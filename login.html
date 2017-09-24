@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>More Recipes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+    <div class="container-fluid wrapper">
+        <div class="row header">
+            <div class="col-xs-12 col-md-3"></div>
+            <div class="col-xs-12 col-md-3">
+                <nav class="nav nav-pills flex-column flex-sm-row topnav">
+                    <a class="flex-sm-fill text-sm-center nav-link  home" href="./index.html">Home</a>
+                    <a class="flex-sm-fill text-sm-center nav-link Profile" href="./profile.html">Profile</a>
+                    <a class="flex-sm-fill text-sm-center nav-link login" href="/">Logout</a>
+                    <a class="flex-sm-fill text-sm-center nav-link resgister" href="./register.html">Register</a>
+                    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row hero-bg">
+            <div class="col-xs-12">
+                <h1>Machi's Tastee</h1>
+                <h5><i>Your Favorite Recipe's At Your Pleasure.</i></h5>
+            </div>
+        </div>
+        <form class="form-horizontal" role="form" method="POST" action="/register">
+            <div style='width:300px; height: 200px'>
+                <form class="form-signin">
+                    <h2 class="form-signin-heading"><b>Log In</b></h2><hr/>
+                    <label for="inputEmail" class="sr-only">Email address</label>
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                    <div class="checkbox">
+                    
+                        <input type="checkbox" value="remember-me">Remember me</div>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block" onclick=login()><i class="fa fa-user-plus"></i> Log In</button>
+                    <p class="new_account" style='text-align: center'><strong>Create A New Account? </strong><a link rel="stylesheet" href="register.html">Register</a></p>
+                </form>
+            </div> 
+            
+            <div class="container footer">
+                <div>
+                    <p><i>Designed with</i> <i class="fa fa-heart love" aria-hidden="true"></i> <i>by </i><strong>Ucheya</strong></p>
+                </div>
+            </div>
+    
+
+    <script src="./scripts/bootstrap.js"></script>
+</body>
+
+</html>

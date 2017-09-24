@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>More Recipes</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+            crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <div class="container-fluid wrapper">
+            <div class="row header">
+                <div class="col-xs-12 col-md-3"></div>
+                <div class="col-xs-12 col-md-3">
+                    <nav class="nav nav-pills flex-column flex-sm-row topnav">
+                        <a class="flex-sm-fill text-sm-center nav-link  home" href="./index.html">Home</a>
+                        <a class="flex-sm-fill text-sm-center nav-link Profile" href="./recipes.html">Recipes</a>
+                        <a class="flex-sm-fill text-sm-center nav-link login" href="./index.html">Logout</a>
+                        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+                    </nav>
+                </div>
+            </div>
+        </div> 
+        <div>
+            <h3 id="profile-header">Profile</h3>
+        </div>
+    <div class="container">
+            <div class="row">
+                    
+        <div class="col-xs-12 col-md-3"> 
+            <div class="MyPicture"><img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png"></div>
+        </div>
+        <div class="col-xs-12 col-md-9 user-details">
+            <form>
+                    <label for="fname"><b>Name: </b></label>
+                    <input type="text" id="fname" name="fname" placeholder="Samson Trina"><br/>
+    
+                    <label for="Ename"><b>Email:&nbsp; </b></label>
+                    <input type="text" id="Ename" name="Ename" placeholder="meya@gmail.com"><br/>
+                </form>
+                </div>
+        </div>
+        <div class="manage">
+                <h3>Recipes</h3>
+                <p>Feel free to manipulate your own account</p>
+        </div>
+        <div class="new-inputs">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#1" data-toggle="tab"><b>ADD</b></a></li>
+                <li class="active"><a href="#2" data-toggle="tab"><b>MANAGE</b></a></li>
+                <li class="active"><a href="#3" data-toggle="tab"><b>FAVORITE(s)</b></a></l>
+            </ul>
+            <br>
+        <div class="tab-content ">
+        <div class="tab-pane active" id="1">
+                <form class="recipe-add--form">
+                    <label class="recipe-add--form_name"><b>Recipe Name:</b></label>
+                    <input type="text" name="recipe-name" placeholder="e.g: Eforiro">
+                </form>
+        </div>
+        </div>
+    
+    </div>
+        <div class="container footer">
+            <div>
+                <p><i>Designed with</i> <i class="fa fa-heart love" aria-hidden="true"></i> <i>by </i><strong>Ucheya</strong></p>
+            </div>
+        </div>
+    
+        <script src="./scripts/bootstrap.js"></script>                              
+   </body>
+</html>
