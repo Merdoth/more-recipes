@@ -309,7 +309,7 @@ img {
   margin: 0 0 0 30px;
 }
 #title4  {
-  padding-top: 20px;
+  padding-top: 70px;
   font-size: 35px;
   line-height: .8rem;
   font-weight: bold;
@@ -320,6 +320,20 @@ img {
 }
 
 .footer {
+  padding: 19px 0;
+  background: black;
+  text-align: center;
+  border-top: 1px solid peachpuff;
+  color:peachpuff ;  
+  letter-spacing: 0.1em;
+  line-height:1.5;
+  font-size: 22px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  margin-top:70px;
+}
+
+.footer1 {
   padding: 19px 0;
   background: black;
   text-align: center;
