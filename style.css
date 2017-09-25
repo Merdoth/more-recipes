@@ -113,7 +113,7 @@ img {
   font-size: 20px;
   line-height: .8rem;
   font-weight: bold;
-  color: #222;
+   color: #222;
   padding-left: 5px;
 }
 
@@ -264,6 +264,8 @@ img {
 }
 
 #profile-header {
+  margin-top: 10px;
+  margin-bottom: 15px;
   text-align: center;
   font-weight: bold;
 }
@@ -333,20 +335,6 @@ img {
   margin-top:70px;
 }
 
-.footer1 {
-  padding: 19px 0;
-  background: black;
-  text-align: center;
-  border-top: 1px solid peachpuff;
-  color:peachpuff ;  
-  letter-spacing: 0.1em;
-  line-height:1.5;
-  font-size: 22px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  margin-top:350px;
-}
-
 p{
   margin: 10px 0;
 }
@@ -403,4 +391,36 @@ p{
 .manage{
   margin-top:15px;
   margin-bottom: 15px;
+}
+
+.user-details label textarea {
+   height: 100%;
+   margin-bottom: 1rem;
+   resize: none !important;
+}
+
+.user-details textarea {
+  border: 2px solid black;
+  padding: .5rem;
+  border-radius: 5px;
+  width: 100%;
+  display: block;
+  font-size: 1.2rem;
+  -webkit-appearance: none;
+}
+
+textarea{
+  background-color: transparent;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-align: start;
+  text-indent: 0px;
+  text-transform: none;
+  text-rendering: auto;
+  user-select: text;
+  cursor: auto;
+}
+
+.submit {
+  margin-left: 5px;
 }

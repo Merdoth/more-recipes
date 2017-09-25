@@ -24,7 +24,7 @@
             </div>
         </div> 
         <div>
-            <h3 id="profile-header">Profile</h3>
+            <h1 id="profile-header">Profile</h1>
         </div>
     <div class="container">
             <div class="row">
@@ -34,56 +34,27 @@
         </div>
         <div class="col-xs-12 col-md-9 user-details">
             <form>
-                    <label for="fname"><b>Name: </b></label>
+                    <label for="fname"><b>Name:&nbsp;&nbsp; &nbsp; </b></label>
                     <input type="text" id="fname" name="fname" placeholder="Samson Trina"><br/>
     
-                    <label for="Ename"><b>Email:&nbsp; </b></label>
+                    <label for="Ename"><b>Email:&nbsp;&nbsp; &nbsp;&nbsp; </b></label>
                     <input type="text" id="Ename" name="Ename" placeholder="meya@gmail.com"><br/>
+
+                    <label for="Cname"><b>Contact:&nbsp;</b></label>
+                    <input type=" phone number" id="Cname" name="Cname" placeholder="Phone number"><br/><br/>
+    
+
+                    <div class="status"><label for="Status"><b>Status:</b></div>
+                    <textarea id="status" name="Status" placeholder="What's on your mind ?"></textarea>
+                </label><br/><br/>
+                  <div class="submit" style="width:150px;">
+                        <button type="submit" class="btn btn-lg btn-primary btn-block " onclick=submit()>Submit</button>
+                  </div>
                 </form>
                 </div>
         </div>
-        <div class="manage">
-                <h3>Recipes</h3>
-                <p>Feel free to manipulate your own account</p>
-        </div>
-        <div class="new-inputs">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#1" data-toggle="tab"><b>ADD</b></a></li>
-                <li><a href="#2" data-toggle="tab"><b>MANAGE</b></a></li>
-                <li><a href="#3" data-toggle="tab"><b>FAVORITE(s)</b></a></l>
-            </ul>
-            <br>
-        <div class="tab-content">
-        <div class="tab-pane active"  id="1">
-            <div class="">
-                    <form class="recipe-add--form">
-                            <label class="recipe-add--form_name"><b>Recipe Name</b></label>
-                            <textarea class="form-control" placeholder="eg: Eforiro"></textarea>      
-                    </form>
-            </div>  
-        </div>
-        <div class="tab-pane"  id="2">
-                <div class="">
-                        <form class="recipe-add--form">
-                                <label class="recipe-add--form_name"><b>Recipe 2</b></label>
-                                <textarea class="form-control" placeholder="eg: Eforiro"></textarea>      
-                        </form>
-                </div>  
-                <h1>2</h1>
-            </div>
-            <div class="tab-pane"  id="3">
-                    <div class="">
-                            <form class="recipe-add--form">
-                                    <label class="recipe-add--form_name"><b>Recipe 3</b></label>
-                                    <textarea class="form-control" placeholder="eg: Eforiro"></textarea>      
-                            </form>
-                    </div>  
-                    <h1>3</h1>
-                </div>
-        </div>
-    
-    </div>
-        <div class="container footer1">
+       
+        <div class="container footer">
             <div>
                 <p><i>Designed with</i> <i class="fa fa-heart love" aria-hidden="true"></i> <i>by </i><strong>Ucheya</strong></p>
             </div>
