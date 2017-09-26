@@ -79,7 +79,7 @@ img {
 }
 
 
-.hero-bg h1, h5 {
+.hero-bg h1, h5 > i {
   font-weight:bold;
   color:rgba(0, 0, 0, 0.9);
   border-bottom: 0;
