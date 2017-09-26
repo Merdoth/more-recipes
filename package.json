@@ -1,0 +1,32 @@
+{
+  "name": "more-recipes",
+  "version": "1.0.0",
+  "description": "For the foodies in the house",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.15.5"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "body-parser": "^1.18.2",
+    "morgan": "^1.8.2",
+    "nodemon": "^1.12.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Merdoth/more-recipes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Merdoth/more-recipes/issues"
+  },
+  "homepage": "https://github.com/Merdoth/more-recipes#readme"
+}
