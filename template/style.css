@@ -105,7 +105,13 @@ img {
   border:2px solid #fff;
 }
  
-
+.About{
+  text-align: center;
+  margin-top: 50px;
+}
+#note2{
+  font-size: 28px;
+}
 
 .hero-bg h1, h5 > i {
   font-weight:bold;
@@ -308,10 +314,6 @@ img {
   font-weight: bold;
 }
 
-#note2 {
-  padding-top: 1px;
-  margin: 0 0 0 30px;
-}
 #title2  {
   font-size: 20px;
   line-height: .8rem;
@@ -331,7 +333,7 @@ img {
 .latest {
   color:#acacac;
   font-weight: bold;
-  margin: 0 0 0 11px;
+  margin: 0 20px 0 11px;
   letter-spacing: 1px;
   font-size: .8rem;
 }
@@ -341,8 +343,18 @@ img {
   font-size: 20px;
   line-height: .8rem;
   font-weight: bold;
-  padding: 25px 0 8px 20px;
+  padding: 25px 0 8px 70px;
   color: #222;
+  
+}
+
+#title5 {
+  font-size: 20px;
+  line-height: .8rem;
+  font-weight: bold;
+  padding: 25px 0 8px 120px;
+  color: #222;
+  
 }
 
 #note3, #note4 {
@@ -375,6 +387,21 @@ img {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
   margin-top:50px;
+  
+}
+
+.footer1 {
+  padding: 15px 0px;
+  background: black;
+  text-align: center;
+  border-top: 1px solid #efefef;
+  color:peachpuff ;  
+  letter-spacing: 0.1em;
+  line-height:1.5;
+  font-size: 22px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  margin-top:3px;
   
 }
 
