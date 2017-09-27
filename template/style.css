@@ -107,12 +107,16 @@ img {
  
 
 
-.hero-bg h1, h5 {
+.hero-bg h1, h5 > i {
   font-weight:bold;
   color:#efefef;
   border-bottom: 0;
   text-align: center;
+<<<<<<< HEAD
   text-shadow:3px 3px 8px black;
+=======
+  text-shadow: 1px 1px 10px #fff;
+>>>>>>> 79404cb9327480e4fd4beb0b2de3ca1693fd2a62
   
 }
 .hero-bg h1 {
