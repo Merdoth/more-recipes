@@ -14,9 +14,14 @@ div {
   box-sizing: border-box
 }
 
+.navs > h2 {
+  color:#efefef;
+}
+
 .header {
-  height: 40px;
-  border: 1px solid #f0f0f0;
+  padding:1%;
+  height: 70px;
+  border: 1px solid #efefef;
   overflow: hidden;
   background-color: #333;
 }
@@ -73,26 +78,49 @@ img {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  margin-top: 30px;
   height: 500px;
   
 }
 
+.search {
+  margin-top: 5%;
+}
+
+.hit {
+  background:black;
+  background-repeat:no-repeat;
+  border:2px solid white;
+  cursor:pointer;
+  color: #efefef;
+  border-radius: 0;
+}
+
+.Enter{
+  border:2px solid white;
+  background:#efefef;
+}
+.hit:hover {
+  background:#efefef;
+  color: black;
+  border:2px solid #fff;
+}
+ 
+
 
 .hero-bg h1, h5 {
   font-weight:bold;
-  color:rgba(0, 0, 0, 0.9);
+  color:#efefef;
   border-bottom: 0;
   text-align: center;
+  text-shadow:3px 3px 8px black;
   
 }
 .hero-bg h1 {
-  padding: 200px 650px 0 10px;
   font-size: 50px;
 }
 
 .hero-bg h5 {
-  padding: 0 650px 200px 10px;
+
   font-size: 15px;
 }
 
@@ -104,17 +132,26 @@ img {
   width: 100%;
 }
 
+.oats1 > img {
+  width: 80%;
+}
+
+.profile1 {
+ margin-top:2%
+}
+
 .one{
   text-align: center;
   padding-bottom: 20px;
 }
 
 .one #title {
-  font-size: 20px;
+  font-size: 36px;
   line-height: .8rem;
   font-weight: bold;
    color: #222;
   padding-left: 5px;
+  margin-bottom: 5%;
 }
 
 .one h1 {
@@ -240,8 +277,9 @@ img {
 }
 
 .main-aside {
-  height: 300px;
+  height: 200px;
   text-align: center;
+
 }
 
 .MyPicture > img {
@@ -311,7 +349,7 @@ img {
   margin: 0 0 0 30px;
 }
 #title4  {
-  padding-top: 70px;
+  padding-top: 40px;
   font-size: 35px;
   line-height: .8rem;
   font-weight: bold;
@@ -321,18 +359,23 @@ img {
 
 }
 
+.container-fluid {
+  padding: 0px;
+}
+
 .footer {
-  padding: 19px 0;
+  padding: 15px 0px;
   background: black;
   text-align: center;
-  border-top: 1px solid peachpuff;
+  border-top: 1px solid #efefef;
   color:peachpuff ;  
   letter-spacing: 0.1em;
   line-height:1.5;
   font-size: 22px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
-  margin-top:70px;
+  margin-top:50px;
+  
 }
 
 p{
@@ -386,6 +429,10 @@ p{
 }
 .user-details, input{
    width: 70%;
+}
+
+.form-signin-heading {
+  margin-top: 5px;
 }
 
 .manage{
