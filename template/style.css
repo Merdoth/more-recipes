@@ -74,12 +74,12 @@ img {
 
 
 .hero-bg {
-  background-image: url("./image/Salad.jpg");
+  /* background-image: url("./image/Salad.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height:500px;
-  
+   */
 }
 
 .search {
