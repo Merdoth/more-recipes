@@ -1,9 +1,16 @@
 import express from 'express';
-import recipeController from '../controller/recipes';
+import Recipes from '../controller/recipes';
+import Review from '../controller/review';
+
+const recipeController = new Recipes();
+const reviewController = new Review();
 
 let router = express.Router();
 
-router.get('/', recipeController.test);
-router.get('/add', recipeController.add);
+router.post('/', recipeController.add);
+router.put('/:Id', recipeController.update);
+router.delete('/:Id', recipeController.delete);
+router.get('/', recipeController.get);
+router.post('/:Id/reviews', reviewController.add);
 
 export default router;

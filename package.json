@@ -19,8 +19,10 @@
     "nodemon": "^1.12.1"
   },
   "scripts": {
-    "start": "nodemon --watch server --exec babel-node  -- server/bin/www.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./dist/bin/www.js",
+    "build": "babel ./server/ -d ./dist",
+    "start:dev": "nodemon --watch server --exec babel-node  -- server/bin/www.js",
+    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register server/tests/"
   },
   "repository": {
     "type": "git",
