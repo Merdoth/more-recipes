@@ -6,8 +6,8 @@ db.recipes = [
     userId: 1,
     recipeName: 'French Spaghetti',
     ingredient: [
-      'rice',
-      'beans',
+      'Spaghetti',
+      'Green beans',
       'meat'
     ],
     preparation:'This is just a dummy that will do you no good, just ask your google',
@@ -20,8 +20,8 @@ db.recipes = [
     userId: 2,
     recipeName: 'French Spaghetti',
     ingredient: [
-      'rice',
-      'beans',
+      'Spaghetti',
+      'Green beans',
       'meat'
     ],
     preparation:'This is just a dummy that will do you no good, just ask your google',
