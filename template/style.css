@@ -35,7 +35,7 @@ img {
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 7px 16px;
+  padding: 7px;
   text-decoration: none;
   font-size: 17px;
 }
@@ -110,18 +110,26 @@ img {
   margin-top: 50px;
 }
 #note2{
-  font-size: 28px;
+  font-size: 25px;
 }
 
 .hero-bg h1, h5 > i {
+  margin-top: 30px;
   font-weight:bold;
   color:#efefef;
   border-bottom: 0;
-  text-align: center;
+  font-size: 50px;
   text-shadow: 3px 3px 8px black;
   
 }
+.hello {
+  position: relative;
+  bottom: 400px;
+  text-align: center;
+
+}
 .hero-bg h1 {
+  display:inline-block;
   font-size: 50px;
 }
 
@@ -158,6 +166,7 @@ img {
    color: #222;
   padding-left: 5px;
   margin-bottom: 5%;
+  margin-top: 15px;
 }
 
 .one h1 {
@@ -270,16 +279,16 @@ img {
   color: orange;
 }
 
-.icons .fa-thumbs-up{
+.icons .fa-thumbs-up, .icons1  .fa-edit{
   color: green;
 }
 
-.icons .fa-thumbs-down{
+.icons .fa-thumbs-down, .icons1 .fa-trash{
   color: red;
 }
 
-.icons .fa-eye{
-  color: skyblue;
+.icons .fa-eye, .icons1 .fa-eye{
+  color: #3535B0;
 }
 
 .main-aside {
@@ -296,7 +305,7 @@ img {
   border:0;
   vertical-align: middle;
   margin: 0 0 10px 15px;
-  opacity:0.3;
+  
 
 }
 
@@ -325,7 +334,7 @@ img {
 .sept {
   color:#acacac;
   font-weight: bold;
-  margin: 0 0 0 15px;
+  margin: 0 15px 0 15px;
   letter-spacing: 1px;
   font-size: .8rem;
 }
@@ -359,6 +368,7 @@ img {
 
 #note3, #note4 {
   margin: 0 0 0 30px;
+  font-size: 10px;
 }
 #title4  {
   padding-top: 40px;
@@ -384,6 +394,7 @@ img {
   letter-spacing: 0.1em;
   line-height:1.5;
   font-size: 22px;
+  bottom:0px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
   margin-top:50px;
@@ -398,6 +409,7 @@ img {
   color:peachpuff ;  
   letter-spacing: 0.1em;
   line-height:1.5;
+  bottom: 0px;
   font-size: 22px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
@@ -447,7 +459,6 @@ p{
     
   input{
     padding: 5px;
-    margin-right: 10px;
     margin-bottom: 20px;
   }
   
@@ -465,36 +476,44 @@ p{
 .manage{
   margin-top:15px;
   margin-bottom: 15px;
+  text-align: center;
+}
+.manage > h2{
+  font-size: 50px;
 }
 
-.user-details label textarea {
-   height: 100%;
-   margin-bottom: 1rem;
-   resize: none !important;
+.manage > p {
+  font-size: 30px;
 }
 
-.user-details textarea {
+
+
+ .user-details #status{
   border: 2px solid black;
-  padding: .5rem;
   border-radius: 5px;
-  width: 100%;
-  display: block;
+  /* width: 70%; */
+  height: 100px;
   font-size: 1.2rem;
   -webkit-appearance: none;
 }
 
-textarea{
+
+#status{
   background-color: transparent;
   letter-spacing: normal;
-  word-spacing: normal;
-  text-align: start;
+  word-spacing: normal; 
   text-indent: 0px;
   text-transform: none;
   text-rendering: auto;
   user-select: text;
   cursor: auto;
+  
 }
+ #status1 {
+   margin-bottom: 30px;
+ }
 
 .submit {
-  margin-left: 5px;
+  margin-right:50px;
+  margin-left:70px;
 }
