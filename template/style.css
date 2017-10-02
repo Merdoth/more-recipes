@@ -83,7 +83,7 @@ img {
 }
 
 .search {
-  margin-top: 5%;
+  margin-top: -200px;
 }
 
 .hit {
@@ -139,7 +139,7 @@ img {
 }
 
 .main {
-  margin-top: 30px;
+  margin-top: 200px;
 }
 
 .oats > img {
