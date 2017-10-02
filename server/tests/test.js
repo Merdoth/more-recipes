@@ -15,13 +15,11 @@ describe('More Recipes', () => {
       });
   });
  
-  it('should return a 400 if there is a wrong route', (done) => {
+  it('should return a 404 if there is a wrong route', (done) => {
     chai.request(app)
       .get('/6^6fDF')
       .end((err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('ERROR').eql('404: Sorry Page Not Found!');
-    
+        res.should.have.status(404);    
         done();
       });
   });
