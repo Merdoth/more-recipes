@@ -19,5 +19,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   
   });
+  
+  votes.associate = (models) => {
+    votes.belongsto(models.recipes, {
+      foreignKey:'recipeid'
+    });
+    votes.belongsto(models.users, {
+      foreignKey:'userid'
+    });
+  };
   return votes;
 };

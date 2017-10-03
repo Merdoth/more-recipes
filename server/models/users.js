@@ -15,5 +15,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   
   });
+
+  
+  users.associate = (models) => {
+    users.hasMany(models.recipes, {
+      foreignKey:'userid'
+    });
+    users.hasMany(models.reviews, {
+      foreignKey:'userid'
+    });
+    users.hasMany(models.favorites, {
+      foreignKey:'userid'
+    });
+    users.hasMany(models.votes, {
+      foreignKey:'userid'
+    });
+
+
+  };
   return users;
 };

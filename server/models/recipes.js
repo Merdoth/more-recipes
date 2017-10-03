@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     ingredients:{
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: false
     },
     preparation:{ 
@@ -19,12 +19,23 @@ module.exports = (sequelize, DataTypes) => {
     },
     upvotes: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue:0
     },
     downvotes: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue:0
     }
   });
+
+  recipes.associate = (models) => {
+    recipes.belongsto(models.users, {
+      foreignKey:'userid'
+    });
+    recipes.hasMany(models.reviews, {
+      foreignKey:'recipeid'
+    });
+  };
   return recipes;
 };

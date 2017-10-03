@@ -11,5 +11,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   
+  favorites.associate = (models) => {
+    favorites.belongsto(models.recipes, {
+      foreignKey: 'recipeid'
+    });
+
+    favorites.belongsto(models.users, {
+      foreignKey: 'userid'
+    });
+  };
   return favorites;
 };
