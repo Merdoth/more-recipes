@@ -1,7 +1,7 @@
 import db from '../models/db';
 
 class Recipe {
-  add(req, res) {
+  static add(req, res) {
     const{recipeName, ingredients, preparation} = req.body;
     if(!recipeName) {
       res.status(400).send({
@@ -33,11 +33,11 @@ class Recipe {
     }
   }
 
-  get(req, res){
+  static get(req, res){
     return res.status(200).send(db.recipes);
   }
 
-  update(req, res) {
+  static update(req, res) {
     const id = req.params.Id;
     const {recipeName, ingredients, preparation } = req.body;
     
@@ -56,7 +56,7 @@ class Recipe {
     });
   }
 
-  delete(req, res) {
+  static delete(req, res) {
     for(let i = 0; i < db.recipes.length; i++) {
       if (db.recipes[i].id === parseInt(res.params.Id, 10)){
         db.recipes.splice(i, 1);
@@ -71,4 +71,4 @@ class Recipe {
   }
 }
 
-export default Recipe; 
+export default Recipe;
