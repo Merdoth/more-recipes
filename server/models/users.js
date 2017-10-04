@@ -1,5 +1,4 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
     username: {
       type: DataTypes.STRING,
@@ -16,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
   
   });
 
-  
   users.associate = (models) => {
     users.hasMany(models.recipes, {
       foreignKey:'userid'
@@ -30,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
     users.hasMany(models.votes, {
       foreignKey:'userid'
     });
-
 
   };
   return users;

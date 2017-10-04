@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   reviews.associate = (models) => {
-    reviews.belongsto(models.users, {
+    reviews.belongsTo(models.users, {
       foreignKey:'userid'
     });
 
-    reviews.belongsto(models.recipes, {
+    reviews.belongsTo(models.recipes, {
       foreignKey:'recipeid'
     });
   };

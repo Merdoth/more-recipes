@@ -21,10 +21,10 @@ module.exports = (sequelize, DataTypes) => {
   });
   
   votes.associate = (models) => {
-    votes.belongsto(models.recipes, {
+    votes.belongsTo(models.recipes, {
       foreignKey:'recipeid'
     });
-    votes.belongsto(models.users, {
+    votes.belongsTo(models.users, {
       foreignKey:'userid'
     });
   };

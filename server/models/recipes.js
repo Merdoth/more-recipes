@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   recipes.associate = (models) => {
-    recipes.belongsto(models.users, {
+    recipes.belongsTo(models.users, {
       foreignKey:'userid'
     });
     recipes.hasMany(models.reviews, {
