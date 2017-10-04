@@ -19,7 +19,7 @@ export class User {
       }})
       .then(found => {
         if(found) {
-          return res.status(400).send({ message: 'Username already exists'});
+          return res.status(409).send({ message: 'Username already exists'});
         } else {
           return Users
             .create({

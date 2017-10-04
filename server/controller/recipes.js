@@ -41,6 +41,32 @@ class Recipe {
       }
     });
   }
+
+  static update(req, res) {
+    const id = req.params.Id;
+    const {recipename, ingredients, preparation } = req.body;
+    console.log('hey');
+    recipes.find({
+      where: {
+        id: id
+      }
+    }).then((isRecipe) => {
+      // console.log(isRecipe)
+      if(isRecipe) {
+        return isRecipe.update({
+          recipename:  recipename , 
+          ingredients: ingredients, 
+          preparation: preparation 
+        }).then(() => {
+          console.log('hahahah');
+          return res.status(200).send(isRecipe);
+        });
+      }
+    });
+  }
 }
+
+
+
 
 export default Recipe;

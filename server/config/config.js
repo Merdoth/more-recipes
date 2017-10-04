@@ -19,4 +19,5 @@ if (!devMode) {
     require: !devMode
   };
 }
+
 module.exports = config;
