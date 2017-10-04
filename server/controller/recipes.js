@@ -31,6 +31,16 @@ class Recipe {
         });
     }
   }
+
+  static get(req, res){
+    recipes.all().then(recipes => {
+      if(!recipes) {
+        return res.status(404).send({ message: 'Recipe not found'});
+      }else {
+        return res.status(200).send(recipes);
+      }
+    });
+  }
 }
 
 export default Recipe;
