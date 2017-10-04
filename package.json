@@ -24,9 +24,8 @@
     "nodemon": "^1.12.1"
   },
   "scripts": {
-    "start": "nodemon ./dist/bin/www.js",
     "build": "babel ./server/ -d ./dist",
-    "start:dev": "nodemon --watch server --exec babel-node  -- server/app.js",
+    "start": "nodemon --watch server --exec babel-node  -- server/app.js",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register server/tests/"
   },
   "repository": {

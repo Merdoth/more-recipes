@@ -3,9 +3,7 @@ import JWT from 'jsonwebtoken';
 class Token {
   static getJWT(id, username, email) {
     return JWT.sign({
-      id: id,
-      username: username,
-      email: email
+      id: id
     }, process.env.SECRET, { expiresIn: '24h' });
   }
 }

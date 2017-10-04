@@ -1,4 +1,6 @@
-import db from '../models/db';
+import db from '../models';
+
+const recipes
 
 class Recipe {
   static add(req, res) {
