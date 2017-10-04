@@ -3,8 +3,7 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import database from './models';
 import 'dotenv';
-
-// import recipes from './routes/recipes';
+import recipes from './routes/recipes';
 import users from './routes/users';
 
 const app = express();
@@ -14,7 +13,7 @@ process.env.SECRET;
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false}));
 
-// app.use('/api/recipes', recipes);
+app.use('/api/recipes', recipes);
 app.use('/api/users', users);
 
 app.get('/', (req, res) =>{
