@@ -31,6 +31,7 @@
   "scripts": {
     "start": "node dist/app.js",
     "build": "babel ./server/ -d ./dist",
+    "migrations": "sequelize db:migrate",
     "start:dev": "nodemon --watch server --exec babel-node  -- server/app.js",
     "test": "nyc --reporter=html --reporter=text mocha ./server/tests/ --compilers js:babel-register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
