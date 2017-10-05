@@ -1,11 +1,10 @@
-import JWT from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-class Token {
-  static getJWT(id, username, email) {
-    return JWT.sign({
-      id: id
-    }, process.env.SECRET, { expiresIn: '24h' });
-  }
-}
+const env = dotenv.config().parsed;
 
-export default Token;
+export default (payload) => {
+  const secret = env.secret;
+  const { id, username, email } = payload;
+  return jwt.sign({ id, username, email }, secret, { expiresIn: '24h' });
+};
