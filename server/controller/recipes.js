@@ -3,6 +3,15 @@ import models from '../models';
 const recipes = models.recipes;
 
 class Recipe {
+  /**
+   * 
+   * 
+   * @static
+   * @param {any} req 
+   * @param {any} res 
+   * @returns 
+   * @memberof Recipe
+   */
   static add(req, res) {
     const{recipename, ingredients, preparation} = req.body;
     if(!recipename) {
@@ -44,9 +53,11 @@ class Recipe {
 
   static update(req, res) {
     const id = req.params.Id;
-    const {recipename, ingredients, preparation } = req.body;
+    const {recipename,  preparation } = req.body;
+    const ingredients = req.body.ingredients.split(',');
     console.log('hey');
-    recipes.find({
+    console.log(ingredients)
+    return recipes.find({
       where: {
         id: id
       }
@@ -55,12 +66,14 @@ class Recipe {
       if(isRecipe) {
         return isRecipe.update({
           recipename:  recipename , 
-          ingredients: ingredients, 
-          preparation: preparation 
-        }).then(() => {
+          ingredients
+        }).then((isRecipe) => {
           console.log('hahahah');
           return res.status(200).send(isRecipe);
-        });
+        })
+          .catch((error) => {
+            console.log('error', error);
+          });
       }
     });
   }
