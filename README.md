@@ -41,13 +41,13 @@ More recipes is a web appliaction that allows food lovers to exhibit and explore
 - Start browser and direct to localhost:5001/
 
 # System Requirements
-- 1. A working pc
+- A working pc
 
-- 2. Node.js must be installed on pc
+- Node.js must be installed on pc
 
-- 3. Text Editor
+- Text Editor
 
-- 4. A browser
+- A browser
 
-- 5. Internet
+- Internet
 
