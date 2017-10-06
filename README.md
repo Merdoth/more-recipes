@@ -17,19 +17,21 @@ More recipes is a web appliaction that allows food lovers to exhibit and explore
 - Upload profile picture 
 - Search for recipes
 
-Dependencies
-Back End Dependencies
+# Dependencies
+
+*Back End Dependencies*
 
 - Express.JS Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 
-- Sequelize is a database ORM that will interface with the postgres database.
+- Sequelize is a database ORM(Object Relational Mapping) that will interface with the postgres database.
 
 - PostgreSQL is a powerful open source database where our recipes(data) will be stored.
 
-Front End Dependencies
+*Front End Dependencies*
+
 - Bootstrap is an open source toolkit for developing with HTML, CSS, and JS.
 
-Setup
+# Setup
 - Navigate to a directory of choice on terminal.
 - Clone this repository on that directory.
 - Using command prompt;
@@ -38,12 +40,14 @@ Setup
 - Start server with npm start
 - Start browser and direct to localhost:5001/
 
-System Requirements
+# System Requirements
 - 1. A working pc
 
 - 2. Node.js must be installed on pc
 
-- 3. A browser
+- 3. Text Editor
 
-- 4. Internet
+- 4. A browser
+
+- 5. Internet
 
