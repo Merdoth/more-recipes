@@ -15,14 +15,14 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  reviews.associate = (models) => {
-    reviews.belongsTo(models.users, {
-      foreignKey:'userid'
-    });
+  // reviews.associate = (models) => {
+  //   reviews.belongsTo(models.users, {
+  //     foreignKey:'userid'
+  //   });
 
-    reviews.belongsTo(models.recipes, {
-      foreignKey:'recipeid'
-    });
-  };
+  //   reviews.belongsTo(models.recipes, {
+  //     foreignKey:'recipeid'
+  //   });
+  // };
   return reviews;
 };

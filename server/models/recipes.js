@@ -29,13 +29,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  recipes.associate = (models) => {
-    recipes.belongsTo(models.users, {
-      foreignKey:'userid'
-    });
-    recipes.hasMany(models.reviews, {
-      foreignKey:'recipeid'
-    });
-  };
+  // recipes.associate = (models) => {
+  //   recipes.belongsTo(models.users, {
+  //     foreignKey:'userid'
+  //   });
+  //   recipes.hasMany(models.reviews, {
+  //     foreignKey:'recipeid'
+  //   });
+  // };
   return recipes;
 };

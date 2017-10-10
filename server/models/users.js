@@ -49,16 +49,16 @@ export default (sequelize, DataTypes) => {
     });
   };
 
-  users.beforeCreate((user) => {
-    //console.log('user object', user);
-    user.dataValues.password = bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
-  });
+  // users.beforeCreate((user) => {
+  //   //console.log('user object', user);
+  //   user.dataValues.password = bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
+  // });
 
-  users.beforeUpdate((user) => {
-    if (user._changed.password) {
-      user.dataValues.password = bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
-    }
-  });
+  // users.beforeUpdate((user) => {
+  //   if (user._changed.password) {
+  //     user.dataValues.password = bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
+  //   }
+  // });
 
   return users;
 };

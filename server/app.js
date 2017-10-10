@@ -9,7 +9,7 @@ import reviews from './routes/reviews';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 8001;
 //process.env.SECRET;
 
 app.use(logger('dev'));

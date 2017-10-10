@@ -55,8 +55,8 @@ class Recipe {
     const id = req.params.Id;
     const {recipename,  preparation } = req.body;
     const ingredients = req.body.ingredients.split(',');
-    console.log('hey');
-    console.log(ingredients)
+    // console.log('hey');
+    // console.log(ingredients)
     return recipes.find({
       where: {
         id: id
@@ -68,7 +68,7 @@ class Recipe {
           recipename:  recipename , 
           ingredients
         }).then((isRecipe) => {
-          console.log('hahahah');
+          // console.log('hahahah');
           return res.status(200).send(isRecipe);
         })
           .catch((error) => {
