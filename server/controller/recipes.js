@@ -14,72 +14,83 @@ class Recipe {
    */
   static add(req, res) {
     const{recipename, ingredients, preparation} = req.body;
-    if(!recipename) {
-      res.status(400).send({
-        message:'Enter Recipe Name'
-      });
-    } else if(!ingredients) {
-      res.status(400).send({
-        message:'Enter Ingredients'
-      });
-    } else if(!preparation) {
-      res.status(400).send({
-        message:'Enter Preparation Steps'
-      });
-    } else {
+    if (recipename && ingredients && preparation &&
+      recipename !== '' && ingredients !== '' && preparation !== ''
+    ) {
       return recipes
         .create({
-          userid: 1, //req.decoded.id,
+          userid: 2, //req.decoded.id,
           recipename: recipename,
-          ingredients: [ ingredients ],
+          ingredients: [ingredients],
           preparation: preparation,
           upvotes: 0,
           downvotes: 0,
-        }).then(created => {
-          return res.status(200).send(created);
+        }).then(recipe => {
+          return res.status(200).send(recipe);
         });
+    } else{
+      res.status(400).send({
+        message: 'All fields must be provided!'
+      });
     }
   }
 
   static get(req, res){
     recipes.all().then(recipes => {
-      if(!recipes) {
-        return res.status(404).send({ message: 'Recipe not found'});
-      }else {
+      if(recipes) {
         return res.status(200).send(recipes);
+      }else {
+        return res.status(404).send({ message: 'Recipe not found'});
       }
     });
   }
 
   static update(req, res) {
-    const id = req.params.Id;
-    const {recipename,  preparation } = req.body;
-    const ingredients = req.body.ingredients.split(',');
-    // console.log('hey');
-    // console.log(ingredients)
+    const id = req.params.id;
+    const {recipename,  preparation, ingredients } = req.body;
+
     return recipes.find({
       where: {
-        id: id
+        id
       }
-    }).then((isRecipe) => {
-      // console.log(isRecipe)
-      if(isRecipe) {
-        return isRecipe.update({
-          recipename:  recipename , 
-          ingredients
-        }).then((isRecipe) => {
-          // console.log('hahahah');
-          return res.status(200).send(isRecipe);
+    }).then((recipe) => {
+      if(recipe) {
+        return recipe.update({
+          recipename: recipename || recipe.recipename, 
+          ingredients: [ingredients] || [recipe.ingredients],
+          preparation: preparation || recipe.preparation
         })
+          .then((updatedRecipe) => {
+            return res.status(200).send(updatedRecipe);
+          })
           .catch((error) => {
-            console.log('error', error);
+            return res.status(500).send({error});
           });
+      } else {
+        return res.status(404).send({message: 'Recipe does not exist!'});
       }
     });
   }
+
+  static delete(req, res){
+    const id = req.params.id;
+    return recipes.find({
+      where: {
+        id
+      }
+    }).then((recipe) => {
+      if (recipe) {
+        recipe
+          .destroy()
+          .then(() => res.status(200).send({message: 'Recipe deleted!'}));
+      } else {
+        res.status(404).send({message: 'Recipe does not exist!'});
+      }
+    })
+      .catch(error => {
+        return res.status(500).send({error});
+      });
+  }
 }
-
-
-
 
 export default Recipe;

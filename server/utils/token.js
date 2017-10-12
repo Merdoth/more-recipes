@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-const env = dotenv.config().parsed;
+dotenv.config();
 
 export default (payload) => {
-  const secret = env.secret;
+  const secret = process.env.SECRET;
   const { id, username, email } = payload;
   return jwt.sign({ id, username, email }, secret, { expiresIn: '24h' });
 };
