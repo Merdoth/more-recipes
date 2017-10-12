@@ -13,21 +13,21 @@ class Review {
    * @memberof Review
    */
   static add(req, res) {
-    const { review, userId } = req.body;
-    if(!review) {
-      res.status(400).send({
-        Message: 'Please Enter Review '
-      });
-    }else {
-      return reviews
+    const{review, userid} = req.body;
+    if (review && userid && review !== '' && userid !== '') {
+    
+      return reviews 
         .create({
-          userId: userId,
+          userid: userid,
           review: review,
-        }).then(created => {
-          return res.status(200).send(created);
+        }).then(review => {
+          return res.status(200).send(review);
         });
+    } else{
+      res.status(400).send({
+        message: 'Please enter a review'
+      });
     }
   }
 }
-
 export default Review;
