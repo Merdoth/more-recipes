@@ -1,6 +1,7 @@
 import models from '../models';
 
 const recipes = models.recipes;
+const reviews = models.reviews;
 
 class Recipe {
   /**
@@ -19,16 +20,16 @@ class Recipe {
     ) {
       return recipes
         .create({
-          userid: 2, //req.decoded.id,
+          userid: 1,
           recipename: recipename,
-          ingredients: [ingredients],
+          ingredients: ingredients,
           preparation: preparation,
           upvotes: 0,
           downvotes: 0,
         }).then(recipe => {
           return res.status(200).send(recipe);
         });
-    } else{
+    } else {
       res.status(400).send({
         message: 'All fields must be provided!'
       });
@@ -36,7 +37,14 @@ class Recipe {
   }
 
   static get(req, res){
-    recipes.all().then(recipes => {
+    recipes.findAll({
+      include: [{ model: reviews }]
+    }).then(recipes => {
+      if(recipes.length < 1) {
+        return res.status(200).send({
+          message: 'No recipes found. Please try to create some.'
+        });
+      }
       if(recipes) {
         return res.status(200).send(recipes);
       }else {
@@ -57,7 +65,7 @@ class Recipe {
       if(recipe) {
         return recipe.update({
           recipename: recipename || recipe.recipename, 
-          ingredients: [ingredients] || [recipe.ingredients],
+          ingredients: ingredients || recipe.ingredients,
           preparation: preparation || recipe.preparation
         })
           .then((updatedRecipe) => {

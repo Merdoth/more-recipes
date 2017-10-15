@@ -4,9 +4,10 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const Users = models.users;
+const Favorites = models.favorites;
 
 export class User {
-  static signup(req, res) {
+  static signUp(req, res) {
     Users.create(req.body)
       .then((user) => {
         const newUser = user.dataValues;
@@ -19,7 +20,9 @@ export class User {
   }
 
   static getAllUsers(req, res) {
-    Users.all()
+    Users.findAll({
+      include:[{ model: Favorites }]
+    })
       .then((users) => {
         res.status(200).send({ users });
       })

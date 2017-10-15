@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   
-  // favorites.associate = (models) => {
-  //   favorites.belongsTo(models.recipes, {
-  //     foreignKey: 'recipeid'
-  //   });
+  favorites.associate = (models) => {
+    favorites.belongsTo(models.recipes, {
+      foreignKey: 'recipeid'
+    });
 
-  //   favorites.belongsTo(models.users, {
-  //     foreignKey: 'userid'
-  //   });
-  // };
+    favorites.belongsTo(models.users, {
+      foreignKey: 'userid'
+    });
+  };
   return favorites;
 };
