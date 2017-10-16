@@ -2,6 +2,9 @@
   "name": "more-recipes",
   "version": "1.0.0",
   "description": "For the foodies in the house",
+  "engines": {
+    "node": "6.11.0"
+  },
   "main": "index.js",
   "dependencies": {
     "bcrypt": "^1.0.3",
@@ -13,6 +16,8 @@
     "nyc": "^11.2.1",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "sequelize": "^4.13.2",
     "sequelize-cli": "^3.0.0"
   },
@@ -21,6 +26,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.2",
     "eslint": "^4.7.2",
     "eslint-plugin-react": "^7.4.0",
