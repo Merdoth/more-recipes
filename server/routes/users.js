@@ -1,10 +1,9 @@
-import express from 'express';
 import User from '../controller/user';
 
-let router = express.Router();
+const userRoutes = (router) => {
+  router.get('/users/', User.getAllUsers);
+  router.post('/users/signup', User.signUp);
+  router.post('/users/signin', User.signIn);
+};
 
-router.post('/signup', User.signup);
-router.post('/signin', User.signIn);
-router.get('/', User.getAllUsers);
-
-export default router;
+export default userRoutes;

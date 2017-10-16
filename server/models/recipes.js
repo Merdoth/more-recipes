@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     ingredients:{
-      type: DataTypes.ARRAY(DataTypes.TEXT),
+      type: DataTypes.STRING,
       allowNull: false
     },
     preparation:{ 
@@ -22,11 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue:0
     },
-    downvotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue:0
-    }
   });
 
   recipes.associate = (models) => {
@@ -34,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey:'userid'
     });
     recipes.hasMany(models.reviews, {
-      foreignKey:'recipename'
+      foreignKey:'recipeid'
     });
   };
   return recipes;

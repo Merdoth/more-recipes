@@ -1,10 +1,7 @@
-import express from 'express';
 import reviews from '../controller/reviews';
 
-let router = express.Router();
+const reviewRoutes = (router) => {
+  router.post('/reviews/', reviews.add);
+};
 
-//User route goes here
-
-router.post('/', reviews.add);
-
-export default router;
+export default reviewRoutes;

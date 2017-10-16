@@ -1,13 +1,11 @@
-import express from 'express';
 import recipes from '../controller/recipes';
+import auth from '../middleware/authorization';
 
-let router = express.Router();
+const recipeRoutes = (router) => {
+  router.post('/recipes/', auth.authorize, recipes.add);
+  router.get('/recipes/', auth.authorize, recipes.get);
+  router.put('/recipes/:id', auth.authorize, recipes.update);
+  router.delete('/recipes/:id', auth.authorize, recipes.delete);
+};
 
-//User route goes here
-
-router.post('/', recipes.add);
-router.get('/', recipes.get);
-router.put('/:id', recipes.update);
-router.delete('/:id', recipes.delete);
-
-export default router;
+export default recipeRoutes;

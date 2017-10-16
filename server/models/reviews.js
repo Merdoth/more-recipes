@@ -5,11 +5,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    recipename: {
-      type: DataTypes.STRING,
+    recipeid: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
-    userscomment:{
+    review:{
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -21,8 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     reviews.belongsTo(models.recipes, {
-      foreignKey:'recipename'
+      foreignKey:'recipeid'
     });
   };
+
   return reviews;
 };

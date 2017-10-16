@@ -3,22 +3,22 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import database from './models';
 import dotenv from 'dotenv';
-import recipes from './routes/recipes';
-import users from './routes/users';
-import reviews from './routes/reviews';
+import routes from './routes/';
+
+
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 8001;
-//process.env.SECRET;
+let router = express.Router();
+const port = process.env.PORT || 9000;
+
 
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
-app.use('/api/v1/recipes', recipes);
-app.use('/api/v1/users', users);
-app.use('/api/v1/reviews', reviews);
+routes(router);
+app.use('/api/v1', router);
 
 app.get('/', (req, res) =>{
   res.status(200).send({

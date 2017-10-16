@@ -1,6 +1,10 @@
 import models from '../models';
 
+
+
 const recipes = models.recipes;
+const reviews = models.reviews;
+const votes = models.votes;
 
 class Recipe {
   /**
@@ -13,22 +17,21 @@ class Recipe {
    * @memberof Recipe
    */
   static add(req, res) {
-    const{recipename, ingredients, preparation} = req.body;
+    const{ recipename, ingredients, preparation } = req.body;
+
     if (recipename && ingredients && preparation &&
       recipename !== '' && ingredients !== '' && preparation !== ''
     ) {
       return recipes
         .create({
-          userid: 2, //req.decoded.id,
+          userid: req.decoded.id,
           recipename: recipename,
-          ingredients: [ingredients],
-          preparation: preparation,
-          upvotes: 0,
-          downvotes: 0,
+          ingredients: ingredients,
+          preparation: preparation
         }).then(recipe => {
           return res.status(200).send(recipe);
         });
-    } else{
+    } else {
       res.status(400).send({
         message: 'All fields must be provided!'
       });
@@ -36,7 +39,14 @@ class Recipe {
   }
 
   static get(req, res){
-    recipes.all().then(recipes => {
+    recipes.findAll({
+      include: [{ model: reviews, votes }]
+    }).then(recipes => {
+      if(recipes.length < 1) {
+        return res.status(200).send({
+          message: 'No recipes found. Please try to create some.'
+        });
+      }
       if(recipes) {
         return res.status(200).send(recipes);
       }else {
@@ -57,7 +67,7 @@ class Recipe {
       if(recipe) {
         return recipe.update({
           recipename: recipename || recipe.recipename, 
-          ingredients: [ingredients] || [recipe.ingredients],
+          ingredients: ingredients || recipe.ingredients,
           preparation: preparation || recipe.preparation
         })
           .then((updatedRecipe) => {
