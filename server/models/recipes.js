@@ -22,11 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue:0
     },
-    downvotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue:0
-    }
   });
 
   recipes.associate = (models) => {

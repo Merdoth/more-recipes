@@ -1,7 +1,10 @@
 import models from '../models';
 
+
+
 const recipes = models.recipes;
 const reviews = models.reviews;
+const votes = models.votes;
 
 class Recipe {
   /**
@@ -14,18 +17,17 @@ class Recipe {
    * @memberof Recipe
    */
   static add(req, res) {
-    const{recipename, ingredients, preparation} = req.body;
+    const{ recipename, ingredients, preparation } = req.body;
+
     if (recipename && ingredients && preparation &&
       recipename !== '' && ingredients !== '' && preparation !== ''
     ) {
       return recipes
         .create({
-          userid: 1,
+          userid: req.decoded.id,
           recipename: recipename,
           ingredients: ingredients,
-          preparation: preparation,
-          upvotes: 0,
-          downvotes: 0,
+          preparation: preparation
         }).then(recipe => {
           return res.status(200).send(recipe);
         });
@@ -38,7 +40,7 @@ class Recipe {
 
   static get(req, res){
     recipes.findAll({
-      include: [{ model: reviews }]
+      include: [{ model: reviews, votes }]
     }).then(recipes => {
       if(recipes.length < 1) {
         return res.status(200).send({

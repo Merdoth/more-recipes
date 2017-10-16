@@ -10,11 +10,11 @@ dotenv.config();
 
 const app = express();
 let router = express.Router();
-const port = process.env.PORT || 8001;
+const port = process.env.PORT || 9000;
 
 
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
 routes(router);
