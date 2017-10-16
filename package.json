@@ -2,6 +2,9 @@
   "name": "more-recipes",
   "version": "1.0.0",
   "description": "For the foodies in the house",
+  "engines": {
+    "node": "6.11.0"
+  },
   "main": "index.js",
   "dependencies": {
     "bcrypt": "^1.0.3",
