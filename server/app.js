@@ -33,8 +33,8 @@ app.use(bodyParser.json());
 routes(router);
 app.use('/api/v1', router);
 
-app.get('/* ', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, './index.html'));
+app.get('*', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
 
 database.sequelize.authenticate()
