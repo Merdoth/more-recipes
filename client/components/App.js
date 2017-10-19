@@ -1,7 +1,11 @@
 import React from 'react';
 
-export default () => {
-    return (
-      <h1>More Recipes </h1>
-    );
+class App extends React.Component{
+    render() { 
+        return(
+          <h1>More Recipes</h1>
+        );
+    }
 }
+
+export default App;

@@ -1,21 +1,29 @@
 import path from 'path';
+import webpack from 'webpack'; 
 
 export default {
-  devtools: 'eval-source-map',
-  entry: path.join(__dirname,'/client/react.js' ),
-  output: {
-    path: '/'
+  entry: [
+    'webpack-hot-middleware/client',
+    path.join(__dirname,'/client/react.js' ),
+  ],
+  output: { 
+    path: '/',
+    publicPath: '/'
   },
+  plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     loaders: [
       {
         test: /\.js$/,
-        include: path.json(__dirname, 'client'),
-        loaders: [ 'babel']
+        include: path.join(__dirname, 'client'),
+        loaders: [ 'react-hot-loader/webpack', 'babel-loader']
       }
     ]
   },
   resolve: {
-    extentions: [ '', '.js' ]
+    extensions: [ '*', '.js' ]
   }
 };

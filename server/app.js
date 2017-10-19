@@ -8,6 +8,7 @@ import routes from './routes/';
 
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config.dev';
 
 
@@ -16,10 +17,16 @@ dotenv.config();
 const app = express();
 let router = express.Router();
 const port = process.env.PORT || 9000;
+const compiler = webpack(webpackConfig);
 
 
 app.use(logger('dev'));
-app.use(webpackMiddleware(webpack(webpackConfig)));
+app.use(webpackMiddleware(compiler, {
+  hot: true,
+  publicPath: webpackConfig.output.publicPath,
+  noInfo: true
+}));
+app.use(webpackHotMiddleware(compiler));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
