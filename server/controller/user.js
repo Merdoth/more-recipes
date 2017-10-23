@@ -9,6 +9,7 @@ const Favorites = models.favorites;
 
 export class User {
   static signUp(req, res) {
+    console.log(req.body)
     Users.create(req.body)
       .then((user) => {
         const newUser = user.dataValues;

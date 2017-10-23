@@ -1,21 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default () => {
+class NavigationBar extends React.Component {
+  render() {
     return (
-    <div className="container-fluid wrapper" style={{'height':50+'%'}}>
+      <div className="container-fluid wrapper" style={{'height':50+'%'}}>
         <div className="row header">
-           <div class="col-xs-12 col-md-3 navs">
-              <h2>More Recipes</h2>
-          </div>
+            <div className="col-xs-12 col-md-3 navs">
+                <h2>More Recipes</h2>
+            </div>
           <div className="col-xs-12 col-md-3">
-            <nav className="nav nav-pills flex-column flex-sm-row topnav">
-              <a className="flex-sm-fill text-sm-center nav-link login" href="./login.html">Login</a>
-              <a className="flex-sm-fill text-sm-center nav-link resgister" href="./register.html">Register</a>
-              <a className="flex-sm-fill text-sm-center nav-link Profile" href="/">Logout</a>
-              <a href="javascript:void(0);" style={{"fontSize":15+'px'}} className="icon">&#9776;</a>
-            </nav>
+              <ul className="nav nav-pills flex-column flex-sm-row flex-sm-fill text-sm-center topnav">                                                                                                                              
+               <li><Link to="Signup">Sign Up</Link></li> 
+               <li><Link to="Signin">Sign In</Link></li>
+                {/* <a href="javascript:void(0);" style={{"fontSize":15+'px'}} className="icon">&#9776;</a> */}
+              </ul>
           </div>
         </div>
       </div>
     )
 }
+}
+export default NavigationBar;

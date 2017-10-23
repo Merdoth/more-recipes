@@ -1,6 +1,7 @@
 import React from 'react';
 
-export default () => {
+class Footer extends React.Component {
+  render() {
   return (
     <div className="container-fluid wrapper " style={{"height":50+'%'}}>
       <div className="footer1">
@@ -12,3 +13,6 @@ export default () => {
   )
 
 }
+}
+
+export default Footer;

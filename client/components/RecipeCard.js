@@ -1,11 +1,12 @@
 import React from 'react';
 
-export default () => {
+class RecipeCard extends React.Component {
+    render() {
     return (
-        <div>
+        <div className="container top">
             <h6 id="title4">Top Recipes</h6>
-            <div className="row top">
-                <div className="col-sm-4">
+            <div className="row">
+                <div className="col-md-4 col-sm-4">
                     <div className="top-items">
                         <div className="rated">
                             <div className="imgholder"><img src={require("../image/Edika-Ikong.jpg")}/></div>
@@ -17,7 +18,7 @@ export default () => {
                             </div>
                             <div className="itemReview row">
                                 <div className="col-md-3 picicon">
-                                    <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png"/>
+                                    <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" style={{'weight':70+'px','height':70+'px'}}/>
                                 </div>
                                 <div className="col-md-9 recipe-by">
                                     <div>Recipe by <strong>Meya Samuel</strong></div>
@@ -38,3 +39,6 @@ export default () => {
     )
 
 }
+}
+
+export default RecipeCard;

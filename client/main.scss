@@ -6,7 +6,6 @@ body {
 }
 
 * {
-  margin: 0 auto;
   padding: 0;
 }
 
@@ -17,7 +16,6 @@ div {
 .navs > h2 {
   color:#efefef;
 }
-
 .header {
   padding:1%;
   height: 70px;
@@ -52,7 +50,7 @@ img {
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
   .topnav a.icon {
-    float: right;
+    float: left;
     display: block;
   }
 }
@@ -67,7 +65,7 @@ img {
   .topnav.responsive a {
     float: none;
     display: block;
-    text-align: left;
+    text-align:right;
   }
 
 }
@@ -83,7 +81,7 @@ img {
 }
 
 .search {
-  margin-top: -990px;
+  // margin-top: -200px;
 }
 
 .hit {
@@ -209,6 +207,7 @@ img {
 }
 
 .top-items {
+
   display: flex;
   flex-direction: row;
   margin-top: 30px;
@@ -232,6 +231,10 @@ img {
 }
 .top{
   padding-bottom: 50px;
+  padding-top: 200px;
+}
+.top h6 {
+  padding-bottom: 20px;
 }
 
 
@@ -254,15 +257,22 @@ img {
   border-top: 1px solid #eee;
   padding: 5px;
 }
-.picIcon{
-  margin-bottom:30px;
+.picicon{
+  margin-top:10px;
+  margin-bottom:10px;
   opacity: 0.6;
 }
+
+// #finder{
+//   max-width:80px;
+// }
 
 .recipe-by {
   height: 50px;
   text-align: left;
-  color: #c9c9c9
+  color: #c9c9c9;
+  margin-top: 15px;margin-bottom:10px;
+  
 }
 
 .recipe-by strong {
@@ -272,6 +282,7 @@ img {
 .icons {
   display: block;
   margin-top: 10px;
+  
   color: black;
 }
 
@@ -416,6 +427,7 @@ img {
   margin-top:3px;
   
 }
+
 
 p{
   margin: 10px 0;

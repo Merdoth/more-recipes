@@ -1,25 +1,22 @@
 import React from 'react';
+
 import NavigationBar from './NavigationBar';
-import Slider from './Slider.js';
-import SearchBar from './SearchBar.js';
-import RecipeCard from './RecipeCard.js';
-import Footer from './Footer.js';
+import Footer from './Footer';
 
 class App extends React.Component{
     render() { 
         return(
             <div>
-                <NavigationBar />
-                <Slider />
-                <RecipeCard />
-                <Footer />
-                <SearchBar />
-               
-
-               
+                <NavigationBar /> 
+                {this.props.children}
+                <div style={{'position': 'absolute', 'bottom': 0, 'width': 100 + '%'}}>
+                </div>
             </div>
         );
     }
 }
 
 export default App;
+
+
+                
