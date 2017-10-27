@@ -28,7 +28,7 @@ class SigninForm extends React.Component {
     render() {
         return (
             <div> 
-                <div style={{'width':50+'%', 'margin':5+'% auto', 'padding':1+'%', 'background':'white'}}>
+                <div style={{'margin':5+'% auto', 'padding':1+'%', 'background':'white'}}>
                     <form className="form-signin">
                         <h2 className="form-signin-heading"><b>Sign In</b></h2><hr/>
                         <label htmlFor="inputEmail" className="control-label">Email address</label>

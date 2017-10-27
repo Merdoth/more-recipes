@@ -31,6 +31,16 @@ export default (sequelize, DataTypes) => {
           msg: 'Password cannot be less than 8 characters'
         }
       }
+    },
+    confirmPassword: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [8,],
+          msg: 'Password does not match'
+        }
+      }
     }
   });
 
