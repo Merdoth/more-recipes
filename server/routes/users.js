@@ -15,7 +15,7 @@ const userRoutes = (router) => {
     const { errors, isValid } = validateInput(req.body);
   
     if (isValid) {
-      res.json({ success: true });
+      res.send({ success: true });
     } else {
       res.status(400).send(errors);
     }

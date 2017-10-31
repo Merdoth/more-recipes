@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validateInput from '../../../server/shared/validations/signup';
 import classnames from 'classnames';
+import { browserHistory } from 'react-router';
 
 
 class SignupForm extends React.Component {
@@ -40,7 +41,9 @@ class SignupForm extends React.Component {
         if(this.isValid()) {
         this.setState({ errors: {}, isLoading: true });
         this.props.userSignupRequest(this.state).then(
-          () => {},
+          () => {
+              browserHistory.push('/');
+          },
           ({ data }) => this.setState({ errors: data, isLoading: false})
         );
 
