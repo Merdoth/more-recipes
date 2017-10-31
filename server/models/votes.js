@@ -12,12 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     upvotes: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    downvotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     }
-  
   });
   
   votes.associate = (models) => {

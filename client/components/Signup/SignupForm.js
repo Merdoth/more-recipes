@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import validateInput from '../../../server/shared/validations/signup';
 import classnames from 'classnames';
 
 
@@ -9,30 +10,43 @@ class SignupForm extends React.Component {
         super(props);
         this.state = {
             username: '',
-            email: '',                                                                                                                                                                                                                                                                                                                                                                                                                               
+            email: '',                                                                                                                                     
             password: '',
             confirmPassword: '',
             errors:  {},
             isLoading: false,
         }; 
         this.onChange = this.onChange.bind(this);
-        this.onClick = this.onClick.bind(this);
-
-        console.log(PropTypes, 'prop')
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    onClick(event) {
+    isValid() {
+        const { errors, isValid } = validateInput(this.state);
+
+        if (!isValid) {
+            this.setState({ errors });
+        }
+
+        return isValid;
+    }
+
+    onSubmit(event) {
         event.preventDefault();
+
+        if(this.isValid()) {
         this.setState({ errors: {}, isLoading: true });
         this.props.userSignupRequest(this.state).then(
           () => {},
           ({ data }) => this.setState({ errors: data, isLoading: false})
         );
+
+        }
     }
+
     render() {
         const { errors } = this.state;
         return (
@@ -66,7 +80,7 @@ class SignupForm extends React.Component {
                        </div>
                        
                        <div className="form-group">
-                       <button disabled={this.state.isloading } type="submit" className="btn btn-lg btn-primary btn-block" onClick={this.onClick}><i className="fa fa-user-plus"></i> Sign Up</button><br/>
+                       <button disabled={this.state.isLoading } type="submit" className="btn btn-lg btn-primary btn-block" onClick={this.onSubmit}><i className="fa fa-user-plus"></i> Sign Up</button><br/>
                         <p className="new_account" style={{'textAlign': 'center'}}><strong>Already Have An Account? </strong><Link to="Signin">Sign in</Link></p>
                        </div>
                     </form>
@@ -80,7 +94,3 @@ SignupForm.propTypes = {
     userSignupRequest: PropTypes.func.isRequired
 }
 export default SignupForm;
-
-
-
-

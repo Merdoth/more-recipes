@@ -3,7 +3,7 @@ import auth from '../middleware/authorization';
 
 const recipeRoutes = (router) => {
   router.post('/recipes/', auth.authorize, recipes.add);
-  router.get('/recipes/', auth.authorize, recipes.get);
+  router.get('/recipes/', recipes.get);
   router.put('/recipes/:id', auth.authorize, recipes.update);
   router.delete('/recipes/:id', auth.authorize, recipes.delete);
 };

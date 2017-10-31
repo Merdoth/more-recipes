@@ -2,6 +2,7 @@ import models from '../models';
 import sequelize from 'sequelize';
 
 const votes = models.votes;
+const recipes = models.recipes;
 
 class Vote {
     
@@ -25,8 +26,25 @@ class Vote {
           votes.create({
             userid,
             recipeid,
+            upvotes
           }).then(upvoted => {
-            return res.status(200).send(upvoted);
+
+            return recipes.findOne({
+              where: { id: recipeid }
+            }).then((recipe) => {
+              console.log(`taiwo ${upvotes}`);
+              if (upvotes == 1) {
+                recipe.increment('upvotes');
+              } else if (upvotes == -1) {
+                recipe.decrement('upvotes');
+              } else {
+                res.status(400).send({
+                  message: 'You can only upvote or downvote. +1 for upvote. -1 for downvote.'
+                });
+              }
+
+              res.status(200).send(upvoted);
+            });
           })
             .catch(err => {
               res.status(500).send({err});
@@ -44,7 +62,8 @@ class Vote {
 
   static getAllUpvoted(req, res) {
     votes.findAll({
-      order: sequelize.literal('max(upvoted) DESC')
+      order: sequelize.literal('max(upvoted) DESC'),
+      limit: 6
     })
       .then((votes) => {
         res.status(200).send({votes});

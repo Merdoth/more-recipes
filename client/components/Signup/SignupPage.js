@@ -12,10 +12,8 @@ class SignupPage extends React.Component {
         const {userSignupRequest} = this.props;
         return (
                 <div>
-                    <div className='row'>
                     <div className='col-md-4 col-md-offset-4'>
                     <SignupForm userSignupRequest={userSignupRequest} />
-                    </div>
                     </div>  
                     <Footer />
                 </div>

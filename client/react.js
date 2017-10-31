@@ -6,26 +6,27 @@ import App from './components/App';
 import Home from './components/Home';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import SigninPage from './components/Signin/SigninPage';
 import SignupPage from './components/Signup/SignupPage';
+import rootReducer from './rootReducer';
 
-const store = createStore(
-    (state = {}) => state,
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const enhancer = composeEnhancers(
     applyMiddleware(thunk)
 );
-
+const store = createStore(rootReducer, enhancer);
 
 ReactDOM.render((
     <Provider store={store}>
-    <BrowserRouter>
-       <div>
-            <Route path="/" component={App}/>
-            <Route exact path="/" component={Home}/>
-            <Route path="/Signup" component={SignupPage}/>
-            <Route path="/Signin" component={SigninPage}/>
-        </div>
-    </BrowserRouter>
+        <BrowserRouter>
+        <div>
+                <Route path="/" component={App}/>
+                <Route exact path="/" component={Home}/>
+                <Route path="/Signup" component={SignupPage}/>
+                <Route path="/Signin" component={SigninPage}/>
+            </div>
+        </BrowserRouter>
     </Provider>
     ),
     document.getElementById('app')

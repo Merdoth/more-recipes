@@ -11,8 +11,8 @@ class SigninPage extends React.Component {
         const {userSigninRequest} = this.props;
         return (
            <div>
-               <div className="row">
-                       <SigninForm  userSigninRequest={userSigninRequest} />
+               <div className='col-md-4 col-md-offset-4'>
+               <SigninForm userSigninRequest={userSigninRequest} />
                </div>
                <Footer />
            </div>

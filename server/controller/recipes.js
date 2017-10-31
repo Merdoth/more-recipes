@@ -38,18 +38,31 @@ class Recipe {
     }
   }
 
-  static get(req, res){
-    recipes.findAll({
-      include: [{ model: reviews, votes }]
-    }).then(recipes => {
-      if(recipes.length < 1) {
-        return res.status(200).send({
+  static get(req, res) {
+    let query = {};
+    if (req.query.sort === 'upvotes' && req.query.order === 'des') {
+      query = {
+        include: [{ model: reviews, votes }],
+        order: [
+          ['upvotes', 'DESC']
+        ],
+        limit: 6
+      };
+    } else {
+      query = {
+        include: [{ model: reviews, votes }]
+      };
+    }
+    recipes.findAll(query).then(recipes => {
+      if (recipes.length < 1) {
+        return res.status(404).send({
           message: 'No recipes found. Please try to create some.'
         });
       }
-      if(recipes) {
+
+      if (recipes) {
         return res.status(200).send(recipes);
-      }else {
+      } else {
         return res.status(404).send({ message: 'Recipe not found'});
       }
     });
@@ -57,7 +70,7 @@ class Recipe {
 
   static update(req, res) {
     const id = req.params.id;
-    const {recipename,  preparation, ingredients } = req.body;
+    const {recipename,  preparation, ingredients, upvotes } = req.body;
 
     return recipes.find({
       where: {
@@ -68,7 +81,8 @@ class Recipe {
         return recipe.update({
           recipename: recipename || recipe.recipename, 
           ingredients: ingredients || recipe.ingredients,
-          preparation: preparation || recipe.preparation
+          preparation: preparation || recipe.preparation,
+          upvotes: recipe.upvotes + upvotes || 0
         })
           .then((updatedRecipe) => {
             return res.status(200).send(updatedRecipe);

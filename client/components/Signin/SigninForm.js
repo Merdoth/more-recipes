@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 
 
@@ -11,18 +12,24 @@ class SigninForm extends React.Component {
         this.state = {
             email: '',
             password: '',
-        }
+            // errors: {},
+            isLoading: false,
+        };
         this.onChange = this.onChange.bind(this);
-        this.onClick = this.onClick.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChange(event) {
         this.setState({ [event.target.name]: event.target.value }) 
     }
 
-    onClick(event) {
+    onSubmit(event) {
         event.preventDefault();
-        this.props.userSigninRequest(this.state);
+        this.setState({ errors: {}, isLoading: true });
+        this.props.userSigninRequest(this.state).then(
+          () => {},
+          ({ data }) => this.setState({ errors: data, isLoading: false})
+        );
     }
 
     render() {
@@ -31,12 +38,23 @@ class SigninForm extends React.Component {
                 <div style={{'margin':5+'% auto', 'padding':1+'%', 'background':'white'}}>
                     <form className="form-signin">
                         <h2 className="form-signin-heading"><b>Sign In</b></h2><hr/>
-                        <label htmlFor="inputEmail" className="control-label">Email address</label>
+                        
+                        <div className={classnames("form-group", { 'has-error': errors.email })}>
+                        <label htmlFor="inputEmail" className="control-label">Email Address</label>
                         <input value={this.state.email} onChange={this.onChange} type="email" name="email" className="form-control" placeholder="Email address" required="" autoFocus=""/>
+                        {errors.email && <span className="help-block">{errors.email}</span>}
+                        </div>
+
+                        <div className={classnames("form-group", { 'has-error': errors.password })}>
                         <label htmlFor="inputPassword" className="control-label">Password</label>
                         <input  value={this.state.password} onChange={this.onChange} type="password" name="password" className="form-control" placeholder="Password" required=""/>
-                        <button type="submit" className="btn btn-lg btn-primary btn-block" onClick={this.onClick}><i className="fa fa-user-plus"></i> Sign In</button><br/>
+                        {errors.password && <span className="help-block">{errors.password}</span>}
+                        </div>
+
+                        <div className="form-group">
+                        <button disabled={this.state.isLoading } type="submit" className="btn btn-lg btn-primary btn-block" onClick={this.onSubmit}><i className="fa fa-user-plus"></i> Sign In</button><br/>
                         <p className="new_account" style={{'textAlign': 'center'}}><strong>Create A New Account? </strong><Link to="Signup">Sign Up</Link></p>
+                        </div>
                     </form>
                 </div>
                 </div> 

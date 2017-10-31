@@ -32,16 +32,6 @@ export default (sequelize, DataTypes) => {
         }
       }
     },
-    confirmPassword: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: {
-          args: [8,],
-          msg: 'Password does not match'
-        }
-      }
-    }
   });
 
   users.associate = (models) => {
@@ -61,6 +51,8 @@ export default (sequelize, DataTypes) => {
 
   users.beforeCreate((user) => {
     user.dataValues.password = bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
+    user.dataValues.email = user.dataValues.email.toLowerCase();
+    user.dataValues.username = user.dataValues.username.toLowerCase();
   });
 
   users.beforeUpdate((user) => {
