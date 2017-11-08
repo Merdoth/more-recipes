@@ -24,33 +24,24 @@ var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
 
-var _recipes = require('./routes/recipes');
+var _routes = require('./routes/');
 
-var _recipes2 = _interopRequireDefault(_recipes);
-
-var _users = require('./routes/users');
-
-var _users2 = _interopRequireDefault(_users);
-
-var _reviews = require('./routes/reviews');
-
-var _reviews2 = _interopRequireDefault(_reviews);
+var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _dotenv2.default.config();
 
 var app = (0, _express2.default)();
-var port = process.env.PORT || 5001;
-//process.env.SECRET;
+var router = _express2.default.Router();
+var port = process.env.PORT || 9000;
 
 app.use((0, _morgan2.default)('dev'));
-app.use(_bodyParser2.default.urlencoded({ extended: false }));
+app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use(_bodyParser2.default.json());
 
-app.use('/api/v1/recipes', _recipes2.default);
-app.use('/api/v1/users', _users2.default);
-app.use('/api/v1/reviews', _reviews2.default);
+(0, _routes2.default)(router);
+app.use('/api/v1', router);
 
 app.get('/', function (req, res) {
   res.status(200).send({

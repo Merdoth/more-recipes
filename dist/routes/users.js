@@ -4,19 +4,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _express = require('express');
-
-var _express2 = _interopRequireDefault(_express);
-
 var _user = require('../controller/user');
 
 var _user2 = _interopRequireDefault(_user);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var router = _express2.default.Router();
+var userRoutes = function userRoutes(router) {
+  router.get('/users/', _user2.default.getAllUsers);
+  router.post('/users/signup', _user2.default.signUp);
+  router.post('/users/signin', _user2.default.signIn);
+};
 
-router.post('/signup', _user2.default.signup);
-router.post('/signin', _user2.default.signin);
-
-exports.default = router;
+exports.default = userRoutes;

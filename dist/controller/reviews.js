@@ -35,19 +35,21 @@ var Review = function () {
      */
     value: function add(req, res) {
       var _req$body = req.body,
-          review = _req$body.review,
-          userId = _req$body.userId;
+          userid = _req$body.userid,
+          recipeid = _req$body.recipeid,
+          review = _req$body.review;
 
-      if (!review) {
-        res.status(400).send({
-          Message: 'Please Enter Review '
+      if (review && userid && review !== '' && userid !== '') {
+        return reviews.create({
+          userid: userid,
+          recipeid: recipeid,
+          review: review
+        }).then(function (review) {
+          return res.status(200).send(review);
         });
       } else {
-        return reviews.create({
-          userId: userId,
-          review: review
-        }).then(function (created) {
-          return res.status(200).send(created);
+        res.status(400).send({
+          message: 'Please enter a review'
         });
       }
     }

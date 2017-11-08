@@ -15,11 +15,20 @@ var _token = require('../utils/token');
 
 var _token2 = _interopRequireDefault(_token);
 
+var _bcrypt = require('bcrypt');
+
+var _bcrypt2 = _interopRequireDefault(_bcrypt);
+
+var _jsonwebtoken = require('jsonwebtoken');
+
+var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Users = _models2.default.users;
+var Favorites = _models2.default.favorites;
 
 var User = exports.User = function () {
   function User() {
@@ -27,55 +36,51 @@ var User = exports.User = function () {
   }
 
   _createClass(User, null, [{
-    key: 'signup',
-    value: function signup(req, res) {
+    key: 'signUp',
+    value: function signUp(req, res) {
       Users.create(req.body).then(function (user) {
         var newUser = user.dataValues;
         newUser.token = (0, _token2.default)(newUser);
         res.status(201).send({ message: 'User successfully created', data: newUser });
       }).catch(function (err) {
-        // if (/unique violation/.test(err.errors[0].type)) {
-        // return res.status(409).send({ error: 'User with the same email or surname already exists' });
-        // }
-        res.status(400).send({ error: err.errors[0].message });
+        res.status(400).send({ error: err });
       });
     }
   }, {
-    key: 'signin',
-    value: function signin(req, res) {
-      return { req: req, res: res };
+    key: 'getAllUsers',
+    value: function getAllUsers(req, res) {
+      Users.findAll({
+        include: [{ model: Favorites }]
+      }).then(function (users) {
+        res.status(200).send({ users: users });
+      }).catch(function (err) {
+        res.status(400).send({ error: err });
+      });
     }
+  }, {
+    key: 'signIn',
+    value: function signIn(req, res) {
+      var email = req.body.email;
+      Users.findOne({
+        where: {
+          email: email
+        }
+      }).then(function (user) {
+        if (user) {
+          if (_bcrypt2.default.compareSync(req.body.password, user.password)) {
+            var token = _jsonwebtoken2.default.sign({ id: user.id }, process.env.SECRET_KEY, {
+              expiresIn: 60 * 60 * 24 // Token expires in 24 hours
+            });
 
-    // static signIn(req, res) {
-    //   // check db user is in db
-    //   const email = req.body.email;
-    //   // const password = req.body.password;
-    //   Users.findOne({
-    //     where:{
-    //       email: email
-    //     }
-    //   }).then(found => {
-    //     //console.log(found.password)
-    //     if (!found) {
-    //       // return 404 if not
-    //       return res.status(404).send({message: 'error'});
-
-    //     } else if(bcrypt.compareSync(req.body.password, found.password)) {
-    //       // check if password matches
-    //       // else create token and send succes message
-    //       const token = jwt.sign({id: found.id}, process.env.SECRET_KEY, {
-    //         expiresIn: 60 * 60 * 24 // Token expires in 24 hours
-    //       });
-    //       return res.status(200).send({message: 'Welcome', token});
-
-    //     } else {
-    //       // return 404 if not
-    //       return res.status(404).send({
-    //         message: 'wrong password'
-    //       });
-    //     }
-    //   });
-
+            return res.status(200).send({ message: 'Welcome', token: token });
+          } else {
+            return res.status(400).send({ message: 'Incorrect login details!' });
+          }
+        } else {
+          return res.status(404).send({ message: 'User does not exist!' });
+        }
+      });
+    }
   }]);
 
   return User;

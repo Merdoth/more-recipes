@@ -60,7 +60,6 @@ exports.default = function (sequelize, DataTypes) {
   };
 
   users.beforeCreate(function (user) {
-    //console.log('user object', user);
     user.dataValues.password = _bcrypt2.default.hashSync(user.dataValues.password, _bcrypt2.default.genSaltSync(10));
   });
 

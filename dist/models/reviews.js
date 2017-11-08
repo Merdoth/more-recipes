@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    userscomment: {
+    review: {
       type: DataTypes.STRING,
       allowNull: false
     }
@@ -25,5 +25,6 @@ module.exports = function (sequelize, DataTypes) {
       foreignKey: 'recipeid'
     });
   };
+
   return reviews;
 };

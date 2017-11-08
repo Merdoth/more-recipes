@@ -17,11 +17,4 @@ var config = {
   }
 };
 
-// if (!devMode) {
-//   config.ssl = true;
-//   config.dialectOptions.ssl = {
-//     require: !devMode
-//   };
-// }
-
 module.exports = config;

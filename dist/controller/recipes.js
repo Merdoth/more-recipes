@@ -15,6 +15,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var recipes = _models2.default.recipes;
+var reviews = _models2.default.reviews;
+var votes = _models2.default.votes;
 
 var Recipe = function () {
   function Recipe() {
@@ -39,70 +41,88 @@ var Recipe = function () {
           ingredients = _req$body.ingredients,
           preparation = _req$body.preparation;
 
-      if (!recipename) {
-        res.status(400).send({
-          message: 'Enter Recipe Name'
-        });
-      } else if (!ingredients) {
-        res.status(400).send({
-          message: 'Enter Ingredients'
-        });
-      } else if (!preparation) {
-        res.status(400).send({
-          message: 'Enter Preparation Steps'
+
+      if (recipename && ingredients && preparation && recipename !== '' && ingredients !== '' && preparation !== '') {
+        return recipes.create({
+          userid: req.decoded.id,
+          recipename: recipename,
+          ingredients: ingredients,
+          preparation: preparation
+        }).then(function (recipe) {
+          return res.status(200).send(recipe);
         });
       } else {
-        return recipes.create({
-          userid: 1, //req.decoded.id,
-          recipename: recipename,
-          ingredients: [ingredients],
-          preparation: preparation,
-          upvotes: 0,
-          downvotes: 0
-        }).then(function (created) {
-          return res.status(200).send(created);
+        res.status(400).send({
+          message: 'All fields must be provided!'
         });
       }
     }
   }, {
     key: 'get',
     value: function get(req, res) {
-      recipes.all().then(function (recipes) {
-        if (!recipes) {
-          return res.status(404).send({ message: 'Recipe not found' });
-        } else {
+      recipes.findAll({
+        include: [{ model: reviews, votes: votes }]
+      }).then(function (recipes) {
+        if (recipes.length < 1) {
+          return res.status(200).send({
+            message: 'No recipes found. Please try to create some.'
+          });
+        }
+        if (recipes) {
           return res.status(200).send(recipes);
+        } else {
+          return res.status(404).send({ message: 'Recipe not found' });
         }
       });
     }
   }, {
     key: 'update',
     value: function update(req, res) {
-      var id = req.params.Id;
+      var id = req.params.id;
       var _req$body2 = req.body,
           recipename = _req$body2.recipename,
-          preparation = _req$body2.preparation;
+          preparation = _req$body2.preparation,
+          ingredients = _req$body2.ingredients;
 
-      var ingredients = req.body.ingredients.split(',');
-      console.log('hey');
-      console.log(ingredients);
+
       return recipes.find({
         where: {
           id: id
         }
-      }).then(function (isRecipe) {
-        // console.log(isRecipe)
-        if (isRecipe) {
-          return isRecipe.update({
-            recipename: recipename,
-            ingredients: ingredients
-          }).then(function (isRecipe) {
-            console.log('hahahah');
-            return res.status(200).send(isRecipe);
+      }).then(function (recipe) {
+        if (recipe) {
+          return recipe.update({
+            recipename: recipename || recipe.recipename,
+            ingredients: ingredients || recipe.ingredients,
+            preparation: preparation || recipe.preparation
+          }).then(function (updatedRecipe) {
+            return res.status(200).send(updatedRecipe);
           }).catch(function (error) {
-            console.log('error', error);
+            return res.status(500).send({ error: error });
           });
+        } else {
+          return res.status(404).send({ message: 'Recipe does not exist!' });
         }
+      });
+    }
+  }, {
+    key: 'delete',
+    value: function _delete(req, res) {
+      var id = req.params.id;
+      return recipes.find({
+        where: {
+          id: id
+        }
+      }).then(function (recipe) {
+        if (recipe) {
+          recipe.destroy().then(function () {
+            return res.status(200).send({ message: 'Recipe deleted!' });
+          });
+        } else {
+          res.status(404).send({ message: 'Recipe does not exist!' });
+        }
+      }).catch(function (error) {
+        return res.status(500).send({ error: error });
       });
     }
   }]);

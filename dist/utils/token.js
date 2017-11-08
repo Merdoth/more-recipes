@@ -14,10 +14,10 @@ var _dotenv2 = _interopRequireDefault(_dotenv);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var env = _dotenv2.default.config().parsed;
+_dotenv2.default.config();
 
 exports.default = function (payload) {
-  var secret = env.secret;
+  var secret = process.env.SECRET_KEY;
   var id = payload.id,
       username = payload.username,
       email = payload.email;

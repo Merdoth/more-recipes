@@ -27,7 +27,7 @@ module.exports = {
           as: 'recipeid'
         }
       },
-      userscomment: {
+      review: {
         allowNull: false,
         type: Sequelize.STRING
       },
