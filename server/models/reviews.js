@@ -9,20 +9,21 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    userscomment:{
+    review:{
       type: DataTypes.STRING,
       allowNull: false
     },
   });
 
   reviews.associate = (models) => {
-    reviews.belongsto(models.users, {
+    reviews.belongsTo(models.users, {
       foreignKey:'userid'
     });
 
-    reviews.belongsto(models.recipes, {
+    reviews.belongsTo(models.recipes, {
       foreignKey:'recipeid'
     });
   };
+
   return reviews;
 };

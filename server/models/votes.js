@@ -12,19 +12,14 @@ module.exports = (sequelize, DataTypes) => {
     upvotes: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    downvotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     }
-  
   });
   
   votes.associate = (models) => {
-    votes.belongsto(models.recipes, {
+    votes.belongsTo(models.recipes, {
       foreignKey:'recipeid'
     });
-    votes.belongsto(models.users, {
+    votes.belongsTo(models.users, {
       foreignKey:'userid'
     });
   };

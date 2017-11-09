@@ -1,16 +1,11 @@
-import express from 'express';
-import Recipes from '../controller/recipes';
-import Review from '../controller/review';
+import recipes from '../controller/recipes';
+import auth from '../middleware/authorization';
 
-const recipeController = new Recipes();
-const reviewController = new Review();
+const recipeRoutes = (router) => {
+  router.post('/recipes/', auth.authorize, recipes.add);
+  router.get('/recipes/', recipes.get);
+  router.put('/recipes/:id', auth.authorize, recipes.update);
+  router.delete('/recipes/:id', auth.authorize, recipes.delete);
+};
 
-let router = express.Router();
-
-router.post('/', recipeController.add);
-router.put('/:Id', recipeController.update);
-router.delete('/:Id', recipeController.delete);
-router.get('/', recipeController.get);
-router.post('/:Id/reviews', reviewController.add);
-
-export default router;
+export default recipeRoutes;
