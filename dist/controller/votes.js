@@ -19,6 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var votes = _models2.default.votes;
+var recipes = _models2.default.recipes;
 
 var Vote = function () {
   function Vote() {
@@ -48,9 +49,26 @@ var Vote = function () {
 
           votes.create({
             userid: userid,
-            recipeid: recipeid
+            recipeid: recipeid,
+            upvotes: upvotes
           }).then(function (upvoted) {
-            return res.status(200).send(upvoted);
+
+            return recipes.findOne({
+              where: { id: recipeid }
+            }).then(function (recipe) {
+              console.log('taiwo ' + upvotes);
+              if (upvotes == 1) {
+                recipe.increment('upvotes');
+              } else if (upvotes == -1) {
+                recipe.decrement('upvotes');
+              } else {
+                res.status(400).send({
+                  message: 'You can only upvote or downvote. +1 for upvote. -1 for downvote.'
+                });
+              }
+
+              res.status(200).send(upvoted);
+            });
           }).catch(function (err) {
             res.status(500).send({ err: err });
           });
@@ -67,7 +85,8 @@ var Vote = function () {
     key: 'getAllUpvoted',
     value: function getAllUpvoted(req, res) {
       votes.findAll({
-        order: _sequelize2.default.literal('max(upvoted) DESC')
+        order: _sequelize2.default.literal('max(upvoted) DESC'),
+        limit: 6
       }).then(function (votes) {
         res.status(200).send({ votes: votes });
       }).catch(function (err) {

@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var recipeRoutes = function recipeRoutes(router) {
   router.post('/recipes/', _authorization2.default.authorize, _recipes2.default.add);
-  router.get('/recipes/', _authorization2.default.authorize, _recipes2.default.get);
+  router.get('/recipes/', _recipes2.default.get);
   router.put('/recipes/:id', _authorization2.default.authorize, _recipes2.default.update);
   router.delete('/recipes/:id', _authorization2.default.authorize, _recipes2.default.delete);
 };

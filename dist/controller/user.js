@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.User = undefined;
 
-var _createclass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _models = require('../models/');
 
@@ -38,12 +38,32 @@ var User = exports.User = function () {
   _createClass(User, null, [{
     key: 'signUp',
     value: function signUp(req, res) {
-      Users.create(req.body).then(function (user) {
-        var newUser = user.dataValues;
-        newUser.token = (0, _token2.default)(newUser);
-        res.status(201).send({ message: 'User successfully created', data: newUser });
-      }).catch(function (err) {
-        res.status(400).send({ error: err });
+      var _req$body = req.body,
+          email = _req$body.email,
+          username = _req$body.username;
+
+      Users.findOne({
+        where: {
+          $or: [{
+            email: email
+          }, {
+            username: username
+          }]
+        }
+      }).then(function (user) {
+        if (user) {
+          return res.status(403).send({
+            message: 'User already exists. Try a different email and/or username.'
+          });
+        }
+
+        Users.create(req.body).then(function (user) {
+          var newUser = user.dataValues;
+          newUser.token = (0, _token2.default)(newUser);
+          res.status(201).send({ message: 'User successfully created', data: newUser });
+        }).catch(function (err) {
+          res.status(400).send({ error: err });
+        });
       });
     }
   }, {

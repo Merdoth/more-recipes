@@ -58,7 +58,7 @@
   },
   "scripts": {
     "start": "node dist/app.js",
-    "build": "babel-node ./server/ -d ./dist node dist/app.js",
+    "build": "babel ./server/ -d ./dist && node dist/app.js",
     "migrations": "sequelize db:migrate",
     "server": "nodemon --watch server --exec babel-node  -- server/app.js",
     "test": "nyc --reporter=html --reporter=text mocha ./server/tests/ --compilers js:babel-register",
