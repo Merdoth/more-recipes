@@ -3,7 +3,9 @@
   "scripts": {
   },
   "env": {
-    "SECRET_KEY": "this23423girl223is#$3423crazy"
+    "SECRET_KEY": {
+      "generator": "secret"
+    }
   },
   "formation": {
   },
