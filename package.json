@@ -37,7 +37,10 @@
     "sequelize": "^4.13.2",
     "sequelize-cli": "^3.0.0",
     "shortid": "^2.2.8",
-    "validator": "^9.1.1"
+    "validator": "^9.1.1",
+    "webpack": "^3.8.1",
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-hot-middleware": "^2.20.0"
   },
   "devDependencies": {
     "body-parser": "^1.18.2",
@@ -51,10 +54,7 @@
     "nodemon": "^1.12.1",
     "react-hot-loader": "^3.1.1",
     "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.0",
-    "webpack": "^3.8.1",
-    "webpack-dev-middleware": "^1.12.0",
-    "webpack-hot-middleware": "^2.20.0"
+    "style-loader": "^0.19.0"
   },
   "scripts": {
     "start": "node dist/app.js",
