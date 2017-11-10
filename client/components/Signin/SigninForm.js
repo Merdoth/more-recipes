@@ -3,16 +3,13 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-
-
-
 class SigninForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             email: '',
             password: '',
-            // errors: {},
+            errors: {},
             isLoading: false,
         };
         this.onChange = this.onChange.bind(this);
@@ -33,6 +30,8 @@ class SigninForm extends React.Component {
     }
 
     render() {
+
+        const { errors } = this.state;
         return (
             <div> 
                 <div style={{'margin':5+'% auto', 'padding':1+'%', 'background':'white'}}>

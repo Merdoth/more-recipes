@@ -9,7 +9,7 @@ class App extends React.Component{
         return(
             <div>
                 <NavigationBar /> 
-                <FlashMessagesList />
+                <FlashMessageList />
                 {this.props.children}
                 <div style={{'position': 'absolute', 'bottom': 0, 'width': 100 + '%'}}>
                 </div>

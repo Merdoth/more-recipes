@@ -49,7 +49,7 @@ class RecipeCard extends React.Component {
 
 
 RecipeCard.propTypes = {
-    topRecipes: PropTypes.func.isRequired
+    topRecipes: PropTypes.object.isRequired
 }
 
 export default RecipeCard
