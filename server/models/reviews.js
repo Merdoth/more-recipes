@@ -1,11 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const reviews = sequelize.define('reviews', {
-    userid:{
+    userId:{
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    recipeid: {
+    recipeId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -17,11 +17,11 @@ module.exports = (sequelize, DataTypes) => {
 
   reviews.associate = (models) => {
     reviews.belongsTo(models.users, {
-      foreignKey:'userid'
+      foreignKey:'userId'
     });
 
     reviews.belongsTo(models.recipes, {
-      foreignKey:'recipeid'
+      foreignKey:'recipeId'
     });
   };
 

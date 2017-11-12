@@ -9,7 +9,7 @@ const Favorites = models.favorites;
 
 export class User {
   static signUp(req, res) {
-    const { email, username } = req.body;
+    const { email, userName } = req.body;
     Users.findOne({
       where: {
         $or: [
@@ -17,7 +17,7 @@ export class User {
             email
           },
           {
-            username
+            userName
           }
         ]
       }

@@ -2,7 +2,7 @@ import favorite from '../controller/favorites';
 
 const favoriteRoutes = (router) => {
   router.post('/favorites/', favorite.makeFavorite);
-  router.get('/favorites/', favorite.getFavorites);
+  router.get('users/:id/recipes', favorite.getFavorites);
 };
 
 export default favoriteRoutes;

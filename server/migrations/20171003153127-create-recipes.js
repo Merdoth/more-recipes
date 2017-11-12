@@ -8,16 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userid: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'users',
           key: 'id',
-          as: 'userid'
+          as: 'userId'
         }
       },
-      recipename: {
+      recipeName: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -29,7 +29,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      upvotes: {
+      upVotes: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      downVotes: {
         type: Sequelize.INTEGER,
         allowNull: false
       },

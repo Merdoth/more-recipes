@@ -17,15 +17,15 @@ class Recipe {
    * @memberof Recipe
    */
   static add(req, res) {
-    const{ recipename, ingredients, preparation } = req.body;
+    const{ recipeName, ingredients, preparation } = req.body;
 
-    if (recipename && ingredients && preparation &&
-      recipename !== '' && ingredients !== '' && preparation !== ''
+    if (recipeName && ingredients && preparation &&
+      recipeName !== '' && ingredients !== '' && preparation !== ''
     ) {
       return recipes
         .create({
-          userid: req.decoded.id,
-          recipename: recipename,
+          userId: req.decoded.id,
+          recipeName: recipeName,
           ingredients: ingredients,
           preparation: preparation
         }).then(recipe => {
@@ -44,7 +44,7 @@ class Recipe {
       query = {
         include: [{ model: reviews, votes }],
         order: [
-          ['upvotes', 'DESC']
+          ['upovtes', 'DESC']
         ],
         limit: 6
       };
@@ -70,7 +70,7 @@ class Recipe {
 
   static update(req, res) {
     const id = req.params.id;
-    const {recipename,  preparation, ingredients, upvotes } = req.body;
+    const {recipeName,  preparation, ingredients, upvotes } = req.body;
 
     return recipes.find({
       where: {
@@ -79,7 +79,7 @@ class Recipe {
     }).then((recipe) => {
       if(recipe) {
         return recipe.update({
-          recipename: recipename || recipe.recipename, 
+          recipeName: recipeName || recipe.recipeName, 
           ingredients: ingredients || recipe.ingredients,
           preparation: preparation || recipe.preparation,
           upvotes: recipe.upvotes + upvotes || 0

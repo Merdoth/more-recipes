@@ -1,11 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const favorites = sequelize.define('favorites', {
-    userid: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    recipeid: { 
+    recipeId: { 
       type: DataTypes.INTEGER,
       allowNull: false
     }
@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   
   favorites.associate = (models) => {
     favorites.belongsTo(models.recipes, {
-      foreignKey: 'recipeid'
+      foreignKey: 'recipeId'
     });
 
     favorites.belongsTo(models.users, {
-      foreignKey: 'userid'
+      foreignKey: 'userId'
     });
   };
   return favorites;

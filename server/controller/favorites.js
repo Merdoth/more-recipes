@@ -13,13 +13,13 @@ class Favorite {
    * @memberof Favorite
    */
   static makeFavorite(req, res) {
-    const{userid, recipeid} = req.body;
-    if (recipeid && userid && recipeid !== '' && userid !== '') {
+    const{userId, recipeId} = req.body;
+    if (recipeId && userId && recipeId !== '' && userId !== '') {
       return Favorites
         .findAll({
           where: {
-            recipeid,
-            userid
+            recipeId,
+            userId
           },
         })
         .then(favorited => {
@@ -30,8 +30,8 @@ class Favorite {
           }
 
           Favorites.create({
-            userid,
-            recipeid,
+            userId,
+            recipeId,
           }).then(favorited => {
             return res.status(200).send(favorited);
           })

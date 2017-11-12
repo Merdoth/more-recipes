@@ -13,12 +13,12 @@ class Review {
    * @memberof Review
    */
   static add(req, res) {
-    const{userid, recipeid, review} = req.body;
-    if (review && userid && review !== '' && userid !== '') {
+    const{userId, recipeId, review} = req.body;
+    if (review && userId && review !== '' && userId !== '') {
       return reviews 
         .create({
-          userid,
-          recipeid,
+          userId,
+          recipeId,
           review,
         }).then(review => {
           return res.status(200).send(review);

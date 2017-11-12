@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 
 export default (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
-    username: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -36,16 +36,16 @@ export default (sequelize, DataTypes) => {
 
   users.associate = (models) => {
     users.hasMany(models.recipes, {
-      foreignKey:'userid'
+      foreignKey:'userId'
     });
     users.hasMany(models.reviews, {
-      foreignKey:'userid'
+      foreignKey:'userId'
     });
     users.hasMany(models.favorites, {
-      foreignKey:'userid'
+      foreignKey:'userId'
     });
     users.hasMany(models.votes, {
-      foreignKey:'userid'
+      foreignKey:'userId'
     });
   };
 

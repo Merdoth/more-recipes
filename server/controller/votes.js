@@ -32,7 +32,6 @@ class Vote {
             return recipes.findOne({
               where: { id: recipeid }
             }).then((recipe) => {
-              console.log(`taiwo ${upvotes}`);
               if (upvotes == 1) {
                 recipe.increment('upvotes');
               } else if (upvotes == -1) {
