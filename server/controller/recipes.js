@@ -70,7 +70,7 @@ class Recipe {
 
   static update(req, res) {
     const id = req.params.id;
-    const {recipeName,  preparation, ingredients, upvotes } = req.body;
+    const {recipeName,  preparation, ingredients, upVotes, downVotes } = req.body;
 
     return recipes.find({
       where: {
@@ -82,7 +82,8 @@ class Recipe {
           recipeName: recipeName || recipe.recipeName, 
           ingredients: ingredients || recipe.ingredients,
           preparation: preparation || recipe.preparation,
-          upvotes: recipe.upvotes + upvotes || 0
+          upVotes: recipe.upVotes + upVotes || 0,
+          downVotes: recipe.downVotes + downVotes || 0
         })
           .then((updatedRecipe) => {
             return res.status(200).send(updatedRecipe);
