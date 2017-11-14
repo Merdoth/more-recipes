@@ -20,10 +20,10 @@ export class User {
             userName
           }
         ]
-      }
+      },
     }).then(user => {
       if (user) {
-        return res.status(403).send({
+        return res.status(400).send({
           message: 'User already exists. Try a different email and/or username.'
         });
       }
@@ -31,10 +31,15 @@ export class User {
       Users.create(req.body)
         .then((user) => {
           const newUser = user.dataValues;
-          newUser.token = generateToken(newUser); 
-          res.status(201).send({ message: 'User successfully created', data: newUser });
+          const token = generateToken(newUser); 
+          res.status(201).send({ message: 'User successfully created', user: {
+            userName: newUser.userName,
+            email: newUser.email,
+            token
+          } });
         })
         .catch(err => {
+          console.log(err);
           res.status(400).send({ error: err });
         });
     });
@@ -42,6 +47,18 @@ export class User {
 
   static getAllUsers(req, res) {
     Users.findAll({
+      include:[{ model: Favorites }]
+    })
+      .then((users) => {
+        res.status(200).send({ users });
+      })
+      .catch(err => {
+        res.status(400).send({ error: err });
+      });
+  }
+
+  static getOneUser(req, res) {
+    Users.findOne({
       include:[{ model: Favorites }]
     })
       .then((users) => {
