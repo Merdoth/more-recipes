@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 
 export default (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
-    username: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -31,26 +31,28 @@ export default (sequelize, DataTypes) => {
           msg: 'Password cannot be less than 8 characters'
         }
       }
-    }
+    },
   });
 
   users.associate = (models) => {
     users.hasMany(models.recipes, {
-      foreignKey:'userid'
+      foreignKey:'userId'
     });
     users.hasMany(models.reviews, {
-      foreignKey:'userid'
+      foreignKey:'userId'
     });
     users.hasMany(models.favorites, {
-      foreignKey:'userid'
+      foreignKey:'userId'
     });
     users.hasMany(models.votes, {
-      foreignKey:'userid'
+      foreignKey:'userId'
     });
   };
 
   users.beforeCreate((user) => {
     user.dataValues.password = bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
+    user.dataValues.email = user.dataValues.email.toLowerCase();
+    user.dataValues.username = user.dataValues.username.toLowerCase();
   });
 
   users.beforeUpdate((user) => {

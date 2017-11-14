@@ -13,12 +13,7 @@ module.exports = function (sequelize, DataTypes) {
     upvotes: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    downvotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     }
-
   });
 
   votes.associate = function (models) {

@@ -17,15 +17,15 @@ class Recipe {
    * @memberof Recipe
    */
   static add(req, res) {
-    const{ recipename, ingredients, preparation } = req.body;
+    const{ recipeName, ingredients, preparation } = req.body;
 
-    if (recipename && ingredients && preparation &&
-      recipename !== '' && ingredients !== '' && preparation !== ''
+    if (recipeName && ingredients && preparation &&
+      recipeName !== '' && ingredients !== '' && preparation !== ''
     ) {
       return recipes
         .create({
-          userid: req.decoded.id,
-          recipename: recipename,
+          userId: req.decoded.id,
+          recipeName: recipeName,
           ingredients: ingredients,
           preparation: preparation
         }).then(recipe => {
@@ -38,18 +38,31 @@ class Recipe {
     }
   }
 
-  static get(req, res){
-    recipes.findAll({
-      include: [{ model: reviews, votes }]
-    }).then(recipes => {
-      if(recipes.length < 1) {
-        return res.status(200).send({
+  static get(req, res) {
+    let query = {};
+    if (req.query.sort === 'upvotes' && req.query.order === 'des') {
+      query = {
+        include: [{ model: reviews, votes }],
+        order: [
+          ['upovtes', 'DESC']
+        ],
+        limit: 6
+      };
+    } else {
+      query = {
+        include: [{ model: reviews, votes }]
+      };
+    }
+    recipes.findAll(query).then(recipes => {
+      if (recipes.length < 1) {
+        return res.status(404).send({
           message: 'No recipes found. Please try to create some.'
         });
       }
-      if(recipes) {
+
+      if (recipes) {
         return res.status(200).send(recipes);
-      }else {
+      } else {
         return res.status(404).send({ message: 'Recipe not found'});
       }
     });
@@ -57,7 +70,7 @@ class Recipe {
 
   static update(req, res) {
     const id = req.params.id;
-    const {recipename,  preparation, ingredients } = req.body;
+    const {recipeName,  preparation, ingredients, upVotes, downVotes } = req.body;
 
     return recipes.find({
       where: {
@@ -66,9 +79,11 @@ class Recipe {
     }).then((recipe) => {
       if(recipe) {
         return recipe.update({
-          recipename: recipename || recipe.recipename, 
+          recipeName: recipeName || recipe.recipeName, 
           ingredients: ingredients || recipe.ingredients,
-          preparation: preparation || recipe.preparation
+          preparation: preparation || recipe.preparation,
+          upVotes: recipe.upVotes + upVotes || 0,
+          downVotes: recipe.downVotes + downVotes || 0
         })
           .then((updatedRecipe) => {
             return res.status(200).send(updatedRecipe);

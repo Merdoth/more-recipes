@@ -38,12 +38,32 @@ var User = exports.User = function () {
   _createClass(User, null, [{
     key: 'signUp',
     value: function signUp(req, res) {
-      Users.create(req.body).then(function (user) {
-        var newUser = user.dataValues;
-        newUser.token = (0, _token2.default)(newUser);
-        res.status(201).send({ message: 'User successfully created', data: newUser });
-      }).catch(function (err) {
-        res.status(400).send({ error: err });
+      var _req$body = req.body,
+          email = _req$body.email,
+          username = _req$body.username;
+
+      Users.findOne({
+        where: {
+          $or: [{
+            email: email
+          }, {
+            username: username
+          }]
+        }
+      }).then(function (user) {
+        if (user) {
+          return res.status(403).send({
+            message: 'User already exists. Try a different email and/or username.'
+          });
+        }
+
+        Users.create(req.body).then(function (user) {
+          var newUser = user.dataValues;
+          newUser.token = (0, _token2.default)(newUser);
+          res.status(201).send({ message: 'User successfully created', data: newUser });
+        }).catch(function (err) {
+          res.status(400).send({ error: err });
+        });
       });
     }
   }, {

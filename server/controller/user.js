@@ -9,15 +9,35 @@ const Favorites = models.favorites;
 
 export class User {
   static signUp(req, res) {
-    Users.create(req.body)
-      .then((user) => {
-        const newUser = user.dataValues;
-        newUser.token = generateToken(newUser); 
-        res.status(201).send({ message: 'User successfully created', data: newUser });
-      })
-      .catch(err => {
-        res.status(400).send({ error: err });
-      });
+    const { email, userName } = req.body;
+    Users.findOne({
+      where: {
+        $or: [
+          {
+            email
+          },
+          {
+            userName
+          }
+        ]
+      }
+    }).then(user => {
+      if (user) {
+        return res.status(403).send({
+          message: 'User already exists. Try a different email and/or username.'
+        });
+      }
+
+      Users.create(req.body)
+        .then((user) => {
+          const newUser = user.dataValues;
+          newUser.token = generateToken(newUser); 
+          res.status(201).send({ message: 'User successfully created', data: newUser });
+        })
+        .catch(err => {
+          res.status(400).send({ error: err });
+        });
+    });
   }
 
   static getAllUsers(req, res) {

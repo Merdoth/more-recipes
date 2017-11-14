@@ -61,6 +61,8 @@ exports.default = function (sequelize, DataTypes) {
 
   users.beforeCreate(function (user) {
     user.dataValues.password = _bcrypt2.default.hashSync(user.dataValues.password, _bcrypt2.default.genSaltSync(10));
+    user.dataValues.email = user.dataValues.email.toLowerCase();
+    user.dataValues.username = user.dataValues.username.toLowerCase();
   });
 
   users.beforeUpdate(function (user) {

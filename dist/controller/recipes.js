@@ -60,14 +60,25 @@ var Recipe = function () {
   }, {
     key: 'get',
     value: function get(req, res) {
-      recipes.findAll({
-        include: [{ model: reviews, votes: votes }]
-      }).then(function (recipes) {
+      var query = {};
+      if (req.query.sort === 'upvotes' && req.query.order === 'des') {
+        query = {
+          include: [{ model: reviews, votes: votes }],
+          order: [['upvotes', 'DESC']],
+          limit: 6
+        };
+      } else {
+        query = {
+          include: [{ model: reviews, votes: votes }]
+        };
+      }
+      recipes.findAll(query).then(function (recipes) {
         if (recipes.length < 1) {
-          return res.status(200).send({
+          return res.status(404).send({
             message: 'No recipes found. Please try to create some.'
           });
         }
+
         if (recipes) {
           return res.status(200).send(recipes);
         } else {
@@ -82,7 +93,8 @@ var Recipe = function () {
       var _req$body2 = req.body,
           recipename = _req$body2.recipename,
           preparation = _req$body2.preparation,
-          ingredients = _req$body2.ingredients;
+          ingredients = _req$body2.ingredients,
+          upvotes = _req$body2.upvotes;
 
 
       return recipes.find({
@@ -94,7 +106,8 @@ var Recipe = function () {
           return recipe.update({
             recipename: recipename || recipe.recipename,
             ingredients: ingredients || recipe.ingredients,
-            preparation: preparation || recipe.preparation
+            preparation: preparation || recipe.preparation,
+            upvotes: recipe.upvotes + upvotes || 0
           }).then(function (updatedRecipe) {
             return res.status(200).send(updatedRecipe);
           }).catch(function (error) {

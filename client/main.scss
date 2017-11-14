@@ -6,7 +6,6 @@ body {
 }
 
 * {
-  margin: 0 auto;
   padding: 0;
 }
 
@@ -14,9 +13,13 @@ div {
   box-sizing: border-box
 }
 
+.navs > h2 {
+  color:#efefef;
+}
 .header {
-  height: 40px;
-  border: 1px solid #f0f0f0;
+  padding:1%;
+  height: 70px;
+  border: 1px solid #efefef;
   overflow: hidden;
   background-color: #333;
 }
@@ -30,7 +33,7 @@ img {
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 7px 16px;
+  padding: 7px;
   text-decoration: none;
   font-size: 17px;
 }
@@ -47,7 +50,7 @@ img {
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
   .topnav a.icon {
-    float: right;
+    float: left;
     display: block;
   }
 }
@@ -62,46 +65,91 @@ img {
   .topnav.responsive a {
     float: none;
     display: block;
-    text-align: left;
+    text-align:right;
   }
 
 }
 
 
 .hero-bg {
-  background-image: url("./image/salad.jpg");
+  /* background-image: url("./image/Salad.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  margin-top: 30px;
-  height: 500px;
-  
+  height:500px;
+   */
 }
 
+.search {
+  // margin-top: -200px;
+}
 
-.hero-bg h1, h5 {
-  font-weight:bold;
-  color:rgba(0, 0, 0, 0.9);
-  border-bottom: 0;
+.hit {
+  background:black;
+  background-repeat:no-repeat;
+  border:2px solid white;
+  cursor:pointer;
+  color: #efefef;
+  border-radius: 0;
+}
+
+.Enter{
+  border:2px solid white;
+  background:#efefef;
+}
+.hit:hover {
+  background:#efefef;
+  color: black;
+  border:2px solid #fff;
+}
+ 
+.About{
   text-align: center;
+  margin-top: 50px;
+}
+#note2{
+  font-size: 25px;
+}
+
+.hero-bg h1, h5 > i {
+  margin-top: 30px;
+  font-weight:bold;
+  color:#efefef;
+  border-bottom: 0;
+  font-size: 50px;
+  text-shadow: 3px 3px 8px black;
   
+}
+.hello {
+  position: relative;
+  bottom: 400px;
+  text-align: center;
+
 }
 .hero-bg h1 {
-  padding: 200px 650px 0 10px;
+  display:inline-block;
   font-size: 50px;
 }
 
 .hero-bg h5 {
-  padding: 0 650px 200px 10px;
+
   font-size: 15px;
 }
 
 .main {
-  margin-top: 30px;
+  margin-top: 200px;
 }
 
 .oats > img {
   width: 100%;
+}
+
+.oats1 > img {
+  width: 80%;
+}
+
+.profile1 {
+ margin-top:2%
 }
 
 .one{
@@ -110,11 +158,13 @@ img {
 }
 
 .one #title {
-  font-size: 20px;
+  font-size: 36px;
   line-height: .8rem;
   font-weight: bold;
    color: #222;
   padding-left: 5px;
+  margin-bottom: 5%;
+  margin-top: 15px;
 }
 
 .one h1 {
@@ -157,6 +207,7 @@ img {
 }
 
 .top-items {
+
   display: flex;
   flex-direction: row;
   margin-top: 30px;
@@ -180,6 +231,10 @@ img {
 }
 .top{
   padding-bottom: 50px;
+  padding-top: 60px;
+}
+.top h6 {
+  padding-bottom: 20px;
 }
 
 
@@ -202,15 +257,22 @@ img {
   border-top: 1px solid #eee;
   padding: 5px;
 }
-.picIcon{
-  margin-bottom:30px;
+.picicon{
+  margin-top:10px;
+  margin-bottom:10px;
   opacity: 0.6;
 }
+
+// #finder{
+//   max-width:80px;
+// }
 
 .recipe-by {
   height: 50px;
   text-align: left;
-  color: #c9c9c9
+  color: #c9c9c9;
+  margin-top: 15px;margin-bottom:10px;
+  
 }
 
 .recipe-by strong {
@@ -220,6 +282,7 @@ img {
 .icons {
   display: block;
   margin-top: 10px;
+  
   color: black;
 }
 
@@ -227,21 +290,22 @@ img {
   color: orange;
 }
 
-.icons .fa-thumbs-up{
+.icons .fa-thumbs-up, .icons1  .fa-edit{
   color: green;
 }
 
-.icons .fa-thumbs-down{
+.icons .fa-thumbs-down, .icons1 .fa-trash{
   color: red;
 }
 
-.icons .fa-eye{
-  color: skyblue;
+.icons .fa-eye, .icons1 .fa-eye{
+  color: #3535B0;
 }
 
 .main-aside {
-  height: 300px;
+  height: 200px;
   text-align: center;
+
 }
 
 .MyPicture > img {
@@ -252,7 +316,7 @@ img {
   border:0;
   vertical-align: middle;
   margin: 0 0 10px 15px;
-  opacity:0.3;
+  
 
 }
 
@@ -270,10 +334,6 @@ img {
   font-weight: bold;
 }
 
-#note2 {
-  padding-top: 1px;
-  margin: 0 0 0 30px;
-}
 #title2  {
   font-size: 20px;
   line-height: .8rem;
@@ -285,7 +345,7 @@ img {
 .sept {
   color:#acacac;
   font-weight: bold;
-  margin: 0 0 0 15px;
+  margin: 0 15px 0 15px;
   letter-spacing: 1px;
   font-size: .8rem;
 }
@@ -293,7 +353,7 @@ img {
 .latest {
   color:#acacac;
   font-weight: bold;
-  margin: 0 0 0 11px;
+  margin: 0 20px 0 11px;
   letter-spacing: 1px;
   font-size: .8rem;
 }
@@ -303,15 +363,26 @@ img {
   font-size: 20px;
   line-height: .8rem;
   font-weight: bold;
-  padding: 25px 0 8px 20px;
+  padding: 25px 0 8px 70px;
   color: #222;
+  
+}
+
+#title5 {
+  font-size: 20px;
+  line-height: .8rem;
+  font-weight: bold;
+  padding: 25px 0 8px 120px;
+  color: #222;
+  
 }
 
 #note3, #note4 {
   margin: 0 0 0 30px;
+  font-size: 10px;
 }
 #title4  {
-  padding-top: 70px;
+  padding-top: 40px;
   font-size: 35px;
   line-height: .8rem;
   font-weight: bold;
@@ -321,19 +392,42 @@ img {
 
 }
 
+.container-fluid {
+  padding: 0px;
+}
+
 .footer {
-  padding: 19px 0;
+  padding: 15px 0px;
   background: black;
   text-align: center;
-  border-top: 1px solid peachpuff;
+  border-top: 1px solid #efefef;
   color:peachpuff ;  
   letter-spacing: 0.1em;
   line-height:1.5;
   font-size: 22px;
+  bottom:0px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: normal;
-  margin-top:70px;
+  margin-top:50px;
+  
 }
+
+.footer1 {
+  padding: 15px 0px;
+  background: black;
+  text-align: center;
+  border-top: 1px solid #efefef;
+  color:peachpuff ;  
+  letter-spacing: 0.1em;
+  line-height:1.5;
+  bottom: 0px;
+  font-size: 22px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  margin-top:3px;
+  
+}
+
 
 p{
   margin: 10px 0;
@@ -377,7 +471,6 @@ p{
     
   input{
     padding: 5px;
-    margin-right: 10px;
     margin-bottom: 20px;
   }
   
@@ -388,39 +481,49 @@ p{
    width: 70%;
 }
 
+.form-signin-heading {
+  margin-top: 5px;
+}
+
 .manage{
   margin-top:15px;
   margin-bottom: 15px;
+  text-align: center;
+}
+.manage > h2{
+  font-size: 50px;
 }
 
-.user-details label textarea {
-   height: 100%;
-   margin-bottom: 1rem;
-   resize: none !important;
+.manage > p {
+  font-size: 30px;
 }
 
-.user-details textarea {
+.user-details #status{
   border: 2px solid black;
-  padding: .5rem;
   border-radius: 5px;
-  width: 100%;
-  display: block;
+  /* width: 70%; */
+  height: 100px;
   font-size: 1.2rem;
   -webkit-appearance: none;
 }
 
-textarea{
+
+#status{
   background-color: transparent;
   letter-spacing: normal;
-  word-spacing: normal;
-  text-align: start;
+  word-spacing: normal; 
   text-indent: 0px;
   text-transform: none;
   text-rendering: auto;
   user-select: text;
   cursor: auto;
+  
 }
+ #status1 {
+   margin-bottom: 30px;
+ }
 
 .submit {
-  margin-left: 5px;
+  margin-right:50px;
+  margin-left:70px;
 }
