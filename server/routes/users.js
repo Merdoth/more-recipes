@@ -1,14 +1,16 @@
 import User from '../controller/user';
 import express from 'express';
 import validateInput from '../shared/validations/signup' ;
+import signUpValidator from '../middleware/signUpValidator';
 
 
 let router = express.Router();
 
 
 const userRoutes = (router) => {
-  router .get('/users/', User.getAllUsers);
-  router.post('/users/signup', User.signUp);
+  router .get('/users', User.getAllUsers);
+  router .get('/users/:id', User.getOneUser);
+  router.post('/users/signup', signUpValidator, User.signUp);
   router.post('/users/signin', User.signIn);
 
   router.post('/', (req, res) => {
