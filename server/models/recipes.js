@@ -17,12 +17,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    upvotes: {
+    upVotes: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue:0
     },
-    downvotes: {
+    downVotes: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue:0
