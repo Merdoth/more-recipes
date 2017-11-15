@@ -68,6 +68,36 @@ class Recipe {
     });
   }
 
+  static getMine(req, res) {
+    let query = {};
+    if (req.query.sort === 'createdAt' && req.query.order === 'des') {
+      query = {
+        include: [{ model: reviews, votes }],
+        order: [
+          ['createdAt', 'DESC']
+        ],
+      };
+    } else {
+      query = {
+        include: [{ model: reviews, votes }]
+      };
+    }
+    recipes.findAll(query).then(recipes => {
+      if (recipes.length < 1) {
+        return res.status(404).send({
+          message: 'No recipes found. Please try to create some.'
+        });
+      }
+
+      if (recipes) {
+        return res.status(200).send(recipes);
+      } else {
+        return res.status(404).send({ message: 'Recipe not found'});
+      }
+    });
+  }
+
+
   static update(req, res) {
     const id = req.params.id;
     const {recipeName,  preparation, ingredients, upVotes, downVotes } = req.body;
