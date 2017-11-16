@@ -27,7 +27,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {
-          args: [8,],
+          args: [8],
           msg: 'Password cannot be less than 8 characters'
         }
       }
@@ -36,28 +36,30 @@ export default (sequelize, DataTypes) => {
 
   users.associate = (models) => {
     users.hasMany(models.recipes, {
-      foreignKey:'userId'
+      foreignKey: 'userId'
     });
     users.hasMany(models.reviews, {
-      foreignKey:'userId'
+      foreignKey: 'userId'
     });
     users.hasMany(models.favorites, {
-      foreignKey:'userId'
+      foreignKey: 'userId'
     });
     users.hasMany(models.votes, {
-      foreignKey:'userId'
+      foreignKey: 'userId'
     });
   };
 
   users.beforeCreate((user) => {
-    user.dataValues.password = bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
+    user.dataValues.password =
+    bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
     user.dataValues.email = user.dataValues.email;
     user.dataValues.userName = user.dataValues.userName;
   });
 
   users.beforeUpdate((user) => {
-    if (user._changed.password) {
-      user.dataValues.password = bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
+    if (user.changed.password) {
+      user.dataValues.password =
+      bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
     }
   });
 

@@ -3,22 +3,24 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import path from 'path';
 import database from './models';
-import dotenv from 'dotenv';
 import routes from './routes/';
+import webpackConfig from '../webpack.config.dev';
+
+import dotenv from 'dotenv';
 
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from '../webpack.config.dev';
+
+
 
 
 dotenv.config();
 
 const app = express();
-let router = express.Router();
+const router = express.Router();
 const port = process.env.PORT || 9000;
 const compiler = webpack(webpackConfig);
-
 
 app.use(logger('dev'));
 app.use(webpackMiddleware(compiler, {
@@ -27,7 +29,7 @@ app.use(webpackMiddleware(compiler, {
   noInfo: true
 }));
 app.use(webpackHotMiddleware(compiler));
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 routes(router);

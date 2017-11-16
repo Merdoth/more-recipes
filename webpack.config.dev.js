@@ -1,13 +1,13 @@
 const path = require('path');
-const webpack  = require('webpack');
+const webpack = require('webpack');
 
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
     'webpack-hot-middleware/client',
-    path.join(__dirname,'/client/react.js' ),
+    path.join(__dirname, '/client/react.js'),
   ],
-  output: { 
+  output: {
     path: '/',
     publicPath: '/',
     filename: 'bundle.js'
@@ -20,11 +20,11 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        include:[
+        include: [
           path.join(__dirname, 'client'),
           path.join(__dirname, 'server/shared')
         ],
-        loaders: [ 'react-hot-loader/webpack', 'babel-loader']
+        loaders: ['react-hot-loader/webpack', 'babel-loader']
       }, {
         test: /\.scss$/,
         include: path.join(__dirname, 'client'),
@@ -36,7 +36,7 @@ module.exports = {
             loader: 'file-loader',
             options: {
               query: {
-                name:'assets/[name].[ext]'
+                name: 'assets/[name].[ext]'
               }
             }
           },
@@ -61,6 +61,6 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [ '*', '.js']
+    extensions: ['*', '.js']
   }
 };
