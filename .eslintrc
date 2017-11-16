@@ -10,6 +10,7 @@
         "one-var": 0,
         "one-var-declaration-per-line": 0,
         "new-cap": 0,
+        "max-len": ["error", {"code": 80}],
         "consistent-return": 0,
         "no-param-reassign": 0,
         "comma-dangle": 0,
@@ -27,9 +28,8 @@
             "require": {
                 "FunctionDeclaration": true,
                 "MethodDefinition": true,
-                "classDeclaration": true
+                "ClassDeclaration": true
             }
         }]
     }
 }
-

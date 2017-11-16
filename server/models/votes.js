@@ -1,8 +1,8 @@
-'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   const votes = sequelize.define('votes', {
     userId: {
-      type:DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     recipeId: {
@@ -18,13 +18,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-  
   votes.associate = (models) => {
     votes.belongsTo(models.recipes, {
-      foreignKey:'recipeId'
+      foreignKey: 'recipeId'
     });
     votes.belongsTo(models.users, {
-      foreignKey:'userId'
+      foreignKey: 'userId'
     });
   };
   return votes;

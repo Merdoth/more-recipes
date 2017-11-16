@@ -1,43 +1,43 @@
-'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   const recipes = sequelize.define('recipes', {
-    userId:{
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    recipeName:{ 
+    recipeName: { 
       type: DataTypes.STRING,
       allowNull: false
     },
-    ingredients:{
+    ingredients: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    preparation:{ 
+    preparation: { 
       type: DataTypes.STRING,
       allowNull: false
     },
     upVotes: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue:0
+      defaultValue: 0
     },
     downVotes: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue:0
+      defaultValue: 0
     },
   });
 
   recipes.associate = (models) => {
     recipes.belongsTo(models.users, {
-      foreignKey:'userId'
+      foreignKey: 'userId'
     });
     recipes.hasMany(models.reviews, {
-      foreignKey:'recipeId'
+      foreignKey: 'recipeId'
     });
     recipes.hasMany(models.votes, {
-      foreignKey:'recipeId'
+      foreignKey: 'recipeId'
     });
   };
   return recipes;

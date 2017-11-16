@@ -1,19 +1,18 @@
 import models from '../models';
 
 const Favorites = models.favorites;
-
+/**
+ * @class
+ */
 class Favorite {
   /**
-   * 
-   * 
-   * @static
-   * @param {any} req 
-   * @param {any} res 
-   * @returns 
-   * @memberof Favorite
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return {favorite} favorite
    */
   static makeFavorite(req, res) {
-    const{userId, recipeId} = req.body;
+    const { userId, recipeId } = req.body;
     if (recipeId && userId && recipeId !== '' && userId !== '') {
       return Favorites
         .findAll({
@@ -22,7 +21,7 @@ class Favorite {
             userId
           },
         })
-        .then(favorited => {
+        .then((favorited) => {
           if (favorited.length >= 1) {
             return res.status(200).send({
               message: 'You have already favorited this recipe'
@@ -32,30 +31,32 @@ class Favorite {
           Favorites.create({
             userId,
             recipeId,
-          }).then(favorited => {
-            return res.status(200).send(favorited);
-          })
-            .catch(err => {
-              res.status(500).send({err});
+          }).then(foundRecipe => res.status(200).send(foundRecipe))
+            .catch((err) => {
+              res.status(500).send({ err });
             });
         })
-        .catch(err => {
-          res.status(500).send({err});
+        .catch((err) => {
+          res.status(500).send({ err });
         });
-    } else{
-      res.status(400).send({
-        message: 'Please enter a valid user id / recipe id'
-      });
     }
+    res.status(400).send({
+      message: 'Please enter a valid user id / recipe id'
+    });
   }
-
+  /**
+ *
+ * @param {req} req
+ * @param {res} res
+ * @return {favorites} favorites
+ */
   static getFavorites(req, res) {
     return Favorites.all()
-      .then(favorites => {
-        res.status(200).send({favorites});
+      .then((favorites) => {
+        res.status(200).send({ favorites });
       })
-      .catch(err => {
-        res.status(500).send({err});
+      .catch((err) => {
+        res.status(500).send({ err });
       });
   }
 }

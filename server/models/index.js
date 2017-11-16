@@ -1,7 +1,7 @@
-import Sequelize   from 'sequelize';
-import fs          from 'fs';
+import Sequelize from 'sequelize';
+import fs from 'fs';
 import * as dotenv from 'dotenv';
-import config      from '../config/config.js';
+import config from '../config/config';
 
 dotenv.config();
 
