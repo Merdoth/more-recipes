@@ -14,5 +14,11 @@ export default function (req, res, next) {
   if (!password || password.trim() === '') {
     return res.status(400).send({ message: 'Please enter a valid password!' });
   }
+  if (password.length < 8) {
+    return res.status(400).send({
+      message:
+        'Invalid password!'
+    });
+  }
   next();
 }
