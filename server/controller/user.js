@@ -4,7 +4,7 @@ import models from '../models/';
 import generateToken from '../utils/token';
 
 
-const { Users } = models.users;
+const Users = models.users;
 const { Favorites } = models.favorites;
 
 /**
@@ -41,7 +41,7 @@ export class User {
         .then((userCreated) => {
           const newUser = userCreated.dataValues;
           const token = generateToken(newUser);
-          res.status(201).send({
+          return res.status(201).send({
             message: 'User successfully created',
             user: {
               userName: newUser.userName,
@@ -50,9 +50,7 @@ export class User {
             }
           });
         })
-        .catch((err) => {
-          res.status(400).send({ error: err });
-        });
+        .catch(err => res.status(400).send({ error: err }));
     });
   }
 
@@ -81,7 +79,7 @@ export class User {
    * @return { error } error
    */
   static getOneUser(req, res) {
-    Users.findOne({
+    Users.find({
       include: [{ model: Favorites }]
     })
       .then((users) => {
@@ -113,9 +111,9 @@ export class User {
 
           return res.status(200).send({ message: 'Welcome', token });
         }
-        return res.status(400).send({ message: 'Incorrect login details!' });
+        return res.status(404).send({ message: 'Incorrect login details!' });
       }
-      return res.status(404).send({ message: 'User does not exist!' });
+      // return res.status(404).send({ message: 'User does not exist!' });
     });
   }
 }

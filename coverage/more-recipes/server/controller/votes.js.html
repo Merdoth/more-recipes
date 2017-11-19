@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for more-recipes/server/controller/votes.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">more-recipes/server/controller</a> votes.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.09% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>2/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.09% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>2/22</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import sequelize from 'sequelize';
+import models from '../models';
+&nbsp;
+&nbsp;
+const { votes } = models.votes;
+const { recipes } = models.recipes;
+&nbsp;
+/**
+ * @class
+ */
+class Vote {
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return { message } message
+   */
+  static upVotes(req, res) <span class="cstat-no" title="statement not covered" >{</span>
+    const {
+      userId, recipeId, upVotes, downVotes
+    } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+<span class="cstat-no" title="statement not covered" >    if (userId &amp;&amp; recipeId &amp;&amp; upVotes &amp;&amp; downVotes &amp;&amp;</span>
+     userId !== '' &amp;&amp; recipeId !== '' &amp;&amp; upVotes !== '' &amp;&amp; downVotes !== '') {
+<span class="cstat-no" title="statement not covered" >      return votes</span>
+        .findAll({
+          where: {
+            recipeId,
+            userId
+          },
+        })
+        .then(<span class="fstat-no" title="function not covered" >(</span>recipeUpVoted) =&gt; {
+<span class="cstat-no" title="statement not covered" >          if (recipeUpVoted.length &gt;= 1) {</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(200).send({</span>
+              message: 'You already liked this recipe '
+            });
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          votes.create({</span>
+            userId,
+            recipeId,
+            upVotes,
+            downVotes
+          }).then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >createdUpVoted =&gt; recipes.findOne({</span></span>
+            where: { id: recipeId }
+          }).then(<span class="fstat-no" title="function not covered" >(</span>recipe) =&gt; {
+<span class="cstat-no" title="statement not covered" >            if (upVotes === 1) {</span>
+<span class="cstat-no" title="statement not covered" >              recipe.increment('upVotes');</span>
+            } else <span class="cstat-no" title="statement not covered" >if (upVotes === -1) {</span>
+<span class="cstat-no" title="statement not covered" >              recipe.decrement('upVotes');</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >              res.status(400).send({</span>
+                message:
+                'You can only upvote or downvote.'
+              });
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            res.status(200).send(createdUpVoted);</span>
+          }))
+            .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
+<span class="cstat-no" title="statement not covered" >              res.status(500).send({ err });</span>
+            });
+        })
+        .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
+<span class="cstat-no" title="statement not covered" >          res.status(500).send({ err });</span>
+        });
+    }
+<span class="cstat-no" title="statement not covered" >    res.status(400).send({</span>
+      message: 'Please enter a valid userid / recipe id'
+    });
+  }
+&nbsp;
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return { error } error
+   */
+  static getAllUpvoted(req, res) {
+<span class="cstat-no" title="statement not covered" >    votes.findAll({</span>
+      order: sequelize.literal('max(upVoted) DESC'),
+      limit: 6
+    })
+      .then(<span class="fstat-no" title="function not covered" >(</span>existingVotes) =&gt; {
+<span class="cstat-no" title="statement not covered" >        res.status(200).send({ existingVotes });</span>
+      })
+      .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        res.status(400).send({ error: err });</span>
+      });
+  }
+}
+&nbsp;
+export default Vote;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 19 2017 21:48:59 GMT+0100 (WAT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
