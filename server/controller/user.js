@@ -17,42 +17,24 @@ export class User {
    * @param {res} res
    * @return { message } message
    */
-  static signUp(req, res) {
+  static signUpUser(req, res) {
     const { email, userName } = req.body;
-    Users.findOne({
-      where: {
-        $or: [
-          {
-            email
-          },
-          {
-            userName
+    Users.create(req.body)
+      .then((userCreated) => {
+        const newUser = userCreated.dataValues;
+        const token = generateToken(newUser);
+        return res.status(201).send({
+          message: 'User successfully created',
+          user: {
+            userName: newUser.userName,
+            email: newUser.email,
+            token
           }
-        ]
-      },
-    }).then((user) => {
-      if (user) {
-        return res.status(400).send({
-          message: 'User already exists. Try a different email and/or username.'
         });
-      }
-
-      Users.create(req.body)
-        .then((userCreated) => {
-          const newUser = userCreated.dataValues;
-          const token = generateToken(newUser);
-          return res.status(201).send({
-            message: 'User successfully created',
-            user: {
-              userName: newUser.userName,
-              email: newUser.email,
-              token
-            }
-          });
-        })
-        .catch(err => res.status(400).send({ error: err }));
-    });
+      })
+      .catch(err => res.status(400).send({ error: err }));
   }
+
 
   /**
    *
@@ -68,7 +50,7 @@ export class User {
         res.status(200).send({ users });
       })
       .catch((err) => {
-        res.status(400).send({ error: err });
+        res.status(500).send({ error: err });
       });
   }
 
@@ -79,7 +61,7 @@ export class User {
    * @return { error } error
    */
   static getOneUser(req, res) {
-    Users.find({
+    Users.findById({
       include: [{ model: Favorites }]
     })
       .then((users) => {
@@ -96,15 +78,15 @@ export class User {
    * @param {res} res
    * @return { message } message
    */
-  static signIn(req, res) {
-    const { email } = req.body.email;
+  static signInUser(req, res) {
+    const { email, password } = req.body;
     Users.findOne({
       where: {
         email
       }
     }).then((user) => {
       if (user) {
-        if (bcrypt.compareSync(req.body.password, user.password)) {
+        if (bcrypt.compareSync(password, user.password)) {
           const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
             expiresIn: 60 * 60 * 24 // Token expires in 24 hours
           });
@@ -113,7 +95,7 @@ export class User {
         }
         return res.status(404).send({ message: 'Incorrect login details!' });
       }
-      // return res.status(404).send({ message: 'User does not exist!' });
+      return res.status(404).send({ message: 'User does not exist!' });
     });
   }
 }

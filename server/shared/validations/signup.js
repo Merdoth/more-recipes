@@ -10,11 +10,11 @@ import isEmpty from 'lodash/isEmpty';
 export default function validateInput(data) {
   const errors = {};
 
-  if (Validator.isNull(data.username)) {
+  if (Validator.isNull(data.userName)) {
     errors.username = 'This field is required';
   }
 
-  if (!Validator.isUsername(data.username)) {
+  if (!Validator.isUsername(data.userName)) {
     errors.username = 'Username is invalid';
   }
 

@@ -1,9 +1,7 @@
 import models from '../models';
 
 
-const { recipes } = models.recipes;
-const { reviews } = models.reviews;
-const { votes } = models.votes;
+const { recipes, reviews, votes } = models;
 
 /**
  * @class
@@ -15,24 +13,17 @@ class Recipe {
    * @param {res} res
    * @return { createdRecipe } createdRecipe
    */
-  static add(req, res) {
+  static addRecipe(req, res) {
     const { recipeName, ingredients, preparation } = req.body;
-
-    if (recipeName && ingredients && preparation &&
-      recipeName !== '' && ingredients !== '' && preparation !== ''
-    ) {
-      return recipes
-        .create({
-          userId: req.decoded.id,
-          recipeName,
-          ingredients,
-          preparation
-        }).then(recipe => res.status(200).send(recipe));
-    }
-    res.status(400).send({
-      message: 'All fields must be provided!'
-    });
+    recipes.create({
+      userId: req.decoded.id,
+      recipeName,
+      ingredients,
+      preparation
+    }).then(createdRecipe => res.status(200)
+      .send({ message: 'Recipe successfully added', createdRecipe }));
   }
+
 
   /**
    *
@@ -40,13 +31,13 @@ class Recipe {
    * @param {res} res
    * @return { message } message
    */
-  static get(req, res) {
+  static getAllRecipes(req, res) {
     let query = {};
-    if (req.query.sort === 'upvotes' && req.query.order === 'des') {
+    if (req.query.sort === 'upVotes' && req.query.order === 'des') {
       query = {
         include: [{ model: reviews, votes }],
         order: [
-          ['upovtes', 'DESC']
+          ['upVotes', 'DESC']
         ],
         limit: 6
       };
@@ -75,7 +66,7 @@ class Recipe {
    * @param {res} res
    * @return { message } message
    */
-  static getMine(req, res) {
+  static getUserRecipes(req, res) {
     let query = {};
     if (req.query.sort === 'createdAt' && req.query.order === 'des') {
       query = {
@@ -89,7 +80,7 @@ class Recipe {
         include: [{ model: reviews, votes }]
       };
     }
-    recipes.findAll(query).then((recipesFound) => {
+    recipes.findById(query).then((recipesFound) => {
       if (recipes.length < 1) {
         return res.status(404).send({
           message: 'No recipes found. Please try to create some.'
@@ -110,8 +101,8 @@ class Recipe {
    * @param {res} res
    * @return { message } message
    */
-  static update(req, res) {
-    const { id } = req.params.id;
+  static updateUserRecipes(req, res) {
+    const { id } = req.params;
     const {
       recipeName, preparation, ingredients, upVotes, downVotes
     } = req.body;
@@ -142,8 +133,8 @@ class Recipe {
    * @param {res} res
    * @return { message } message
    */
-  static delete(req, res) {
-    const { id } = req.params.id;
+  static deleteUserRecipes(req, res) {
+    const { id } = req.params;
     return recipes.find({
       where: {
         id

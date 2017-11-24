@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">2.33% </span>
+        <span class="strong">2.44% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/43</span>
+        <span class='fraction'>1/41</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/38</span>
+        <span class='fraction'>0/30</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/9</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">2.33% </span>
+        <span class="strong">2.44% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/43</span>
+        <span class='fraction'>1/41</span>
       </div>
     </div>
   </div>
@@ -198,18 +198,7 @@
 153
 154
 155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+156</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -226,17 +215,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -374,9 +356,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import models from '../models';
 &nbsp;
 &nbsp;
-const { recipes } = models.recipes;
-const { reviews } = models.reviews;
-const { votes } = models.votes;
+const { recipes, reviews, votes } = models;
 &nbsp;
 /**
  * @class
@@ -388,24 +368,17 @@ class Recipe {
    * @param {res} res
    * @return { createdRecipe } createdRecipe
    */
-  static add(req, res) <span class="cstat-no" title="statement not covered" >{</span>
+  static addRecipe(req, res) <span class="cstat-no" title="statement not covered" >{</span>
     const { recipeName, ingredients, preparation } = <span class="cstat-no" title="statement not covered" >req.body;</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    if (recipeName &amp;&amp; ingredients &amp;&amp; preparation &amp;&amp;</span>
-      recipeName !== '' &amp;&amp; ingredients !== '' &amp;&amp; preparation !== ''
-    ) {
-<span class="cstat-no" title="statement not covered" >      return recipes</span>
-        .create({
-          userId: req.decoded.id,
-          recipeName,
-          ingredients,
-          preparation
-        }).then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >recipe =&gt; res.status(200).send(recipe));</span></span>
-    }
-<span class="cstat-no" title="statement not covered" >    res.status(400).send({</span>
-      message: 'All fields must be provided!'
-    });
+<span class="cstat-no" title="statement not covered" >    recipes.create({</span>
+      userId: req.decoded.id,
+      recipeName,
+      ingredients,
+      preparation
+    }).then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >createdRecipe =&gt; res.status(200)</span></span>
+      .send({ message: 'Recipe successfully added' }, createdRecipe));
   }
+&nbsp;
 &nbsp;
   /**
    *
@@ -413,13 +386,13 @@ class Recipe {
    * @param {res} res
    * @return { message } message
    */
-  static get(req, res) {
+  static getAllRecipes(req, res) {
     let query = <span class="cstat-no" title="statement not covered" >{};</span>
 <span class="cstat-no" title="statement not covered" >    if (req.query.sort === 'upvotes' &amp;&amp; req.query.order === 'des') {</span>
 <span class="cstat-no" title="statement not covered" >      query = {</span>
         include: [{ model: reviews, votes }],
         order: [
-          ['upovtes', 'DESC']
+          ['upVotes', 'DESC']
         ],
         limit: 6
       };
@@ -448,7 +421,7 @@ class Recipe {
    * @param {res} res
    * @return { message } message
    */
-  static getMine(req, res) {
+  static getUserRecipes(req, res) {
     let query = <span class="cstat-no" title="statement not covered" >{};</span>
 <span class="cstat-no" title="statement not covered" >    if (req.query.sort === 'createdAt' &amp;&amp; req.query.order === 'des') {</span>
 <span class="cstat-no" title="statement not covered" >      query = {</span>
@@ -462,7 +435,7 @@ class Recipe {
         include: [{ model: reviews, votes }]
       };
     }
-<span class="cstat-no" title="statement not covered" >    recipes.findAll(query).then(<span class="fstat-no" title="function not covered" >(</span>recipesFound) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    recipes.findById(query).then(<span class="fstat-no" title="function not covered" >(</span>recipesFound) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      if (recipes.length &lt; 1) {</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(404).send({</span>
           message: 'No recipes found. Please try to create some.'
@@ -483,8 +456,8 @@ class Recipe {
    * @param {res} res
    * @return { message } message
    */
-  static update(req, res) <span class="cstat-no" title="statement not covered" >{</span>
-    const { id } = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
+  static updateUserRecipes(req, res) <span class="cstat-no" title="statement not covered" >{</span>
+    const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
     const {
       recipeName, preparation, ingredients, upVotes, downVotes
     } = <span class="cstat-no" title="statement not covered" >req.body;</span>
@@ -515,8 +488,8 @@ class Recipe {
    * @param {res} res
    * @return { message } message
    */
-  static delete(req, res) {
-    const { id } = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
+  static deleteUserRecipes(req, res) {
+    const { id } = <span class="cstat-no" title="statement not covered" >req.params;</span>
 <span class="cstat-no" title="statement not covered" >    return recipes.find({</span>
       where: {
         id
@@ -541,7 +514,7 @@ export default Recipe;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 19 2017 21:48:59 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 22 2017 23:34:35 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

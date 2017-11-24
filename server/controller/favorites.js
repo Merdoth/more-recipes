@@ -11,39 +11,17 @@ class Favorite {
    * @param {res} res
    * @return {favorite} favorite
    */
-  static makeFavorite(req, res) {
+  static addFavorite(req, res) {
     const { userId, recipeId } = req.body;
-    if (recipeId && userId && recipeId !== '' && userId !== '') {
-      return Favorites
-        .findAll({
-          where: {
-            recipeId,
-            userId
-          },
-        })
-        .then((favorited) => {
-          if (favorited.length >= 1) {
-            return res.status(200).send({
-              message: 'You have already favorited this recipe'
-            });
-          }
-
-          Favorites.create({
-            userId,
-            recipeId,
-          }).then(foundRecipe => res.status(200).send(foundRecipe))
-            .catch((err) => {
-              res.status(500).send({ err });
-            });
-        })
-        .catch((err) => {
-          res.status(500).send({ err });
-        });
-    }
-    res.status(400).send({
-      message: 'Please enter a valid user id / recipe id'
-    });
+    Favorites.create({
+      userId,
+      recipeId,
+    }).then(foundRecipe => res.status(200).send(foundRecipe))
+      .catch((err) => {
+        res.status(500).send({ err });
+      });
   }
+
   /**
  *
  * @param {req} req
