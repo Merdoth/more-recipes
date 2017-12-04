@@ -18,7 +18,7 @@ export class User {
    * @return { message } message
    */
   static signUpUser(req, res) {
-    const { email, userName } = req.body;
+    // const { email, userName } = req.body;
     Users.create(req.body)
       .then((userCreated) => {
         const newUser = userCreated.dataValues;

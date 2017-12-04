@@ -2,16 +2,14 @@ import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import path from 'path';
-import database from './models';
-import routes from './routes/';
-import webpackConfig from '../webpack.config.dev';
-
 import dotenv from 'dotenv';
-
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
+import database from './models';
+import routes from './routes/';
+import webpackConfig from '../webpack.config.dev';
 
 dotenv.config();
 
@@ -31,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 routes(router);
+
 app.use('/api/v1', router);
 
 app.get('*', (req, res) => {
@@ -45,7 +44,7 @@ database.sequelize.authenticate()
   });
   console.log('Datbase Connection established');
   })
-  .catch(err => {
+  .catch((err) => {
     console.log('Could not establish a database connection', err);
   });
 

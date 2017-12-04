@@ -45,6 +45,39 @@ class Vote {
       });
   }
 
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return { message } message
+   */
+  static downVotes(req, res) {
+    const {
+      userId, recipeId, upVotes, downVotes
+    } = req.body;
+    votes.create({
+      userId,
+      recipeId,
+      upVotes,
+      downVotes
+    
+    }).then((recipe) => {
+      if (downVotes === 1) {
+        recipe.increment('downVotes');
+      } else if (downVotes === -1) {
+        recipe.decrement('downVotes');
+      } else {
+        res.status(400).send({
+          message:
+                'You can only upvote or downvote.'
+        });
+      }
+    })
+      .catch((err) => {
+        res.status(500).send({ err });
+      });
+  }
+
 
   /**
    *

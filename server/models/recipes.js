@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    recipeName: { 
+    recipeName: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    preparation: { 
+    preparation: {
       type: DataTypes.STRING,
       allowNull: false
     },

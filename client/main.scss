@@ -70,18 +70,15 @@ img {
 
 }
 
-
 .hero-bg {
-  /* background-image: url("./image/Salad.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height:500px;
-   */
+  height: 600px;
 }
 
-.search {
-  // margin-top: -200px;
+.search-bar {
+  position: absolute;
+  top: 55%;
+  left: 20%;
+  width: 60%;
 }
 
 .hit {
@@ -263,6 +260,11 @@ img {
   opacity: 0.6;
 }
 
+.picicon >img {
+  weight:70px;
+  height:70px
+}
+
 // #finder{
 //   max-width:80px;
 // }
@@ -316,8 +318,16 @@ img {
   border:0;
   vertical-align: middle;
   margin: 0 0 10px 15px;
-  
+}
 
+.wrapper {
+  height:50%
+}
+
+.appChild {
+  position: absolute; 
+  bottom: 0;
+  width: 100%
 }
 
 #profile {
@@ -526,4 +536,18 @@ p{
 .submit {
   margin-right:50px;
   margin-left:70px;
+}
+
+.slider-image {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+.carousel-inner {
+  height: 700px;
+}
+
+.carousel-item {
+  height: 600px;
 }

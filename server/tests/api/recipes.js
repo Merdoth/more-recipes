@@ -13,9 +13,6 @@ const should = chai.should();
 // const token =
 //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNTExMTMzMjI4LCJleHAiOjE1MTEyMTk2Mjh9.eshYXfOeM5Av-La7Qjs-jzfQAyEE_WZHGtjV0bh24HA';
 
-
-
-
 describe('More Recipes', () => {
   it('should throw an error if recipeName is empty and return 400', (done) => {
     chai.request(app)

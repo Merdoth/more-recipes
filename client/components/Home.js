@@ -15,7 +15,7 @@ class Home extends React.Component {
 
     render() {
         const { getTopRecipes } = this.props;
-        console.log(this.props.topRecipes, 'taiwo')
+        console.log(this.props.topRecipes)
         return(
             <div>
                 <Slider />

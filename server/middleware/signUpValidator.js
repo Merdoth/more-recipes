@@ -1,6 +1,4 @@
-import models from '../models';
 
-const Users = models.users;
 /**
  *
  * @param {req} req
@@ -26,28 +24,6 @@ const signUpUser = (req, res, next) => {
         'Password must be up to 8 characters!'
     });
   }
-  Users.findOne({
-    where: {
-      $or: [
-        {
-          email
-        },
-        {
-          userName
-        }
-      ]
-    },
-  }).then((user) => {
-    if (user) {
-      return res.status(400).send({
-        message: 'User already exists. Try a different email and/or username.'
-      });
-    }
-  })
-    .catch((err) => {
-      res.status(500).send({ error: err });
-    });
-
   next();
 };
 

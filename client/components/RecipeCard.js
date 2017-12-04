@@ -26,7 +26,7 @@ class RecipeCard extends React.Component {
                                 </div>
                                 <div className="itemReview row">
                                     <div className="col-md-3 picicon">
-                                        <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" style={{'weight':70+'px','height':70+'px'}}/>
+                                        <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png"/>
                                     </div>
                                     <div className="col-md-9 recipe-by">
                                         <div>Recipe by <strong>Meya Samuel</strong></div>

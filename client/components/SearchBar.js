@@ -3,11 +3,8 @@ import React from 'react';
 class SearchBar extends React.Component {
     render() {
     return (
-        <div className="" style={{
-            position: 'absolute',
-            top: '70%',
-            left: '20%',
-            width: '60%'
+        <div className="search-bar" style={{
+            
         }}>
         <div className="container-fluid">
            <div className="row">

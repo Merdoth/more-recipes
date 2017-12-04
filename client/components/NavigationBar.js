@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class NavigationBar extends React.Component {
   render() {
     return (
-      <div className="container-fluid wrapper" style={{'height':50+'%'}}>
+      <div className="container-fluid wrapper">
         <div className="row header">
             <div className="col-xs-12 col-md-3 navs">
                 <h2>More Recipes</h2>

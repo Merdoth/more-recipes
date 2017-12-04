@@ -8,8 +8,6 @@ const reducers = combineReducers({
   recipeReducer
 });
 
-const rootReducer = (state, action) => {
-  return reducers(state, action);
-};
+const rootReducer = (state, action) => reducers(state, action);
 
 export default rootReducer;
