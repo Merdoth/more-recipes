@@ -5,9 +5,7 @@ import signUpUser from '../middleware/signUpValidator';
 import signInValidator from '../middleware/signInValidator';
 import checkUserExists from '../middleware/checkUserExists';
 
-
 const router = express.Router();
-
 
 const userRoutes = (router) => {
   router.get('/users', User.getAllUsers);

@@ -8,24 +8,26 @@ const checkUserExists = (req, res, next) => {
     where: {
       $or: [
         {
-          email
+          email,
         },
         {
-          userName
-        }
-      ]
+          userName,
+        },
+      ],
     },
-  }).then((user) => {
-    if (user) {
-      return res.status(400).send({
-        message: 'User already exists. Try a different email and/or username.'
-      });
-    }
-  });
-  // .catch((err) => {
-  //   res.status(500).send({ error: err });
-  // });
-  next();
+  })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send({
+          message:
+            'User already exists. Try a different email and/or username.',
+        });
+      }
+      next();
+    })
+    .catch((err) => {
+      res.status(500).send({ error: err });
+    });
 };
 
 export default checkUserExists;

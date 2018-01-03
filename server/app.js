@@ -37,12 +37,13 @@ app.get('*', (req, res) => {
 });
 
 database.sequelize.authenticate()
-  .then(() => { app.listen(port, (err) => {
-    if (!err) {
-      console.log(`listening on port localhost://${port}`);
-    }
-  });
-  console.log('Datbase Connection established');
+  .then(() => {
+    app.listen(port, (err) => {
+      if (!err) {
+        console.log(`listening on port localhost://${port}`);
+      }
+    });
+    console.log('Datbase Connection established');
   })
   .catch((err) => {
     console.log('Could not establish a database connection', err);

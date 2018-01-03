@@ -1,4 +1,3 @@
-
 /**
  *
  * @param {req} req
@@ -20,8 +19,7 @@ const signUpUser = (req, res, next) => {
   }
   if (password.length < 8) {
     return res.status(400).send({
-      message:
-        'Password must be up to 8 characters!'
+      message: 'Password must be up to 8 characters!',
     });
   }
   next();

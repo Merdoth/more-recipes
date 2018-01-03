@@ -3,9 +3,8 @@ import bcrypt from 'bcrypt';
 import models from '../models/';
 import generateToken from '../utils/token';
 
-
 const Users = models.users;
-const { Favorites } = models.favorites;
+const Favorites = models.favorites;
 
 /**
  * @class
@@ -35,7 +34,6 @@ export class User {
       .catch(err => res.status(400).send({ error: err }));
   }
 
-
   /**
    *
    * @param {req} req
@@ -61,7 +59,7 @@ export class User {
    * @return { error } error
    */
   static getOneUser(req, res) {
-    Users.findById({
+    Users.findById(req.params.id, {
       include: [{ model: Favorites }]
     })
       .then((users) => {

@@ -21,7 +21,7 @@ div {
   height: 70px;
   border: 1px solid #efefef;
   overflow: hidden;
-  background-color: #333;
+  background-color: black;
 }
 
 img {
@@ -422,23 +422,6 @@ img {
   
 }
 
-.footer1 {
-  padding: 15px 0px;
-  background: black;
-  text-align: center;
-  border-top: 1px solid #efefef;
-  color:peachpuff ;  
-  letter-spacing: 0.1em;
-  line-height:1.5;
-  bottom: 0px;
-  font-size: 22px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  margin-top:3px;
-  
-}
-
-
 p{
   margin: 10px 0;
 }
@@ -550,4 +533,17 @@ p{
 
 .carousel-item {
   height: 600px;
+}
+
+.form-deco {
+  background-color: white;
+  padding: 0px 15px;
+}
+
+.form-group {
+  margin-bottom: -0.5rem;
+}
+
+.cover {
+  background-image: url('image/Salad.jpg');
 }

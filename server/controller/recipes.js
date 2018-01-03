@@ -47,14 +47,14 @@ class Recipe {
       };
     }
     recipes.findAll(query).then((recipesFound) => {
-      if (recipes.length < 1) {
+      if (recipesFound.length < 1) {
         return res.status(404).send({
           message: 'No recipes found. Please try to create some.'
         });
       }
 
       if (recipesFound) {
-        return res.status(200).send(recipes);
+        return res.status(200).send(recipesFound);
       }
       return res.status(404).send({ message: 'Recipe not found' });
     });

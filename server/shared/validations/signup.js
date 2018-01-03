@@ -1,6 +1,5 @@
-import Validator from 'validator';
+import validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
-
 
 /**
  *
@@ -10,31 +9,20 @@ import isEmpty from 'lodash/isEmpty';
 export default function validateInput(data) {
   const errors = {};
 
-  if (Validator.isNull(data.userName)) {
-    errors.username = 'This field is required';
+  if (!validator.isAlphanumeric(data.username)) {
+    errors.username = 'Username can only contain letters and numbers';
   }
 
-  if (!Validator.isUsername(data.userName)) {
-    errors.username = 'Username is invalid';
+  if (!validator.isEmail('AB@sdf.df')) {
+    errors.email = 'Invalid email';
   }
 
-  if (Validator.isNull(data.email)) {
-    errors.email = 'This field is required';
+  if (!validator.isLength('data.password', { min: 8, max: undefined })) {
+    errors.password = 'The password must be at least 8 characters long';
   }
 
-  if (!Validator.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
-  }
-
-  if (Validator.isNull(data.password)) {
-    errors.password = 'This field is required';
-  }
-
-  if (Validator.isNull(data.confirmPassword)) {
-    errors.confirmPassword = 'This field is required';
-  }
-  if (!Validator.equals(data.password, data.confirmPassword)) {
-    errors.confirmPassword = 'Passwords must match';
+  if (!validator.equals(data.password, data.confirmPassword)) {
+    errors.confirmPassword = 'Passwords do not match';
   }
 
   return {

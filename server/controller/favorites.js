@@ -29,6 +29,7 @@ class Favorite {
  * @return {favorites} favorites
  */
   static getFavorites(req, res) {
+    console.log('blahblahblah');
     return Favorites.all()
       .then((favorites) => {
         res.status(200).send({ favorites });

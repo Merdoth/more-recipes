@@ -1,104 +1,149 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { browserHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import validateInput from '../../../server/shared/validations/signup';
-import classnames from 'classnames';
-import { browserHistory } from 'react-router';
+import InputField from '../common/InputField';
+import Button from '../common/Button';
 
-
+/**
+ * @param { SignupFrom } SignupForm
+ * @returns { SignupForm } SignupForm
+ */
 class SignupForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: '',
-            email: '',                                                                                                                                     
-            password: '',
-            confirmPassword: '',
-            errors:  {},
-            isLoading: false,
-        }; 
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+  /**
+     *
+     * @param { props } props
+     */
+  constructor(props) { 
+    super(props);
+    this.state = {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      errors: {},
+      isLoading: false,
+    };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  /**
+   * @param { event } event
+   * @returns { state } state
+   */
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+  /**
+   * @param { event } event
+   * @returns { state } state
+   */
+  onSubmit(event) {
+    event.preventDefault();
+    console.log('I am called');
+
+    if (validateInput(this.state).isValid) {
+      this.setState({ errors: {}, isLoading: true });
+      this.props.userSignupRequest(this.state).then(
+        () => {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: 'You have signed up successfully, Welcome!'
+          });
+          browserHistory.push('/');
+        },
+        ({ data }) => this.setState({ errors: data, isLoading: false })
+      );
+    } else {
+      console.log(validateInput(this.state));
     }
+  }
 
-    onChange(event) {
-        this.setState({ [event.target.name]: event.target.value });
-    }
 
-    isValid() {
-        const { errors, isValid } = validateInput(this.state);
+  /**
+   *
+   * @returns { Jsx } Jsx
+   */
+  render() {
+    const { errors } = this.state;
+    return (
+      <div>
+        <div className="form-deco">
+          <form
+            className="form-signin"
+          >
+            <h2
+              className="form-signin-heading"
+            >Sign Up</h2><hr />
+            <br />
 
-        if (!isValid) {
-            this.setState({ errors });
-        }
+            <InputField
+              type="text"
+              name="username"
+              placeholder="Enter your username"
+              value={this.state.username}
+              label="Username"
+              onChange={this.onChange}
+            />
 
-        return isValid;
-    }
+            <InputField
+              type="email"
+              name="email"
+              placeholder="Enter your email address"
+              value={this.state.email}
+              label="Email address"
+              onChange={this.onChange}
+            />
 
-    onSubmit(event) {
-        event.preventDefault();
+            <InputField
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={this.state.password}
+              label="Password"
+              onChange={this.onChange}
+            />
 
-        if(this.isValid()) {
-        this.setState({ errors: {}, isLoading: true });
-        this.props.userSignupRequest(this.state).then(
-          () => {
-              this.props.addFlashMessage({
-                  type: 'success',
-                  text: 'You have signed up successfully, Welcome!'
-              });
-              browserHistory.push('/');
-          },
-          ({ data }) => this.setState({ errors: data, isLoading: false})
-        );
 
-        }
-    }
+            <InputField
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={this.state.confirmPassword}
+              label="Confirm Password"
+              onChange={this.onChange}
+            />
 
-    render() {
-        const { errors } = this.state;
-        return (
-            <div>
-                <div style={{'background':'white', 'padding':1+'%' , 'margin':2+'% auto'}}>
-                    <form className="form-signin">
-                        <h2 className="form-signin-heading"><b>Sign Up</b></h2><hr/><br/>
-            
-                       <div className={classnames("form-group", { 'has-error': errors.username })}>
-                       <label htmlFor="inputUsername" className="control-label">Username</label>
-                        <input value={this.state.username} onChange={this.onChange} type="text" name="username" className="form-control" placeholder="Username" required="" autoFocus=""/><br/>
-                        {errors.username && <span className="help-block">{errors.username}</span>}
-                       </div>
 
-                       <div className={classnames("form-group", { 'has-error': errors.email })}>
-                       <label  htmlFor="inputEmail" className="control-label">Email address</label>
-                        <input value={this.state.email} onChange={this.onChange} type="email" name="email" className="form-control" placeholder="Email address" required=""/><br/>
-                        {errors.email && <span className="help-block">{errors.email}</span>}
-                       </div>
+          `  <Button
+              type="submit"
+              onClick={this.onSubmit}
+              disabled={this.state.isLoading}
+              name="Sign Up"
+              iconClass="fa-user-plus"
+              className="btn btn-lg btn-primary btn-block"
+            >
 
-                       <div className={classnames("form-group", { 'has-error': errors.password })}>
-                       <label  htmlFor="inputPassword" className="control-label">Password</label>
-                        <input value={this.state.password} onChange={this.onChange} type="password" name="password" className="form-control" placeholder="Password" required=""/><br/>
-                        {errors.password && <span className="help-block">{errors.password}</span>}
-                       </div>
-                       
-                       <div className={classnames("form-group", { 'has-error': errors.confirmPassword })}>
-                       <label  htmlFor="inputPassword" className="control-label">Confirm Password</label>
-                        <input value={this.state.confirmPassword} onChange={this.onChange} type="password" name="confirmPassword" className="form-control" placeholder="Confirm Password" required=""/><br/>
-                        {errors.confirmPassword && <span className="help-block">{errors.confirmPassword}</span>}
-                       </div>
-                       
-                       <div className="form-group">
-                       <button disabled={this.state.isLoading } type="submit" className="btn btn-lg btn-primary btn-block" onClick={this.onSubmit}><i className="fa fa-user-plus"></i> Sign Up</button><br/>
-                        <p className="new_account" style={{'textAlign': 'center'}}><strong>Already Have An Account? </strong><Link to="Signin">Sign in</Link></p>
-                       </div>
-                    </form>
-                </div><br/><br/>
-            </div>
-        );
-    }
+            </Button>`
+            <p
+              className="new_account"
+              style={{ textAlign: 'center' }}
+            >
+              <strong>Already Have An Account? </strong>
+              <Link to="Signin">Sign in</Link>
+            </p>
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
 
 SignupForm.propTypes = {
-    userSignupRequest: PropTypes.func.isRequired,
-    addFlashMessage: PropTypes.func.isRequired
-}
+  userSignupRequest: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
+};
 export default SignupForm;

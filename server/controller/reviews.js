@@ -1,6 +1,6 @@
 import models from '../models';
 
-const reviews = models;
+const { reviews } = models;
 
 /**
  * @class
