@@ -4,12 +4,12 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './main.scss';
 import store from './utils/store';
-import App from './components/App';
-import Home from './components/Home';
-import SigninPage from './components/Signin/SigninPage';
-import SignupPage from './components/Signup/SignupPage';
-import Footer from '../client/components/Footer';
-import Profile from '../client/components/Profile';
+import App from './components/App.jsx';
+import Home from './components/Home.jsx';
+import SigninPage from './components/Signin/SigninPage.jsx';
+import SignupPage from './components/Signup/SignupPage.jsx';
+import Footer from '../client/components/Footer.jsx';
+import Profile from '../client/components/Profile.jsx';
 
 ReactDOM.render(
   <Provider store={store}>

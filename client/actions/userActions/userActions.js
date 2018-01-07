@@ -1,5 +1,5 @@
-import * as types from './types';
-import * as api from '../utils/moreRecipeAPI';
+import * as types from '../actionTypes';
+import * as api from './../../utils/moreRecipeAPI';
 
 export const getOneUserSuccess = user => ({
   type: types.GET_ONE_USER,

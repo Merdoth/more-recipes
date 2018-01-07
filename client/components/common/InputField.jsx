@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const InputField = ({
-  type, name, placeholder, error, value, onChange, label
+  type, name, placeholder, error, value, onChange, label,
 }) => (
     <div
         className={ `form-group ${error ? 'has-error' : ''}` }

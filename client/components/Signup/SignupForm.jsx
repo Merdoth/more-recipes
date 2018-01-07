@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { browserHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import validateInput from '../../../server/shared/validations/signup';
-import InputField from '../common/InputField';
-import Button from '../common/Button';
+import InputField from '../common/InputField.jsx';
+import Button from '../common/Button.jsx';
 
 /**
  * @param { SignupFrom } SignupForm
@@ -12,10 +12,10 @@ import Button from '../common/Button';
  */
 class SignupForm extends React.Component {
   /**
-     *
-     * @param { props } props
-     */
-  constructor(props) { 
+   *
+   * @param { props } props
+   */
+  constructor(props) {
     super(props);
     this.state = {
       username: '',
@@ -23,7 +23,7 @@ class SignupForm extends React.Component {
       password: '',
       confirmPassword: '',
       errors: {},
-      isLoading: false,
+      isLoading: false
     };
 
     this.onChange = this.onChange.bind(this);
@@ -43,7 +43,6 @@ class SignupForm extends React.Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    console.log('I am called');
 
     if (validateInput(this.state).isValid) {
       this.setState({ errors: {}, isLoading: true });
@@ -62,7 +61,6 @@ class SignupForm extends React.Component {
     }
   }
 
-
   /**
    *
    * @returns { Jsx } Jsx
@@ -72,14 +70,9 @@ class SignupForm extends React.Component {
     return (
       <div>
         <div className="form-deco">
-          <form
-            className="form-signin"
-          >
-            <h2
-              className="form-signin-heading"
-            >Sign Up</h2><hr />
-            <br />
-
+          <form className="form-signin">
+            <h2 className="form-signin-heading">Sign Up</h2><hr />
+          
             <InputField
               type="text"
               name="username"
@@ -88,7 +81,6 @@ class SignupForm extends React.Component {
               label="Username"
               onChange={this.onChange}
             />
-
             <InputField
               type="email"
               name="email"
@@ -97,7 +89,6 @@ class SignupForm extends React.Component {
               label="Email address"
               onChange={this.onChange}
             />
-
             <InputField
               type="password"
               name="password"
@@ -106,8 +97,6 @@ class SignupForm extends React.Component {
               label="Password"
               onChange={this.onChange}
             />
-
-
             <InputField
               type="password"
               name="confirmPassword"
@@ -116,22 +105,15 @@ class SignupForm extends React.Component {
               label="Confirm Password"
               onChange={this.onChange}
             />
-
-
-          `  <Button
+            <Button
               type="submit"
               onClick={this.onSubmit}
               disabled={this.state.isLoading}
               name="Sign Up"
               iconClass="fa-user-plus"
               className="btn btn-lg btn-primary btn-block"
-            >
-
-            </Button>`
-            <p
-              className="new_account"
-              style={{ textAlign: 'center' }}
-            >
+            />
+            <p className="new_account">
               <strong>Already Have An Account? </strong>
               <Link to="Signin">Sign in</Link>
             </p>

@@ -1,10 +1,11 @@
 import React from 'react';
-import InputField from './common/InputField';
-import Button from './common/Button';
+import InputField from './common/InputField.jsx';
+import Button from './common/Button.jsx';
+import TextArea from './common/TextArea.jsx';
 
 /**
- * @param { SignupFrom } SignupForm
- * @returns { SignupForm } SignupForm
+ * @param { Profile} Profile
+ * @returns { Profile } Profile
  */
 
 class Profile extends React.Component {
@@ -40,12 +41,12 @@ class Profile extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     this.setState({ errors: {}, isLoading: true });
-    this.props
-      .userSigninRequest(this.state)
-      .then(
-        () => {},
-        ({ data }) => this.setState({ errors: data, isLoading: false })
-      );
+    // this.props
+    //   .userSigninRequest(this.state)
+    //   .then(
+    //     () => {},
+    //     ({ data }) => this.setState({ errors: data, isLoading: false })
+    //   );
   }
 
   render() {
@@ -67,20 +68,18 @@ class Profile extends React.Component {
                   name="fName"
                   placeholder="Samson Trina"
                   value={this.state.fName}
-                  label="Name:&nbsp;&nbsp; &nbsp;"
+                  label="Name:&nbsp;&nbsp;&nbsp;"
                   onChange={this.onChange}
                 />
-
                 <InputField
                   id="eName"
                   type="text"
                   name="eName"
                   placeholder="meya@gmail.com"
                   value={this.state.eName}
-                  label="Email:&nbsp;&nbsp; &nbsp;&nbsp;"
+                  label="Email:&nbsp;&nbsp;&nbsp;&nbsp;"
                   onChange={this.onChange}
                 />
-
                 <InputField
                   id="cName"
                   type="number"
@@ -90,17 +89,14 @@ class Profile extends React.Component {
                   label="Contact:&nbsp;"
                   onChange={this.onChange}
                 />
-
-                <InputField
-                  id="status status1"
-                  type="text"
-                  name="status"
+                <TextArea
+                  id="status"
+                  name="Status"
                   placeholder="What's on your mind ?"
-                  value={this.state.status}
+                  value={this.state.Status}
                   label="Status:&nbsp;&nbsp;&nbsp;&nbsp;"
                   onChange={this.onChange}
                 />
-
                 <Button
                   type="submit"
                   onClick={this.onSubmit}

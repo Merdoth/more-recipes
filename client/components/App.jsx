@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavigationBar from './NavigationBar';
+import NavigationBar from './NavigationBar.jsx';
 import FlashMessageList from './flash/FlashMessagesList';
 
 
@@ -12,7 +12,7 @@ class App extends Component {
           messages={[{ id: 1, message: 'hello' }]}
         />
         {this.props.children}
-        <div className="appChild" style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+        <div className="appChild">
         </div>
       </div>
 

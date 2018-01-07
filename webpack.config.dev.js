@@ -19,7 +19,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         include: [
           path.join(__dirname, 'client'),
           path.join(__dirname, 'server/shared')

@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import SigninForm from './SigninForm';
-import { userSigninRequest } from '../../actions/signinActions';
-
+import SigninForm from './SigninForm.jsx';
+import userSigninRequest from '../../actions/auth/signinActions';
 
 /**
  * @param { SignupFrom } SignupForm
@@ -13,11 +12,11 @@ class SigninPage extends React.Component {
   render() {
     const { userSigninRequest } = this.props;
     return (
-            <div className='row cover'>
-               <div className='col-md-4 col-md-offset-4'>
-               <SigninForm userSigninRequest={userSigninRequest} />
-               </div>
-           </div>
+      <div className="row">
+        <div className="col-md-4 offset-md-4 cover1">
+          <SigninForm userSigninRequest={userSigninRequest} />
+        </div>
+      </div>
     );
   }
 }
