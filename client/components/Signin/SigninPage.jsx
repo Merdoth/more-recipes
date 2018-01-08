@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SigninForm from './SigninForm.jsx';
-import userSigninRequest from '../../actions/auth/signinActions';
+import login from '../../actions/auth/authActions';
 
 /**
  * @param { SignupFrom } SignupForm
@@ -10,11 +10,11 @@ import userSigninRequest from '../../actions/auth/signinActions';
  */
 class SigninPage extends React.Component {
   render() {
-    const { userSigninRequest } = this.props;
+    const { login } = this.props;
     return (
       <div className="row">
         <div className="col-md-4 offset-md-4 cover1">
-          <SigninForm userSigninRequest={userSigninRequest} />
+          <SigninForm userSigninRequest={login} />
         </div>
       </div>
     );
@@ -22,7 +22,7 @@ class SigninPage extends React.Component {
 }
 
 SigninPage.propTypes = {
-  userSigninRequest: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired
 };
 
-export default connect(null, { userSigninRequest })(SigninPage);
+export default connect(null, { login })(SigninPage);

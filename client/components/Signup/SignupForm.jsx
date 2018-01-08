@@ -41,21 +41,21 @@ class SignupForm extends React.Component {
    * @param { event } event
    * @returns { state } state
    */
-  onSubmit(event) {
+  async onSubmit(event) {
     event.preventDefault();
 
     if (validateInput(this.state).isValid) {
       this.setState({ errors: {}, isLoading: true });
-      this.props.userSignupRequest(this.state).then(
-        () => {
-          this.props.addFlashMessage({
-            type: 'success',
-            text: 'You have signed up successfully, Welcome!'
-          });
-          browserHistory.push('/');
-        },
-        ({ data }) => this.setState({ errors: data, isLoading: false })
-      );
+      try {
+        await this.props.userSignupRequest(this.state);
+        this.props.addFlashMessage({
+          type: 'success',
+          text: 'You have signed up successfully, Welcome!'
+        });
+        browserHistory.push('/');
+      } catch (errors) {
+        this.setState({ errors, isLoading: false });
+      }
     } else {
       console.log(validateInput(this.state));
     }
@@ -71,8 +71,9 @@ class SignupForm extends React.Component {
       <div>
         <div className="form-deco">
           <form className="form-signin">
-            <h2 className="form-signin-heading">Sign Up</h2><hr />
-          
+            <h2 className="form-signin-heading">Sign Up</h2>
+            <hr />
+
             <InputField
               type="text"
               name="username"

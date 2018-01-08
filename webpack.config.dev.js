@@ -4,6 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
+    'babel-polyfill',
     'webpack-hot-middleware/client',
     path.join(__dirname, '/client/react.js'),
   ],
