@@ -11,7 +11,7 @@ export default {
       jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
         if (error) {
           res.status(400).send({
-            message: 'The token you provided is incorrect.'
+            message: 'The token you provided is incorrect.',
           });
         } else {
           req.decoded = decoded;
@@ -22,8 +22,8 @@ export default {
       // if no token was provided
       return res.status(401).send({
         status: 401,
-        message: 'You did not provide any access token.'
+        message: 'You did not provide any access token.',
       });
     }
-  }
+  },
 };

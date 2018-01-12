@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
 
-import recipeReducer from './reducers/recipeReducer';
+import topRecipes from './reducers/recipeReducer';
 import flashMessages from './reducers/flashMessages';
+import setCurrentUser from './reducers/setCurrentUser';
 
 const reducers = combineReducers({
   flashMessages,
-  recipeReducer
+  topRecipes,
+  setCurrentUser
 });
 
-const rootReducer = (state, action) => {
-  return reducers(state, action);
-};
+const rootReducer = (state, action) => reducers(state, action);
 
 export default rootReducer;

@@ -1,6 +1,6 @@
 import models from '../models';
 
-const { reviews } = models.reviews;
+const { reviews } = models;
 
 /**
  * @class
@@ -12,19 +12,13 @@ class Review {
    * @param {res} res
    * @return { message } message
    */
-  static add(req, res) {
+  static addReview(req, res) {
     const { userId, recipeId, review } = req.body;
-    if (review && userId && review !== '' && userId !== '') {
-      return reviews
-        .create({
-          userId,
-          recipeId,
-          review,
-        }).then(reviewReturned => res.status(200).send(reviewReturned));
-    }
-    res.status(400).send({
-      message: 'Please enter a review'
-    });
+    reviews.create({
+      userId,
+      recipeId,
+      review,
+    }).then(reviewReturned => res.status(200).send(reviewReturned));
   }
 }
 export default Review;

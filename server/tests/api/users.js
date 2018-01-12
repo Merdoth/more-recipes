@@ -1,13 +1,13 @@
 import chai from 'chai';
 import expect from 'expect';
 import chaiHttp from 'chai-http';
-import app from '../app';
+import app from '../../app';
 
 
 chai.use(chaiHttp);
 
 describe('More Recipes', () => {
-  it('should throw an error if userName is empty', (done) => {
+  it('should throw an error if userName is empty & return 400', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({})
@@ -18,7 +18,7 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should throw an error if email is empty', (done) => {
+  it('should throw an error if email is empty & return 400', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
@@ -31,7 +31,7 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should throw an error if password is empty', (done) => {
+  it('should throw an error if password is empty & return 400', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
@@ -45,7 +45,7 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should throw an error if password is less than 8 characters', (done) => {
+  it('should throw an error if password is less than 8 characters & return 400 ', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
@@ -61,7 +61,7 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should successfully signup a user', (done) => {
+  it('should successfully signup a user and return 201', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
       .send({
@@ -77,7 +77,7 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should throw an error if email is empty', (done) => {
+  it('should throw an error if email is empty and return 400', (done) => {
     chai.request(app)
       .post('/api/v1/users/signin')
       .send({})
@@ -88,7 +88,7 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should throw an error if password is empty', (done) => {
+  it('should throw an error if password is empty and return 400', (done) => {
     chai.request(app)
       .post('/api/v1/users/signin')
       .send({
@@ -101,7 +101,7 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should throw an error if password is invalid', (done) => {
+  it('should throw an error if password is invalid and return 400', (done) => {
     chai.request(app)
       .post('/api/v1/users/signin')
       .send({
@@ -116,7 +116,7 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should throw an error if user uses incorrect details', (done) => {
+  it('should throw an error if user uses incorrect details and return 404', (done) => {
     chai.request(app)
       .post('/api/v1/users/signin')
       .send({
@@ -131,7 +131,7 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should throw an error if user uses incorrect details', (done) => {
+  it('should throw an error if user uses incorrect details and return 404', (done) => {
     chai.request(app)
       .post('/api/v1/users/signin')
       .send({
@@ -146,7 +146,7 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should successfully log user in', (done) => {
+  it('should successfully log user in and return 200', (done) => {
     chai.request(app)
       .post('/api/v1/users/signin')
       .send({

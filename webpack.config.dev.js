@@ -4,8 +4,9 @@ const webpack = require('webpack');
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
+    'babel-polyfill',
     'webpack-hot-middleware/client',
-    path.join(__dirname, '/client/react.js'),
+    path.join(__dirname, '/client/index.js'),
   ],
   output: {
     path: '/',
@@ -19,7 +20,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         include: [
           path.join(__dirname, 'client'),
           path.join(__dirname, 'server/shared')
