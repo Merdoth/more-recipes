@@ -11,8 +11,6 @@ class SignupPage extends React.Component {
         <div className="row">
           <div className="col-md-6 offset-md-3 cover">
             <SignupForm
-              userSignupRequest={userSignupRequest}
-              addFlashMessage={addFlashMessage}
             />
           </div>
         </div>

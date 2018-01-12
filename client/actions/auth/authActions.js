@@ -12,7 +12,7 @@ import * as types from './../actionTypes';
  */
 export function setCurrentUser(user) {
   return {
-    type: types.USER_AUTHENTICATED,
+    type: types.SET_CURRENT_USER,
     user
   };
 }
@@ -52,8 +52,8 @@ export function login(responseData) {
  */
 export function userSignupRequest(userData) {
   return dispatch =>
-    axios.post('/api/v1/user/signup', userData).then((res) => {
-      const { token } = res.data;
+    axios.post('/api/v1/users/signup', userData).then((res) => {
+      const { token } = res.data.user;
       localStorage.setItem('jwtToken', token);
       setAuthToken(token);
       dispatch(setCurrentUser(decode(token)));
@@ -69,7 +69,6 @@ export function userSignupRequest(userData) {
 export function logout() {
   return (dispatch) => {
     localStorage.removeItem('jwtToken');
-    localStorage.removeItem('currentGroup');
     setAuthToken(false);
     dispatch(setCurrentUser({}));
   };

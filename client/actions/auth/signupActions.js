@@ -6,7 +6,7 @@ export const userSignupRequestSuccess = userData => ({
   userData
 });
 
-export const userSignupRequest = () => dispatch =>
+export const userSignupRequest = dispatch =>
   api
     .userSignupRequest()
     .then(res => dispatch(userSignupRequestSuccess(res.userData)));

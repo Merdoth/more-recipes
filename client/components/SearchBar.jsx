@@ -15,7 +15,6 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    console.log(this.props.topRecipes, 'donne!!!!!!');
     return (
       <div className="search-bar">
         <div className="container-fluid">

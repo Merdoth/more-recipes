@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
+import swal from 'sweetalert';
 import PropTypes from 'prop-types';
-import validateInput from '../../../server/shared/validations/signup';
+import history from '../../utils/history';
+import { validateSignupFormInput } from '../../validations';
+import { userSignupRequest } from '../../actions/auth/authActions';
 import InputField from '../common/InputField.jsx';
 import Button from '../common/Button.jsx';
 
@@ -18,7 +22,7 @@ class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      userName: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -41,32 +45,61 @@ class SignupForm extends React.Component {
    * @param { event } event
    * @returns { state } state
    */
-  async onSubmit(event) {
+  onSubmit(event) {
     event.preventDefault();
-
-    if (validateInput(this.state).isValid) {
-      this.setState({ errors: {}, isLoading: true });
-      try {
-        await this.props.userSignupRequest(this.state);
-        this.props.addFlashMessage({
-          type: 'success',
-          text: 'You have signed up successfully, Welcome!'
+    const { errors, isValid } = validateSignupFormInput(this.state);
+    if (isValid) {
+      this.setState({ isLoading: true });
+      this.props
+        .userSignupRequest(this.state)
+        .then(() => {
+          swal({
+            title: 'Welcome!',
+            text: this.state.email.split('@')[0],
+            icon: 'success'
+          });
+          // Materialize.toast('Welcome!', 3000, 'green');
+          history.push('/profile');
+        })
+        .catch((err) => {
+          console.log(err);
+          const error = err.data.message;
+          this.handleErrors(error);
+          this.setState({ isLoading: false });
         });
-        browserHistory.push('/');
-      } catch (errors) {
-        this.setState({ errors, isLoading: false });
-      }
     } else {
-      console.log(validateInput(this.state));
+      this.handleErrors(errors);
     }
   }
 
   /**
    *
+   * @returns {void}
+   * @param {any} errors
+   * @memberof SignupForm
+   */
+  handleErrors(errors) {
+    if (typeof errors !== 'string') {
+      Object.keys(errors).forEach((error) => {
+        swal({
+          title: 'Oops!',
+          text: 'sorry one or more fields are empty',
+          icon: 'error'
+        });
+      });
+    } else {
+      swal({
+        title: 'Oops!',
+        text: errors,
+        icon: 'error'
+      });
+    }
+  }
+  /**
+   *
    * @returns { Jsx } Jsx
    */
   render() {
-    const { errors } = this.state;
     return (
       <div>
         <div className="form-deco">
@@ -76,11 +109,13 @@ class SignupForm extends React.Component {
 
             <InputField
               type="text"
-              name="username"
+              className="form-control"
+              name="userName"
               placeholder="Enter your username"
-              value={this.state.username}
+              value={this.state.userName}
               label="Username"
               onChange={this.onChange}
+              required
             />
             <InputField
               type="email"
@@ -89,6 +124,7 @@ class SignupForm extends React.Component {
               value={this.state.email}
               label="Email address"
               onChange={this.onChange}
+              required
             />
             <InputField
               type="password"
@@ -97,6 +133,7 @@ class SignupForm extends React.Component {
               value={this.state.password}
               label="Password"
               onChange={this.onChange}
+              required
             />
             <InputField
               type="password"
@@ -105,6 +142,7 @@ class SignupForm extends React.Component {
               value={this.state.confirmPassword}
               label="Confirm Password"
               onChange={this.onChange}
+              required
             />
             <Button
               type="submit"
@@ -126,7 +164,7 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
+  userSignupRequest: PropTypes.func.isRequired
 };
-export default SignupForm;
+const mapDispatchToProps = { userSignupRequest };
+export default connect(null, mapDispatchToProps)(SignupForm);

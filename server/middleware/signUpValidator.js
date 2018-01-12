@@ -5,10 +5,10 @@
  * @param {next} next
  * @return { message } message
  */
-const signUpUser = (req, res, next) => {
+const signUpValidator = (req, res, next) => {
   const { userName, email, password } = req.body;
 
-  if (!userName || userName.trim() === '') {
+  if (userName.trim() === '') {
     return res.status(400).send({ message: 'Please enter a valid userName!' });
   }
   if (!email || email.trim() === '') {
@@ -25,4 +25,4 @@ const signUpUser = (req, res, next) => {
   next();
 };
 
-export default signUpUser;
+export default signUpValidator;

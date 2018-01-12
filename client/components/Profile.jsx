@@ -70,6 +70,7 @@ class Profile extends React.Component {
                   value={this.state.fName}
                   label="Name:&nbsp;&nbsp;&nbsp;"
                   onChange={this.onChange}
+                  required
                 />
                 <InputField
                   id="eName"
@@ -79,6 +80,7 @@ class Profile extends React.Component {
                   value={this.state.eName}
                   label="Email:&nbsp;&nbsp;&nbsp;&nbsp;"
                   onChange={this.onChange}
+                  required
                 />
                 <InputField
                   id="cName"
@@ -88,6 +90,7 @@ class Profile extends React.Component {
                   value={this.state.cName}
                   label="Contact:&nbsp;"
                   onChange={this.onChange}
+                  required
                 />
                 <TextArea
                   id="status"

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Button from '../common/Button.jsx';
 import InputField from '../common/InputField.jsx';
 import { login } from '../../actions/auth/authActions';
+import history from '../../utils/history';
 import { validateSigninFormInput } from '../../validations';
 
 /**
@@ -29,27 +30,6 @@ class SigninForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  // /**
-  //  * @param { event } event
-  //  * @returns { state } state
-  //  */
-  // onChange(event) {
-  //   this.setState({ [event.target.name]: event.target.value });
-  // }
-  // /**
-  //  * @param { event } event
-  //  * @returns { state } state
-  //  */
-  // onSubmit(event) {
-  //   event.preventDefault();
-  //   this.setState({ errors: {}, isLoading: true });
-  //   this.props
-  //     .userSigninRequest(this.state)
-  //     .then(
-  //       () => {},
-  //       ({ data }) => this.setState({ errors: data, isLoading: false })
-  //     );
-  // }
   /**
    * This method validates the input from the state object
    * and chcecks if its valid and makes an api call to the backend
@@ -72,13 +52,10 @@ class SigninForm extends React.Component {
             icon: 'success'
           });
           // Materialize.toast('Welcome!', 3000, 'green');
-          this.props.history.push('/profile');
+          history.push('/profile');
         })
         .catch((err) => {
-          // console.log(err.data.message);
-
           const error = err.data.message;
-          // this.handleErrors(error);
           swal({
             title: 'Oops!',
             text: error,
@@ -111,14 +88,11 @@ class SigninForm extends React.Component {
    */
   handleErrors(errors) {
     Object.keys(errors).forEach((error) => {
-      console.log(errors[error]);
       swal({
         title: 'Oops!',
         text: errors[error],
         icon: 'error'
       });
-
-      // Materialize.toast(errors[error], 3000, 'red');
     });
   }
   /**

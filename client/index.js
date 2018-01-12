@@ -2,11 +2,15 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import jwt from 'jsonwebtoken';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { Router } from 'react-router';
+import history from './utils/history';
 import './scss/main.scss';
 import store from './utils/store';
 import App from './components/App.jsx';
 import Home from './components/Home.jsx';
+import AuthenticateUser from './utils/AuthenticateUser';
+import CheckLoggedinUser from './utils/CheckLoggedinUser';
 import setAuthToken from './utils/setAuthToken';
 import SigninPage from './components/Signin/SigninForm.jsx';
 import SignupPage from './components/Signup/SignupPage.jsx';
@@ -17,27 +21,37 @@ import { setCurrentUser } from './actions/auth/authActions';
 const { localStorage } = window;
 const jwtToken = localStorage && localStorage.getItem('jwtToken');
 if (jwtToken) {
-  const decodedToken = jwt.decode(jwtToken);
-  const hasExpired = decodedToken.exp - (Date.now() / 1000) < 0;
-  if (!hasExpired) {
+  const valid = jwt.verify(
+    jwtToken,
+    'this23423girl223is#$3423crazy',
+    (err, result) => {
+      if (err) {
+        return err;
+      }
+      return result;
+    }
+  );
+  if (valid) {
+    const decodedToken = jwt.decode(jwtToken);
     setAuthToken(jwtToken);
-    store.dispatch(setCurrentUser(jwt.decode(jwtToken)));
+    store.dispatch(setCurrentUser(decodedToken));
   } else {
     localStorage.removeItem('jwtToken');
   }
 }
 render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <div>
         <Route path="/" component={App} />
-        <Route exact path="/" component={Home} />
-        <Route path="/Signup" component={SignupPage} />
-        <Route path="/Signin" component={SigninPage} />
-        <Route path="/profile" component={Profile} />
+        <Route exact path="/" component={CheckLoggedinUser(Home)} />
+        <Route path="/Signup" component={CheckLoggedinUser(SignupPage)} />
+        <Route path="/Signin" component={CheckLoggedinUser(SigninPage)} />
+        <Route path="/profile" component={AuthenticateUser(Profile)} />
+        
         <Footer />
       </div>
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById('app')
 );

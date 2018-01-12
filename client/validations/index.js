@@ -30,7 +30,7 @@ export const validateSigninFormInput = (inputData) => {
  */
 export const validateSignupFormInput = (inputData) => {
   const errors = {};
-  if (Validator.isEmpty(inputData.username)) {
+  if (Validator.isEmpty(inputData.userName)) {
     errors.username = 'Username field is required';
   }
   if (Validator.isEmpty(inputData.email)) {
@@ -42,8 +42,11 @@ export const validateSignupFormInput = (inputData) => {
   if (Validator.isEmpty(inputData.password)) {
     errors.password = 'Password field is required';
   }
-  if (Validator.isEmpty(inputData.phone)) {
-    errors.phone = 'Phone field is require for message notifications';
+  if (Validator.isEmpty(inputData.confirmPassword)) {
+    errors.confirmPassword = 'confirm password field can not be  empty';
+  }
+  if (!Validator.equals(inputData.password, inputData.confirmPassword)) {
+    errors.confirmPassword = 'Password do not match';
   }
   return {
     errors,

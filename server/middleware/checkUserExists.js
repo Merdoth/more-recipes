@@ -18,7 +18,7 @@ const checkUserExists = (req, res, next) => {
   })
     .then((user) => {
       if (user) {
-        return res.status(400).send({
+        return res.status(409).send({
           message:
             'User already exists. Try a different email and/or username.',
         });
