@@ -23,6 +23,13 @@ const InputField = ({
       onChange={onChange}
       className="form-control"
       required={required}
+      style={{
+        border: '0',
+        outline: '0',
+        background: 'transparent',
+        borderBottom: '1px solid black',
+        borderRadius: '3px'
+      }}
     />
 
     <br />

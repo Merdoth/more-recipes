@@ -2,7 +2,7 @@ import React from 'react';
 import RecipeCardImage from './RecipeCardImage.jsx';
 import RecipeCardDes from './RecipeCardDes.jsx';
 import RecipeCardFooter from './RecipeCardFooter.jsx';
-import image from '../../image/Edika-Ikong.jpg';
+import image from '../../../image/Edika-Ikong.jpg';
 
 const title = 'Edika Ikong';
 const text = `Cook the spaghetti in salted water about half of the way
@@ -22,7 +22,6 @@ class RecipeCard extends React.Component {
   render() {
     return (
       <div className="container top">
-        <h6 id="title4">Top Recipes</h6>
         <div className="row">
           <div className="col-md-4 col-sm-4">
             <div className="top-items">
