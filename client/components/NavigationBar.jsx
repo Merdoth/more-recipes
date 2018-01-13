@@ -27,15 +27,81 @@ class NavigationBar extends React.Component {
     return (
       <ul className="nav nav-pills flex-column flex-sm-row flex-sm-fill text-sm-center topnav">
         <li>
-          <Link to="/">Home</Link>
+          <Link className="nav-link" to="/recipes">
+            <i className="fa fa-home" aria-hidden="true">
+              {' '}
+              Home
+            </i>
+          </Link>
         </li>
         <li>
-          <Link to="/profile">My Recipes</Link>
+          <Link
+            className="nav-link dropdown-toggle"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            to="/recipes"
+          >
+            <i className="fa fa-user-circle-o" aria-hidden="true">
+              {' '}
+              Manage Account
+            </i>
+          </Link>
+          <div
+            className="dropdown-menu"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            <a
+              className="dropdown-item"
+              style={{ color: '#000' }}
+              href="/addrecipes"
+            >
+              {' '}
+              <i className="fa fa-user-circle-o" aria-hidden="true">
+                {' '}
+                Add Recipes
+              </i>
+            </a>
+            <a
+              className="dropdown-item"
+              style={{ color: '#000' }}
+              href="favourites"
+            >
+              <i className="fa fa-user-circle-o" aria-hidden="true">
+                {' '}
+                Favourites
+              </i>
+            </a>
+            <a
+              className="dropdown-item"
+              style={{ color: '#000' }}
+              href="myrecipes"
+            >
+              <i className="fa fa-user-circle-o" aria-hidden="true">
+                {' '}
+                My recipes
+              </i>
+            </a>
+            <a
+              className="dropdown-item"
+              style={{ color: '#000' }}
+              href="allrecipes"
+            >
+              <i className="fa fa-user-circle-o" aria-hidden="true">
+                {' '}
+                All Recipes
+              </i>{' '}
+            </a>
+          </div>
         </li>
         <li>
-          <a onClick={this.logout}>
-            Sign Out
-          </a>
+          <Link onClick={this.logout} className="nav-link" to="/recipes">
+            <i className="fa fa-sign-out" aria-hidden="true">
+              {' '}
+              Signout
+            </i>
+          </Link>
         </li>
       </ul>
     );

@@ -3,17 +3,18 @@ import { connect } from 'react-redux';
 
 import Slider from './Slider.jsx';
 import SearchBar from './SearchBar.jsx';
-import RecipeCard from '../components/RecipeCard/RecipeCard.jsx';
+import RecipeCard from '../components/Recipes/RecipeCard/RecipeCard.jsx';
 import getTopRecipes from '../actions/recipeActions/recipeActions';
 
 class Home extends React.Component {
   render() {
     return (
-            <div>
-                <Slider />
-                <SearchBar />
-                <RecipeCard topRecipes={this.props.topRecipes} />
-            </div>
+      <div>
+        <Slider />
+        <SearchBar />
+        <h6 id="title4">Top Recipes</h6>
+        <RecipeCard topRecipes={this.props.topRecipes} />
+      </div>
     );
   }
 }
