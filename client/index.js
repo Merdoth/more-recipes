@@ -17,6 +17,7 @@ import SignupPage from './components/Signup/SignupPage.jsx';
 import Footer from './components/Footer.jsx';
 import Profile from './components/Profile.jsx';
 import Recipes from './components/Recipes/Recipes.jsx';
+import AddRecipePage from './components/AddRecipe/AddRecipePage.jsx';
 import { setCurrentUser } from './actions/auth/authActions';
 
 const { localStorage } = window;
@@ -50,6 +51,7 @@ render(
         <Route path="/Signin" component={CheckLoggedinUser(SigninPage)} />
         <Route path="/profile" component={AuthenticateUser(Profile)} />
         <Route path="/recipes" component={AuthenticateUser(Recipes)} />
+        <Route path="/addrecipe" component={AuthenticateUser(AddRecipePage)} />
         <Footer />
       </div>
     </Router>

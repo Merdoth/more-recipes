@@ -1,4 +1,3 @@
-
 module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable('recipes', {
@@ -26,6 +25,10 @@ module.exports = {
         allowNull: false
       },
       preparation: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      image: {
         type: Sequelize.STRING,
         allowNull: false
       },
