@@ -1,6 +1,5 @@
 import models from '../models';
 
-
 const { recipes, reviews, votes } = models;
 
 /**
@@ -14,16 +13,22 @@ class Recipe {
    * @return { createdRecipe } createdRecipe
    */
   static addRecipe(req, res) {
-    const { recipeName, ingredients, preparation } = req.body;
-    recipes.create({
-      userId: req.decoded.id,
-      recipeName,
-      ingredients,
-      preparation
-    }).then(createdRecipe => res.status(200)
-      .send({ message: 'Recipe successfully added', createdRecipe }));
+    const {
+      recipeName, ingredients, preparation, image
+    } = req.body;
+    recipes
+      .create({
+        userId: req.decoded.id,
+        recipeName,
+        ingredients,
+        preparation,
+        image
+      })
+      .then(createdRecipe =>
+        res
+          .status(200)
+          .send({ message: 'Recipe successfully added', createdRecipe }));
   }
-
 
   /**
    *
@@ -36,9 +41,7 @@ class Recipe {
     if (req.query.sort === 'upVotes' && req.query.order === 'des') {
       query = {
         include: [{ model: reviews, votes }],
-        order: [
-          ['upVotes', 'DESC']
-        ],
+        order: [['upVotes', 'DESC']],
         limit: 6
       };
     } else {
@@ -71,9 +74,7 @@ class Recipe {
     if (req.query.sort === 'createdAt' && req.query.order === 'des') {
       query = {
         include: [{ model: reviews, votes }],
-        order: [
-          ['createdAt', 'DESC']
-        ],
+        order: [['createdAt', 'DESC']]
       };
     } else {
       query = {
@@ -94,7 +95,6 @@ class Recipe {
     });
   }
 
-
   /**
    *
    * @param {req} req
@@ -104,27 +104,34 @@ class Recipe {
   static updateUserRecipes(req, res) {
     const { id } = req.params;
     const {
-      recipeName, preparation, ingredients, upVotes, downVotes
+      recipeName,
+      preparation,
+      ingredients,
+      upVotes,
+      downVotes
     } = req.body;
 
-    return recipes.find({
-      where: {
-        id
-      }
-    }).then((recipe) => {
-      if (recipe) {
-        return recipe.update({
-          recipeName: recipeName || recipe.recipeName,
-          ingredients: ingredients || recipe.ingredients,
-          preparation: preparation || recipe.preparation,
-          upVotes: recipe.upVotes + upVotes || 0,
-          downVotes: recipe.downVotes + downVotes || 0
-        })
-          .then(updatedRecipe => res.status(200).send(updatedRecipe))
-          .catch(error => res.status(500).send({ error }));
-      }
-      return res.status(404).send({ message: 'Recipe does not exist!' });
-    });
+    return recipes
+      .find({
+        where: {
+          id
+        }
+      })
+      .then((recipe) => {
+        if (recipe) {
+          return recipe
+            .update({
+              recipeName: recipeName || recipe.recipeName,
+              ingredients: ingredients || recipe.ingredients,
+              preparation: preparation || recipe.preparation,
+              upVotes: recipe.upVotes + upVotes || 0,
+              downVotes: recipe.downVotes + downVotes || 0
+            })
+            .then(updatedRecipe => res.status(200).send(updatedRecipe))
+            .catch(error => res.status(500).send({ error }));
+        }
+        return res.status(404).send({ message: 'Recipe does not exist!' });
+      });
   }
 
   /**
@@ -135,19 +142,21 @@ class Recipe {
    */
   static deleteUserRecipes(req, res) {
     const { id } = req.params;
-    return recipes.find({
-      where: {
-        id
-      }
-    }).then((recipe) => {
-      if (recipe) {
-        recipe
-          .destroy()
-          .then(() => res.status(200).send({ message: 'Recipe deleted!' }));
-      } else {
-        res.status(404).send({ message: 'Recipe does not exist!' });
-      }
-    })
+    return recipes
+      .find({
+        where: {
+          id
+        }
+      })
+      .then((recipe) => {
+        if (recipe) {
+          recipe
+            .destroy()
+            .then(() => res.status(200).send({ message: 'Recipe deleted!' }));
+        } else {
+          res.status(404).send({ message: 'Recipe does not exist!' });
+        }
+      })
       .catch(error => res.status(500).send({ error }));
   }
 }
