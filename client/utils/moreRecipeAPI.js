@@ -8,7 +8,7 @@ const header = () => ({
 
 export const getOneUser = () => axios.get('/api/v1/users/:id');
 
-export const getAllRecipes = () => axios.get('');
+export const getAllRecipes = () => axios.get('/api/v1/recipes');
 
 export const userSignupRequest = () => axios.post('/api/v1/users/signup');
 

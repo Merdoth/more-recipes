@@ -5,8 +5,7 @@ dotenv.config();
 
 export default {
   authorize(req, res, next) {
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlck5hbWUiOiJEYW50ZSBXZXN0IiwiZW1haWwiOiJsb3Vpc2RhbnRlOUBnbWFpbC5jb20iLCJpYXQiOjE1MTU4OTgwODQsImV4cCI6MTUxNTk4NDQ4NH0.bi2Zm41xizRZloW_5pGTP4iGI_Dx6TkOY5vA-owTOTo';
+    const token = req.headers.authorization || req.body.authorization;
     // req.headers.authorization;
     if (token) {
       // verify token
