@@ -9,6 +9,9 @@ export default (state = {}, action = {}) => {
     case 'ADD_RECIPE_FAILURE': {
       return action.error;
     }
+    case 'GET_ALL_RECIPES': {
+      return action.recipes;
+    }
     default: {
       return state;
     }
