@@ -28,7 +28,11 @@ class Recipes extends Component {
           <p>Feel free to manipulate your own account</p>
         </div>
         <hr />
-        {recipes}
+        <div className="container top">
+          <div className="row">
+             {recipes}
+          </div>
+         </div>
       </div>
     );
   }

@@ -20,21 +20,18 @@ class RecipeCard extends React.Component {
    * @memberof RecipeCard
    */
   render() {
-    console.log('from recipe card', this.props.recipeList);
+    console.log(' >>>>>>>>> ', this.props.recipeList);
     return (
-      <div className="container top">
-        <div className="row">
-          <div className="col-md-4 col-sm-4">
-            <div className="top-items">
-              <div className="rated">
-                <RecipeCardImage src={this.props.recipeList.image} />
-                <RecipeCardDes
-                  title={this.props.recipeList.title}
-                  text={this.props.recipeList.procedure}
-                />
-                <RecipeCardFooter />
-              </div>
-            </div>
+      <div className="col-md-4 col-sm-4">
+        <div className="top-items">
+          <div className="rated">
+            <RecipeCardImage src={this.props.recipeList.image} />
+            <RecipeCardDes
+              title={this.props.recipeList.recipeName}
+              text={this.props.recipeList.procedure}
+              id={this.props.recipeList.id}
+            />
+            <RecipeCardFooter />
           </div>
         </div>
       </div>
