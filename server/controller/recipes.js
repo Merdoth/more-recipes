@@ -36,6 +36,33 @@ class Recipe {
    * @param {res} res
    * @return { message } message
    */
+  static getOneRecipe(req, res) {
+    return recipes
+      .findOne({
+        where: {
+          id: req.params.recipeId
+        },
+        include: [{ model: reviews, votes }]
+      })
+      .then((recipesFound) => {
+        if (recipesFound.length < 1) {
+          return res.status(404).send({
+            message: 'No recipes found. Please try to create some.'
+          });
+        }
+        if (recipesFound) {
+          return res.status(200).send(recipesFound);
+        }
+        return res.status(404).send({ message: 'Recipe not found' });
+      });
+  }
+
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return { message } message
+   */
   static getAllRecipes(req, res) {
     let query = {};
     if (req.query.sort === 'upVotes' && req.query.order === 'des') {
@@ -127,7 +154,10 @@ class Recipe {
               upVotes: recipe.upVotes + upVotes || 0,
               downVotes: recipe.downVotes + downVotes || 0
             })
-            .then(updatedRecipe => res.status(200).send(updatedRecipe))
+            .then((updatedRecipe) => {
+              console.log('=======git ', updatedRecipe);
+              res.status(200).send(updatedRecipe);
+            })
             .catch(error => res.status(500).send({ error }));
         }
         return res.status(404).send({ message: 'Recipe does not exist!' });

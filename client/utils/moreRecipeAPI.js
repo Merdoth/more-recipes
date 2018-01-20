@@ -14,10 +14,13 @@ export const userSignupRequest = () => axios.post('/api/v1/users/signup');
 
 export const userSigninRequest = () => axios.post('/api/v1/users/signin');
 
-export const addRecipeRequest = (data) => {
+export const updateRecipe = (recipe, id) =>
+  axios.put(`/api/v1/recipes/${id}`, { recipe });
+
+export const addRecipeRequest = (recipes) => {
   delete axios.defaults.headers.common.Authorization;
   const formData = new FormData();
-  formData.append('file', data.image);
+  formData.append('file', recipes.image);
   formData.append('upload_preset', 'v1papr5k');
   return axios({
     method: 'POST',
@@ -25,9 +28,9 @@ export const addRecipeRequest = (data) => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    data: formData
+    recipes: formData
   }).then((res) => {
-    const { recipeName, ingredients, preparation } = data;
+    const { recipeName, ingredients, preparation } = recipes;
     const recipeData = {
       recipeName,
       ingredients,
@@ -40,3 +43,5 @@ export const addRecipeRequest = (data) => {
 
 export const getTopRecipes = () =>
   axios.get('/api/v1/recipes?sort=upvotes&order=des');
+
+export const getOneRecipe = recipeId => axios.get(`/api/v1/recipe/${recipeId}`);

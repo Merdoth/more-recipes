@@ -6,11 +6,22 @@ export const getTopRecipesSuccess = recipes => ({
   recipes
 });
 
-export const getTopRecipes = () => (dispatch) => {
+export const getTopRecipes = () => dispatch =>
   api.getTopRecipes().then((res) => {
-    dispatch(getTopRecipesSuccess(res.data));
+    const recipes = res.data;
+    dispatch(getTopRecipesSuccess(recipes));
   });
-};
+
+export const getOneRecipeSuccess = recipes => ({
+  type: types.GET_ONE_RECIPE,
+  recipes
+});
+
+export const getOneRecipe = recipeId => dispatch =>
+  api.getOneRecipe(recipeId).then((res) => {
+    const recipes = res.data;
+    dispatch(getOneRecipeSuccess(recipes));
+  });
 
 export const getAllRecipesSuccess = recipes => ({
   type: types.GET_ALL_RECIPES,
@@ -19,7 +30,15 @@ export const getAllRecipesSuccess = recipes => ({
 
 export const getAllRecipes = () => dispatch =>
   api.getAllRecipes().then((res) => {
-    dispatch(getAllRecipesSuccess(res.data));
+    const recipes = res.data;
+    dispatch(getAllRecipesSuccess(recipes));
+  });
+
+export const updateRecipe = (id, recipe) => dispatch =>
+  api.updateRecipe(recipe, id).then((res) => {
+    console.log(res);
+    const recipes = res.data;
+    // dispatch(updateRecipe(recipeId, recipes));
   });
 
 export const addRecipesSuccess = recipes => ({
@@ -32,12 +51,12 @@ export const addRecipesFailure = error => ({
   error
 });
 
-export const addRecipes = data => dispatch =>
+export const addRecipes = recipes => dispatch =>
   api
-    .addRecipeRequest(data)
+    .addRecipeRequest(recipes)
     .then((res) => {
       if (res) {
-        return dispatch(addRecipesSuccess(res.data));
+        return dispatch(addRecipesSuccess(res.recipes));
       }
     })
     .catch((error) => {

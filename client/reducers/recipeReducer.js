@@ -6,6 +6,9 @@ export default (state = {}, action = {}) => {
     case 'ADD_RECIPE_SUCCESS': {
       return action.recipes;
     }
+    case 'GET_ONE_RECIPE': {
+      return action.recipes;
+    }
     case 'ADD_RECIPE_FAILURE': {
       return action.error;
     }

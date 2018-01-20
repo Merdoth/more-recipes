@@ -86,7 +86,7 @@ class NavigationBar extends React.Component {
             <a
               className="dropdown-item"
               style={{ color: '#000' }}
-              href="allrecipes"
+              href="recipes"
             >
               <i className="fa fa-user-circle-o" aria-hidden="true">
                 {' '}
