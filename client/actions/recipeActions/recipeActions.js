@@ -34,12 +34,32 @@ export const getAllRecipes = () => dispatch =>
     dispatch(getAllRecipesSuccess(recipes));
   });
 
-export const updateRecipe = (id, recipe) => dispatch =>
-  api.updateRecipe(recipe, id).then((res) => {
-    console.log(res);
-    const recipes = res.data;
-    // dispatch(updateRecipe(recipeId, recipes));
-  });
+export const updateRecipeSuccess = (recipes, id) => ({
+  type: types.UPDATE_RECIPE_SUCCESS,
+  recipes,
+  id
+});
+
+export const updateRecipeFailure = error => ({
+  type: types.UPDATE_RECIPE_FAILURE,
+  error
+});
+
+export const updateRecipe = (id, recipes) => dispatch =>
+  api
+    .updateRecipeRequest(id, recipes)
+    .then((res) => {
+      console.log(res);
+      if (res) {
+        return dispatch(updateRecipeSuccess({
+          message: res.data.message,
+          recipes: res.data.updatedRecipe
+        }));
+      }
+    })
+    .catch((error) => {
+      dispatch(updateRecipeFailure(error.data));
+    });
 
 export const addRecipesSuccess = recipes => ({
   type: types.ADD_RECIPE_SUCCESS,
@@ -56,7 +76,10 @@ export const addRecipes = recipes => dispatch =>
     .addRecipeRequest(recipes)
     .then((res) => {
       if (res) {
-        return dispatch(addRecipesSuccess(res.recipes));
+        return dispatch(addRecipesSuccess({
+          message: res.data.message,
+          recipes: res.data.createdRecipe
+        }));
       }
     })
     .catch((error) => {

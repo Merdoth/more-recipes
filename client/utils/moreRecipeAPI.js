@@ -14,9 +14,6 @@ export const userSignupRequest = () => axios.post('/api/v1/users/signup');
 
 export const userSigninRequest = () => axios.post('/api/v1/users/signin');
 
-export const updateRecipe = (recipe, id) =>
-  axios.put(`/api/v1/recipes/${id}`, { recipe });
-
 export const addRecipeRequest = (recipes) => {
   delete axios.defaults.headers.common.Authorization;
   const formData = new FormData();
@@ -28,7 +25,7 @@ export const addRecipeRequest = (recipes) => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    recipes: formData
+    data: formData
   }).then((res) => {
     const { recipeName, ingredients, preparation } = recipes;
     const recipeData = {
@@ -38,6 +35,30 @@ export const addRecipeRequest = (recipes) => {
       image: res.data.url
     };
     return axios.post('/api/v1/recipes', recipeData, header());
+  });
+};
+
+export const updateRecipeRequest = (id, recipes) => {
+  delete axios.defaults.headers.common.Authorization;
+  const formData = new FormData();
+  formData.append('file', recipes.image);
+  formData.append('upload_preset', 'v1papr5k');
+  return axios({
+    method: 'POST',
+    url: 'https://api.cloudinary.com/v1_1/ucheya/image/upload',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data: formData
+  }).then((res) => {
+    const { recipeName, ingredients, preparation } = recipes;
+    const recipeData = {
+      recipeName,
+      ingredients,
+      preparation,
+      image: res.data.url
+    };
+    return axios.put(`/api/v1/recipes/${id}`, recipeData, header());
   });
 };
 

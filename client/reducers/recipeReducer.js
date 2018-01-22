@@ -15,6 +15,12 @@ export default (state = {}, action = {}) => {
     case 'GET_ALL_RECIPES': {
       return action.recipes;
     }
+    case 'UPDATE_RECIPE_SUCCESS': {
+      return action.recipes;
+    }
+    case 'UPDATE_RECIPE_FAILURE': {
+      return action.error;
+    }
     default: {
       return state;
     }

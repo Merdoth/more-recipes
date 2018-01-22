@@ -24,14 +24,17 @@ class RecipeDetails extends Component {
   }
   render() {
     const recipeDetails = this.state.recipes;
-
+    console.log('recioe details', recipeDetails);
+    console.log('recioe image', recipeDetails.image);
     return (
       <div className="container wrap">
         <div className="row Card">
           <div className="col-md-4 col-sm-4 recipeD">
             <div className="top-items">
               <div className="rated">
-                <RecipeCardImage src={recipeDetails.image} />
+                <RecipeCardImage
+                  src={recipeDetails ? recipeDetails.image : ''}
+                />
                 <RecipeCardFooter1 />
               </div>
             </div>

@@ -20,6 +20,7 @@ class RecipeCard extends React.Component {
    * @memberof ReciprecipeeCard
    */
   render() {
+    console.log('this is very expected ', this.props.recipeList);
     return (
       <div className="col-md-4 col-sm-4">
         <div className="top-items">
@@ -30,7 +31,7 @@ class RecipeCard extends React.Component {
               text={this.props.recipeList.procedure}
               id={this.props.recipeList.id}
             />
-            <RecipeCardFooter />
+            <RecipeCardFooter id={this.props.recipeList.id} />
           </div>
         </div>
       </div>

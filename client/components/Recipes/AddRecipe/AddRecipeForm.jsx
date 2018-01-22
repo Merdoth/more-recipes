@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Button from '../common/Button.jsx';
-import InputField from '../common/InputField.jsx';
-import TextArea from '../common/TextArea.jsx';
-import InputLine from '../common/InputLine.jsx';
-import { addRecipes } from '../../actions/recipeActions/recipeActions';
-import history from '../../utils/history';
+import Button from '../../common/Button.jsx';
+import InputField from '../../common/InputField.jsx';
+import TextArea from '../../common/TextArea.jsx';
+import InputLine from '../../common/InputLine.jsx';
+import { addRecipes } from '../../../actions/recipeActions/recipeActions';
+import history from '../../../utils/history';
 
 class AddRecipeForm extends Component {
   constructor(props) {
@@ -48,7 +48,6 @@ class AddRecipeForm extends Component {
   }
 
   render() {
-    // const { errors } = this.state;
     return (
       <form className="form-signin" onSubmit={this.onSubmit}>
         <h2 className="form-signin-heading">Add Recipe</h2>
@@ -60,6 +59,7 @@ class AddRecipeForm extends Component {
           value={this.state.recipeName}
           label="Name"
           onChange={this.onChange}
+          required
         />
         <TextArea
           type="text"
@@ -86,7 +86,7 @@ class AddRecipeForm extends Component {
           label="Select Image"
           onChange={this.onImageChange}
         />
-        
+
         <Button
           type="submit"
           onClick={this.onSubmit}

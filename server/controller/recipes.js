@@ -135,7 +135,8 @@ class Recipe {
       preparation,
       ingredients,
       upVotes,
-      downVotes
+      downVotes,
+      image
     } = req.body;
 
     return recipes
@@ -152,11 +153,14 @@ class Recipe {
               ingredients: ingredients || recipe.ingredients,
               preparation: preparation || recipe.preparation,
               upVotes: recipe.upVotes + upVotes || 0,
-              downVotes: recipe.downVotes + downVotes || 0
+              downVotes: recipe.downVotes + downVotes || 0,
+              image
             })
             .then((updatedRecipe) => {
-              console.log('=======git ', updatedRecipe);
-              res.status(200).send(updatedRecipe);
+              res.status(200).send({
+                message: 'Recipe successfully updated',
+                updatedRecipe
+              });
             })
             .catch(error => res.status(500).send({ error }));
         }
