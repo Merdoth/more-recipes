@@ -17,8 +17,10 @@ import SignupPage from './components/Signup/SignupPage.jsx';
 import Footer from './components/Footer.jsx';
 import Profile from './components/Profile.jsx';
 import Recipes from './components/Recipes/Recipes.jsx';
-import AddRecipePage from './components/AddRecipe/AddRecipePage.jsx';
+import AddRecipePage from './components/Recipes/AddRecipe/AddRecipePage.jsx';
+import UpdateRecipePage from './components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
 import { setCurrentUser } from './actions/auth/authActions';
+import RecipeDetails from './components/Recipes/RecipeDetails.jsx';
 
 const { localStorage } = window;
 const jwtToken = localStorage && localStorage.getItem('jwtToken');
@@ -52,6 +54,14 @@ render(
         <Route path="/profile" component={AuthenticateUser(Profile)} />
         <Route path="/recipes" component={AuthenticateUser(Recipes)} />
         <Route path="/addrecipe" component={AuthenticateUser(AddRecipePage)} />
+        <Route
+          path="/updaterecipe/:recipeId"
+          component={AuthenticateUser(UpdateRecipePage)}
+        />
+        <Route
+          path="/recipe-details/:recipeId"
+          component={AuthenticateUser(RecipeDetails)}
+        />
         <Footer />
       </div>
     </Router>

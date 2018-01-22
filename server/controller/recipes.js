@@ -36,6 +36,33 @@ class Recipe {
    * @param {res} res
    * @return { message } message
    */
+  static getOneRecipe(req, res) {
+    return recipes
+      .findOne({
+        where: {
+          id: req.params.recipeId
+        },
+        include: [{ model: reviews, votes }]
+      })
+      .then((recipesFound) => {
+        if (recipesFound.length < 1) {
+          return res.status(404).send({
+            message: 'No recipes found. Please try to create some.'
+          });
+        }
+        if (recipesFound) {
+          return res.status(200).send(recipesFound);
+        }
+        return res.status(404).send({ message: 'Recipe not found' });
+      });
+  }
+
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return { message } message
+   */
   static getAllRecipes(req, res) {
     let query = {};
     if (req.query.sort === 'upVotes' && req.query.order === 'des') {
@@ -108,7 +135,8 @@ class Recipe {
       preparation,
       ingredients,
       upVotes,
-      downVotes
+      downVotes,
+      image
     } = req.body;
 
     return recipes
@@ -125,9 +153,15 @@ class Recipe {
               ingredients: ingredients || recipe.ingredients,
               preparation: preparation || recipe.preparation,
               upVotes: recipe.upVotes + upVotes || 0,
-              downVotes: recipe.downVotes + downVotes || 0
+              downVotes: recipe.downVotes + downVotes || 0,
+              image
             })
-            .then(updatedRecipe => res.status(200).send(updatedRecipe))
+            .then((updatedRecipe) => {
+              res.status(200).send({
+                message: 'Recipe successfully updated',
+                updatedRecipe
+              });
+            })
             .catch(error => res.status(500).send({ error }));
         }
         return res.status(404).send({ message: 'Recipe does not exist!' });

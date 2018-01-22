@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Button from '../common/Button.jsx';
-import InputField from '../common/InputField.jsx';
-import TextArea from '../common/TextArea.jsx';
-import InputLine from '../common/InputLine.jsx';
-import { addRecipes } from '../../actions/recipeActions/recipeActions';
-import history from '../../utils/history';
+import swal from 'sweetalert';
+import Button from '../../common/Button.jsx';
+import InputField from '../../common/InputField.jsx';
+import TextArea from '../../common/TextArea.jsx';
+import InputLine from '../../common/InputLine.jsx';
+import history from '../../../utils/history';
+import {
+  updateRecipe,
+  getOneRecipe
+} from '../../../actions/recipeActions/recipeActions';
 
-class AddRecipeForm extends Component {
+class UpdateRecipeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +26,21 @@ class AddRecipeForm extends Component {
     this.onImageChange = this.onImageChange.bind(this);
   }
 
+  componentDidMount() {
+    const { recipeId } = this.props.match.params;
+    this.props.getOneRecipe(recipeId);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { recipe } = nextProps;
+    this.setState({
+      recipeName: recipe.recipeName,
+      ingredients: recipe.ingredients,
+      preparation: recipe.preparation,
+      image: recipe.image
+    });
+  }
+
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -34,24 +52,25 @@ class AddRecipeForm extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    this.props.addRecipes(this.state).then(() => {
-      const { message, error } = this.props.recipes;
+    const { recipeId } = this.props.match.params;
+    this.props.updateRecipe(recipeId, this.state).then(() => {
+      const { message, error } = this.props.recipe;
+      console.log(this.props.recipes);
       if (error) {
         return swal(error.message);
       }
-      if (message === 'Recipe successfully added') {
+      if (message === 'Recipe successfully updated') {
         swal(message);
-        return history.push('/myrecipes');
+        return history.push(`/recipe-details/${recipeId}`);
       }
       swal(message);
     });
   }
 
   render() {
-    // const { errors } = this.state;
     return (
       <form className="form-signin" onSubmit={this.onSubmit}>
-        <h2 className="form-signin-heading">Add Recipe</h2>
+        <h2 className="form-signin-heading">Edit Recipe</h2>
         <hr />
         <InputField
           type="text"
@@ -60,6 +79,7 @@ class AddRecipeForm extends Component {
           value={this.state.recipeName}
           label="Name"
           onChange={this.onChange}
+          required
         />
         <TextArea
           type="text"
@@ -81,17 +101,16 @@ class AddRecipeForm extends Component {
           id=""
           type="file"
           name="image"
-          placeholder="Ingredients"
+          placeholder="image"
           value=""
           label="Select Image"
           onChange={this.onImageChange}
         />
-        
         <Button
           type="submit"
           onClick={this.onSubmit}
           disabled={this.state.isLoading}
-          name="Add Recipe"
+          name="Update Recipe"
           iconClass="fa-cutlery"
           className="btn btn-lg btn-primary btn-block"
         />
@@ -99,20 +118,18 @@ class AddRecipeForm extends Component {
     );
   }
 }
-
-AddRecipeForm.propTypes = {
-  addRecipe: PropTypes.func,
+UpdateRecipeForm.propTypes = {
+  updateRecipe: PropTypes.func,
   error: PropTypes.object
 };
 
-AddRecipeForm.defaultValue = {
-  addRecipe: {},
+UpdateRecipeForm.defaultValue = {
+  updateRecipe: {},
   error: {}
 };
 
 const mapStateToProps = state => ({
-  recipes: state.recipes,
-  error: state.recipes.error
+  recipe: state.recipes
 });
 
-export default connect(mapStateToProps, { addRecipes })(AddRecipeForm);
+export default connect(mapStateToProps, { updateRecipe, getOneRecipe })(UpdateRecipeForm);

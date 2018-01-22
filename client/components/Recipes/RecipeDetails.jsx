@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Button from '../common/Button.jsx';
 import { getOneRecipe } from '../../actions/recipeActions/recipeActions';
+import { Icons } from '../common/Icons.jsx';
+import RecipeCardImage from './RecipeCard/RecipeCardImage.jsx';
+import RecipeCardFooter1 from './RecipeCard/RecipeCardFooter1.jsx';
 
 class RecipeDetails extends Component {
   constructor(props) {
@@ -21,12 +24,23 @@ class RecipeDetails extends Component {
   }
   render() {
     const recipeDetails = this.state.recipes;
-
+    console.log('recioe details', recipeDetails);
+    console.log('recioe image', recipeDetails.image);
     return (
       <div className="container wrap">
-        <div className="row">
-          <div className="col-md-12 col-sm-6 recipeD">
-            <img src={recipeDetails.image} />
+        <div className="row Card">
+          <div className="col-md-4 col-sm-4 recipeD">
+            <div className="top-items">
+              <div className="rated">
+                <RecipeCardImage
+                  src={recipeDetails ? recipeDetails.image : ''}
+                />
+                <RecipeCardFooter1 />
+              </div>
+            </div>
+          </div>
+          <div className="col-md-8 col-sm-8 recipeI">
+            <Icons likes={150} upvotes={150} downvotes={150} views={150} />
           </div>
         </div>
         <div className="row main">

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import UpdateRecipeForm from './UpdateRecipeForm.jsx';
 
 class UpdateRecipePage extends Component {
-
   render() {
     return (
       <div className="row" style={{ marginBottom: '100px' }}>
@@ -17,4 +16,4 @@ class UpdateRecipePage extends Component {
   }
 }
 
-export default UpdateRecipePage;
+export default connect(null)(UpdateRecipePage);

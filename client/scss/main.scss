@@ -169,10 +169,6 @@ h5 > i {
   font-size: 15px;
 }
 
-.main {
-  margin-top: 200px;
-}
-
 .oats > img {
   width: 100%;
 }
@@ -185,36 +181,40 @@ h5 > i {
   margin-top: 2%;
 }
 
-.one {
+#title{
   text-align: center;
-  padding-bottom: 20px;
-}
-
-.one #title {
   font-size: 36px;
   line-height: 0.8rem;
   font-weight: bold;
   color: #222;
-  padding-left: 5px;
-  margin-bottom: 5%;
+  margin-bottom: 4%;
   margin-top: 15px;
 }
 
-.one h1 {
-  font-size: 44px;
-  line-height: 1.4;
-  font-weight: bold;
-  color: #222;
+#Popular {
+ font-weight: bold;
+ font-size: 36px;
+ color: #222;
+ margin-bottom: 5%;
+ text-align: center;
+ 
 }
 
-.one h6 {
-  color: #acacac;
-  text-transform: uppercase;
-  font-weight: 500;
-  letter-spacing: 1px;
-  margin-bottom: 5px;
-  margin-top: 10px;
-  font-size: 0.8rem;
+.main {
+padding-top: 80px;
+padding-left: 5%;
+padding-right: 5%;
+ background-color: rgb(235, 223, 223);
+height: 500px;
+
+}
+
+.wrap {
+margin-top: 80px;
+}
+
+.main-aside .main-section {
+  height: 80%;
 }
 
 #note {
@@ -222,21 +222,6 @@ h5 > i {
   font-size: 16px;
   padding: 20px;
   -webkit-font-smoothing: antialiased;
-}
-
-.readmore {
-  background: white;
-  border-radius: 3px;
-  padding: 10px 30px;
-  border: 1px solid #000;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-size: 10px;
-}
-
-.readmore:hover {
-  background: black;
-  color: white;
 }
 
 .top-items {
@@ -343,10 +328,6 @@ h5 > i {
   color: #3535b0;
 }
 
-.main-aside {
-  height: 200px;
-  text-align: center;
-}
 
 .MyPicture > img {
   border-radius: 50%;
@@ -588,3 +569,73 @@ input {
   margin: 5% 0 0 32%;
   background: none;
 }
+
+.recipeD {
+  // height: 500px;
+  padding-bottom: 50px;
+  padding-top: 30px;
+  padding-left: 30px;
+}
+
+.inputstl {
+padding: 15px;
+border: solid 1px #460023;
+outline: 0;
+box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+}
+
+#reView {
+  padding-top: 20px;
+  padding-left: 2% !important;
+   margin-bottom: 20px;
+   font-weight: bold;
+}
+
+.textArea {
+  background-color: rgb(235, 223, 223);
+  margin-right: -1.5%;
+  margin-left: -1.6%;
+  padding-bottom: 5%;
+}
+
+.textAreaButton {
+ padding-top: 20px !important;
+ 
+padding-left: 30%;
+padding-right: 30%;
+text-align: center;
+}
+
+.reviewed {
+  background-color: white;
+  width: 50%; 
+  height:200px;
+  margin:0 auto;
+  text-align: center;
+  padding-top: 20px;
+  border: 1px solid;
+  border-color: #616161;
+  box-shadow: 2px 2px #bebebe;
+
+}
+
+.reviewedView {
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+.deledit {
+  padding-top: 15px;
+}
+
+.Card{
+  background-color: rgb(207, 205, 205);
+}
+
+.recipeI {
+  text-align: left;
+  color: #c9c9c9;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
