@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
@@ -58,11 +57,9 @@ class SignupForm extends React.Component {
             text: this.state.email.split('@')[0],
             icon: 'success'
           });
-          // Materialize.toast('Welcome!', 3000, 'green');
           history.push('/profile');
         })
         .catch((err) => {
-          console.log(err);
           const error = err.data.message;
           this.handleErrors(error);
           this.setState({ isLoading: false });

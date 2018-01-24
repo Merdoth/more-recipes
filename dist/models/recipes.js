@@ -2,11 +2,11 @@
 
 module.exports = function (sequelize, DataTypes) {
   var recipes = sequelize.define('recipes', {
-    userid: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    recipename: {
+    recipeName: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -18,7 +18,16 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    upvotes: {
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    upVotes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
+    downVotes: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0
@@ -27,13 +36,13 @@ module.exports = function (sequelize, DataTypes) {
 
   recipes.associate = function (models) {
     recipes.belongsTo(models.users, {
-      foreignKey: 'userid'
+      foreignKey: 'userId'
     });
     recipes.hasMany(models.reviews, {
-      foreignKey: 'recipeid'
+      foreignKey: 'recipeId'
     });
     recipes.hasMany(models.votes, {
-      foreignKey: 'recipeid'
+      foreignKey: 'recipeId'
     });
   };
   return recipes;

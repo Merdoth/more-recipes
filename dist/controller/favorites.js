@@ -15,6 +15,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Favorites = _models2.default.favorites;
+/**
+ * @class
+ */
 
 var Favorite = function () {
   function Favorite() {
@@ -22,59 +25,43 @@ var Favorite = function () {
   }
 
   _createClass(Favorite, null, [{
-    key: 'makeFavorite',
+    key: 'addFavorite',
 
     /**
-     * 
-     * 
-     * @static
-     * @param {any} req 
-     * @param {any} res 
-     * @returns 
-     * @memberof Favorite
+     *
+     * @param {req} req
+     * @param {res} res
+     * @return {favorite} favorite
      */
-    value: function makeFavorite(req, res) {
+    value: function addFavorite(req, res) {
       var _req$body = req.body,
-          userid = _req$body.userid,
-          recipeid = _req$body.recipeid;
+          userId = _req$body.userId,
+          recipeId = _req$body.recipeId;
 
-      if (recipeid && userid && recipeid !== '' && userid !== '') {
-        return Favorites.findAll({
-          where: {
-            recipeid: recipeid,
-            userid: userid
-          }
-        }).then(function (favorited) {
-          if (favorited.length >= 1) {
-            return res.status(200).send({
-              message: 'You have already favorited this recipe'
-            });
-          }
-
-          Favorites.create({
-            userid: userid,
-            recipeid: recipeid
-          }).then(function (favorited) {
-            return res.status(200).send(favorited);
-          }).catch(function (err) {
-            res.status(500).send({ err: err });
-          });
-        }).catch(function (err) {
-          res.status(500).send({ err: err });
-        });
-      } else {
-        res.status(400).send({
-          message: 'Please enter a valid user id / recipe id'
-        });
-      }
+      Favorites.create({
+        userId: userId,
+        recipeId: recipeId
+      }).then(function (foundRecipe) {
+        return res.status(200).send(foundRecipe);
+      }).catch(function (err) {
+        res.status(404).send({ err: err });
+      });
     }
+
+    /**
+    *
+    * @param {req} req
+    * @param {res} res
+    * @return {favorites} favorites
+    */
+
   }, {
     key: 'getFavorites',
     value: function getFavorites(req, res) {
       return Favorites.all().then(function (favorites) {
         res.status(200).send({ favorites: favorites });
       }).catch(function (err) {
-        res.status(500).send({ err: err });
+        res.status(404).send({ err: err });
       });
     }
   }]);

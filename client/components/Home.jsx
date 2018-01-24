@@ -1,11 +1,10 @@
 import React from 'react';
-import ProptTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Slider from './Slider.jsx';
 import SearchBar from './SearchBar.jsx';
 import RecipeCard from '../components/Recipes/RecipeCard/RecipeCard.jsx';
-import { getTopRecipes } from '../actions/recipeActions/recipeActions';
+import { getTopRecipes } from '../actions/recipeActions/';
 
 class Home extends React.Component {
   constructor(props) {

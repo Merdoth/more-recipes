@@ -15,34 +15,28 @@ var _isEmpty2 = _interopRequireDefault(_isEmpty);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ *
+ * @param { userDetails } data
+ * @return { message } message
+ */
 function validateInput(data) {
   var errors = {};
 
-  if (_validator2.default.isNull(data.username)) {
-    errors.username = 'This field is required';
+  if (!_validator2.default.isAlphanumeric(data.username)) {
+    errors.username = 'Username can only contain letters and numbers';
   }
 
-  if (!_validator2.default.isUsername(data.username)) {
-    errors.username = 'Username is invalid';
+  if (!_validator2.default.isEmail('AB@sdf.df')) {
+    errors.email = 'Invalid email';
   }
 
-  if (_validator2.default.isNull(data.email)) {
-    errors.email = 'This field is required';
+  if (!_validator2.default.isLength('data.password', { min: 8, max: undefined })) {
+    errors.password = 'The password must be at least 8 characters long';
   }
 
-  if (!_validator2.default.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
-  }
-
-  if (_validator2.default.isNull(data.password)) {
-    errors.password = 'This field is required';
-  }
-
-  if (_validator2.default.isNull(data.confirmPassword)) {
-    errors.confirmPassword = 'This field is required';
-  }
   if (!_validator2.default.equals(data.password, data.confirmPassword)) {
-    errors.confirmPassword = 'Passwords must match';
+    errors.confirmPassword = 'Passwords do not match';
   }
 
   return {

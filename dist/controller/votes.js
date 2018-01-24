@@ -6,20 +6,24 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _models = require('../models');
-
-var _models2 = _interopRequireDefault(_models);
-
 var _sequelize = require('sequelize');
 
 var _sequelize2 = _interopRequireDefault(_sequelize);
+
+var _models = require('../models');
+
+var _models2 = _interopRequireDefault(_models);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var votes = _models2.default.votes;
-var recipes = _models2.default.recipes;
+var votes = _models2.default.votes.votes;
+var recipes = _models2.default.recipes.recipes;
+
+/**
+ * @class
+ */
 
 var Vote = function () {
   function Vote() {
@@ -28,66 +32,98 @@ var Vote = function () {
 
   _createClass(Vote, null, [{
     key: 'upVotes',
+
+    /**
+     *
+     * @param {req} req
+     * @param {res} res
+     * @return { message } message
+     */
     value: function upVotes(req, res) {
       var _req$body = req.body,
-          userid = _req$body.userid,
-          recipeid = _req$body.recipeid,
-          upvotes = _req$body.upvotes;
+          userId = _req$body.userId,
+          recipeId = _req$body.recipeId,
+          upVotes = _req$body.upVotes,
+          downVotes = _req$body.downVotes;
 
-      if (userid && recipeid && upvotes && userid !== '' && recipeid !== '' && upvotes !== '') {
-        return votes.findAll({
-          where: {
-            recipeid: recipeid,
-            userid: userid
-          }
-        }).then(function (upvoted) {
-          if (upvoted.length >= 1) {
-            return res.status(200).send({
-              message: 'You already liked this recipe '
+      votes.create({
+        userId: userId,
+        recipeId: recipeId,
+        upVotes: upVotes,
+        downVotes: downVotes
+      }).then(function (createdUpVoted) {
+        return recipes.findOne({
+          where: { id: recipeId }
+        }).then(function (recipe) {
+          if (upVotes === 1) {
+            recipe.increment('upVotes');
+          } else if (upVotes === -1) {
+            recipe.decrement('upVotes');
+          } else {
+            res.status(400).send({
+              message: 'You can only upvote or downvote.'
             });
           }
 
-          votes.create({
-            userid: userid,
-            recipeid: recipeid,
-            upvotes: upvotes
-          }).then(function (upvoted) {
-
-            return recipes.findOne({
-              where: { id: recipeid }
-            }).then(function (recipe) {
-              if (upvotes == 1) {
-                recipe.increment('upvotes');
-              } else if (upvotes == -1) {
-                recipe.decrement('upvotes');
-              } else {
-                res.status(400).send({
-                  message: 'You can only upvote or downvote. +1 for upvote. -1 for downvote.'
-                });
-              }
-
-              res.status(200).send(upvoted);
-            });
-          }).catch(function (err) {
-            res.status(500).send({ err: err });
-          });
-        }).catch(function (err) {
-          res.status(500).send({ err: err });
+          res.status(200).send(createdUpVoted);
         });
-      } else {
-        res.status(400).send({
-          message: 'Please enter a valid userid / recipe id'
-        });
-      }
+      }).catch(function (err) {
+        res.status(500).send({ err: err });
+      });
     }
+
+    /**
+     *
+     * @param {req} req
+     * @param {res} res
+     * @return { message } message
+     */
+
+  }, {
+    key: 'downVotes',
+    value: function downVotes(req, res) {
+      var _req$body2 = req.body,
+          userId = _req$body2.userId,
+          recipeId = _req$body2.recipeId,
+          upVotes = _req$body2.upVotes,
+          downVotes = _req$body2.downVotes;
+
+      votes.create({
+        userId: userId,
+        recipeId: recipeId,
+        upVotes: upVotes,
+        downVotes: downVotes
+
+      }).then(function (recipe) {
+        if (downVotes === 1) {
+          recipe.increment('downVotes');
+        } else if (downVotes === -1) {
+          recipe.decrement('downVotes');
+        } else {
+          res.status(400).send({
+            message: 'You can only upvote or downvote.'
+          });
+        }
+      }).catch(function (err) {
+        res.status(500).send({ err: err });
+      });
+    }
+
+    /**
+     *
+     * @param {req} req
+     * @param {res} res
+     * @return { error } error
+     */
+
   }, {
     key: 'getAllUpvoted',
     value: function getAllUpvoted(req, res) {
       votes.findAll({
-        order: _sequelize2.default.literal('max(upvoted) DESC'),
+        order: _sequelize2.default.literal('max(upVoted) DESC'),
         limit: 6
-      }).then(function (votes) {
-        res.status(200).send({ votes: votes });
+      }).then(function (existingVotes) {
+        res.status(200).send({ existingVotes: existingVotes });
       }).catch(function (err) {
         res.status(400).send({ error: err });
       });

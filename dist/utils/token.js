@@ -19,8 +19,8 @@ _dotenv2.default.config();
 exports.default = function (payload) {
   var secret = process.env.SECRET_KEY;
   var id = payload.id,
-      username = payload.username,
+      userName = payload.userName,
       email = payload.email;
 
-  return _jsonwebtoken2.default.sign({ id: id, username: username, email: email }, secret, { expiresIn: '24h' });
+  return _jsonwebtoken2.default.sign({ id: id, userName: userName, email: email }, secret, { expiresIn: '24h' });
 };

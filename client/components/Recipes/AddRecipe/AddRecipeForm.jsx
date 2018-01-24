@@ -6,7 +6,7 @@ import Button from '../../common/Button.jsx';
 import InputField from '../../common/InputField.jsx';
 import TextArea from '../../common/TextArea.jsx';
 import InputLine from '../../common/InputLine.jsx';
-import { addRecipes } from '../../../actions/recipeActions/recipeActions';
+import { addRecipes } from '../../../actions/recipeActions/';
 import history from '../../../utils/history';
 
 class AddRecipeForm extends Component {

@@ -16,42 +16,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var reviews = _models2.default.reviews;
 
+/**
+ * @class
+ */
+
 var Review = function () {
   function Review() {
     _classCallCheck(this, Review);
   }
 
   _createClass(Review, null, [{
-    key: 'add',
+    key: 'addReview',
 
     /**
-     * 
-     * 
-     * @static
-     * @param {any} req 
-     * @param {any} res 
-     * @returns 
-     * @memberof Review
+     *
+     * @param {req} req
+     * @param {res} res
+     * @return { message } message
      */
-    value: function add(req, res) {
+    value: function addReview(req, res) {
       var _req$body = req.body,
-          userid = _req$body.userid,
-          recipeid = _req$body.recipeid,
+          userId = _req$body.userId,
+          recipeId = _req$body.recipeId,
           review = _req$body.review;
 
-      if (review && userid && review !== '' && userid !== '') {
-        return reviews.create({
-          userid: userid,
-          recipeid: recipeid,
-          review: review
-        }).then(function (review) {
-          return res.status(200).send(review);
-        });
-      } else {
-        res.status(400).send({
-          message: 'Please enter a review'
-        });
-      }
+      reviews.create({
+        userId: userId,
+        recipeId: recipeId,
+        review: review
+      }).then(function (reviewReturned) {
+        return res.status(200).send(reviewReturned);
+      });
     }
   }]);
 

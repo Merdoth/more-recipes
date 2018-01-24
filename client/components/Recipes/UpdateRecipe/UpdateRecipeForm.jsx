@@ -10,7 +10,7 @@ import history from '../../../utils/history';
 import {
   updateRecipe,
   getOneRecipe
-} from '../../../actions/recipeActions/recipeActions';
+} from '../../../actions/recipeActions/';
 
 class UpdateRecipeForm extends Component {
   constructor(props) {
@@ -55,7 +55,6 @@ class UpdateRecipeForm extends Component {
     const { recipeId } = this.props.match.params;
     this.props.updateRecipe(recipeId, this.state).then(() => {
       const { message, error } = this.props.recipe;
-      console.log(this.props.recipes);
       if (error) {
         return swal(error.message);
       }
@@ -132,4 +131,7 @@ const mapStateToProps = state => ({
   recipe: state.recipes
 });
 
-export default connect(mapStateToProps, { updateRecipe, getOneRecipe })(UpdateRecipeForm);
+export default connect(
+  mapStateToProps,
+  { updateRecipe, getOneRecipe }
+)(UpdateRecipeForm);

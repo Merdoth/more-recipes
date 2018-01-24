@@ -26,7 +26,7 @@ const checkUserExists = (req, res, next) => {
       next();
     })
     .catch((err) => {
-      res.status(500).send({ error: err });
+      res.status(400).send({ error: err });
     });
 };
 

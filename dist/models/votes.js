@@ -2,26 +2,30 @@
 
 module.exports = function (sequelize, DataTypes) {
   var votes = sequelize.define('votes', {
-    userid: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    recipeid: {
+    recipeId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    upvotes: {
+    upVotes: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    downVotes: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
   });
-
   votes.associate = function (models) {
     votes.belongsTo(models.recipes, {
-      foreignKey: 'recipeid'
+      foreignKey: 'recipeId',
+      onDelete: 'CASCADE'
     });
     votes.belongsTo(models.users, {
-      foreignKey: 'userid'
+      foreignKey: 'userId'
     });
   };
   return votes;

@@ -45,21 +45,24 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should throw an error if password is less than 8 characters & return 400 ', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signup')
-      .send({
-        userName: 'ucheya',
-        email: 'ucheya@gmail.com',
-        password: '1234567'
-      })
-      .end((err, res) => {
-        expect(res.status).toEqual(400);
-        expect(res.body.message)
-          .toEqual('Password must be up to 8 characters!');
-      });
-    done();
-  });
+  it(
+    'should throw an error if password is less than 8 characters & return 400 ',
+    (done) => {
+      chai.request(app)
+        .post('/api/v1/users/signup')
+        .send({
+          userName: 'ucheya',
+          email: 'ucheya@gmail.com',
+          password: '1234567'
+        })
+        .end((err, res) => {
+          expect(res.status).toEqual(400);
+          expect(res.body.message)
+            .toEqual('Password must be up to 8 characters!');
+        });
+      done();
+    }
+  );
 
   it('should successfully signup a user and return 201', (done) => {
     chai.request(app)
@@ -116,35 +119,41 @@ describe('More Recipes', () => {
     done();
   });
 
-  it('should throw an error if user uses incorrect details and return 404', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signin')
-      .send({
-        email: 'ucheya@gmail.com',
-        password: '123456789'
-      })
-      .end((err, res) => {
-        expect(res.status).toEqual(404);
-        expect(res.body.message)
-          .toEqual('Incorrect login details!');
-      });
-    done();
-  });
+  it(
+    'should throw an error if user uses incorrect details and return 404',
+    (done) => {
+      chai.request(app)
+        .post('/api/v1/users/signin')
+        .send({
+          email: 'ucheya@gmail.com',
+          password: '123456789'
+        })
+        .end((err, res) => {
+          expect(res.status).toEqual(404);
+          expect(res.body.message)
+            .toEqual('Incorrect login details!');
+        });
+      done();
+    }
+  );
 
-  it('should throw an error if user uses incorrect details and return 404', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signin')
-      .send({
-        email: 'ucheyao@gmail.com',
-        password: '12345679'
-      })
-      .end((err, res) => {
-        expect(res.status).toEqual(404);
-        expect(res.body.message)
-          .toEqual('Incorrect login details!');
-      });
-    done();
-  });
+  it(
+    'should throw an error if user uses incorrect details and return 404',
+    (done) => {
+      chai.request(app)
+        .post('/api/v1/users/signin')
+        .send({
+          email: 'ucheyao@gmail.com',
+          password: '12345679'
+        })
+        .end((err, res) => {
+          expect(res.status).toEqual(404);
+          expect(res.body.message)
+            .toEqual('Incorrect login details!');
+        });
+      done();
+    }
+  );
 
   it('should successfully log user in and return 200', (done) => {
     chai.request(app)

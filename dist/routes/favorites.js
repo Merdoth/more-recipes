@@ -8,11 +8,19 @@ var _favorites = require('../controller/favorites');
 
 var _favorites2 = _interopRequireDefault(_favorites);
 
+var _authorization = require('../middleware/authorization');
+
+var _authorization2 = _interopRequireDefault(_authorization);
+
+var _favoriteValidator = require('../middleware/favoriteValidator');
+
+var _favoriteValidator2 = _interopRequireDefault(_favoriteValidator);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var favoriteRoutes = function favoriteRoutes(router) {
-  router.post('/favorites/', _favorites2.default.makeFavorite);
-  router.get('/favorites/', _favorites2.default.getFavorites);
+  router.post('/favorites', _authorization2.default.authorize, _favoriteValidator2.default, _favorites2.default.addFavorite);
+  router.get('/users/:id/recipes', _authorization2.default.authorize, _favorites2.default.getFavorites);
 };
 
 exports.default = favoriteRoutes;

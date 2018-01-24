@@ -11,12 +11,10 @@ export default {
       // verify token
       jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
         if (error) {
-          console.log('err', error);
           res.status(400).send({
             message: 'The token you provided is incorrect.'
           });
         } else {
-          console.log('nice');
           req.decoded = decoded;
           next();
         }

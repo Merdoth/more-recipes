@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-     - "6"
+     - "9"
 install:
     - npm install    
 before_script:
-    - createdb post-dev-test -U postgres
+    - createdb morerecipes-test -U postgres
     - sequelize db:migrate
 script: 
     - npm test
@@ -14,4 +14,4 @@ services:
     - postgresql         
 env:
     global:
-        -NODE_ENV=test
+        - NODE_ENV=test

@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SignupForm from './SignupForm.jsx';
-import { userSignupRequest } from '../../actions/auth/signupActions';
-import { addFlashMessage } from '../../actions/flashMessages/addFlashMessage';
+import { userSignupRequest } from '../../actions/auth/authActions';
 
 class SignupPage extends React.Component {
   render() {
@@ -21,5 +20,4 @@ class SignupPage extends React.Component {
 
 export default connect(null, {
   userSignupRequest,
-  addFlashMessage
 })(SignupPage);

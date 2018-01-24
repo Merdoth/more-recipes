@@ -1,17 +1,12 @@
 import chai from 'chai';
 import expect from 'expect';
 import chaiHttp from 'chai-http';
-import jwt from 'jsonwebtoken';
+import token from 'jsonwebtoken';
 
 import app from '../../app';
 
 
 chai.use(chaiHttp);
-
-const should = chai.should();
-
-// const token =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNTExMTMzMjI4LCJleHAiOjE1MTEyMTk2Mjh9.eshYXfOeM5Av-La7Qjs-jzfQAyEE_WZHGtjV0bh24HA';
 
 describe('More Recipes', () => {
   it('should throw an error if recipeName is empty and return 400', (done) => {
@@ -61,11 +56,10 @@ describe('More Recipes', () => {
         preparation: 'but pepper add salt and bake'
       })
       .end((err, res) => {
-        console.log(res.status);
         expect(res.status).toEqual(200);
         expect(res.body.recipe)
           .toEqual();
-          done();
+        done();
       });
   });
 
@@ -78,7 +72,7 @@ describe('More Recipes', () => {
         expect(res.status).toEqual(404);
         expect(res.body.message)
           .toEqual('No recipes found. Please try to create some.');
-          done();
+        done();
       });
   });
 
@@ -94,15 +88,18 @@ describe('More Recipes', () => {
       });
   });
 
-  it('should throw an error if one field of a recipe is missing and return 400', (done) => {
-    chai.request(app)
-      .post('/api/v1/recipes').set({ authorization: token })
-      .send({
-      })
-      .end((err, res) => {
-        expect(res.status).toEqual(400);
-        expect(res.body.message).toEqual('All fields must be provided!');
-        done();
-      });
-  });
+  it(
+    'should throw an error if one field of a recipe is missing and return 400',
+    (done) => {
+      chai.request(app)
+        .post('/api/v1/recipes').set({ authorization: token })
+        .send({
+        })
+        .end((err, res) => {
+          expect(res.status).toEqual(400);
+          expect(res.body.message).toEqual('All fields must be provided!');
+          done();
+        });
+    }
+  );
 });

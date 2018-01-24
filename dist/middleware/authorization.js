@@ -18,7 +18,8 @@ _dotenv2.default.config();
 
 exports.default = {
   authorize: function authorize(req, res, next) {
-    var token = req.headers.authorization;
+    var token = req.headers.authorization || req.body.authorization;
+    // req.headers.authorization;
     if (token) {
       // verify token
       _jsonwebtoken2.default.verify(token, process.env.SECRET_KEY, function (error, decoded) {

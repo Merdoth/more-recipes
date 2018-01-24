@@ -51,7 +51,6 @@ class SigninForm extends React.Component {
             text: this.state.email.split('@')[0],
             icon: 'success'
           });
-          // Materialize.toast('Welcome!', 3000, 'green');
           history.push('/profile');
         })
         .catch((err) => {

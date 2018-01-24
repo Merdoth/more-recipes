@@ -18,7 +18,7 @@ class Favorite {
       recipeId,
     }).then(foundRecipe => res.status(200).send(foundRecipe))
       .catch((err) => {
-        res.status(500).send({ err });
+        res.status(404).send({ err });
       });
   }
 
@@ -34,7 +34,7 @@ class Favorite {
         res.status(200).send({ favorites });
       })
       .catch((err) => {
-        res.status(500).send({ err });
+        res.status(404).send({ err });
       });
   }
 }
