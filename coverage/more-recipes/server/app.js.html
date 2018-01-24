@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.55% </span>
+        <span class="strong">87.5% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>29/31</span>
+        <span class='fraction'>28/32</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>2/4</span>
+        <span class='fraction'>3/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>2/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.55% </span>
+        <span class="strong">87.5% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>29/31</span>
+        <span class='fraction'>28/32</span>
       </div>
     </div>
   </div>
@@ -94,10 +94,21 @@
 49
 50
 51
-52</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+52
+53
+54
+55
+56
+57
+58</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -107,26 +118,24 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -134,6 +143,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -143,22 +154,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import path from 'path';
-import database from './models';
-import routes from './routes/';
-import webpackConfig from '../webpack.config.dev';
-&nbsp;
 import dotenv from 'dotenv';
-&nbsp;
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 &nbsp;
+import database from './models';
+import routes from './routes/';
+import webpackConfig from '../webpack.config.dev';
 &nbsp;
 dotenv.config();
 &nbsp;
@@ -168,41 +178,49 @@ const port = process.env.PORT || <span class="branch-1 cbranch-no" title="branch
 const compiler = webpack(webpackConfig);
 &nbsp;
 app.use(logger('dev'));
-app.use(webpackMiddleware(compiler, {
-  hot: true,
-  publicPath: webpackConfig.output.publicPath,
-  noInfo: true
-}));
-app.use(webpackHotMiddleware(compiler));
+&nbsp;
+<span class="missing-if-branch" title="if path not taken" >I</span>if (process.env.NODE_ENV === 'development') {
+<span class="cstat-no" title="statement not covered" >  app.use(webpackMiddleware(compiler, {</span>
+    hot: true,
+    publicPath: webpackConfig.output.publicPath,
+    noInfo: true
+  }));
+<span class="cstat-no" title="statement not covered" >  app.use(webpackHotMiddleware(compiler));</span>
+}
+&nbsp;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 &nbsp;
 routes(router);
+&nbsp;
 app.use('/api/v1', router);
 &nbsp;
-app.get('*', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
+app.use('*', <span class="fstat-no" title="function not covered" >(</span>req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >  res.status(200).sendFile(path.join(__dirname, '../client/index.html'));</span>
 });
 &nbsp;
-database.sequelize.authenticate()
-  .then(() =&gt; { app.listen(port, (err) =&gt; {
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (!err) {
-      console.log(`listening on port localhost://${port}`);
-    }
-  });
-  console.log('Datbase Connection established');
+database.sequelize
+  .authenticate()
+  .then(() =&gt; {
+    app.listen(port, (err) =&gt; {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (!err) {
+        console.log(`listening on port localhost://${port}`);
+      }
+    });
+    console.log('Datbase Connection established');
   })
-  .catch(<span class="fstat-no" title="function not covered" >err =&gt; </span>{
+  .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
 <span class="cstat-no" title="statement not covered" >    console.log('Could not establish a database connection', err);</span>
   });
 &nbsp;
-export default app;</pre></td></tr>
+export default app;
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 22 2017 23:34:35 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jan 24 2018 18:04:29 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

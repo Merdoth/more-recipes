@@ -1,17 +1,25 @@
+sudo: required
+dist: trusty
 language: node_js
 node_js:
-     - "9"
-install:
-    - npm install    
-before_script:
-    - createdb morerecipes-test -U postgres
-    - sequelize db:migrate
-script: 
-    - npm test
-after_success:
-    - npm run coverage
+  - node
+
 services:
-    - postgresql         
-env:
-    global:
-        - NODE_ENV=test
+  - postgresql
+
+postgres:
+  adapter: postgresql
+  database: morerecipes-test
+  username: postgres
+  
+before_script:
+  - createdb morerecipes-test -U postgres
+  - npm install sequelize-cli -g
+
+script:
+  - npm run test
+
+after_success:
+  - npm run coveralls
+
+group: deprecated-2017Q4
