@@ -12,13 +12,19 @@ var _authorization = require('../middleware/authorization');
 
 var _authorization2 = _interopRequireDefault(_authorization);
 
+var _recipeValidator = require('../middleware/recipeValidator');
+
+var _recipeValidator2 = _interopRequireDefault(_recipeValidator);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var recipeRoutes = function recipeRoutes(router) {
-  router.post('/recipes/', _authorization2.default.authorize, _recipes2.default.add);
-  router.get('/recipes/', _recipes2.default.get);
-  router.put('/recipes/:id', _authorization2.default.authorize, _recipes2.default.update);
-  router.delete('/recipes/:id', _authorization2.default.authorize, _recipes2.default.delete);
+  router.post('/recipes', _authorization2.default.authorize, _recipeValidator2.default, _recipes2.default.addRecipe);
+  router.get('/recipes', _recipes2.default.getAllRecipes);
+  router.get('/recipes/:userId', _recipes2.default.getUserRecipes);
+  router.get('/recipe/:recipeId', _recipes2.default.getOneRecipe);
+  router.put('/recipe/:id', _authorization2.default.authorize, _recipes2.default.updateUserRecipes);
+  router.delete('/recipes/:id', _authorization2.default.authorize, _recipes2.default.deleteUserRecipes);
 };
 
 exports.default = recipeRoutes;

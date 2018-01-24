@@ -9,22 +9,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userid: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'users',
           key: 'id',
-          as: 'userid'
+          as: 'userId'
         }
       },
-      recipeid: {
+      recipeId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        onDelete: 'CASCADE',
         references: {
           model: 'recipes',
           key: 'id',
-          as: 'recipeid'
+          as: 'recipeId'
         }
       },
       review: {

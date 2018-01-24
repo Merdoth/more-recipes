@@ -19,12 +19,16 @@ const port = process.env.PORT || 9000;
 const compiler = webpack(webpackConfig);
 
 app.use(logger('dev'));
-app.use(webpackMiddleware(compiler, {
-  hot: true,
-  publicPath: webpackConfig.output.publicPath,
-  noInfo: true
-}));
-app.use(webpackHotMiddleware(compiler));
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(webpackMiddleware(compiler, {
+    hot: true,
+    publicPath: webpackConfig.output.publicPath,
+    noInfo: true
+  }));
+  app.use(webpackHotMiddleware(compiler));
+}
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -32,11 +36,12 @@ routes(router);
 
 app.use('/api/v1', router);
 
-app.get('*', (req, res) => {
+app.use('*', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-database.sequelize.authenticate()
+database.sequelize
+  .authenticate()
   .then(() => {
     app.listen(port, (err) => {
       if (!err) {

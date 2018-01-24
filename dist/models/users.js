@@ -12,7 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function (sequelize, DataTypes) {
   var users = sequelize.define('users', {
-    username: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -46,27 +46,27 @@ exports.default = function (sequelize, DataTypes) {
 
   users.associate = function (models) {
     users.hasMany(models.recipes, {
-      foreignKey: 'userid'
+      foreignKey: 'userId'
     });
     users.hasMany(models.reviews, {
-      foreignKey: 'userid'
+      foreignKey: 'userId'
     });
     users.hasMany(models.favorites, {
-      foreignKey: 'userid'
+      foreignKey: 'userId'
     });
     users.hasMany(models.votes, {
-      foreignKey: 'userid'
+      foreignKey: 'userId'
     });
   };
 
   users.beforeCreate(function (user) {
     user.dataValues.password = _bcrypt2.default.hashSync(user.dataValues.password, _bcrypt2.default.genSaltSync(10));
-    user.dataValues.email = user.dataValues.email.toLowerCase();
-    user.dataValues.username = user.dataValues.username.toLowerCase();
+    user.dataValues.email = user.dataValues.email;
+    user.dataValues.userName = user.dataValues.userName;
   });
 
   users.beforeUpdate(function (user) {
-    if (user._changed.password) {
+    if (user.changed.password) {
       user.dataValues.password = _bcrypt2.default.hashSync(user.dataValues.password, _bcrypt2.default.genSaltSync(10));
     }
   });

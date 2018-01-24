@@ -16,7 +16,7 @@ var _dotenv = require('dotenv');
 
 var dotenv = _interopRequireWildcard(_dotenv);
 
-var _config = require('../config/config.js');
+var _config = require('../config/config');
 
 var _config2 = _interopRequireDefault(_config);
 

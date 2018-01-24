@@ -3,8 +3,10 @@
 require('dotenv').config();
 
 var env = process.env.NODE_ENV || 'development';
+
 var dialect = 'postgres';
-var url = '' + process.env.DATABASE_URL + process.env.NODE_ENV;
+var url = '' + process.env.DATABASE_URL + env;
+
 var devMode = env === ('development' || 'test');
 var config = {
   url: url,

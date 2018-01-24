@@ -1,6 +1,4 @@
-import models from '../models';
 
-const Reviews = models.reviews;
 
 const alreadyReviewed = (req, res, next) => {
   const { userId, recipeId, review } = req.body;

@@ -3,22 +3,28 @@ export default (state = {}, action = {}) => {
     case 'GET_TOP_RECIPES': {
       return action.recipes;
     }
-    case 'ADD_RECIPE_SUCCESS': {
+    case 'GET_ONE_RECIPE': {
       return action.recipes;
     }
-    case 'GET_ONE_RECIPE': {
+    case 'GET_ALL_RECIPES': {
+      return action.recipes;
+    }
+    case 'ADD_RECIPE_SUCCESS': {
       return action.recipes;
     }
     case 'ADD_RECIPE_FAILURE': {
       return action.error;
     }
-    case 'GET_ALL_RECIPES': {
-      return action.recipes;
-    }
     case 'UPDATE_RECIPE_SUCCESS': {
       return action.recipes;
     }
     case 'UPDATE_RECIPE_FAILURE': {
+      return action.error;
+    }
+    case 'DELETE_RECIPE_SUCCESS': {
+      return action.recipeId;
+    }
+    case 'DELETE_RECIPE_FAILURE': {
       return action.error;
     }
     default: {

@@ -2,11 +2,11 @@
 
 module.exports = function (sequelize, DataTypes) {
   var favorites = sequelize.define('favorites', {
-    userid: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    recipeid: {
+    recipeId: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
@@ -14,11 +14,11 @@ module.exports = function (sequelize, DataTypes) {
 
   favorites.associate = function (models) {
     favorites.belongsTo(models.recipes, {
-      foreignKey: 'recipeid'
+      foreignKey: 'recipeId'
     });
 
     favorites.belongsTo(models.users, {
-      foreignKey: 'userid'
+      foreignKey: 'userId'
     });
   };
   return favorites;

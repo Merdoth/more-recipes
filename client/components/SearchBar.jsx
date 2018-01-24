@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import InputLine from './common/InputLine.jsx';
 import Button from './common/Button.jsx';
-import { getTopRecipes } from '../actions/recipeActions/recipeActions';
+import { getTopRecipes } from '../actions/recipeActions/';
 
 class SearchBar extends React.Component {
   constructor(props) {

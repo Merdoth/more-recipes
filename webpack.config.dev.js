@@ -23,7 +23,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: [
           path.join(__dirname, 'client'),
-          path.join(__dirname, 'server/shared')
+          path.join(__dirname, 'server')
         ],
         loaders: ['react-hot-loader/webpack', 'babel-loader']
       }, {

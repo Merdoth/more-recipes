@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Button from '../common/Button.jsx';
-import { getOneRecipe } from '../../actions/recipeActions/recipeActions';
+import { getOneRecipe } from '../../actions/recipeActions/';
 import { Icons } from '../common/Icons.jsx';
 import RecipeCardImage from './RecipeCard/RecipeCardImage.jsx';
 import RecipeCardFooter1 from './RecipeCard/RecipeCardFooter1.jsx';
@@ -24,8 +24,6 @@ class RecipeDetails extends Component {
   }
   render() {
     const recipeDetails = this.state.recipes;
-    console.log('recioe details', recipeDetails);
-    console.log('recioe image', recipeDetails.image);
     return (
       <div className="container wrap">
         <div className="row Card">
@@ -35,7 +33,7 @@ class RecipeDetails extends Component {
                 <RecipeCardImage
                   src={recipeDetails ? recipeDetails.image : ''}
                 />
-                <RecipeCardFooter1 />
+                <RecipeCardFooter1 id={recipeDetails.id} />
               </div>
             </div>
           </div>

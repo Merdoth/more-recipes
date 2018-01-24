@@ -1,11 +1,10 @@
-import { combineReducers } from 'redux';
+import { applyMiddleware, combineReducers } from 'redux';
+import logger from 'redux-logger';
 
 import recipes from './reducers/recipeReducer';
-import flashMessages from './reducers/flashMessages';
 import setCurrentUser from './reducers/setCurrentUser';
 
 const reducers = combineReducers({
-  flashMessages,
   recipes,
   setCurrentUser
 });

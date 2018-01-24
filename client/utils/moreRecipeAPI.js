@@ -58,11 +58,15 @@ export const updateRecipeRequest = (id, recipes) => {
       preparation,
       image: res.data.url
     };
-    return axios.put(`/api/v1/recipes/${id}`, recipeData, header());
+    return axios.put(`/api/v1/recipe/${id}`, recipeData, header());
   });
 };
 
 export const getTopRecipes = () =>
   axios.get('/api/v1/recipes?sort=upvotes&order=des');
 
-export const getOneRecipe = recipeId => axios.get(`/api/v1/recipe/${recipeId}`);
+export const getOneRecipe = recipeId =>
+  axios.get(`/api/v1/recipe/${recipeId}`);
+
+export const deleteRecipe = id =>
+  axios.delete(`/api/v1/recipes/${id}`);

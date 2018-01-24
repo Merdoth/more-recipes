@@ -2,11 +2,11 @@
 
 module.exports = function (sequelize, DataTypes) {
   var reviews = sequelize.define('reviews', {
-    userid: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    recipeid: {
+    recipeId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -18,11 +18,12 @@ module.exports = function (sequelize, DataTypes) {
 
   reviews.associate = function (models) {
     reviews.belongsTo(models.users, {
-      foreignKey: 'userid'
+      foreignKey: 'userId'
     });
 
     reviews.belongsTo(models.recipes, {
-      foreignKey: 'recipeid'
+      foreignKey: 'recipeId',
+      onDelete: 'CASCADE'
     });
   };
 

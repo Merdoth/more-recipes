@@ -1,6 +1,7 @@
 import * as types from '../actionTypes';
 import * as api from './../../utils/moreRecipeAPI';
 
+
 export const getTopRecipesSuccess = recipes => ({
   type: types.GET_TOP_RECIPES,
   recipes
@@ -28,6 +29,27 @@ export const getAllRecipesSuccess = recipes => ({
   recipes
 });
 
+export const deleteRecipeSuccess = id => ({
+  type: types.DELETE_RECIPE_SUCCESS,
+  id
+});
+
+export const deleteRecipeFailure = error => ({
+  type: types.DELETE_RECIPE_FAILURE,
+  error
+});
+
+export const deleteRecipe = id => dispatch =>
+
+  api
+    .deleteRecipe(id)
+    .then((res) => {
+      dispatch(deleteRecipeSuccess(res.data.message));
+    })
+    .catch((err) => {
+      dispatch(deleteRecipeFailure(err));
+    });
+
 export const getAllRecipes = () => dispatch =>
   api.getAllRecipes().then((res) => {
     const recipes = res.data;
@@ -49,7 +71,6 @@ export const updateRecipe = (id, recipes) => dispatch =>
   api
     .updateRecipeRequest(id, recipes)
     .then((res) => {
-      console.log(res);
       if (res) {
         return dispatch(updateRecipeSuccess({
           message: res.data.message,

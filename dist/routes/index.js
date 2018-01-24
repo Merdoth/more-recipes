@@ -27,10 +27,10 @@ var _votes2 = _interopRequireDefault(_votes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var routes = function routes(router) {
+  (0, _favorites2.default)(router);
   (0, _users2.default)(router);
   (0, _recipes2.default)(router);
   (0, _reviews2.default)(router);
-  (0, _favorites2.default)(router);
   (0, _votes2.default)(router);
 };
 

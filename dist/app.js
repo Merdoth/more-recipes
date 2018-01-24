@@ -20,17 +20,9 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-var _models = require('./models');
-
-var _models2 = _interopRequireDefault(_models);
-
 var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
-
-var _routes = require('./routes/');
-
-var _routes2 = _interopRequireDefault(_routes);
 
 var _webpack = require('webpack');
 
@@ -43,6 +35,14 @@ var _webpackDevMiddleware2 = _interopRequireDefault(_webpackDevMiddleware);
 var _webpackHotMiddleware = require('webpack-hot-middleware');
 
 var _webpackHotMiddleware2 = _interopRequireDefault(_webpackHotMiddleware);
+
+var _models = require('./models');
+
+var _models2 = _interopRequireDefault(_models);
+
+var _routes = require('./routes/');
+
+var _routes2 = _interopRequireDefault(_routes);
 
 var _webpackConfig = require('../webpack.config.dev');
 
@@ -58,19 +58,24 @@ var port = process.env.PORT || 9000;
 var compiler = (0, _webpack2.default)(_webpackConfig2.default);
 
 app.use((0, _morgan2.default)('dev'));
-app.use((0, _webpackDevMiddleware2.default)(compiler, {
-  hot: true,
-  publicPath: _webpackConfig2.default.output.publicPath,
-  noInfo: true
-}));
-app.use((0, _webpackHotMiddleware2.default)(compiler));
+
+if (process.env.NODE_ENV === 'development') {
+  app.use((0, _webpackDevMiddleware2.default)(compiler, {
+    hot: true,
+    publicPath: _webpackConfig2.default.output.publicPath,
+    noInfo: true
+  }));
+  app.use((0, _webpackHotMiddleware2.default)(compiler));
+}
+
 app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use(_bodyParser2.default.json());
 
 (0, _routes2.default)(router);
+
 app.use('/api/v1', router);
 
-app.get('*', function (req, res) {
+app.use('*', function (req, res) {
   res.status(200).sendFile(_path2.default.join(__dirname, '../client/index.html'));
 });
 

@@ -17,7 +17,6 @@ export class User {
    * @return { message } message
    */
   static signUpUser(req, res) {
-    // const { email, userName } = req.body;
     Users.create(req.body)
       .then((userCreated) => {
         const newUser = userCreated.dataValues;
@@ -42,13 +41,14 @@ export class User {
    */
   static getAllUsers(req, res) {
     Users.findAll({
-      include: [{ model: Favorites }]
+      include: [{ model: Favorites }],
+      attributes: ['userName', 'email']
     })
       .then((users) => {
         res.status(200).send({ users });
       })
       .catch((err) => {
-        res.status(500).send({ error: err });
+        res.status(404).send({ error: err });
       });
   }
 
@@ -60,13 +60,14 @@ export class User {
    */
   static getOneUser(req, res) {
     Users.findById(req.params.id, {
-      include: [{ model: Favorites }]
+      include: [{ model: Favorites }],
+      attributes: ['userName', 'email']
     })
       .then((users) => {
         res.status(200).send({ users });
       })
       .catch((err) => {
-        res.status(500).send({ error: err });
+        res.status(404).send({ error: err });
       });
   }
 
@@ -85,13 +86,13 @@ export class User {
     }).then((user) => {
       if (user) {
         if (bcrypt.compareSync(password, user.password)) {
-          const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+          const token = jwt.sign({ id: user.id, userName: user.userName, email: user.email }, process.env.SECRET_KEY, {
             expiresIn: 60 * 60 * 24 // Token expires in 24 hours
           });
 
           return res.status(200).send({ message: 'Welcome', token });
         }
-        return res.status(404).send({ message: 'Incorrect login details!' });
+        return res.status(400).send({ message: 'Incorrect login details!' });
       }
       return res.status(404).send({ message: 'User does not exist!' });
     });

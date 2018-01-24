@@ -7,7 +7,7 @@ const recipeRoutes = (router) => {
   router.get('/recipes', recipes.getAllRecipes);
   router.get('/recipes/:userId', recipes.getUserRecipes);
   router.get('/recipe/:recipeId', recipes.getOneRecipe);
-  router.put('/recipes/:id', auth.authorize, recipes.updateUserRecipes);
+  router.put('/recipe/:id', auth.authorize, recipes.updateUserRecipes);
   router.delete('/recipes/:id', auth.authorize, recipes.deleteUserRecipes);
 };
 

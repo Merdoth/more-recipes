@@ -9,136 +9,133 @@ import { logout } from '../actions/auth/authActions';
  * @returns { NavigationBar } NavigationBar
  */
 class NavigationBar extends React.Component {
+  /**
+   * Creates an instance of NavigationBar.
+   * @param {any} props
+   * @memberof NavigationBar
+   */
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
   }
-
+  /**
+   * @param {any} event
+   * @memberof NavigationBar
+   * @returns { void }
+   */
   logout(event) {
     event.preventDefault();
     this.props.logout();
   }
+
   /**
    *
-   * @returns { Jsx } Jsx
+   *
+   * @returns
+   * @memberof NavigationBar
+   * @returns { void }
    */
-
   loggedInMenu() {
     return (
-      <ul className="nav nav-pills flex-column flex-sm-row flex-sm-fill text-sm-center topnav">
-        <li>
-          <Link className="nav-link" to="/recipes">
-            <i className="fa fa-home" aria-hidden="true">
-              {' '}
-              Home
-            </i>
-          </Link>
-        </li>
-        <li>
-          <Link
+      <ul className="navbar-nav ">
+        <li className="nav-item dropdown">
+          <a
             className="nav-link dropdown-toggle"
-            id="navbarDropdownMenuLink"
+            href="#"
+            id="navbarDropdown"
+            role="button"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
-            to="/recipes"
           >
-            <i className="fa fa-user-circle-o" aria-hidden="true">
-              {' '}
-              Manage Account
-            </i>
-          </Link>
-          <div
-            className="dropdown-menu"
-            aria-labelledby="navbarDropdownMenuLink"
-          >
-            <a
-              className="dropdown-item"
-              style={{ color: '#000' }}
-              href="/addrecipe"
-            >
-              {' '}
-              <i className="fa fa-user-circle-o" aria-hidden="true">
-                {' '}
-                Add Recipes
-              </i>
+            Hi, {this.props.user.userName}
+            <i className="fa fa-user-circle-o icon-size" aria-hidden="true" />
+          </a>
+          <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a className="dropdown-item" href="/addrecipe">
+              Add Recipes
             </a>
-            <a
-              className="dropdown-item"
-              style={{ color: '#000' }}
-              href="favourites"
-            >
-              <i className="fa fa-user-circle-o" aria-hidden="true">
-                {' '}
-                Favourites
-              </i>
+            <a className="dropdown-item" href="/favourites">
+              Favourites
             </a>
-            <a
-              className="dropdown-item"
-              style={{ color: '#000' }}
-              href="myrecipes"
-            >
-              <i className="fa fa-user-circle-o" aria-hidden="true">
-                {' '}
-                My recipes
-              </i>
+            <a className="dropdown-item" href="/myrecipes">
+              My recipes
             </a>
-            <a
-              className="dropdown-item"
-              style={{ color: '#000' }}
-              href="recipes"
-            >
-              <i className="fa fa-user-circle-o" aria-hidden="true">
-                {' '}
-                All Recipes
-              </i>{' '}
+            <a className="dropdown-item" href="/recipes">
+              All Recipes
             </a>
-          </div>
-        </li>
-        <li>
-          <Link onClick={this.logout} className="nav-link" to="/recipes">
-            <i className="fa fa-sign-out" aria-hidden="true">
-              {' '}
+            <Link onClick={this.logout} className="dropdown-item" to="/">
               Signout
-            </i>
-          </Link>
+            </Link>
+          </div>
         </li>
       </ul>
     );
   }
 
+  /**
+   * @returns { void }
+   * @memberof NavigationBar
+   */
   notLoggedInMenu() {
     return (
-      <ul className="nav nav-pills flex-column flex-sm-row flex-sm-fill text-sm-center topnav">
-        <li>
-          <Link to="/">Home</Link>
+      <ul className="navbar-nav mr-auto">
+        <li className="nav-item active">
+          <Link className="nav-link" to="/">
+            Home
+          </Link>
         </li>
-        <li>
-          <Link to="/Signup">Sign Up</Link>
+        <li className="nav-item">
+          <Link className="nav-link" to="/Signup">
+            Sign Up
+          </Link>
         </li>
-        <li>
-          <Link to="/Signin">Sign In</Link>
+
+        <li className="nav-item">
+          <Link className="nav-link" to="/Signin">
+            Sign In
+          </Link>
         </li>
       </ul>
     );
   }
 
+  /**
+   * @returns { void }
+   * @memberof NavigationBar
+   */
   render() {
     return (
-      <div className="container-fluid wrapper">
-        <div className="row header">
-          <div className="col-xs-12 col-md-6 navs">
-            <h2>More Recipes</h2>
-          </div>
-          <div className="col-xs-12 col-md-6">
-            <div className="float-right topnavdiv">
-              {this.props.isAuthenticated
-                ? this.loggedInMenu()
-                : this.notLoggedInMenu()}
-            </div>
-          </div>
+      <nav className="navbar navbar-expand-lg navbar-dark header">
+        <Link className="navbar-brand" to="/recipes">
+          MORE RECIPES
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <form className="form-inline my-2 my-lg-0 float-menuitem-right">
+            <input
+              className="form-control mr-sm-2 search"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+          </form>
+          {this.props.isAuthenticated
+            ? this.loggedInMenu()
+            : this.notLoggedInMenu()}
         </div>
-      </div>
+      </nav>
     );
   }
 }
@@ -146,7 +143,8 @@ NavigationBar.PropTypes = {
   logout: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-  isAuthenticated: state.setCurrentUser.isAuthenticated
+  isAuthenticated: state.setCurrentUser.isAuthenticated,
+  user: state.setCurrentUser.user
 });
 
 export default connect(mapStateToProps, { logout })(NavigationBar);

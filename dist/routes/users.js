@@ -6,36 +6,25 @@ Object.defineProperty(exports, "__esModule", {
 
 var _user = require('../controller/user');
 
-var _user2 = _interopRequireDefault(_user);
+var _signUpValidator = require('../middleware/signUpValidator');
 
-var _express = require('express');
+var _signUpValidator2 = _interopRequireDefault(_signUpValidator);
 
-var _express2 = _interopRequireDefault(_express);
+var _signInValidator = require('../middleware/signInValidator');
 
-var _signup = require('../shared/validations/signup');
+var _signInValidator2 = _interopRequireDefault(_signInValidator);
 
-var _signup2 = _interopRequireDefault(_signup);
+var _checkUserExists = require('../middleware/checkUserExists');
+
+var _checkUserExists2 = _interopRequireDefault(_checkUserExists);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var router = _express2.default.Router();
-
 var userRoutes = function userRoutes(router) {
-  router.get('/users/', _user2.default.getAllUsers);
-  router.post('/users/signup', _user2.default.signUp);
-  router.post('/users/signin', _user2.default.signIn);
-
-  router.post('/', function (req, res) {
-    var _validateInput = (0, _signup2.default)(req.body),
-        errors = _validateInput.errors,
-        isValid = _validateInput.isValid;
-
-    if (isValid) {
-      res.send({ success: true });
-    } else {
-      res.status(400).send(errors);
-    }
-  });
+  router.get('/users', _user.User.getAllUsers);
+  router.get('/users/:id', _user.User.getOneUser);
+  router.post('/users/signup', _signUpValidator2.default, _checkUserExists2.default, _user.User.signUpUser);
+  router.post('/users/signin', _signInValidator2.default, _user.User.signInUser);
 };
 
 exports.default = userRoutes;

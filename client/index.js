@@ -18,12 +18,14 @@ import Footer from './components/Footer.jsx';
 import Profile from './components/Profile.jsx';
 import Recipes from './components/Recipes/Recipes.jsx';
 import AddRecipePage from './components/Recipes/AddRecipe/AddRecipePage.jsx';
-import UpdateRecipePage from './components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
+import UpdateRecipePage from
+  './components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
 import { setCurrentUser } from './actions/auth/authActions';
 import RecipeDetails from './components/Recipes/RecipeDetails.jsx';
 
 const { localStorage } = window;
 const jwtToken = localStorage && localStorage.getItem('jwtToken');
+
 if (jwtToken) {
   const valid = jwt.verify(
     jwtToken,
@@ -43,6 +45,7 @@ if (jwtToken) {
     localStorage.removeItem('jwtToken');
   }
 }
+
 render(
   <Provider store={store}>
     <Router history={history}>

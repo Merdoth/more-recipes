@@ -41,12 +41,6 @@ class Profile extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     this.setState({ errors: {}, isLoading: true });
-    // this.props
-    //   .userSigninRequest(this.state)
-    //   .then(
-    //     () => {},
-    //     ({ data }) => this.setState({ errors: data, isLoading: false })
-    //   );
   }
 
   render() {
