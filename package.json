@@ -79,11 +79,8 @@
     "test": "npm run reset-db && NODE_ENV=test nyc --reporter=html --reporter=text mocha ./server/tests/api --compilers js:babel-register -t 20000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "postinstall": "npm run build:server && npm run build:client",
     "build:dev": "webpack --config=webpack.config.dev.js",
-    "start:dev": "npm run build:dev && npm run server:dev",
-    "build:client": "webpack  --progress --config=webpack.config.prod.js",
-    "start:production": "NODE_ENV=production npm run build:client && npm run build:server"
+    "start:dev": "npm run build:dev && npm run server:dev"
   },
   "repository": {
     "type": "git",
