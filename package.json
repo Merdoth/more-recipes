@@ -74,16 +74,15 @@
     "start": "node dist/app.js",
     "build:server": "babel ./server/ -d ./dist && node dist/app.js",
     "migrations": "sequelize db:migrate",
-    "server:dev": "NODE_ENV=development nodemon --watch server --exec babel-node  -- server/app.js ",
-    "reset-db": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate",
-    "test": "npm run reset-db && NODE_ENV=test nyc --reporter=html --reporter=text mocha ./server/tests/api --compilers js:babel-register -t 20000",
+    "server:dev":
+      "NODE_ENV=development nodemon --watch server --exec babel-node  -- server/app.js ",
+    "reset-db":
+      "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate",
+    "test":
+      "npm run reset-db && NODE_ENV=test nyc --reporter=html --reporter=text mocha  --compilers js:babel-register ./server/tests/api/*.js -t 20000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "postinstall": "npm run build:server && npm run build:client",
-    "build:dev": "webpack --config=webpack.config.dev.js",
-    "start:dev": "npm run build:dev && npm run server:dev",
-    "build:client": "webpack  --progress --config=webpack.config.prod.js",
-    "start:production": "NODE_ENV=production npm run build:client && npm run build:server"
+    "start:dev": "npm run build:dev && npm run server:dev"
   },
   "repository": {
     "type": "git",

@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">9.09% </span>
+        <span class="strong">8% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>2/22</span>
+        <span class='fraction'>2/25</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/16</span>
+        <span class='fraction'>0/8</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">9.09% </span>
+        <span class="strong">8% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>2/22</span>
+        <span class='fraction'>2/25</span>
       </div>
     </div>
   </div>
@@ -135,7 +135,17 @@
 90
 91
 92
-93</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,22 +168,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -198,7 +192,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -248,55 +268,65 @@ class Vote {
     const {
       userId, recipeId, upVotes, downVotes
     } = <span class="cstat-no" title="statement not covered" >req.body;</span>
-<span class="cstat-no" title="statement not covered" >    if (userId &amp;&amp; recipeId &amp;&amp; upVotes &amp;&amp; downVotes &amp;&amp;</span>
-     userId !== '' &amp;&amp; recipeId !== '' &amp;&amp; upVotes !== '' &amp;&amp; downVotes !== '') {
-<span class="cstat-no" title="statement not covered" >      return votes</span>
-        .findAll({
-          where: {
-            recipeId,
-            userId
-          },
-        })
-        .then(<span class="fstat-no" title="function not covered" >(</span>recipeUpVoted) =&gt; {
-<span class="cstat-no" title="statement not covered" >          if (recipeUpVoted.length &gt;= 1) {</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(200).send({</span>
-              message: 'You already liked this recipe '
-            });
-          }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >          votes.create({</span>
-            userId,
-            recipeId,
-            upVotes,
-            downVotes
-          }).then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >createdUpVoted =&gt; recipes.findOne({</span></span>
-            where: { id: recipeId }
-          }).then(<span class="fstat-no" title="function not covered" >(</span>recipe) =&gt; {
-<span class="cstat-no" title="statement not covered" >            if (upVotes === 1) {</span>
-<span class="cstat-no" title="statement not covered" >              recipe.increment('upVotes');</span>
-            } else <span class="cstat-no" title="statement not covered" >if (upVotes === -1) {</span>
-<span class="cstat-no" title="statement not covered" >              recipe.decrement('upVotes');</span>
-            } else {
-<span class="cstat-no" title="statement not covered" >              res.status(400).send({</span>
-                message:
+<span class="cstat-no" title="statement not covered" >    votes.create({</span>
+      userId,
+      recipeId,
+      upVotes,
+      downVotes
+    }).then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >createdUpVoted =&gt; recipes.findOne({</span></span>
+      where: { id: recipeId }
+    }).then(<span class="fstat-no" title="function not covered" >(</span>recipe) =&gt; {
+<span class="cstat-no" title="statement not covered" >      if (upVotes === 1) {</span>
+<span class="cstat-no" title="statement not covered" >        recipe.increment('upVotes');</span>
+      } else <span class="cstat-no" title="statement not covered" >if (upVotes === -1) {</span>
+<span class="cstat-no" title="statement not covered" >        recipe.decrement('upVotes');</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        res.status(400).send({</span>
+          message:
                 'You can only upvote or downvote.'
-              });
-            }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >            res.status(200).send(createdUpVoted);</span>
-          }))
-            .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
-<span class="cstat-no" title="statement not covered" >              res.status(500).send({ err });</span>
-            });
-        })
-        .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
-<span class="cstat-no" title="statement not covered" >          res.status(500).send({ err });</span>
         });
-    }
-<span class="cstat-no" title="statement not covered" >    res.status(400).send({</span>
-      message: 'Please enter a valid userid / recipe id'
-    });
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      res.status(200).send(createdUpVoted);</span>
+    }))
+      .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        res.status(500).send({ err });</span>
+      });
   }
+&nbsp;
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return { message } message
+   */
+  static downVotes(req, res) <span class="cstat-no" title="statement not covered" >{</span>
+    const {
+      userId, recipeId, upVotes, downVotes
+    } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+<span class="cstat-no" title="statement not covered" >    votes.create({</span>
+      userId,
+      recipeId,
+      upVotes,
+      downVotes
+    
+    }).then(<span class="fstat-no" title="function not covered" >(</span>recipe) =&gt; {
+<span class="cstat-no" title="statement not covered" >      if (downVotes === 1) {</span>
+<span class="cstat-no" title="statement not covered" >        recipe.increment('downVotes');</span>
+      } else <span class="cstat-no" title="statement not covered" >if (downVotes === -1) {</span>
+<span class="cstat-no" title="statement not covered" >        recipe.decrement('downVotes');</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        res.status(400).send({</span>
+          message:
+                'You can only upvote or downvote.'
+        });
+      }
+    })
+      .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        res.status(500).send({ err });</span>
+      });
+  }
+&nbsp;
 &nbsp;
   /**
    *
@@ -325,7 +355,7 @@ export default Vote;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 22 2017 23:34:35 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jan 24 2018 18:04:29 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

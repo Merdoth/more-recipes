@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">12.5% </span>
+        <span class="strong">20% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>2/16</span>
+        <span class='fraction'>2/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">12.5% </span>
+        <span class="strong">20% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>2/16</span>
+        <span class='fraction'>2/10</span>
       </div>
     </div>
   </div>
@@ -85,29 +85,7 @@
 40
 41
 42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+43</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -123,31 +101,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -186,37 +142,15 @@ class Favorite {
    */
   static addFavorite(req, res) <span class="cstat-no" title="statement not covered" >{</span>
     const { userId, recipeId } = <span class="cstat-no" title="statement not covered" >req.body;</span>
-<span class="cstat-no" title="statement not covered" >    if (recipeId &amp;&amp; userId &amp;&amp; recipeId !== '' &amp;&amp; userId !== '') {</span>
-<span class="cstat-no" title="statement not covered" >      return Favorites</span>
-        .findAll({
-          where: {
-            recipeId,
-            userId
-          },
-        })
-        .then(<span class="fstat-no" title="function not covered" >(</span>favorited) =&gt; {
-<span class="cstat-no" title="statement not covered" >          if (favorited.length &gt;= 1) {</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(200).send({</span>
-              message: 'You have already favorited this recipe'
-            });
-          }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >          Favorites.create({</span>
-            userId,
-            recipeId,
-          }).then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >foundRecipe =&gt; res.status(200).send(foundRecipe))</span></span>
-            .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
-<span class="cstat-no" title="statement not covered" >              res.status(500).send({ err });</span>
-            });
-        })
-        .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
-<span class="cstat-no" title="statement not covered" >          res.status(500).send({ err });</span>
-        });
-    }
-<span class="cstat-no" title="statement not covered" >    res.status(400).send({</span>
-      message: 'Please enter a valid user id / recipe id'
-    });
+<span class="cstat-no" title="statement not covered" >    Favorites.create({</span>
+      userId,
+      recipeId,
+    }).then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >foundRecipe =&gt; res.status(200).send(foundRecipe))</span></span>
+      .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
+<span class="cstat-no" title="statement not covered" >        res.status(404).send({ err });</span>
+      });
   }
+&nbsp;
   /**
  *
  * @param {req} req
@@ -229,7 +163,7 @@ class Favorite {
 <span class="cstat-no" title="statement not covered" >        res.status(200).send({ favorites });</span>
       })
       .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
-<span class="cstat-no" title="statement not covered" >        res.status(500).send({ err });</span>
+<span class="cstat-no" title="statement not covered" >        res.status(404).send({ err });</span>
       });
   }
 }
@@ -241,7 +175,7 @@ export default Favorite;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 22 2017 23:34:35 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jan 24 2018 18:04:29 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
