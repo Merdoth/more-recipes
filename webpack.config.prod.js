@@ -1,85 +1,104 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './client/index.html',
   filename: 'index.html',
   inject: 'body',
+  minify: {
+    collapseWhitespace: true,
+    collapseInlineTagWhitespace: true,
+    removeComments: true,
+    removeRedundantAttributes: true
+  }
 });
 
 module.exports = {
-  entry: ['babel-polyfill', path.join(__dirname, '/client/index.js')],
+  devtool: 'source-map',
+  entry: [path.join(__dirname, './client/index.js')],
   output: {
-    path: '/',
-    publicPath: '/',
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('./styles.css'),
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        conditionals: true,
+        unused: true,
+        comparisons: true,
+        sequences: true,
+        dead_code: true,
+        evaluate: true,
+        if_return: true,
+        join_vars: true
+      },
+      output: {
+        comments: false
       }
     }),
-    HtmlWebpackPluginConfig,
-    new ExtractTextWebpackPlugin('public/bundle.css'),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      compress: {
-        warnings: false
-      }
-    })
+    new webpack.HashedModuleIdsPlugin(),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+      threshold: 10240,
+      minRatio: 0.8
+    }),
+    HtmlWebpackPluginConfig
   ],
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.(js|jsx)$/,
-        include: [
-          path.join(__dirname, 'client'),
-          path.join(__dirname, 'server')
-        ],
-        loaders: ['react-hot-loader/webpack', 'babel-loader']
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          plugins: [
+            'transform-class-properties',
+            'transform-object-rest-spread'
+          ]
+        }
       },
       {
-        test: /\.scss$/,
-        include: path.join(__dirname, 'client'),
-        loaders: ['style-loader', 'css-loader', 'sass-loader']
+        test: /\.s?css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader'
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ]
+        })
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              query: {
-                name: 'assets/[name].[ext]'
-              }
-            }
-          },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              query: {
-                mozjpeg: {
-                  progressive: true
-                },
-                gifsicle: {
-                  interlaced: true
-                },
-                optipng: {
-                  optimizationLevel: 7
-                }
-              }
-            }
-          }
-        ]
+        test: /\.(jpe?g|gif|png|svg)$/,
+        loader: 'file-loader?name=images/[name].[ext]'
+      },
+      {
+        test: /\.mp4$/,
+        loader: 'file-loader'
       }
     ]
   },
   resolve: {
-    extensions: ['*', '.js']
+    extensions: ['.js', '.jsx']
+  },
+  node: {
+    dns: 'empty',
+    net: 'empty',
+    fs: 'empty'
   }
 };

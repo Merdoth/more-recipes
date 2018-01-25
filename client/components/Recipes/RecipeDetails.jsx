@@ -5,15 +5,31 @@ import Button from '../common/Button.jsx';
 import { getOneRecipe } from '../../actions/recipeActions/';
 import { Icons } from '../common/Icons.jsx';
 import RecipeCardImage from './RecipeCard/RecipeCardImage.jsx';
-import RecipeCardFooter1 from './RecipeCard/RecipeCardFooter1.jsx';
+import RecipeDetailsFooter from './RecipeCard/RecipeDetailsFooter.jsx';
 
+/**
+ * @param { RecipeDetails } RecipeDetails
+ * @returns { RecipeDetails } RecipeDetails
+ * @desc this class returns a Profile component
+ */
 class RecipeDetails extends Component {
+  /**
+   * Creates an instance of RecipeDetails.
+   * @param {any} props
+   * @memberof RecipeDetails
+   * @returns { void }
+   */
   constructor(props) {
     super(props);
     this.state = {
       recipes: []
     };
   }
+  /**
+   * @param {any} event
+   * @memberof RecipeDetails
+   * @returns { void }
+   */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
     this.props.getOneRecipe(recipeId).then(() => {
@@ -22,6 +38,10 @@ class RecipeDetails extends Component {
       });
     });
   }
+  /**
+   * @returns {void }
+   * @memberof RecipeDetails
+   */
   render() {
     const recipeDetails = this.state.recipes;
     return (
@@ -33,7 +53,7 @@ class RecipeDetails extends Component {
                 <RecipeCardImage
                   src={recipeDetails ? recipeDetails.image : ''}
                 />
-                <RecipeCardFooter1 id={recipeDetails.id} />
+                <RecipeDetailsFooter id={recipeDetails.id} />
               </div>
             </div>
           </div>

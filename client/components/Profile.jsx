@@ -1,25 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import InputField from './common/InputField.jsx';
-import Button from './common/Button.jsx';
-import TextArea from './common/TextArea.jsx';
 
 /**
- * @param { Profile} Profile
+ * @param { Profile } Profile
  * @returns { Profile } Profile
+ * @desc this class returns a Profile component
  */
-
-class Profile extends React.Component {
+class Profile extends Component {
   /**
-   *n
-   * @param { props } props
+   * Creates an instance of Profile.
+   * @param {any} props
+   * @memberof Profile
+   * @returns { void }
    */
   constructor(props) {
     super(props);
     this.state = {
-      fName: '',
-      eName: '',
-      cName: '',
-      status: '',
+      userName: this.props.user.userName,
+      email: this.props.user.email,
       errors: {},
       isLoading: false
     };
@@ -28,21 +27,28 @@ class Profile extends React.Component {
   }
 
   /**
-   * @param { event } event
-   * @returns { state } state
+   * @param {any} event
+   * @memberof Profile
+   * @returns { void }
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+
   /**
-   * @param { event } event
-   * @returns { state } state
+   * @param {any} event
+   * @memberof Profile
+   * @returns { void }
    */
   onSubmit(event) {
     event.preventDefault();
     this.setState({ errors: {}, isLoading: true });
   }
 
+  /**
+   * @returns {void }
+   * @memberof Profile
+   */
   render() {
     return (
       <div>
@@ -57,49 +63,24 @@ class Profile extends React.Component {
             <div className="col-xs-12 col-md-9 user-details">
               <form>
                 <InputField
-                  id="fName"
+                  id="userName"
                   type="text"
-                  name="fName"
-                  placeholder="Samson Trina"
-                  value={this.state.fName}
+                  name="userName"
+                  value={this.state.userName}
                   label="Name:&nbsp;&nbsp;&nbsp;"
                   onChange={this.onChange}
                   required
+                  placeholder="null"
                 />
                 <InputField
-                  id="eName"
+                  id="email"
                   type="text"
-                  name="eName"
-                  placeholder="meya@gmail.com"
-                  value={this.state.eName}
+                  name="email"
+                  value={this.state.email}
                   label="Email:&nbsp;&nbsp;&nbsp;&nbsp;"
                   onChange={this.onChange}
                   required
-                />
-                <InputField
-                  id="cName"
-                  type="number"
-                  name="cName"
-                  placeholder="Phone number"
-                  value={this.state.cName}
-                  label="Contact:&nbsp;"
-                  onChange={this.onChange}
-                  required
-                />
-                <TextArea
-                  id="status"
-                  name="Status"
-                  placeholder="What's on your mind ?"
-                  value={this.state.Status}
-                  label="Status:&nbsp;&nbsp;&nbsp;&nbsp;"
-                  onChange={this.onChange}
-                />
-                <Button
-                  type="submit"
-                  onClick={this.onSubmit}
-                  name="Submit"
-                  iconClass="fa-user-plus"
-                  className="btn btn-lg btn-primary btn-block"
+                  placeholder="null"
                 />
               </form>
             </div>
@@ -109,5 +90,7 @@ class Profile extends React.Component {
     );
   }
 }
-
-export default Profile;
+const mapStateToProps = state => ({
+  user: state.setCurrentUser.user
+});
+export default connect(mapStateToProps, null)(Profile);

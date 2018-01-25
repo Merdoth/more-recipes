@@ -5,7 +5,7 @@ For the foodies in the house
 [![Coverage Status](https://coveralls.io/repos/github/Merdoth/more-recipes/badge.svg?branch=develop)](https://coveralls.io/github/Merdoth/more-recipes?branch=develop)
 
 
-More recipes is a web appliaction that allows food lovers to exhibit and explore their ideas towards food, and gets the chance to share with others what they've been able to come across in the course of exploring. It features are:
+More recipes is a web appliaction that allows food lovers to exhibit and explore their ideas towards food, and gets the chance to share with others what they've been able to come across in the course of exploring. It's features are:
 
 - Sign up via email
 - Login via email
@@ -14,7 +14,7 @@ More recipes is a web appliaction that allows food lovers to exhibit and explore
 - Build user profile
 - Manage your recipe account 
 - Favorite recipes
-- Upload profile picture 
+- Update profile
 - Search for recipes
 
 # Dependencies

@@ -52,15 +52,19 @@ class NavigationBar extends React.Component {
             <i className="fa fa-user-circle-o icon-size" aria-hidden="true" />
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a className="dropdown-item" href="/addrecipe">
-              Add Recipes
+            <a className="dropdown-item" href="/profile">
+              Profile
             </a>
-            <a className="dropdown-item" href="/favourites">
-              Favourites
+            <a className="dropdown-item" href="/addrecipe">
+              Add Recipe
             </a>
             <a className="dropdown-item" href="/myrecipes">
               My recipes
             </a>
+            <a className="dropdown-item" href="/favourites">
+             Favourites
+            </a>
+
             <a className="dropdown-item" href="/recipes">
               All Recipes
             </a>

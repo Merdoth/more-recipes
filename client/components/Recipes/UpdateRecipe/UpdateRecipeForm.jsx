@@ -7,12 +7,19 @@ import InputField from '../../common/InputField.jsx';
 import TextArea from '../../common/TextArea.jsx';
 import InputLine from '../../common/InputLine.jsx';
 import history from '../../../utils/history';
-import {
-  updateRecipe,
-  getOneRecipe
-} from '../../../actions/recipeActions/';
-
+import { updateRecipe, getOneRecipe } from '../../../actions/recipeActions/';
+/**
+ * @param { UpdateRecipeForm } UpdateRecipeForm
+ * @returns { UpdateRecipeForm } UpdateRecipeForm
+ * @desc this class returns a UpdateRecipeForm component
+ */
 class UpdateRecipeForm extends Component {
+  /**
+   * Creates an instance of UpdateRecipeForm.
+   * @param {any} props
+   * @memberof UpdateRecipeForm
+   * @returns { void }
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -25,12 +32,20 @@ class UpdateRecipeForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onImageChange = this.onImageChange.bind(this);
   }
-
+  /**
+   * @param {any} event
+   * @memberof UpdateRecipeForm
+   * @returns { void }
+   */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
     this.props.getOneRecipe(recipeId);
   }
-
+  /**
+   * @param {any} nextProps
+   * @memberof UpdateRecipeForm
+   * @returns { void }
+   */
   componentWillReceiveProps(nextProps) {
     const { recipe } = nextProps;
     this.setState({
@@ -40,16 +55,28 @@ class UpdateRecipeForm extends Component {
       image: recipe.image
     });
   }
-
+  /**
+   * @param {any} event
+   * @memberof UpdateRecipeForm
+   * @returns { void }
+   */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
-
+  /**
+   * @param {any} event
+   * @memberof UpdateRecipeForm
+   * @returns { void }
+   */
   onImageChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.files[0] });
   }
-
+  /**
+   * @param {any} event
+   * @memberof UpdateRecipeForm
+   * @returns { void }
+   */
   onSubmit(event) {
     event.preventDefault();
     const { recipeId } = this.props.match.params;
@@ -65,7 +92,10 @@ class UpdateRecipeForm extends Component {
       swal(message);
     });
   }
-
+  /**
+   * @returns {void }
+   * @memberof UpdateRecipeForm
+   */
   render() {
     return (
       <form className="form-signin" onSubmit={this.onSubmit}>

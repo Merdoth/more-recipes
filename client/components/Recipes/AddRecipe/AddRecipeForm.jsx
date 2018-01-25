@@ -9,7 +9,18 @@ import InputLine from '../../common/InputLine.jsx';
 import { addRecipes } from '../../../actions/recipeActions/';
 import history from '../../../utils/history';
 
+/**
+ * @param { AddRecipeForm } AddRecipeForm
+ * @returns { AddRecipeForm } AddRecipeForm
+ * @desc this class returns a AddRecipeForm component
+ */
 class AddRecipeForm extends Component {
+  /**
+   * Creates an instance of AddRecipeForm
+   * @param {any} props
+   * @memberof AddRecipeForm
+   * @returns { void }
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -23,15 +34,30 @@ class AddRecipeForm extends Component {
     this.onImageChange = this.onImageChange.bind(this);
   }
 
+  /**
+   * @param {any} event
+   * @memberof AddRecipeForm
+   * @returns { void }
+   */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  /**
+   * @param {any} event
+   * @memberof AddRecipeForm
+   * @returns { void }
+   */
   onImageChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.files[0] });
   }
 
+  /**
+   * @param {any} event
+   * @memberof AddRecipeForm
+   * @returns { void }
+   */
   onSubmit(event) {
     event.preventDefault();
     this.props.addRecipes(this.state).then(() => {
@@ -46,7 +72,10 @@ class AddRecipeForm extends Component {
       swal(message);
     });
   }
-
+  /**
+   * @returns {void }
+   * @memberof AddRecipeForm
+   */
   render() {
     return (
       <form className="form-signin" onSubmit={this.onSubmit}>
@@ -112,7 +141,7 @@ AddRecipeForm.defaultValue = {
 
 const mapStateToProps = state => ({
   recipes: state.recipes,
-  error: state.recipes.error
+  // error: state.recipes.error
 });
 
 export default connect(mapStateToProps, { addRecipes })(AddRecipeForm);

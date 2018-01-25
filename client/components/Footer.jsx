@@ -1,18 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 
+/**
+ * @description this returns a footer component
+ * @extends {Component}
+ * @returns { void }
+ */
 
-class Footer extends Component {
-  render() {
-    return (
-    <div className="container-fluid">
-      <div className="footer">
-        <div>
-          <p><i>Designed with</i> <i className="fa fa-heart love" aria-hidden="true"></i> <i>by </i><strong>Ucheya</strong></p>
+const Footer = () => (
+      <div className="container-fluid">
+        <div className="footer">
+          <div>
+            <p>
+              <i>Designed with</i>
+              <i className="fa fa-heart love" aria-hidden="true" />
+              <i>by </i>
+              <strong>Ucheya</strong>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-    );
-  }
-}
+);
 
 export default Footer;

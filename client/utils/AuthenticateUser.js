@@ -28,7 +28,7 @@ const AuthenticateUser = (ComposedComponent) => {
       }
     }
     /**
-     * @return {DOM}
+     * @return { Component-DOM } DOM
      */
     render() {
       return <ComposedComponent {...this.props} />;

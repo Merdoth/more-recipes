@@ -8,6 +8,6 @@ export const getOneUserSuccess = user => ({
 
 export const getOneUser = () => (dispatch) => {
   api.getOneUser().then((res) => {
-    dispatch(getOneUserSuccess(res.data));
+    dispatch(getOneUserSuccess(res.user));
   });
 };
