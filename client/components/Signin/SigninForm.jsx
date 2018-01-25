@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import { connect } from 'react-redux';
@@ -10,10 +10,10 @@ import history from '../../utils/history';
 import { validateSigninFormInput } from '../../validations';
 
 /**
- * @param { SignupFrom } SignupForm
+ * @param { SignupForm } SignupForm
  * @returns { SignupForm } SignupForm
  */
-class SigninForm extends React.Component {
+class SigninForm extends Component {
   /**
    *n
    * @param { props } props
@@ -79,8 +79,7 @@ class SigninForm extends React.Component {
   }
 
   /**
-   * this method handle errors that return as an object
-   *
+   * this method handle errors
    * @param {any} errors
    * @memberof SigninForm
    * @returns {void}

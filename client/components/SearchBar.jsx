@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import InputLine from './common/InputLine.jsx';
 import Button from './common/Button.jsx';
 import { getTopRecipes } from '../actions/recipeActions/';
 
-class SearchBar extends React.Component {
+/**
+ * @description this class return an SearchBar component
+ * @class  SearchBar
+ * @extends {Component}
+ */
+class SearchBar extends Component {
+  /**
+   * Creates an instance of SearchBar.
+   * @param {any} props
+   * @memberof SearchBar
+   */
   constructor(props) {
     super(props);
 
     this.getRecipes = this.getRecipes.bind(this);
   }
+  /**
+   * @param {any} props
+   * @memberof SearchBar
+   * @returns { void }
+   */
   getRecipes() {
     this.props.getTopRecipes();
   }
-
+  /**
+   * @returns { void }
+   * @memberof SearchBar
+  */
   render() {
     return (
       <div className="search-bar">

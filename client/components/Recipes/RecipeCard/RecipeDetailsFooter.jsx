@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import Button from '../../common/Button.jsx';
 import history from '../../../utils/history';
 import { deleteRecipe } from '../../../actions/recipeActions/';
 
-class RecipeCardFooter1 extends React.Component {
+/**
+ * @param { RecipeDetailsFooter } RecipeDetailsFooter
+ * @returns { RecipeDetailsFooter } RecipeDetailsFooter
+ * @desc this class returns a RecipeDetailsFooter component
+ */
+class RecipeDetailsFooter extends Component {
+  /**
+   * Creates an instance of RecipeDetailsFooter
+   * @param {any} props
+   * @memberof RecipeDetailsFooter
+   * @returns { void }
+   */
   constructor(props) {
     super(props);
     this.state = {};
@@ -13,26 +24,33 @@ class RecipeCardFooter1 extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * @param {any} event
+   * @memberof RecipeDetailsFooter
+   * @returns { void }
+   */
   onSubmit(event) {
     event.preventDefault();
     const { id } = this.props;
     return history.push(`/updaterecipe/${id}`);
   }
-
+  /**
+   * @param {any} event
+   * @memberof RecipeDetailsFooter
+   * @returns { void }
+   */
   handleDelete(event) {
     event.preventDefault();
     const { id } = this.props;
     swal({
       title: 'Are you sure?',
-      text:
-        'Once deleted, you will not be able to recover this recipe!',
+      text: 'Once deleted, you will not be able to recover this recipe!',
       icon: 'warning',
       buttons: true,
       dangerMode: true
     }).then((willDelete) => {
       if (willDelete) {
-        this.props.deleteRecipe(id).then(()=>{
-
+        this.props.deleteRecipe(id).then(() => {
           swal('Poof! Your recipe has been deleted!', {
             icon: 'success'
           });
@@ -42,7 +60,10 @@ class RecipeCardFooter1 extends React.Component {
       swal('Your recipe is safe!');
     });
   }
-
+  /**
+   * @returns {void }
+   * @memberof RecipeDetailsFooter
+   */
   render() {
     return (
       <div className="itemReview row">
@@ -69,4 +90,4 @@ class RecipeCardFooter1 extends React.Component {
   }
 }
 
-export default connect(null, { deleteRecipe })(RecipeCardFooter1);
+export default connect(null, { deleteRecipe })(RecipeDetailsFooter);

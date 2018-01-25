@@ -2,26 +2,36 @@ module.exports = (sequelize, DataTypes) => {
   const reviews = sequelize.define('reviews', {
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'users',
+        key: 'id',
+        as: 'userId'
+      }
     },
     recipeId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'recipes',
+        key: 'id',
+        as: 'recipeId'
+      }
     },
     review: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   });
 
   reviews.associate = (models) => {
     reviews.belongsTo(models.users, {
-      foreignKey: 'userId',
+      foreignKey: 'userId'
     });
 
     reviews.belongsTo(models.recipes, {
       foreignKey: 'recipeId',
-      onDelete: 'CASCADE',
+      onDelete: 'CASCADE'
     });
   };
 

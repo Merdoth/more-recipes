@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import RecipeCardImage from './RecipeCardImage.jsx';
 import RecipeCardDes from './RecipeCardDes.jsx';
 import RecipeCardFooter from './RecipeCardFooter.jsx';
 
-
 /**
- *
+ * @param { RecipeCard } RecipeCard
+ * @returns { RecipeCard } RecipeCard
  */
-class RecipeCard extends React.Component {
+class RecipeCard extends Component {
   /**
    *
    * @returns {jsx} JSX
