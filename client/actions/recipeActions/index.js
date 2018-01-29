@@ -1,6 +1,7 @@
+import swal from 'sweetalert';
 import * as types from '../actionTypes';
-import * as api from './../../utils/moreRecipeAPI';
 
+import * as api from './../../utils/moreRecipeAPI';
 
 export const getTopRecipesSuccess = recipes => ({
   type: types.GET_TOP_RECIPES,
@@ -8,30 +9,34 @@ export const getTopRecipesSuccess = recipes => ({
 });
 
 export const getTopRecipes = () => dispatch =>
-  api.getTopRecipes().then((res) => {
-    const recipes = res.data;
+  api.getTopRecipes().then((response) => {
+    const recipes = response.data;
     dispatch(getTopRecipesSuccess(recipes));
   });
 
-export const getOneRecipeSuccess = recipes => ({
+export const getOneRecipeSuccess = recipe => ({
   type: types.GET_ONE_RECIPE,
-  recipes
+  recipe
+});
+export const getOneRecipeFailure = error => ({
+  type: types.GET_ONE_RECIPE_FAILURE,
+  error
 });
 
 export const getOneRecipe = recipeId => dispatch =>
-  api.getOneRecipe(recipeId).then((res) => {
-    const recipes = res.data;
-    dispatch(getOneRecipeSuccess(recipes));
-  });
+  api
+    .getOneRecipe(recipeId)
+    .then((response) => {
+      const recipe = response.data;
+      dispatch(getOneRecipeSuccess(recipe));
+    })
+    .catch((error) => {
+      dispatch(getOneRecipeFailure(error.data));
+    });
 
-export const getAllRecipesSuccess = recipes => ({
-  type: types.GET_ALL_RECIPES,
-  recipes
-});
-
-export const deleteRecipeSuccess = id => ({
+export const deleteRecipeSuccess = message => ({
   type: types.DELETE_RECIPE_SUCCESS,
-  id
+  message
 });
 
 export const deleteRecipeFailure = error => ({
@@ -40,26 +45,29 @@ export const deleteRecipeFailure = error => ({
 });
 
 export const deleteRecipe = id => dispatch =>
-
   api
     .deleteRecipe(id)
     .then((res) => {
       dispatch(deleteRecipeSuccess(res.data.message));
     })
-    .catch((err) => {
-      dispatch(deleteRecipeFailure(err));
+    .catch((error) => {
+      dispatch(deleteRecipeFailure(error));
     });
+
+export const getAllRecipesSuccess = recipes => ({
+  type: types.GET_ALL_RECIPES,
+  recipes
+});
 
 export const getAllRecipes = () => dispatch =>
   api.getAllRecipes().then((res) => {
-    const recipes = res.data;
+    const recipes = res.data.recipesFound;
     dispatch(getAllRecipesSuccess(recipes));
   });
 
-export const updateRecipeSuccess = (recipes, id) => ({
+export const updateRecipeSuccess = recipe => ({
   type: types.UPDATE_RECIPE_SUCCESS,
-  recipes,
-  id
+  recipe
 });
 
 export const updateRecipeFailure = error => ({
@@ -82,9 +90,9 @@ export const updateRecipe = (id, recipes) => dispatch =>
       dispatch(updateRecipeFailure(error.data));
     });
 
-export const addRecipesSuccess = recipes => ({
+export const addRecipesSuccess = recipe => ({
   type: types.ADD_RECIPE_SUCCESS,
-  recipes
+  recipe
 });
 
 export const addRecipesFailure = error => ({
@@ -97,12 +105,19 @@ export const addRecipes = recipes => dispatch =>
     .addRecipeRequest(recipes)
     .then((res) => {
       if (res) {
-        return dispatch(addRecipesSuccess({
-          message: res.data.message,
-          recipes: res.data.createdRecipe
-        }));
+        dispatch(addRecipesSuccess(res.data.createdRecipe));
+        swal({
+          title: 'Recipe successfully added!',
+          text: res.data.message,
+          icon: 'success'
+        });
       }
     })
     .catch((error) => {
       dispatch(addRecipesFailure(error.data));
+      swal({
+        title: 'Oops!',
+        text: 'sorry an error occured',
+        icon: 'error'
+      });
     });

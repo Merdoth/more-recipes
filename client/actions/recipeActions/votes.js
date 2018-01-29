@@ -1,49 +1,46 @@
 import axios from 'axios';
 import {
-  UPVOTE_RECIPE,
-  UPVOTE_RECIPE_ERRORS,
-  DOWNVOTE_RECIPE_ERRORS,
-  DOWNVOTE_RECIPE
+  UPVOTE_RECIPE_SUCCESS,
+  UPVOTE_RECIPE_FAILURE,
+  DOWNVOTE_RECIPE_FAILURE,
+  DOWNVOTE_RECIPE_SUCCESS
 } from '../actionTypes';
 
-export const upvoteRecipeError = data => ({
-  type: UPVOTE_RECIPE_ERRORS,
+export const upvoteRecipeFailure = data => ({
+  type: UPVOTE_RECIPE_FAILURE,
   payload: data
 });
 
-export const upvoteRecipeAction = data => ({
-  type: UPVOTE_RECIPE,
+export const upvoteRecipeSuccess = data => ({
+  type: UPVOTE_RECIPE_SUCCESS,
   payload: data
 });
 
-export const downvoteRecipeError = data => ({
-  type: DOWNVOTE_RECIPE_ERRORS,
+export const downvoteRecipeFailure = data => ({
+  type: DOWNVOTE_RECIPE_FAILURE,
   payload: data
 });
 
-export const downvoteRecipeAction = data => ({
-  type: DOWNVOTE_RECIPE,
+export const downvoteRecipeSuccess = data => ({
+  type: DOWNVOTE_RECIPE_SUCCESS,
   payload: data
 });
 
 export const upvoteRecipe = (id, callback) => (dispatch) => {
-  dispatch(upvoteRecipeError(null));
-  dispatch(upvoteRecipeAction({}));
+  dispatch(upvoteRecipeFailure(null));
+  dispatch(upvoteRecipeSuccess({}));
   return axios
-    .post(
-      `/api/v1/recipes/${id}/votes`,
-      { voteType: 'upvotes' },
-    )
+    .post(`/api/v1/recipes/${id}/votes`, { voteType: 'upvotes' })
     .then((res) => {
       if (res) {
-        dispatch(upvoteRecipeAction({
+        dispatch(upvoteRecipeSuccess({
           upVotes: { message: res.data.message }
         }));
         callback(true);
       }
     })
     .catch((error) => {
-      dispatch(upvoteRecipeError({
+      dispatch(upvoteRecipeFailure({
         errors: {
           status: error.response.status,
           message: error.response.data.message
@@ -54,23 +51,20 @@ export const upvoteRecipe = (id, callback) => (dispatch) => {
 };
 
 export const downVoteRecipe = (id, callback) => (dispatch) => {
-  dispatch(downvoteRecipeError(null));
-  dispatch(downvoteRecipeAction({}));
+  dispatch(downvoteRecipeFailure(null));
+  dispatch(downvoteRecipeSuccess({}));
   return axios
-    .post(
-      `/api/v1/recipes/${id}/votes`,
-      { voteType: 'downvotes' },
-    )
+    .post(`/api/v1/recipes/${id}/votes`, { voteType: 'downvotes' })
     .then((res) => {
       if (res) {
-        dispatch(downvoteRecipeAction({
+        dispatch(downvoteRecipeSuccess({
           downVotes: { message: res.data.message }
         }));
         callback(true);
       }
     })
     .catch((error) => {
-      dispatch(downvoteRecipeError({
+      dispatch(downvoteRecipeFailure({
         errors: {
           status: error.response.status,
           message: error.response.data.message

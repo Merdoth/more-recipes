@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux';
 
 import recipeReducer from './recipeReducer';
+import recipesReducer from './recipesReducer';
 import setCurrentUser from './setCurrentUser';
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
+  recipesReducer,
   recipeReducer,
-  setCurrentUser
+  setCurrentUser,
 });
 
-const rootReducer = (state, action) => reducers(state, action);
 
 export default rootReducer;

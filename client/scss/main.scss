@@ -267,6 +267,7 @@ h5 > i {
   padding-left: 7px;
   padding-right: 7px;
   margin-bottom: 14px;
+  width: 100%;
 }
 .rated {
   width: 380px;
@@ -282,6 +283,7 @@ h5 > i {
 .imgholder > img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 .top {
   margin-bottom: 90px;
@@ -311,6 +313,9 @@ h5 > i {
   text-align: center;
   border-top: 1px solid #eee;
   padding: 5px;
+  width:100%;
+  height: 60px
+   
 }
 .picicon {
   margin-top: 10px;
@@ -337,18 +342,19 @@ h5 > i {
 
 .icons {
   display: block;
-  margin-top: 10px;
+  margin: 10px auto;
 
   color: black;
 }
 
 .icons .fa-heart {
-  color: orange;
+      
 }
 
 .icons .fa-thumbs-up,
 .icons1 .fa-edit {
-  color: green;
+ opacity: 0.5; 
+ color:#878787;
 }
 
 .icons .fa-thumbs-down,
@@ -483,13 +489,17 @@ p {
   }
 }
 
-#review {
-  margin-left: 20px;
-  box-shadow: 0 2px 0 #e6e6e6;
-  height: 40px;
-  padding-left: 10px;
-  width: 650px;
-  height: 200px;
+.review {
+    padding: 20px;
+    background-color: #eee;
+    border-radius: 5px;
+    height: 150px;
+    width: 100%;
+    max-width: 500px;
+    font-size: 15px;
+    font-family: "Open sans";
+    margin-bottom: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
 }
 #reviewSubmit {
   margin-left: 20px;
@@ -606,7 +616,7 @@ input {
 
 .inputstl {
   padding: 15px;
-  border: solid 1px #460023;
+  border: solid 1px  rgba(0, 0, 0, 0.1);
   outline: 0;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
 }
@@ -672,4 +682,9 @@ input {
 
 .deco {
   margin-bottom: 100px;
+}
+
+.buttonb {
+  margin-top: 5%;
+  margin-bottom: 5%;
 }

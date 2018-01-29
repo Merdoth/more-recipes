@@ -26,7 +26,8 @@ class UpdateRecipeForm extends Component {
       recipeName: '',
       ingredients: '',
       preparation: '',
-      image: ''
+      image: '',
+      error: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -47,12 +48,18 @@ class UpdateRecipeForm extends Component {
    * @returns { void }
    */
   componentWillReceiveProps(nextProps) {
-    const { recipe } = nextProps;
+    const { recipe, error } = nextProps;
+    if (error.status === 'Not Found') {
+      swal('Too Bad', 'No Such Recipe', 'error');
+      history.push('/recipes');
+    }
     this.setState({
       recipeName: recipe.recipeName,
       ingredients: recipe.ingredients,
       preparation: recipe.preparation,
-      image: recipe.image
+      message: nextProps.message,
+      image: recipe.image,
+      error: nextProps.error
     });
   }
   /**
@@ -81,15 +88,12 @@ class UpdateRecipeForm extends Component {
     event.preventDefault();
     const { recipeId } = this.props.match.params;
     this.props.updateRecipe(recipeId, this.state).then(() => {
-      const { message, error } = this.props.recipe;
-      if (error) {
-        return swal(error.message);
+      const { error, message } = this.state;
+      if (error.message) {
+        return swal('Too Bad!', error.message, 'error');
       }
-      if (message === 'Recipe successfully updated') {
-        swal(message);
-        return history.push(`/recipe-details/${recipeId}`);
-      }
-      swal(message);
+      swal('Great!!!', message, 'success');
+      history.push(`/recipe-details/${recipeId}`);
     });
   }
   /**
@@ -149,19 +153,20 @@ class UpdateRecipeForm extends Component {
 }
 UpdateRecipeForm.propTypes = {
   updateRecipe: PropTypes.func,
+  message: PropTypes.string,
   error: PropTypes.object
 };
 
 UpdateRecipeForm.defaultValue = {
   updateRecipe: {},
+  message: '',
   error: {}
 };
 
 const mapStateToProps = state => ({
-  recipe: state.recipes
+  recipe: state.recipeReducer.recipes,
+  message: state.recipeReducer.message,
+  error: state.recipeReducer.error
 });
 
-export default connect(
-  mapStateToProps,
-  { updateRecipe, getOneRecipe }
-)(UpdateRecipeForm);
+export default connect(mapStateToProps, { updateRecipe, getOneRecipe })(UpdateRecipeForm);

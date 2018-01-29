@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Slider from './Slider.jsx';
-import SearchBar from './SearchBar.jsx';
 import RecipeCard from '../components/Recipes/RecipeCard/RecipeCard.jsx';
 import { getTopRecipes } from '../actions/recipeActions/';
 
@@ -30,11 +29,10 @@ class Home extends Component {
    * @returns { void }
    */
   componentDidMount() {
-    this.props.getTopRecipes().then(() => {
-      this.setState({
-        topRecipes: this.props.topRecipes
+    this.props.getTopRecipes()
+      .then(() => {
+        this.setState({ topRecipes: this.props.topRecipes });
       });
-    });
   }
 
   /**
@@ -50,7 +48,6 @@ class Home extends Component {
     return (
       <div>
         <Slider />
-        <SearchBar />
         <h6 id="title4">Top Recipes</h6>
         <div className="container top">
           <div className="row">{recipes}</div>
@@ -61,7 +58,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  topRecipes: state.recipes
+  topRecipes: state.recipesReducer.recipes
 });
 
 

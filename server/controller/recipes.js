@@ -1,6 +1,8 @@
 import models from '../models';
+import pagination from '../utils/pagination';
 
 const { recipes, reviews, votes } = models;
+let query = {};
 
 /**
  * @class
@@ -45,15 +47,15 @@ class Recipe {
         include: [{ model: reviews, votes }]
       })
       .then((recipesFound) => {
-        if (recipesFound.length < 1) {
+        if (!recipesFound || recipesFound.length < 1) {
           return res.status(404).send({
+            status: 'Not Found',
             message: 'No recipes found. Please try to create some.'
           });
         }
         if (recipesFound) {
           return res.status(200).send(recipesFound);
         }
-        return res.status(404).send({ message: 'Recipe not found' });
       });
   }
 
@@ -64,7 +66,10 @@ class Recipe {
    * @return { message } message
    */
   static getAllRecipes(req, res) {
-    let query = {};
+    let { limit, offset, page } = req.query;
+    page = page || 1;
+    limit = limit || 6;
+    offset = limit * (page - 1) || 0;
     if (req.query.sort === 'upVotes' && req.query.order === 'des') {
       query = {
         include: [{ model: reviews, votes }],
@@ -73,18 +78,30 @@ class Recipe {
       };
     } else {
       query = {
-        include: [{ model: reviews, votes }]
+        include: [{ model: reviews }],
+        limit,
+        offset,
+        order: [['id', 'DESC']]
       };
     }
-    recipes.findAll(query).then((recipesFound) => {
+    recipes.findAndCountAll(query).then((recipesFound) => {
       if (recipesFound.length < 1) {
         return res.status(404).send({
           message: 'No recipes found. Please try to create some.'
         });
       }
-
+      query.offset = req.query.offset || 0;
+      query.limit = req.query.limit || 6;
+      const paginate = pagination(
+        query.limit,
+        query.offset,
+        recipesFound.count
+      );
       if (recipesFound) {
-        return res.status(200).send(recipesFound);
+        return res.status(200).send({
+          paginate,
+          recipesFound
+        });
       }
       return res.status(404).send({ message: 'Recipe not found' });
     });
@@ -97,7 +114,6 @@ class Recipe {
    * @return { message } message
    */
   static getUserRecipes(req, res) {
-    let query = {};
     if (req.query.sort === 'createdAt' && req.query.order === 'des') {
       query = {
         include: [{ model: reviews, votes }],
@@ -192,6 +208,33 @@ class Recipe {
         }
       })
       .catch(error => res.status(500).send({ error }));
+  }
+
+  /**
+   *
+   * @param {req} req
+   * @param {res} res
+   * @return { message } message
+   */
+  static searchRecipes(req, res) {
+    return recipes
+      .findAll({
+        where: {
+          title: { $ilike: `%${query}%` }
+        }
+      })
+      .then((recipe) => {
+        if (recipe) {
+          res.status(200).send({
+            recipe
+          });
+        }
+      })
+      .catch((error) => {
+        res.status(404).send({
+          error
+        });
+      });
   }
 }
 

@@ -5,7 +5,7 @@ const Button = ({
   type, onClick, disabled, name, iconClass, className,
 }) => (
     <div
-      className='form-group'
+      className='form-group buttonb'
     >
 
       <button
@@ -17,7 +17,6 @@ const Button = ({
       >
      <i className={`fa ${iconClass}`} ></i> { name }
      </button>
-      <br />
     </div>
 );
 

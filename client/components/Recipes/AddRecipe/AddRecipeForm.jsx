@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '../../common/Button.jsx';
@@ -60,17 +59,8 @@ class AddRecipeForm extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    this.props.addRecipes(this.state).then(() => {
-      const { message, error } = this.props.recipes;
-      if (error) {
-        return swal(error.message);
-      }
-      if (message === 'Recipe successfully added') {
-        swal(message);
-        return history.push('/myrecipes');
-      }
-      swal(message);
-    });
+    this.props.addRecipes(this.state);
+    history.push('/recipes');
   }
   /**
    * @returns {void }
@@ -140,8 +130,8 @@ AddRecipeForm.defaultValue = {
 };
 
 const mapStateToProps = state => ({
-  recipes: state.recipes,
-  // error: state.recipes.error
+  recipes: state.recipeReducer.recipes,
+  error: state.recipeReducer.error
 });
 
 export default connect(mapStateToProps, { addRecipes })(AddRecipeForm);
