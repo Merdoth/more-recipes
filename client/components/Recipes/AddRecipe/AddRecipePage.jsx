@@ -4,7 +4,9 @@ import AddRecipeForm from './AddRecipeForm.jsx';
 
 /**
  * @extends {Component}
- * @return { void }
+ *
+ * @return { undefined }
+ *
  * @desc this returns an AddRecipeForm component
  */
 const AddRecipePage = () => (

@@ -7,6 +7,8 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
+import expressValidator from 'express-validator';
+
 import database from './models';
 import routes from './routes/';
 import webpackConfig from '../webpack.config.dev';
@@ -32,6 +34,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(expressValidator());
+
 routes(router);
 
 app.use('/api/v1', router);
@@ -45,7 +49,7 @@ database.sequelize
   .then(() => {
     app.listen(port, (err) => {
       if (!err) {
-        console.log(`listening on port localhost://${port}`);
+        console.log(`listening on port localhost:${port}`);
       }
     });
     console.log('Datbase Connection established');

@@ -2,9 +2,11 @@ import axios from 'axios';
 
 /**
  *
- * @desc this method sets authetication for a signed up or signed in user
- * @param {any} token
- * @returns { void }
+ * @description this method sets authetication for a signed up or signed in user
+ *
+ * @param { object } token
+ *
+ * @returns { undefined }
  */
 const setAuthToken = (token) => {
   token = token || localStorage.getItem('jwtToken');

@@ -1,9 +1,15 @@
 import { User } from '../controller/user';
-import signUpValidator from '../middleware/signUpValidator';
+import { signUpValidator, signInValidator } from '../middleware/validateInput';
 import auth from '../middleware/authorization';
-import signInValidator from '../middleware/signInValidator';
 import checkUserExists from '../middleware/checkUserExists';
 
+/**
+ * @description user routes
+ *
+ * @param {Function} router
+ *
+ * @returns {void}
+ */
 const userRoutes = (router) => {
   router.get('/users', User.getAllUsers);
   router.get('/users/:id', auth.authorize, User.getOneUser);

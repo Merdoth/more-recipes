@@ -7,8 +7,10 @@ import * as types from './../actionTypes';
  *
  *
  * @export
- * @param {any} user
- * @returns {void}
+ * 
+ * @param {Object} user
+ * 
+ * @returns {undefined}
  */
 export function setCurrentUser(user) {
   return {
@@ -20,8 +22,10 @@ export function setCurrentUser(user) {
 /**
  *
  * @desc this function returns a jwt token
- * @param {any} token
- * @returns {void}
+ *
+ * @param { string } token
+ *
+ * @returns {undefined}
  */
 function decode(token) {
   return jwtDecode(token);
@@ -31,12 +35,14 @@ function decode(token) {
  *
  *
  * @desc this function signs in a user
- * @param {any} responseData
- * @returns {void}
+ *
+ * @param {object} resData
+ *
+ * @returns {undefined}
  */
-export function login(responseData) {
+export function login(resData) {
   return dispatch =>
-    axios.post('/api/v1/users/signin', responseData).then((res) => {
+    axios.post('/api/v1/users/signin', resData).then((res) => {
       const { token } = res.data;
       localStorage.setItem('jwtToken', token);
       setAuthToken(token);
@@ -47,8 +53,10 @@ export function login(responseData) {
  *
  *
  * @desc this method signs up a user
- * @param {any} userData
- * @returns {void}
+ *
+ * @param {object} userData
+ *
+ * @returns { undefined }
  */
 export function userSignupRequest(userData) {
   return dispatch =>
@@ -64,7 +72,8 @@ export function userSignupRequest(userData) {
  *
  *
  * @desc this method logs out a user
- * @returns {void}
+ *
+ * @returns { undefined }
  */
 export function logout() {
   return (dispatch) => {

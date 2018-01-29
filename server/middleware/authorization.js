@@ -1,3 +1,4 @@
+// import modules from dependecies
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 

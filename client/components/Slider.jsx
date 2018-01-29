@@ -1,7 +1,9 @@
 import React from 'react';
 /**
  * @description this returns a slider component
+ *
  * @param { Slider } Slider
+ *
  * @returns { Slider } Slider
  */
 

@@ -22,7 +22,9 @@ class RecipeDetails extends Component {
   /**
    * Creates an instance of RecipeDetails.
    * @param {any} props
+   *
    * @memberof RecipeDetails
+   *
    * @returns { void }
    */
   constructor(props) {
@@ -48,7 +50,9 @@ class RecipeDetails extends Component {
   }
   /**
    * @param {any} event
+   *
    * @memberof RecipeDetails
+   *
    * @returns { void }
    */
   onChange(event) {
@@ -59,7 +63,9 @@ class RecipeDetails extends Component {
 
   /**
    * @param {any} event
+   *
    * @returns { void }
+   *
    * @memberof RecipeDetails
    */
   onSubmit(event) {
@@ -83,11 +89,11 @@ class RecipeDetails extends Component {
       swal('Too Bad', 'No Such Recipe', 'error');
       history.push('/recipes');
     }
-    this.setState({
+    this.setState(() => ({
       recipe,
       review: currentReview,
       reviews
-    });
+    }));
   }
 
   /**
@@ -97,8 +103,11 @@ class RecipeDetails extends Component {
    */
   render() {
     const recipeDetails = this.state.recipe;
-    const fetchedReview = this.state.reviews.map(review => (
-      <div key={review.id} className="review"> {review.review} </div>
+    const fetchedReviews = this.state.reviews.map(review => (
+      <div key={review.id} className="review">
+        {' '}
+        {review.review}{' '}
+      </div>
     ));
 
     return (
@@ -165,7 +174,7 @@ class RecipeDetails extends Component {
                 <div class="col-sm-8">
                   <div class="panel panel-white post panel-shadow">
                     <div class="post-description">
-                      {fetchedReview}
+                      {fetchedReviews}
                       <div class="stats">
                         <a href="#" class="btn btn-default stat-item">
                           <i class="fa fa-thumbs-up icon" />2

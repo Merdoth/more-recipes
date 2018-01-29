@@ -1,17 +1,21 @@
+// import models from models directory
 import models from '../models';
-// import recipes from '../routes/recipes';
 
-const { reviews, recipes } = models;
+// create reference database model
+const { reviews, recipes, user } = models;
 
 /**
  * @class
  */
 class Review {
   /**
+   * @description post review controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { message } message
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
    */
   static addReview(req, res) {
     const { review } = req.body;
@@ -44,7 +48,7 @@ class Review {
                   })
                   .then((reviewReturned) => {
                     res.status(200).send({
-                      message: 'Made review successfully',
+                      message: 'Review successfully added',
                       reviewReturned
                     });
                   });
@@ -60,6 +64,38 @@ class Review {
       .catch((error) => {
         res.status(500).send({ message: error });
       });
+  }
+
+  /**
+     * @description get recipe reviews controller
+     *
+     * @param {Object} req - Request object
+     *
+     * @param {Object} res - Response object
+     *
+     * @returns {Object} json - payload
+     */
+  getReview(req, res) {
+    reviews
+      .findAll({
+        include: {
+          model: user,
+          attributes: ['userName'],
+        },
+        where: {
+          recipeId: req.params.id
+        }
+      })
+      .then((reviewFound) => {
+        if (reviewFound.length === 0) {
+          return res.status(404).send({
+            message:
+            'Recipe not found'
+          });
+        }
+        return res.status(200).send(reviewFound);
+      })
+      .catch(error => res.status(400).send({ message: error }));
   }
 }
 export default Review;

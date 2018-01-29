@@ -1,10 +1,34 @@
 import vote from '../controller/votes';
 import auth from '../middleware/authorization';
-import votesValidator from '../middleware/votesValidator';
+import votedRecipes from '../middleware/votesValidator';
+import { validateParams } from '../middleware/validateInput';
 
+/**
+ * @description votes routes
+ *
+ * @param {Function} router
+ *
+ * @returns {void}
+ */
 const voteRoutes = (router) => {
-  router.post('/votes', auth.authorize, vote.upVotes);
-  router.get('/recipes?sort=upvotes&order=desc', vote.getAllUpvoted);
+  router.post(
+    '/upVotes',
+    auth.authorize,
+    validateParams,
+    votedRecipes,
+    vote.upVotes
+  );
+  router.post(
+    '/downVotes',
+    auth.authorize,
+    validateParams,
+    votedRecipes,
+    vote.downVotes
+  );
+  router.get(
+    '/recipes?sort=upvotes&order=desc',
+    auth.authorize, vote.getMostVoted
+  );
 };
 
 export default voteRoutes;

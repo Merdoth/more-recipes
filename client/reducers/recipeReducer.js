@@ -1,7 +1,9 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  recipes: {},
+  recipes: {
+    reviews: []
+  },
   message: '',
   error: {}
 };
@@ -31,11 +33,6 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         error: action.error
-      };
-    case types.POST_REVIEW_SUCCESS:
-      return {
-        ...state,
-        ...action.review
       };
     case types.UPDATE_RECIPE_SUCCESS:
       return {

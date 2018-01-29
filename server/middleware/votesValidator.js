@@ -3,42 +3,28 @@ import models from '../models';
 const { votes } = models.votes;
 
 /**
+ * @description upVoted recipe Field
  *
- * @param {req} req
- * @param {res} res
- * @param {next} next
- * @return { message } message
+ * @param {Object} req - Request object
+ *
+ * @param {Object} res - Response object
+ *
+ * @param {Object} next - callback
+ *
+ * @returns {object} json - payload
  */
-const upVotedRecipes = (req, res, next) => {
-  const {
-    userId, recipeId, upVotes, downVotes
-  } = req.body;
+const votedRecipes = (req, res, next) => {
+  const { userId, recipeId } = req.body;
 
-  if (!userId || userId.trim() === '') {
-    return res.status(400).send({
-      message: 'Please enter a valid userid!'
-    });
-  }
-  if (!recipeId || recipeId.trim() === '') {
-    return res.status(400).send({
-      message: 'Please enter valid recipeid!'
-    });
-  }
-  if (!upVotes || upVotes.trim() === '') {
-    return res.status(400).send({ message: 'Please enter an upvote!' });
-  }
-  if (!downVotes || downVotes.trim() === '') {
-    return res.status(400).send({ message: 'Please enter a downvote!' });
-  }
-
-  votes.findAll({
-    where: {
-      recipeId,
-      userId
-    },
-  })
-    .then((recipeUpVoted) => {
-      if (recipeUpVoted.length >= 1) {
+  votes
+    .findAll({
+      where: {
+        recipeId,
+        userId
+      }
+    })
+    .then((recipeVoted) => {
+      if (recipeVoted.length >= 1) {
         return res.status(200).send({
           message: 'You already liked this recipe '
         });
@@ -50,4 +36,4 @@ const upVotedRecipes = (req, res, next) => {
   next();
 };
 
-export default upVotedRecipes;
+export default votedRecipes;

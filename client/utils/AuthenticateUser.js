@@ -5,11 +5,14 @@ import history from './history';
 
 const AuthenticateUser = (ComposedComponent) => {
   /**
+   * @class Authenticate
    *
+   * @extends Component
    */
   class Authenticate extends Component {
     /**
      * @method componentWillMount
+     *
      * @return {*} set user authentication status
      */
     componentWillMount() {
@@ -19,7 +22,9 @@ const AuthenticateUser = (ComposedComponent) => {
     }
     /**
      * @method componentWillUpdate
+     *
      * @param {*} nextProps
+     *
      * @return {*} props
      */
     componentWillUpdate(nextProps) {

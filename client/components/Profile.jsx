@@ -4,14 +4,19 @@ import InputField from './common/InputField.jsx';
 
 /**
  * @param { Profile } Profile
+ *
  * @returns { Profile } Profile
+ *
  * @desc this class returns a Profile component
  */
 class Profile extends Component {
   /**
    * Creates an instance of Profile.
+   *
    * @param {any} props
+   *
    * @memberof Profile
+   *
    * @returns { void }
    */
   constructor(props) {
@@ -28,7 +33,9 @@ class Profile extends Component {
 
   /**
    * @param {any} event
+   *
    * @memberof Profile
+   *
    * @returns { void }
    */
   onChange(event) {
@@ -37,7 +44,9 @@ class Profile extends Component {
 
   /**
    * @param {any} event
+   *
    * @memberof Profile
+   *
    * @returns { void }
    */
   onSubmit(event) {
@@ -47,6 +56,7 @@ class Profile extends Component {
 
   /**
    * @returns {void }
+   *
    * @memberof Profile
    */
   render() {

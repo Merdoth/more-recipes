@@ -4,13 +4,17 @@ import RecipeCardDes from './RecipeCardDes.jsx';
 import RecipeCardFooter from './RecipeCardFooter.jsx';
 
 /**
+ * @description this holders alkl the appreciation buttons and recipe image
+ *
  * @param { RecipeCard } RecipeCard
+ *
  * @returns { RecipeCard } RecipeCard
  */
 class RecipeCard extends Component {
   /**
    *
-   * @returns {jsx} JSX
+   * @returns { undefined }
+   *
    * @memberof ReciprecipeeCard
    */
   render() {

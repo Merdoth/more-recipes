@@ -4,7 +4,9 @@ import SignupForm from './SignupForm.jsx';
 import { userSignupRequest } from '../../actions/auth/authActions';
 /**
  * @description this returns a signupPage component
+ *
  * @extends { Component }
+ *
  * @returns { void }
  */
 const SignupPage = () => (

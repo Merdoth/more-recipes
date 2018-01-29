@@ -7,15 +7,18 @@ import { deleteRecipe } from '../../../actions/recipeActions';
 
 /**
  * @param { RecipeDetailsFooter } RecipeDetailsFooter
+ *
  * @returns { RecipeDetailsFooter } RecipeDetailsFooter
+ *
  * @desc this class returns a RecipeDetailsFooter component
  */
 class RecipeDetailsFooter extends Component {
   /**
    * Creates an instance of RecipeDetailsFooter
-   * @param {any} props
+   * @param { object } props
+   *
    * @memberof RecipeDetailsFooter
-   * @returns { void }
+   * @returns { undefined }
    */
   constructor(props) {
     super(props);
@@ -25,9 +28,11 @@ class RecipeDetailsFooter extends Component {
   }
 
   /**
-   * @param {any} event
+   * @param { object } event
+   *
    * @memberof RecipeDetailsFooter
-   * @returns { void }
+   *
+   * @returns { undefined }
    */
   onSubmit(event) {
     event.preventDefault();
@@ -35,9 +40,11 @@ class RecipeDetailsFooter extends Component {
     return history.push(`/updaterecipe/${id}`);
   }
   /**
-   * @param {any} event
+   * @param { object } event
+   *
    * @memberof RecipeDetailsFooter
-   * @returns { void }
+   *
+   * @returns { undefined }
    */
   handleDelete(event) {
     event.preventDefault();
@@ -61,7 +68,8 @@ class RecipeDetailsFooter extends Component {
     });
   }
   /**
-   * @returns {void }
+   * @returns { undefined }
+   *
    * @memberof RecipeDetailsFooter
    */
   render() {

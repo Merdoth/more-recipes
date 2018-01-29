@@ -1,7 +1,13 @@
+// import module dependencies
 import models from '../models';
 import pagination from '../utils/pagination';
 
+// create reference database model
 const { recipes, reviews, votes } = models;
+
+/**
+ * query: hold query limit and offset
+ */
 let query = {};
 
 /**
@@ -9,10 +15,13 @@ let query = {};
  */
 class Recipe {
   /**
+   * @description add recipe controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { createdRecipe } createdRecipe
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
    */
   static addRecipe(req, res) {
     const {
@@ -29,7 +38,8 @@ class Recipe {
       .then(createdRecipe =>
         res
           .status(200)
-          .send({ message: 'Recipe successfully added', createdRecipe }));
+          .send({ message: 'Recipe successfully added', createdRecipe }))
+      .catch(error => res.status(500).send({ error }));
   }
 
   /**
@@ -56,14 +66,18 @@ class Recipe {
         if (recipesFound) {
           return res.status(200).send(recipesFound);
         }
-      });
+      })
+      .catch(error => res.status(400).send({ error }));
   }
 
   /**
+   * @description get all recipe controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { message } message
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
    */
   static getAllRecipes(req, res) {
     let { limit, offset, page } = req.query;
@@ -84,34 +98,54 @@ class Recipe {
         order: [['id', 'DESC']]
       };
     }
-    recipes.findAndCountAll(query).then((recipesFound) => {
-      if (recipesFound.length < 1) {
-        return res.status(404).send({
-          message: 'No recipes found. Please try to create some.'
-        });
-      }
-      query.offset = req.query.offset || 0;
-      query.limit = req.query.limit || 6;
-      const paginate = pagination(
-        query.limit,
-        query.offset,
-        recipesFound.count
-      );
-      if (recipesFound) {
-        return res.status(200).send({
-          paginate,
-          recipesFound
-        });
-      }
-      return res.status(404).send({ message: 'Recipe not found' });
-    });
+    /**
+     * query the database for all recipes
+     */
+    recipes
+      .findAndCountAll(query)
+      .then((recipesFound) => {
+        if (recipesFound.length < 1) {
+          return res.status(404).send({
+            message: 'No recipes found. Please try to create some.'
+          });
+        }
+
+        /**
+         * query limit: get query limit if supplie else use default
+         * query offset: get query offset if supplie else use default
+         */
+        query.offset = req.query.offset || 0;
+        query.limit = req.query.limit || 6;
+
+        /**
+         * pass query limit, query offset, recipeFound.count to pagenate utilis
+         * and return totalCount, currentPage, pageCount, and pageSize
+         * to pagination
+         */
+        const paginate = pagination(
+          query.limit,
+          query.offset,
+          recipesFound.count
+        );
+        if (recipesFound) {
+          return res.status(200).send({
+            paginate,
+            recipesFound
+          });
+        }
+        return res.status(404).send({ message: 'Recipe not found' });
+      })
+      .catch(error => res.status(500).send({ error }));
   }
 
   /**
+   * @description get user recipes controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { message } message
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
    */
   static getUserRecipes(req, res) {
     if (req.query.sort === 'createdAt' && req.query.order === 'des') {
@@ -124,25 +158,31 @@ class Recipe {
         include: [{ model: reviews, votes }]
       };
     }
-    recipes.findById(query).then((recipesFound) => {
-      if (recipes.length < 1) {
-        return res.status(404).send({
-          message: 'No recipes found. Please try to create some.'
-        });
-      }
+    recipes
+      .findById(query)
+      .then((recipesFound) => {
+        if (recipes.length < 1) {
+          return res.status(404).send({
+            message: 'No recipes found. Please try to create some.'
+          });
+        }
 
-      if (recipes) {
-        return res.status(200).send(recipesFound);
-      }
-      return res.status(404).send({ message: 'Recipe not found' });
-    });
+        if (recipes) {
+          return res.status(200).send(recipesFound);
+        }
+        return res.status(404).send({ message: 'Recipe not found' });
+      })
+      .catch(error => res.status(500).send({ error }));
   }
 
   /**
+   * @description update recipe controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { message } message
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
    */
   static updateUserRecipes(req, res) {
     const { id } = req.params;
@@ -150,92 +190,142 @@ class Recipe {
       recipeName,
       preparation,
       ingredients,
-      upVotes,
-      downVotes,
       image
     } = req.body;
 
-    return recipes
-      .find({
-        where: {
-          id
-        }
-      })
-      .then((recipe) => {
-        if (recipe) {
-          return recipe
-            .update({
-              recipeName: recipeName || recipe.recipeName,
-              ingredients: ingredients || recipe.ingredients,
-              preparation: preparation || recipe.preparation,
-              upVotes: recipe.upVotes + upVotes || 0,
-              downVotes: recipe.downVotes + downVotes || 0,
-              image
-            })
-            .then((updatedRecipe) => {
-              res.status(200).send({
-                message: 'Recipe successfully updated',
-                updatedRecipe
-              });
-            })
-            .catch(error => res.status(500).send({ error }));
-        }
-        return res.status(404).send({ message: 'Recipe does not exist!' });
-      });
+    return (
+      recipes
+        // query database to check if recipe exist
+        .find({
+          where: {
+            id
+          }
+        })
+        .then((recipe) => {
+          if (recipe) {
+            return recipe
+              .update({
+                recipeName: recipeName || recipe.recipeName,
+                ingredients: ingredients || recipe.ingredients,
+                preparation: preparation || recipe.preparation,
+                image
+              })
+              .then((updatedRecipe) => {
+                res.status(200).send({
+                  message: 'Recipe successfully updated',
+                  updatedRecipe
+                });
+              })
+              .catch(error => res.status(500).send({ error }));
+          }
+          return res.status(404).send({ message: 'Recipe does not exist!' });
+        })
+    );
   }
 
   /**
+   * @description delete recipe controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { message } message
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
    */
   static deleteUserRecipes(req, res) {
     const { id } = req.params;
-    return recipes
-      .find({
-        where: {
-          id
-        }
-      })
-      .then((recipe) => {
-        if (recipe) {
-          recipe
-            .destroy()
-            .then(() => res.status(200).send({ message: 'Recipe deleted!' }));
-        } else {
-          res.status(404).send({ message: 'Recipe does not exist!' });
-        }
-      })
-      .catch(error => res.status(500).send({ error }));
+    return (
+      recipes
+        // query db to check if recipe exist
+        .find({
+          where: {
+            id
+          }
+        })
+        .then((recipe) => {
+          if (recipe) {
+            recipe
+              .destroy()
+              .then(() => res.status(200).send({ message: 'Recipe deleted!' }));
+          } else {
+            res.status(404).send({ message: 'Recipe does not exist!' });
+          }
+        })
+        .catch(error => res.status(500).send({ error }))
+    );
   }
 
   /**
+   * @description search by title or ingredients controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { message } message
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
    */
-  static searchRecipes(req, res) {
-    return recipes
-      .findAll({
+  static searchByRecipeNameOrIngredient(req, res) {
+    if (req.query.recipeName) {
+      query = {
         where: {
-          title: { $ilike: `%${query}%` }
+          recipeName: {
+            $iLike: `%${req.query.recipeName.trim()}%`
+          }
         }
-      })
+      };
+    } else {
+      query = {
+        where: {
+          ingredients: {
+            $iLike: `%${req.query.ingredients.trim()}%`
+          }
+        }
+      };
+    }
+
+    /**
+     * query limit: get query limit if supplie else use default
+     * query offset: get query offset if supplie else use default
+     */
+    query.limit = req.query.limit || 8;
+    query.offset = req.query.offset || 0;
+
+    /**
+     * query the db for all recipes
+     * left join Reviews as reviews
+     * left join Favourites as favourites
+     * left join left join Votings as votings
+     * ordered by 'id' descending
+     */
+    Recipe.findAndCountAll(query, {
+      order: [['id', 'DESC']],
+      limit: query.limit,
+      offset: query.offset
+    })
       .then((recipe) => {
-        if (recipe) {
-          res.status(200).send({
-            recipe
-          });
+        if (recipe.rows.length <= 0) {
+          return res
+            .status(404)
+            .send({ message: 'Search term did not match any recipe' });
         }
-      })
-      .catch((error) => {
-        res.status(404).send({
-          error
+
+        /**
+         * pass query limit, query offset, recipe.count to pagenate helper
+         * and return totalCount, currentPage, pageCount, and pageSize
+         * to pagenation
+         */
+        const paginate = pagination(
+          query.limit,
+          query.offset,
+          recipes.count
+        );
+
+        return res.status(200).send({
+          paginate,
+          recipes: recipe.rows
         });
-      });
+      })
+      .catch(error => res.status(500).send({ error }));
   }
 }
-
 export default Recipe;
