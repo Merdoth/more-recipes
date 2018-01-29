@@ -7,14 +7,18 @@ import { getTopRecipes } from '../actions/recipeActions/';
 
 /**
  * @param { Home } Home
- * @returns { Home } Home
+ *
+ * @returns { void }
+ *
  * @desc this class returns a Home component
  */
 class Home extends Component {
   /**
    * Creates an instance of Home.
    * @param {any} props
+   *
    * @memberof Home
+   *
    * @returns { void }
    */
   constructor(props) {
@@ -25,22 +29,22 @@ class Home extends Component {
   }
   /**
    * @param {any} props
+   *
    * @memberof Home
+   *
    * @returns { void }
    */
   componentDidMount() {
-    this.props.getTopRecipes()
-      .then(() => {
-        this.setState({ topRecipes: this.props.topRecipes });
-      });
+    this.props.getTopRecipes();
   }
 
   /**
    * @returns {void }
+   *
    * @memberof Home
    */
   render() {
-    const { topRecipes } = this.state;
+    const { topRecipes } = this.props;
 
     const recipes = topRecipes.map(recipe => (
       <RecipeCard key={recipe.id} recipeList={recipe} />
@@ -60,6 +64,5 @@ class Home extends Component {
 const mapStateToProps = state => ({
   topRecipes: state.recipesReducer.recipes
 });
-
 
 export default connect(mapStateToProps, { getTopRecipes })(Home);

@@ -1,33 +1,46 @@
+// import models from models directory
 import models from '../models';
 
+// create reference to database model
 const Favorites = models.favorites;
+
 /**
  * @class
  */
 class Favorite {
   /**
+   * @description add favourite controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return {favorite} favorite
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
+   *
    */
   static addFavorite(req, res) {
     const { userId, recipeId } = req.body;
     Favorites.create({
       userId,
-      recipeId,
-    }).then(foundRecipe => res.status(200).send(foundRecipe))
+      recipeId
+    })
+      .then(foundRecipe => res.status(200).send(foundRecipe))
       .catch((err) => {
         res.status(404).send({ err });
       });
   }
 
   /**
- *
- * @param {req} req
- * @param {res} res
- * @return {favorites} favorites
- */
+   *
+   * @description get user favourites controller
+   *
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
+   *
+   */
   static getFavorites(req, res) {
     return Favorites.all()
       .then((favorites) => {

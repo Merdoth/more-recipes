@@ -1,11 +1,16 @@
+// import dependencies
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import jwt from 'jsonwebtoken';
-import { Route } from 'react-router-dom';
-import { Router } from 'react-router';
-import history from './utils/history';
+// import { Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
+
+// import scss stylesheet
 import './scss/main.scss';
+
+// import component
+import history from './utils/history';
 import store from './utils/store';
 import App from './components/App.jsx';
 import Home from './components/Home.jsx';
@@ -18,10 +23,10 @@ import Footer from './components/Footer.jsx';
 import Profile from './components/Profile.jsx';
 import Recipes from './components/Recipes/Recipes.jsx';
 import AddRecipePage from './components/Recipes/AddRecipe/AddRecipePage.jsx';
-import UpdateRecipePage from
-  './components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
+import UpdateRecipePage from './components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
 import { setCurrentUser } from './actions/auth/authActions';
 import RecipeDetails from './components/Recipes/RecipeDetails.jsx';
+import NotFound from './components/NotFound.jsx';
 
 const { localStorage } = window;
 const jwtToken = localStorage && localStorage.getItem('jwtToken');
@@ -51,20 +56,26 @@ render(
     <Router history={history}>
       <div>
         <Route path="/" component={App} />
-        <Route exact path="/" component={CheckLoggedinUser(Home)} />
-        <Route path="/Signup" component={CheckLoggedinUser(SignupPage)} />
-        <Route path="/Signin" component={CheckLoggedinUser(SigninPage)} />
-        <Route path="/profile" component={AuthenticateUser(Profile)} />
-        <Route path="/recipes" component={AuthenticateUser(Recipes)} />
-        <Route path="/addrecipe" component={AuthenticateUser(AddRecipePage)} />
-        <Route
-          path="/updaterecipe/:recipeId"
-          component={AuthenticateUser(UpdateRecipePage)}
-        />
-        <Route
-          path="/recipe-details/:recipeId"
-          component={AuthenticateUser(RecipeDetails)}
-        />
+        <Switch>
+          <Route exact path="/" component={CheckLoggedinUser(Home)} />
+          <Route path="/Signup" component={CheckLoggedinUser(SignupPage)} />
+          <Route path="/Signin" component={CheckLoggedinUser(SigninPage)} />
+          <Route path="/profile" component={AuthenticateUser(Profile)} />
+          <Route path="/recipes" component={AuthenticateUser(Recipes)} />
+          <Route
+            path="/addrecipe"
+            component={AuthenticateUser(AddRecipePage)}
+          />
+          <Route
+            path="/updaterecipe/:recipeId"
+            component={AuthenticateUser(UpdateRecipePage)}
+          />
+          <Route
+            path="/recipe-details/:recipeId"
+            component={AuthenticateUser(RecipeDetails)}
+          />
+          <Route path="*" component={AuthenticateUser(NotFound)} />
+        </Switch>
         <Footer />
       </div>
     </Router>

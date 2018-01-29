@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import history from '../../utils/history';
-import { validateSignupFormInput } from '../../validations';
+import { validateSignUp } from '../../validations';
 import { userSignupRequest } from '../../actions/auth/authActions';
 import InputField from '../common/InputField.jsx';
 import Button from '../common/Button.jsx';
 
 /**
+ * @description this renders the signup form component
+ *
  * @param { SignupFrom } SignupForm
+ *
  * @returns { SignupForm } SignupForm
  */
-class SignupForm extends React.Component {
+class SignupForm extends Component {
   /**
    *
    * @param { props } props
@@ -35,6 +38,7 @@ class SignupForm extends React.Component {
 
   /**
    * @param { event } event
+   *
    * @returns { state } state
    */
   onChange(event) {
@@ -42,11 +46,12 @@ class SignupForm extends React.Component {
   }
   /**
    * @param { event } event
+   *
    * @returns { state } state
    */
   onSubmit(event) {
     event.preventDefault();
-    const { errors, isValid } = validateSignupFormInput(this.state);
+    const { errors, isValid } = validateSignUp(this.state);
     if (isValid) {
       this.setState({ isLoading: true });
       this.props
@@ -72,7 +77,9 @@ class SignupForm extends React.Component {
   /**
    *
    * @returns {void}
+   *
    * @param {any} errors
+   *
    * @memberof SignupForm
    */
   handleErrors(errors) {
@@ -94,7 +101,9 @@ class SignupForm extends React.Component {
   }
   /**
    *
-   * @returns { Jsx } Jsx
+   * @returns {void}
+   *
+   * @memberof SignupForm
    */
   render() {
     return (

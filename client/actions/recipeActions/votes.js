@@ -5,27 +5,68 @@ import {
   DOWNVOTE_RECIPE_FAILURE,
   DOWNVOTE_RECIPE_SUCCESS
 } from '../actionTypes';
+import { recipeValidator } from '../../../server/middleware/validateInput';
 
-export const upvoteRecipeFailure = data => ({
+/**
+ * @method
+ *
+ * @param {object} error
+ *
+ * @returns {Object} payload
+ *
+ */
+export const upvoteRecipeFailure = error => ({
   type: UPVOTE_RECIPE_FAILURE,
-  payload: data
+  error: recipeValidator
 });
 
-export const upvoteRecipeSuccess = data => ({
+/**
+ * @method
+ *
+ * @param {object} recipe
+ *
+ * @returns {Object} payload
+ *
+ */
+export const upvoteRecipeSuccess = recipe => ({
   type: UPVOTE_RECIPE_SUCCESS,
-  payload: data
+  recipe
 });
 
-export const downvoteRecipeFailure = data => ({
+/**
+ * @method
+ *
+ * @param {object} error
+ *
+ * @returns {Object} payload
+ *
+ */
+export const downvoteRecipeFailure = error => ({
   type: DOWNVOTE_RECIPE_FAILURE,
-  payload: data
+  error: recipeValidator
 });
 
-export const downvoteRecipeSuccess = data => ({
+/**
+ *
+ * @param {object} recipes
+ *
+ * @returns {undefined}
+ */
+export const downvoteRecipeSuccess = recipes => ({
   type: DOWNVOTE_RECIPE_SUCCESS,
-  payload: data
+  payload: recipes
 });
 
+/**
+ *
+ * @description dispatches an action to upvote a recipe
+ *
+ * @param {Integer} id
+ *
+ * @param {object } callback
+ *
+ * @returns {undefined}
+ */
 export const upvoteRecipe = (id, callback) => (dispatch) => {
   dispatch(upvoteRecipeFailure(null));
   dispatch(upvoteRecipeSuccess({}));
@@ -34,7 +75,7 @@ export const upvoteRecipe = (id, callback) => (dispatch) => {
     .then((res) => {
       if (res) {
         dispatch(upvoteRecipeSuccess({
-          upVotes: { message: res.data.message }
+          upVotes: { message: res.recipes.message }
         }));
         callback(true);
       }
@@ -43,13 +84,23 @@ export const upvoteRecipe = (id, callback) => (dispatch) => {
       dispatch(upvoteRecipeFailure({
         errors: {
           status: error.response.status,
-          message: error.response.data.message
+          message: error.response.recipes.message
         }
       }));
       callback(false);
     });
 };
 
+/**
+ *
+ * @description dispatches an action to downvote a recipe
+ *
+ * @param {Integer} id
+ *
+ * @param {object } callback
+ *
+ * @returns {undefined}
+ */
 export const downVoteRecipe = (id, callback) => (dispatch) => {
   dispatch(downvoteRecipeFailure(null));
   dispatch(downvoteRecipeSuccess({}));
@@ -58,7 +109,7 @@ export const downVoteRecipe = (id, callback) => (dispatch) => {
     .then((res) => {
       if (res) {
         dispatch(downvoteRecipeSuccess({
-          downVotes: { message: res.data.message }
+          downVotes: { message: res.recipes.message }
         }));
         callback(true);
       }
@@ -67,7 +118,7 @@ export const downVoteRecipe = (id, callback) => (dispatch) => {
       dispatch(downvoteRecipeFailure({
         errors: {
           status: error.response.status,
-          message: error.response.data.message
+          message: error.response.recipes.message
         }
       }));
       callback(false);

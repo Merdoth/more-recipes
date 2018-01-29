@@ -1,6 +1,21 @@
+/**
+ * @description paginate function
+ *
+ * @param {Integer} limit - limit integer
+ *
+ * @param {Integer} offset - offset integer
+ *
+ * @param {integer} count - count integer
+ *
+ * @returns {object} result - result object
+ */
 const pagination = (limit, offset, count) => {
+  /** totalCount : total number of records based on query
+   * pageCount : total number of pages
+   * currentPage : current page of the query result based on limit and offset
+   * pageSize : number of records per page (based on limit)
+   */
   const result = {};
-
   limit = limit > count ? count : limit;
   offset = offset > count ? count : offset;
   result.totalCount = count;
@@ -12,4 +27,3 @@ const pagination = (limit, offset, count) => {
 };
 
 export default pagination;
-

@@ -5,14 +5,18 @@ import { getAllRecipes } from '../../actions/recipeActions/';
 
 /**
  * @param {  Recipes }  Recipes
+ *
  * @returns {  Recipes }  Recipes
+ *
  * @desc this class returns a  Recipes component
  */
 class Recipes extends Component {
   /**
    * Creates an instance of  Recipes.
    * @param {any} props
+   *
    * @memberof  Recipes
+   *
    * @returns { void }
    */
   constructor(props) {
@@ -23,7 +27,9 @@ class Recipes extends Component {
   }
   /**
    * @param {any} event
+   *
    * @memberof  Recipes
+   *
    * @returns { void }
    */
   componentDidMount() {
@@ -36,7 +42,9 @@ class Recipes extends Component {
 
   /**
    * @param {any} nextProps
+   *
    * @memberof  Recipes
+   *
    * @returns { void }
    */
   componentWillReceiveProps(nextProps) {
@@ -47,6 +55,7 @@ class Recipes extends Component {
 
   /**
    * @returns {void }
+   *
    * @memberof  Recipes
    */
   render() {

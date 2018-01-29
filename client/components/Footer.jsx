@@ -2,7 +2,9 @@ import React from 'react';
 
 /**
  * @description this returns a footer component
+ *
  * @extends {Component}
+ *
  * @returns { void }
  */
 

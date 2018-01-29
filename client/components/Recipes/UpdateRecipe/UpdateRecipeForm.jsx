@@ -10,14 +10,18 @@ import history from '../../../utils/history';
 import { updateRecipe, getOneRecipe } from '../../../actions/recipeActions/';
 /**
  * @param { UpdateRecipeForm } UpdateRecipeForm
+ *
  * @returns { UpdateRecipeForm } UpdateRecipeForm
+ *
  * @desc this class returns a UpdateRecipeForm component
  */
 class UpdateRecipeForm extends Component {
   /**
    * Creates an instance of UpdateRecipeForm.
    * @param {any} props
+   *
    * @memberof UpdateRecipeForm
+   *
    * @returns { void }
    */
   constructor(props) {
@@ -35,7 +39,9 @@ class UpdateRecipeForm extends Component {
   }
   /**
    * @param {any} event
+   *
    * @memberof UpdateRecipeForm
+   *
    * @returns { void }
    */
   componentDidMount() {
@@ -44,7 +50,9 @@ class UpdateRecipeForm extends Component {
   }
   /**
    * @param {any} nextProps
+   *
    * @memberof UpdateRecipeForm
+   *
    * @returns { void }
    */
   componentWillReceiveProps(nextProps) {
@@ -64,7 +72,9 @@ class UpdateRecipeForm extends Component {
   }
   /**
    * @param {any} event
+   *
    * @memberof UpdateRecipeForm
+   *
    * @returns { void }
    */
   onChange(event) {
@@ -72,7 +82,9 @@ class UpdateRecipeForm extends Component {
   }
   /**
    * @param {any} event
+   *
    * @memberof UpdateRecipeForm
+   *
    * @returns { void }
    */
   onImageChange(event) {
@@ -81,7 +93,9 @@ class UpdateRecipeForm extends Component {
   }
   /**
    * @param {any} event
+   *
    * @memberof UpdateRecipeForm
+   *
    * @returns { void }
    */
   onSubmit(event) {
@@ -98,6 +112,7 @@ class UpdateRecipeForm extends Component {
   }
   /**
    * @returns {void }
+   *
    * @memberof UpdateRecipeForm
    */
   render() {

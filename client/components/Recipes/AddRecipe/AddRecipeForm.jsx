@@ -10,15 +10,19 @@ import history from '../../../utils/history';
 
 /**
  * @param { AddRecipeForm } AddRecipeForm
+ *
  * @returns { AddRecipeForm } AddRecipeForm
+ *
  * @desc this class returns a AddRecipeForm component
  */
 class AddRecipeForm extends Component {
   /**
    * Creates an instance of AddRecipeForm
-   * @param {any} props
+   * @param { object } props
+   *
    * @memberof AddRecipeForm
-   * @returns { void }
+   *
+   * @returns { undefined }
    */
   constructor(props) {
     super(props);
@@ -34,18 +38,22 @@ class AddRecipeForm extends Component {
   }
 
   /**
-   * @param {any} event
+   * @param {object} event
+   *
    * @memberof AddRecipeForm
-   * @returns { void }
+   *
+   * @returns { undefined }
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
   /**
-   * @param {any} event
+   * @param {object} event
+   *
    * @memberof AddRecipeForm
-   * @returns { void }
+   *
+   * @returns { undefined }
    */
   onImageChange(event) {
     event.preventDefault();
@@ -53,9 +61,11 @@ class AddRecipeForm extends Component {
   }
 
   /**
-   * @param {any} event
+   * @param {object} event
+   *
    * @memberof AddRecipeForm
-   * @returns { void }
+   *
+   * @returns { undefined }
    */
   onSubmit(event) {
     event.preventDefault();
@@ -63,7 +73,8 @@ class AddRecipeForm extends Component {
     history.push('/recipes');
   }
   /**
-   * @returns {void }
+   * @returns { undefined }
+   *
    * @memberof AddRecipeForm
    */
   render() {

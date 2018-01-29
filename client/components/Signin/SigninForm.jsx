@@ -7,11 +7,14 @@ import Button from '../common/Button.jsx';
 import InputField from '../common/InputField.jsx';
 import { login } from '../../actions/auth/authActions';
 import history from '../../utils/history';
-import { validateSigninFormInput } from '../../validations';
+import { validateSignIn } from '../../validations';
 
 /**
- * @param { SignupForm } SignupForm
- * @returns { SignupForm } SignupForm
+ * @description this renders the signin form component
+ *
+ * @param { SigninForm } SigninForm
+ *
+ * @returns { SigninForm } SignupForm
  */
 class SigninForm extends Component {
   /**
@@ -35,13 +38,17 @@ class SigninForm extends Component {
    * and chcecks if its valid and makes an api call to the backend
    *
    * @param {any} event
+   *
    * @memberof SigninForm
+   *
    * @returns {void}
    */
   onSubmit(event) {
+    console.log('=== In submit handler');
     event.preventDefault();
-    const { errors, isValid } = validateSigninFormInput(this.state);
+    const { errors, isValid } = validateSignIn(this.state);
     if (isValid) {
+      console.log('=== In valid clause');
       this.setState({ isLoading: true });
       this.props
         .login(this.state)
@@ -54,7 +61,8 @@ class SigninForm extends Component {
           history.push('/profile');
         })
         .catch((err) => {
-          console.log(err, 'hello there!!!')
+          console.log('=== In catch block');
+          console.log(err, 'hello there!!!');
           const error = err.data.message;
           swal({
             title: 'Oops!',
@@ -64,15 +72,20 @@ class SigninForm extends Component {
           this.setState({ isLoading: false });
         });
     } else {
+      console.log('=== Isvalid', isValid);
+      console.log('=== errors', errors);
+      console.log('=== In else block');
       this.handleErrors(errors);
     }
   }
 
   /**
-   *  this method is gets the values of the input
+   *  this method gets the values of the input
    * and passes the values to the global state object
    * @param {any} event
+   *
    * @memberof SigninForm
+   *
    * @returns {void}
    */
   onChange(event) {
@@ -82,10 +95,14 @@ class SigninForm extends Component {
   /**
    * this method handle errors
    * @param {any} errors
+   *
    * @memberof SigninForm
+   *
    * @returns {void}
    */
   handleErrors(errors) {
+    console.log('=== In handleErrors errors', errors);
+    console.log('=== NONSENSE FUNCTION!!!!!!!!!!');
     Object.keys(errors).forEach((error) => {
       swal({
         title: 'Oops!',
@@ -96,7 +113,9 @@ class SigninForm extends Component {
   }
   /**
    *
-   * @returns { Jsx } Jsx
+   * @returns {void}
+   *
+   * @memberof SignupForm
    */
   render() {
     const { errors } = this.state;

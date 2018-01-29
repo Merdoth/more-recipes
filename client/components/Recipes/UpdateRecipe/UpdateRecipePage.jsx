@@ -1,14 +1,25 @@
 import React from 'react';
 import UpdateRecipeForm from './UpdateRecipeForm.jsx';
 
+/**
+ *
+ * @description The page the user gets when he/she wants to update a recipe
+ *
+ * @method UpdateRecipePage
+ *
+ *  @param { props } props
+ *
+ * @returns { undefined }
+ * .
+ */
 const UpdateRecipePage = props => (
-      <div className="row deco">
-        <div className="col-md-4 offset-md-4 cover1">
-          <div className="form-deco">
-            <UpdateRecipeForm {...props}/>
-          </div>
-        </div>
+  <div className="row deco">
+    <div className="col-md-4 offset-md-4 cover1">
+      <div className="form-deco">
+        <UpdateRecipeForm {...props} />
       </div>
+    </div>
+  </div>
 );
 
 export default UpdateRecipePage;

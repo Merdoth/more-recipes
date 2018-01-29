@@ -1,3 +1,4 @@
+// import module dependencies
 import sequelize from 'sequelize';
 import models from '../models';
 
@@ -9,23 +10,22 @@ const Recipes = models.recipes;
  */
 class Vote {
   /**
+   * @description up vote recipe controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { message } message
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
    */
   static upVotes(req, res) {
-    console.log(req.body);
     const userId = req.decoded.id;
     const recipeId = Number(req.body.recipeId);
     const upVotes = Number(req.body.upVotes);
-    console.log(upVotes, 'hello');
-    const downVotes = Number(req.body.downVotes);
     Votes.create({
       userId,
       recipeId,
-      upVotes,
-      downVotes
+      upVotes
     })
       .then(createdUpVoted =>
         Recipes.findOne({
@@ -44,25 +44,26 @@ class Vote {
           res.status(200).send(createdUpVoted);
         }))
       .catch((err) => {
-        console.log(err, 'err');
         res.status(500).send({ err });
       });
   }
 
   /**
+   * @description down vote recipe controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { message } message
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
    */
   static downVotes(req, res) {
-    const {
-      userId, recipeId, upVotes, downVotes
-    } = req.body;
+    const userId = req.decoded.id;
+    const recipeId = Number(req.body.recipeId);
+    const downVotes = Number(req.body.downVotes);
     Votes.create({
       userId,
       recipeId,
-      upVotes,
       downVotes
     })
       .then((recipe) => {
@@ -82,12 +83,15 @@ class Vote {
   }
 
   /**
+   * @description get most upvoted controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { error } error
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
    */
-  static getAllUpvoted(req, res) {
+  static getMostVoted(req, res) {
     Votes.findAll({
       order: sequelize.literal('max(upVoted) DESC'),
       limit: 6

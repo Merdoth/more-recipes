@@ -3,26 +3,70 @@ import * as types from '../actionTypes';
 
 import * as api from './../../utils/moreRecipeAPI';
 
+/**
+ *
+ * @method
+ *
+ * @param {object} recipes
+ *
+ * @returns {undefined}
+ */
 export const getTopRecipesSuccess = recipes => ({
   type: types.GET_TOP_RECIPES,
   recipes
 });
 
+/**
+ *
+ * @description dispatches action to get top recipes
+ *
+ * @method
+ *
+ * @param { object } object
+ *
+ * @returns { undefined }
+ */
 export const getTopRecipes = () => dispatch =>
-  api.getTopRecipes().then((response) => {
-    const recipes = response.data;
+  api.getTopRecipes().then((res) => {
+    const recipes = res.data;
     dispatch(getTopRecipesSuccess(recipes));
   });
 
+/**
+ *
+ * @method
+ *
+ * @param { object } recipe
+ *
+ * @returns { undefined }
+ */
 export const getOneRecipeSuccess = recipe => ({
   type: types.GET_ONE_RECIPE,
   recipe
 });
+/**
+ *
+ * @method
+ *
+ * @param { object } error
+ *
+ * @returns { undefined }
+ */
 export const getOneRecipeFailure = error => ({
   type: types.GET_ONE_RECIPE_FAILURE,
   error
 });
 
+/**
+ *
+ * @description dispatches action to get one recipe
+ *
+ * @method
+ *
+ * @param { object } recipeId
+ *
+ * @returns { undefined }
+ */
 export const getOneRecipe = recipeId => dispatch =>
   api
     .getOneRecipe(recipeId)
@@ -34,16 +78,44 @@ export const getOneRecipe = recipeId => dispatch =>
       dispatch(getOneRecipeFailure(error.data));
     });
 
+/**
+ *
+ * @method
+ *
+ * @param {object} message
+ *
+ * @returns {undefined}
+ *
+ */
 export const deleteRecipeSuccess = message => ({
   type: types.DELETE_RECIPE_SUCCESS,
   message
 });
 
+/**
+ *
+ * @method
+ *
+ * @param {object} error
+ *
+ * @returns {Object} payload
+ *
+ */
 export const deleteRecipeFailure = error => ({
   type: types.DELETE_RECIPE_FAILURE,
   error
 });
 
+/**
+ * @description this dispatches an action that deletes a recipe
+ *
+ * @method
+ *
+ * @param {Integer} id
+ *
+ * @returns {Object} payload
+ *
+ */
 export const deleteRecipe = id => dispatch =>
   api
     .deleteRecipe(id)
@@ -53,28 +125,74 @@ export const deleteRecipe = id => dispatch =>
     .catch((error) => {
       dispatch(deleteRecipeFailure(error));
     });
-
+/**
+ * @method
+ *
+ * @param {Object} recipes
+ *
+ * @returns {Object} payload
+ *
+ */
 export const getAllRecipesSuccess = recipes => ({
   type: types.GET_ALL_RECIPES,
   recipes
 });
 
+/**
+ * @description this dispatches an action that gets all recipes
+ *
+ * @method
+ *
+ * @param {object} object
+ *
+ * @returns {Object} payload
+ *
+ */
 export const getAllRecipes = () => dispatch =>
   api.getAllRecipes().then((res) => {
     const recipes = res.data.recipesFound;
     dispatch(getAllRecipesSuccess(recipes));
   });
 
+/**
+ *
+ * @method
+ *
+ * @param {object} recipe
+ *
+ * @returns {Object} payload
+ *
+ */
 export const updateRecipeSuccess = recipe => ({
   type: types.UPDATE_RECIPE_SUCCESS,
   recipe
 });
 
+/**
+ * @method
+ *
+ * @param {object} error
+ *
+ * @returns {Object} payload
+ *
+ */
 export const updateRecipeFailure = error => ({
   type: types.UPDATE_RECIPE_FAILURE,
   error
 });
 
+/**
+ * @description this dispatches an action that updates recipes
+ *
+ * @method
+ *
+ * @param {Integer} id
+ *
+ * @param {Object} recipes
+ *
+ * @returns {Object} payload
+ *
+ */
 export const updateRecipe = (id, recipes) => dispatch =>
   api
     .updateRecipeRequest(id, recipes)
@@ -90,16 +208,42 @@ export const updateRecipe = (id, recipes) => dispatch =>
       dispatch(updateRecipeFailure(error.data));
     });
 
+/**
+ * @method
+ *
+ * @param {object} recipe
+ *
+ * @returns {Object} payload
+ *
+ */
 export const addRecipesSuccess = recipe => ({
   type: types.ADD_RECIPE_SUCCESS,
   recipe
 });
 
+/**
+ * @method
+ *
+ * @param {object} error
+ *
+ * @returns {Object} payload
+ *
+ */
 export const addRecipesFailure = error => ({
   type: types.ADD_RECIPE_FAILURE,
   error
 });
 
+/**
+ * @description this dispatches an action that adds a recipe
+ *
+ * @method
+ *
+ * @param {object} recipes
+ *
+ * @returns {Object} payload
+ *
+ */
 export const addRecipes = recipes => dispatch =>
   api
     .addRecipeRequest(recipes)

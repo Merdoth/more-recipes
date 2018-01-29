@@ -5,13 +5,17 @@ import { PropTypes } from 'prop-types';
 import { logout } from '../actions/auth/authActions';
 
 /**
+ * @description this render the navigation bar which allopws the user move from page to page
+ *
  * @param { NavigationBar } NavigationBar
+ *
  * @returns { NavigationBar } NavigationBar
  */
 class NavigationBar extends React.Component {
   /**
    * Creates an instance of NavigationBar.
    * @param {any} props
+   *
    * @memberof NavigationBar
    */
   constructor(props) {
@@ -20,7 +24,9 @@ class NavigationBar extends React.Component {
   }
   /**
    * @param {any} event
+   *
    * @memberof NavigationBar
+   *
    * @returns { void }
    */
   logout(event) {
@@ -30,9 +36,8 @@ class NavigationBar extends React.Component {
 
   /**
    *
-   *
-   * @returns
    * @memberof NavigationBar
+   *
    * @returns { void }
    */
   loggedInMenu() {
@@ -79,6 +84,7 @@ class NavigationBar extends React.Component {
 
   /**
    * @returns { void }
+   *
    * @memberof NavigationBar
    */
   notLoggedInMenu() {
@@ -106,6 +112,7 @@ class NavigationBar extends React.Component {
 
   /**
    * @returns { void }
+   *
    * @memberof NavigationBar
    */
   render() {
