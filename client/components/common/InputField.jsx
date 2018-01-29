@@ -10,7 +10,7 @@ const InputField = ({
   label,
   required
 }) => (
-  <div className="input-field">
+  <div className="input-field buttonb">
     <label htmlFor={name} className="control-label">
       {label}
     </label>
@@ -31,8 +31,6 @@ const InputField = ({
         borderRadius: '3px'
       }}
     />
-
-    <br />
   </div>
 );
 

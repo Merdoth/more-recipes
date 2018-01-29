@@ -1,18 +1,14 @@
-
-
 const alreadyReviewed = (req, res, next) => {
-  const { userId, recipeId, review } = req.body;
+  const recipeId = Number(req.params.recipeId);
+  const { review } = req.body;
+  console.log(req.body, 'req.bosy')
 
-  if (!userId || userId.trim() === '') {
-    return res.status(400).send({ message: 'Please enter a valid userid!' });
-  }
-
-  if (!recipeId || recipeId.trim() === '') {
-    return res.status(400).send({ message: 'Please enter a valid recipeid!' });
+  if (!recipeId) {
+    return res.status(404).send({ message: 'Please enter a valid recipeid!' });
   }
 
   if (!review || review.trim() === '') {
-    return res.status(400).send({ message: 'Please enter a review!' });
+    return res.status(404).send({ message: 'Please enter a review!' });
   }
   next();
 };

@@ -9,6 +9,7 @@ const recipeRoutes = (router) => {
   router.get('/recipe/:recipeId', recipes.getOneRecipe);
   router.put('/recipe/:id', auth.authorize, recipes.updateUserRecipes);
   router.delete('/recipes/:id', auth.authorize, recipes.deleteUserRecipes);
+  router.post('/search', auth.authorize, recipes.searchRecipes);
 };
 
 export default recipeRoutes;

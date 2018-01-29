@@ -1,9 +1,14 @@
 import React from 'react';
 
 const TextArea = ({
-  name, placeholder, label, value, error, onChange
+  name,
+  placeholder,
+  label,
+  value,
+  error,
+  onChange
 }) => (
-  <div className={`form-group ${error ? 'has-error' : ''}`}>
+  <div className={`form-group ${error ? 'has-error' : ''} buttonb`}>
     <label htmlFor={name} className="control-label">
       {label}
     </label>
@@ -16,8 +21,6 @@ const TextArea = ({
       onChange={onChange}
       className="form-control"
     />
-    <br />
-    <br />
   </div>
 );
 

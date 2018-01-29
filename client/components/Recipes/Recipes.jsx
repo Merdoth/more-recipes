@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import RecipeCard from './RecipeCard/RecipeCard.jsx';
 import { getAllRecipes } from '../../actions/recipeActions/';
 
@@ -34,6 +33,18 @@ class Recipes extends Component {
       });
     });
   }
+
+  /**
+   * @param {any} nextProps
+   * @memberof  Recipes
+   * @returns { void }
+   */
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      recipes: nextProps.recipes
+    });
+  }
+
   /**
    * @returns {void }
    * @memberof  Recipes
@@ -65,15 +76,7 @@ class Recipes extends Component {
 }
 
 const mapStateToProps = state => ({
-  recipes: state.recipes
+  recipes: state.recipesReducer.rows
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      getAllRecipes
-    },
-    dispatch
-  );
-
-export default connect(mapStateToProps, mapDispatchToProps)(Recipes);
+export default connect(mapStateToProps, { getAllRecipes })(Recipes);
