@@ -4,7 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // import module dependencies
+
 
 var _sequelize = require('sequelize');
 
@@ -18,8 +19,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var votes = _models2.default.votes.votes;
-var recipes = _models2.default.recipes.recipes;
+var Votes = _models2.default.votes;
+var Recipes = _models2.default.recipes;
 
 /**
  * @class
@@ -34,25 +35,23 @@ var Vote = function () {
     key: 'upVotes',
 
     /**
+     * @description up vote recipe controller
      *
-     * @param {req} req
-     * @param {res} res
-     * @return { message } message
+     * @param {Object} req - Request object
+     * @param {Object} res - Response object
+     *
+     * @returns {Object} json - payload
      */
     value: function upVotes(req, res) {
-      var _req$body = req.body,
-          userId = _req$body.userId,
-          recipeId = _req$body.recipeId,
-          upVotes = _req$body.upVotes,
-          downVotes = _req$body.downVotes;
-
-      votes.create({
+      var userId = req.decoded.id;
+      var recipeId = Number(req.body.recipeId);
+      var upVotes = Number(req.body.upVotes);
+      Votes.create({
         userId: userId,
         recipeId: recipeId,
-        upVotes: upVotes,
-        downVotes: downVotes
+        upVotes: upVotes
       }).then(function (createdUpVoted) {
-        return recipes.findOne({
+        return Recipes.findOne({
           where: { id: recipeId }
         }).then(function (recipe) {
           if (upVotes === 1) {
@@ -73,27 +72,24 @@ var Vote = function () {
     }
 
     /**
+     * @description down vote recipe controller
      *
-     * @param {req} req
-     * @param {res} res
-     * @return { message } message
+     * @param {Object} req - Request object
+     * @param {Object} res - Response object
+     *
+     * @returns {Object} json - payload
      */
 
   }, {
     key: 'downVotes',
     value: function downVotes(req, res) {
-      var _req$body2 = req.body,
-          userId = _req$body2.userId,
-          recipeId = _req$body2.recipeId,
-          upVotes = _req$body2.upVotes,
-          downVotes = _req$body2.downVotes;
-
-      votes.create({
+      var userId = req.decoded.id;
+      var recipeId = Number(req.body.recipeId);
+      var downVotes = Number(req.body.downVotes);
+      Votes.create({
         userId: userId,
         recipeId: recipeId,
-        upVotes: upVotes,
         downVotes: downVotes
-
       }).then(function (recipe) {
         if (downVotes === 1) {
           recipe.increment('downVotes');
@@ -110,16 +106,18 @@ var Vote = function () {
     }
 
     /**
+     * @description get most upvoted controller
      *
-     * @param {req} req
-     * @param {res} res
-     * @return { error } error
+     * @param {Object} req - Request object
+     * @param {Object} res - Response object
+     *
+     * @returns {Object} json - payload
      */
 
   }, {
-    key: 'getAllUpvoted',
-    value: function getAllUpvoted(req, res) {
-      votes.findAll({
+    key: 'getMostVoted',
+    value: function getMostVoted(req, res) {
+      Votes.findAll({
         order: _sequelize2.default.literal('max(upVoted) DESC'),
         limit: 6
       }).then(function (existingVotes) {
