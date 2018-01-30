@@ -13,45 +13,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var votes = _models2.default.votes.votes;
 
 /**
+ * @description upVoted recipe Field
  *
- * @param {req} req
- * @param {res} res
- * @param {next} next
- * @return { message } message
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @param {Object} next - callback
+ *
+ * @returns {object} json - payload
  */
 
-var upVotedRecipes = function upVotedRecipes(req, res, next) {
+var votedRecipes = function votedRecipes(req, res, next) {
   var _req$body = req.body,
       userId = _req$body.userId,
-      recipeId = _req$body.recipeId,
-      upVotes = _req$body.upVotes,
-      downVotes = _req$body.downVotes;
+      recipeId = _req$body.recipeId;
 
-
-  if (!userId || userId.trim() === '') {
-    return res.status(400).send({
-      message: 'Please enter a valid userid!'
-    });
-  }
-  if (!recipeId || recipeId.trim() === '') {
-    return res.status(400).send({
-      message: 'Please enter valid recipeid!'
-    });
-  }
-  if (!upVotes || upVotes.trim() === '') {
-    return res.status(400).send({ message: 'Please enter an upvote!' });
-  }
-  if (!downVotes || downVotes.trim() === '') {
-    return res.status(400).send({ message: 'Please enter a downvote!' });
-  }
 
   votes.findAll({
     where: {
       recipeId: recipeId,
       userId: userId
     }
-  }).then(function (recipeUpVoted) {
-    if (recipeUpVoted.length >= 1) {
+  }).then(function (recipeVoted) {
+    if (recipeVoted.length >= 1) {
       return res.status(200).send({
         message: 'You already liked this recipe '
       });
@@ -62,4 +45,4 @@ var upVotedRecipes = function upVotedRecipes(req, res, next) {
   next();
 };
 
-exports.default = upVotedRecipes;
+exports.default = votedRecipes;

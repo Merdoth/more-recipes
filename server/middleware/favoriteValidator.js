@@ -6,12 +6,8 @@ const Favorites = models.favorites;
 /**
  * @description validate favorites fileds middleware
  *
- * @method
- *
  * @param {Object} req - Request object
- *
  * @param {Object} res - Response object
- *
  * @param {Object} next - callback
  *
  * @returns {object} json - payload

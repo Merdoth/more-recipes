@@ -4,7 +4,11 @@ module.exports = function (sequelize, DataTypes) {
   var recipes = sequelize.define('recipes', {
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      references: {
+        model: 'users',
+        key: 'id',
+        as: 'userId'
+      }
     },
     recipeName: {
       type: DataTypes.STRING,
