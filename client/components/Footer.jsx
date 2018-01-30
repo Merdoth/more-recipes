@@ -5,7 +5,7 @@ import React from 'react';
  *
  * @extends {Component}
  *
- * @returns { void }
+ * @returns { undefined }
  */
 
 const Footer = () => (

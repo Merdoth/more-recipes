@@ -76,9 +76,9 @@ class SignupForm extends Component {
 
   /**
    *
-   * @returns {void}
+   * @returns {undefined}
    *
-   * @param {any} errors
+   * @param {object} errors
    *
    * @memberof SignupForm
    */
@@ -101,7 +101,7 @@ class SignupForm extends Component {
   }
   /**
    *
-   * @returns {void}
+   * @returns {undefined}
    *
    * @memberof SignupForm
    */

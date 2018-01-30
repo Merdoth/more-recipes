@@ -11,7 +11,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         ...action.review
       };
-    
+
     case types.GET_ALL_RECIPES:
       return {
         ...state,

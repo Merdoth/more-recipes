@@ -26,12 +26,18 @@ var _votes2 = _interopRequireDefault(_votes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * @description combine user, recipe, voting reviews and favourite routes
+ *
+ * @param {Function} router
+ *
+ * @returns {void}
+ */
 var routes = function routes(router) {
   (0, _favorites2.default)(router);
   (0, _users2.default)(router);
   (0, _recipes2.default)(router);
   (0, _reviews2.default)(router);
   (0, _votes2.default)(router);
-};
-
+}; // import controllers
 exports.default = routes;

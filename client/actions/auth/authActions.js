@@ -7,9 +7,9 @@ import * as types from './../actionTypes';
  *
  *
  * @export
- * 
+ *
  * @param {Object} user
- * 
+ *
  * @returns {undefined}
  */
 export function setCurrentUser(user) {

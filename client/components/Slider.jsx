@@ -2,7 +2,7 @@ import React from 'react';
 /**
  * @description this returns a slider component
  *
- * @param { Slider } Slider
+ * @param { Function } Slider
  *
  * @returns { Slider } Slider
  */
@@ -19,7 +19,7 @@ const Slider = () => (
               <div className="carousel-item active">
                 <img
                   className="d-block img-fluid slider-image"
-                  src={require('../image/Salad.jpg')}
+                  src={'/image/Salad.jpg'}
                   alt="First slide"
                 />
                 <div className="hello">
@@ -32,7 +32,7 @@ const Slider = () => (
               <div className="carousel-item ">
                 <img
                   className="d-block img-fluid slider-image"
-                  src={require('../image/Food.jpg')}
+                  src={'/image/Food.jpg'}
                   alt="Second slide"
                 />
                 <div className="hello">
@@ -45,7 +45,7 @@ const Slider = () => (
               <div className="carousel-item">
                 <img
                   className="d-block img-fluid slider-image"
-                  src={require('../image/shrimp.jpg')}
+                  src={'/image/shrimp.jpg'}
                   alt="Third slide"
                 />
                 <div className="hello">

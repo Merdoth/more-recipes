@@ -12,7 +12,6 @@ class Review {
    * @description post review controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -70,7 +69,6 @@ class Review {
      * @description get recipe reviews controller
      *
      * @param {Object} req - Request object
-     *
      * @param {Object} res - Response object
      *
      * @returns {Object} json - payload

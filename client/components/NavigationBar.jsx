@@ -14,7 +14,7 @@ import { logout } from '../actions/auth/authActions';
 class NavigationBar extends React.Component {
   /**
    * Creates an instance of NavigationBar.
-   * @param {any} props
+   * @param {object} props
    *
    * @memberof NavigationBar
    */
@@ -23,11 +23,11 @@ class NavigationBar extends React.Component {
     this.logout = this.logout.bind(this);
   }
   /**
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof NavigationBar
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   logout(event) {
     event.preventDefault();
@@ -38,7 +38,7 @@ class NavigationBar extends React.Component {
    *
    * @memberof NavigationBar
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   loggedInMenu() {
     return (
@@ -83,7 +83,7 @@ class NavigationBar extends React.Component {
   }
 
   /**
-   * @returns { void }
+   * @returns { undefined }
    *
    * @memberof NavigationBar
    */
@@ -111,7 +111,7 @@ class NavigationBar extends React.Component {
   }
 
   /**
-   * @returns { void }
+   * @returns { undefined }
    *
    * @memberof NavigationBar
    */

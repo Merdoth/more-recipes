@@ -18,6 +18,7 @@ class RecipeDetailsFooter extends Component {
    * @param { object } props
    *
    * @memberof RecipeDetailsFooter
+   *
    * @returns { undefined }
    */
   constructor(props) {
