@@ -1,4 +1,4 @@
-import { User } from '../controller/user';
+import User from '../controller/user';
 import { signUpValidator, signInValidator } from '../middleware/validateInput';
 import auth from '../middleware/authorization';
 import checkUserExists from '../middleware/checkUserExists';

@@ -6,7 +6,7 @@ import NavigationBar from './NavigationBar.jsx';
  *
  * @extends {Component}
  *
- *  @returns { void }
+ *  @returns { undefined }
  */
 const App = () => (
   <div>

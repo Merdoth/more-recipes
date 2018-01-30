@@ -5,8 +5,6 @@ import * as api from './../../utils/moreRecipeAPI';
 
 /**
  *
- * @method
- *
  * @param {object} recipes
  *
  * @returns {undefined}
@@ -20,8 +18,6 @@ export const getTopRecipesSuccess = recipes => ({
  *
  * @description dispatches action to get top recipes
  *
- * @method
- *
  * @param { object } object
  *
  * @returns { undefined }
@@ -34,8 +30,6 @@ export const getTopRecipes = () => dispatch =>
 
 /**
  *
- * @method
- *
  * @param { object } recipe
  *
  * @returns { undefined }
@@ -45,8 +39,6 @@ export const getOneRecipeSuccess = recipe => ({
   recipe
 });
 /**
- *
- * @method
  *
  * @param { object } error
  *
@@ -60,8 +52,6 @@ export const getOneRecipeFailure = error => ({
 /**
  *
  * @description dispatches action to get one recipe
- *
- * @method
  *
  * @param { object } recipeId
  *
@@ -80,8 +70,6 @@ export const getOneRecipe = recipeId => dispatch =>
 
 /**
  *
- * @method
- *
  * @param {object} message
  *
  * @returns {undefined}
@@ -93,8 +81,6 @@ export const deleteRecipeSuccess = message => ({
 });
 
 /**
- *
- * @method
  *
  * @param {object} error
  *
@@ -108,8 +94,6 @@ export const deleteRecipeFailure = error => ({
 
 /**
  * @description this dispatches an action that deletes a recipe
- *
- * @method
  *
  * @param {Integer} id
  *
@@ -126,8 +110,6 @@ export const deleteRecipe = id => dispatch =>
       dispatch(deleteRecipeFailure(error));
     });
 /**
- * @method
- *
  * @param {Object} recipes
  *
  * @returns {Object} payload
@@ -140,8 +122,6 @@ export const getAllRecipesSuccess = recipes => ({
 
 /**
  * @description this dispatches an action that gets all recipes
- *
- * @method
  *
  * @param {object} object
  *
@@ -156,8 +136,6 @@ export const getAllRecipes = () => dispatch =>
 
 /**
  *
- * @method
- *
  * @param {object} recipe
  *
  * @returns {Object} payload
@@ -169,7 +147,6 @@ export const updateRecipeSuccess = recipe => ({
 });
 
 /**
- * @method
  *
  * @param {object} error
  *
@@ -184,10 +161,7 @@ export const updateRecipeFailure = error => ({
 /**
  * @description this dispatches an action that updates recipes
  *
- * @method
- *
  * @param {Integer} id
- *
  * @param {Object} recipes
  *
  * @returns {Object} payload
@@ -209,7 +183,6 @@ export const updateRecipe = (id, recipes) => dispatch =>
     });
 
 /**
- * @method
  *
  * @param {object} recipe
  *
@@ -222,7 +195,6 @@ export const addRecipesSuccess = recipe => ({
 });
 
 /**
- * @method
  *
  * @param {object} error
  *
@@ -236,8 +208,6 @@ export const addRecipesFailure = error => ({
 
 /**
  * @description this dispatches an action that adds a recipe
- *
- * @method
  *
  * @param {object} recipes
  *

@@ -16,12 +16,8 @@ const validator = new ValidatePassword(options);
 /**
  * @description validate User Sign In Fields
  *
- * @method
- *
  * @param {Object} req - Request object
- *
  * @param {Object} res - Response object
- *
  * @param {Object} next - callback
  *
  * @returns {object} json - payload

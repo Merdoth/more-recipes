@@ -7,7 +7,7 @@ import { userSignupRequest } from '../../actions/auth/authActions';
  *
  * @extends { Component }
  *
- * @returns { void }
+ * @returns { undefined }
  */
 const SignupPage = () => (
       <div>
