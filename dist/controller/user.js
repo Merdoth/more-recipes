@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.User = undefined;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // import modules
+
 
 var _jsonwebtoken = require('jsonwebtoken');
 
@@ -27,6 +27,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+// create reference to db model
 var Users = _models2.default.users;
 var Favorites = _models2.default.favorites;
 
@@ -34,7 +35,7 @@ var Favorites = _models2.default.favorites;
  * @class
  */
 
-var User = exports.User = function () {
+var User = function () {
   function User() {
     _classCallCheck(this, User);
   }
@@ -43,10 +44,12 @@ var User = exports.User = function () {
     key: 'signUpUser',
 
     /**
+     * @description creates a new user controller
      *
-     * @param {req} req
-     * @param {res} res
-     * @return { message } message
+     * @param {Object} req - Request object
+     * @param {Object} res - Response object
+     *
+     * @returns {Object} json - payload
      */
     value: function signUpUser(req, res) {
       Users.create(req.body).then(function (userCreated) {
@@ -66,10 +69,12 @@ var User = exports.User = function () {
     }
 
     /**
+     * @description get all users controller
      *
-     * @param {req} req
-     * @param {res} res
-     * @return { error } error
+     * @param {Object} req - Request object
+     * @param {Object} res - Response object
+     *
+     * @returns {Object} json - payload
      */
 
   }, {
@@ -86,10 +91,12 @@ var User = exports.User = function () {
     }
 
     /**
+     * @description get a user controller
      *
-     * @param {req} req
-     * @param {res} res
-     * @return { error } error
+     * @param {Object} req - Request object
+     * @param {Object} res - Response object
+     *
+     * @returns {Object} json - payload
      */
 
   }, {
@@ -102,14 +109,18 @@ var User = exports.User = function () {
         res.status(200).send({ users: users });
       }).catch(function (err) {
         res.status(404).send({ error: err });
+      }).catch(function (err) {
+        res.status(500).send({ error: err });
       });
     }
 
     /**
+     * @description sign in user controller
      *
-     * @param {req} req
-     * @param {res} res
-     * @return { message } message
+     * @param {Object} req - Request object
+     * @param {Object} res - Response object
+     *
+     * @returns {Object} json - payload
      */
 
   }, {
@@ -135,6 +146,8 @@ var User = exports.User = function () {
           return res.status(400).send({ message: 'Incorrect login details!' });
         }
         return res.status(404).send({ message: 'User does not exist!' });
+      }).catch(function (err) {
+        res.status(500).send({ error: err });
       });
     }
   }]);

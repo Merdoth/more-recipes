@@ -36,6 +36,10 @@ var _webpackHotMiddleware = require('webpack-hot-middleware');
 
 var _webpackHotMiddleware2 = _interopRequireDefault(_webpackHotMiddleware);
 
+var _expressValidator = require('express-validator');
+
+var _expressValidator2 = _interopRequireDefault(_expressValidator);
+
 var _models = require('./models');
 
 var _models2 = _interopRequireDefault(_models);
@@ -71,6 +75,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use(_bodyParser2.default.json());
 
+app.use((0, _expressValidator2.default)());
+
 (0, _routes2.default)(router);
 
 app.use('/api/v1', router);
@@ -82,7 +88,7 @@ app.use('*', function (req, res) {
 _models2.default.sequelize.authenticate().then(function () {
   app.listen(port, function (err) {
     if (!err) {
-      console.log('listening on port localhost://' + port);
+      console.log('listening on port localhost:' + port);
     }
   });
   console.log('Datbase Connection established');

@@ -13,7 +13,7 @@ const header = () => ({
  *
  * @param {Object} object
  *
- * @returns {void}
+ * @returns {undefined}
  *
  */
 export const getOneUser = () => axios.get('/api/v1/users/:id');
@@ -24,7 +24,7 @@ export const getOneUser = () => axios.get('/api/v1/users/:id');
  *
  * @param {Object} object
  *
- * @returns {void}
+ * @returns {undefined}
  *
  */
 export const getAllRecipes = () => axios.get('/api/v1/recipes');
@@ -35,7 +35,7 @@ export const getAllRecipes = () => axios.get('/api/v1/recipes');
  *
  * @param {Object} object
  *
- * @returns {void}
+ * @returns {undefined}
  *
  */
 export const userSignupRequest = () => axios.post('/api/v1/users/signup');
@@ -46,7 +46,7 @@ export const userSignupRequest = () => axios.post('/api/v1/users/signup');
  *
  * @param {Object} object
  *
- * @returns {void}
+ * @returns {undefined}
  *
  */
 export const userSigninRequest = () => axios.post('/api/v1/users/signin');
@@ -57,7 +57,7 @@ export const userSigninRequest = () => axios.post('/api/v1/users/signin');
  *
  * @param {Object} recipes
  *
- * @returns {void}
+ * @returns {undefined}
  *
  */
 export const addRecipeRequest = (recipes) => {
@@ -89,10 +89,9 @@ export const addRecipeRequest = (recipes) => {
  * @description allows a user update an already existing recipe.
  *
  * @param {Object} id
- *
  * @param {Object} recipes
  *
- * @returns {void}
+ * @returns {undefined}
  *
  */
 export const updateRecipeRequest = (id, recipes) => {
@@ -123,10 +122,9 @@ export const updateRecipeRequest = (id, recipes) => {
  * @description post user review.
  *
  * @param {Object} recipeId
- *
  * @param {Object} review
  *
- * @returns {void}
+ * @returns {undefined}
  *
  */
 export const addReview = (recipeId, review) =>
@@ -138,7 +136,7 @@ export const addReview = (recipeId, review) =>
  *
  * @param {Object} object
  *
- * @returns {void}
+ * @returns {undefined}
  *
  */
 export const getTopRecipes = () =>
@@ -150,7 +148,7 @@ export const getTopRecipes = () =>
  *
  * @param {Object} recipeId
  *
- * @returns {void}
+ * @returns {undefined}
  *
  */
 export const getOneRecipe = recipeId => axios.get(`/api/v1/recipe/${recipeId}`);
@@ -161,7 +159,7 @@ export const getOneRecipe = recipeId => axios.get(`/api/v1/recipe/${recipeId}`);
  *
  * @param {Object} id - action object
  *
- * @returns {void}
+ * @returns {undefined}
  *
  */
 export const deleteRecipe = id => axios.delete(`/api/v1/recipes/${id}`);

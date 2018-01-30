@@ -11,14 +11,11 @@ const Favorites = models.favorites;
 /**
  * @class
  */
-export class User {
+class User {
   /**
    * @description creates a new user controller
    *
-   * @method
-   *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -43,10 +40,7 @@ export class User {
   /**
    * @description get all users controller
    *
-   * @method
-   *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -67,10 +61,7 @@ export class User {
   /**
    * @description get a user controller
    *
-   * @method
-   *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -94,10 +85,7 @@ export class User {
   /**
    * @description sign in user controller
    *
-   * @method
-   *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload

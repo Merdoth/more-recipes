@@ -8,18 +8,18 @@ import { getTopRecipes } from '../actions/recipeActions/';
 /**
  * @param { Home } Home
  *
- * @returns { void }
+ * @returns { undefined }
  *
  * @desc this class returns a Home component
  */
 class Home extends Component {
   /**
    * Creates an instance of Home.
-   * @param {any} props
+   * @param {object} props
    *
    * @memberof Home
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   constructor(props) {
     super(props);
@@ -28,18 +28,18 @@ class Home extends Component {
     };
   }
   /**
-   * @param {any} props
+   * @param {object} props
    *
    * @memberof Home
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   componentDidMount() {
     this.props.getTopRecipes();
   }
 
   /**
-   * @returns {void }
+   * @returns {undefined }
    *
    * @memberof Home
    */

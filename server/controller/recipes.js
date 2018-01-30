@@ -18,7 +18,6 @@ class Recipe {
    * @description add recipe controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -74,7 +73,6 @@ class Recipe {
    * @description get all recipe controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -142,7 +140,6 @@ class Recipe {
    * @description get user recipes controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -179,7 +176,6 @@ class Recipe {
    * @description update recipe controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -227,7 +223,6 @@ class Recipe {
    * @description delete recipe controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -259,7 +254,6 @@ class Recipe {
    * @description search by title or ingredients controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload

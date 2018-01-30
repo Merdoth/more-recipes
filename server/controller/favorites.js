@@ -12,7 +12,6 @@ class Favorite {
    * @description add favourite controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -35,7 +34,6 @@ class Favorite {
    * @description get user favourites controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload

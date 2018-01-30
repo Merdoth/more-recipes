@@ -1,3 +1,8 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 /**
  * @description paginate function
  *
@@ -7,13 +12,13 @@
  *
  * @returns {object} result - result object
  */
-const pagination = (limit, offset, count) => {
+var pagination = function pagination(limit, offset, count) {
   /** totalCount : total number of records based on query
    * pageCount : total number of pages
    * currentPage : current page of the query result based on limit and offset
    * pageSize : number of records per page (based on limit)
    */
-  const result = {};
+  var result = {};
   limit = limit > count ? count : limit;
   offset = offset > count ? count : offset;
   result.totalCount = count;
@@ -24,4 +29,4 @@ const pagination = (limit, offset, count) => {
   return result;
 };
 
-export default pagination;
+exports.default = pagination;

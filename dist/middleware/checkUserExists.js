@@ -12,6 +12,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Users = _models2.default.users;
 
+/**
+ * @description checks if user exists
+ *
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @param {Object} next - callback
+ *
+ * @returns {object} json - payload
+ */
+// import models from model directory
 var checkUserExists = function checkUserExists(req, res, next) {
   var _req$body = req.body,
       userName = _req$body.userName,
