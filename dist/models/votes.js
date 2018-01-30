@@ -4,11 +4,21 @@ module.exports = function (sequelize, DataTypes) {
   var votes = sequelize.define('votes', {
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      onDelete: 'CASCADE',
+      references: {
+        model: 'users',
+        key: 'id',
+        as: 'userId'
+      }
     },
     recipeId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      onDelete: 'CASCADE',
+      references: {
+        model: 'recipes',
+        key: 'id',
+        as: 'recipeId'
+      }
     },
     upVotes: {
       type: DataTypes.INTEGER,
