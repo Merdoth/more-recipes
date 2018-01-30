@@ -13,11 +13,11 @@ import { getAllRecipes } from '../../actions/recipeActions/';
 class Recipes extends Component {
   /**
    * Creates an instance of  Recipes.
-   * @param {any} props
+   * @param { object } props
    *
    * @memberof  Recipes
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   constructor(props) {
     super(props);
@@ -26,11 +26,11 @@ class Recipes extends Component {
     };
   }
   /**
-   * @param {any} event
+   * @param { object } event
    *
    * @memberof  Recipes
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   componentDidMount() {
     this.props.getAllRecipes().then(() => {
@@ -41,11 +41,11 @@ class Recipes extends Component {
   }
 
   /**
-   * @param {any} nextProps
+   * @param {object} nextProps
    *
    * @memberof  Recipes
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -54,7 +54,7 @@ class Recipes extends Component {
   }
 
   /**
-   * @returns {void }
+   * @returns { undefined }
    *
    * @memberof  Recipes
    */

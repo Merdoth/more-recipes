@@ -9,11 +9,11 @@ services:
 
 postgres:
   adapter: postgresql
-  database: morerecipes-test
+  database: morerecipes
   username: postgres
   
 before_script:
-  - createdb morerecipes-test -U postgres
+  - createdb morerecipes -U postgres
   - npm install sequelize-cli -g
 
 script:

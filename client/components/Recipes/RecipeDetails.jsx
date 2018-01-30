@@ -21,11 +21,11 @@ import RecipeDetailsFooter from './RecipeCard/RecipeDetailsFooter.jsx';
 class RecipeDetails extends Component {
   /**
    * Creates an instance of RecipeDetails.
-   * @param {any} props
+   * @param {object} props
    *
    * @memberof RecipeDetails
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   constructor(props) {
     super(props);
@@ -38,22 +38,22 @@ class RecipeDetails extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   /**
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof RecipeDetails
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
     this.props.getOneRecipe(recipeId);
   }
   /**
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof RecipeDetails
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   onChange(event) {
     this.setState({
@@ -62,9 +62,9 @@ class RecipeDetails extends Component {
   }
 
   /**
-   * @param {any} event
+   * @param {Object} event
    *
-   * @returns { void }
+   * @returns { undefined }
    *
    * @memberof RecipeDetails
    */
@@ -79,7 +79,7 @@ class RecipeDetails extends Component {
    *
    * @param {object} nextProps
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   componentWillReceiveProps(nextProps) {
     const {
@@ -97,7 +97,7 @@ class RecipeDetails extends Component {
   }
 
   /**
-   * @returns {void }
+   * @returns {undefined }
    *
    * @memberof RecipeDetails
    */
