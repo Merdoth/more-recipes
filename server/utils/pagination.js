@@ -2,9 +2,7 @@
  * @description paginate function
  *
  * @param {Integer} limit - limit integer
- *
  * @param {Integer} offset - offset integer
- *
  * @param {integer} count - count integer
  *
  * @returns {object} result - result object

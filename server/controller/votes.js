@@ -13,7 +13,6 @@ class Vote {
    * @description up vote recipe controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -52,7 +51,6 @@ class Vote {
    * @description down vote recipe controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
@@ -86,7 +84,6 @@ class Vote {
    * @description get most upvoted controller
    *
    * @param {Object} req - Request object
-   *
    * @param {Object} res - Response object
    *
    * @returns {Object} json - payload
