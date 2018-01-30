@@ -37,18 +37,16 @@ class SigninForm extends Component {
    * This method validates the input from the state object
    * and chcecks if its valid and makes an api call to the backend
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof SigninForm
    *
-   * @returns {void}
+   * @returns {undefined}
    */
   onSubmit(event) {
-    console.log('=== In submit handler');
     event.preventDefault();
     const { errors, isValid } = validateSignIn(this.state);
     if (isValid) {
-      console.log('=== In valid clause');
       this.setState({ isLoading: true });
       this.props
         .login(this.state)
@@ -61,8 +59,6 @@ class SigninForm extends Component {
           history.push('/profile');
         })
         .catch((err) => {
-          console.log('=== In catch block');
-          console.log(err, 'hello there!!!');
           const error = err.data.message;
           swal({
             title: 'Oops!',
@@ -72,9 +68,6 @@ class SigninForm extends Component {
           this.setState({ isLoading: false });
         });
     } else {
-      console.log('=== Isvalid', isValid);
-      console.log('=== errors', errors);
-      console.log('=== In else block');
       this.handleErrors(errors);
     }
   }
@@ -82,11 +75,11 @@ class SigninForm extends Component {
   /**
    *  this method gets the values of the input
    * and passes the values to the global state object
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof SigninForm
    *
-   * @returns {void}
+   * @returns {undefined}
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -94,11 +87,11 @@ class SigninForm extends Component {
 
   /**
    * this method handle errors
-   * @param {any} errors
+   * @param {object} errors
    *
    * @memberof SigninForm
    *
-   * @returns {void}
+   * @returns {undefined}
    */
   handleErrors(errors) {
     console.log('=== In handleErrors errors', errors);
@@ -113,7 +106,7 @@ class SigninForm extends Component {
   }
   /**
    *
-   * @returns {void}
+   * @returns {undefined}
    *
    * @memberof SignupForm
    */

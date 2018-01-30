@@ -5,7 +5,7 @@ import React from 'react';
  *
  * @method NotFound
  *
- * @returns { void }
+ * @returns { undefined }
  * .
  */
 const NotFound = () => (

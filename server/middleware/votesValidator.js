@@ -6,9 +6,7 @@ const { votes } = models.votes;
  * @description upVoted recipe Field
  *
  * @param {Object} req - Request object
- *
  * @param {Object} res - Response object
- *
  * @param {Object} next - callback
  *
  * @returns {object} json - payload

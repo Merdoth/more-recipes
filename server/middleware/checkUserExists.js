@@ -6,12 +6,8 @@ const Users = models.users;
 /**
  * @description checks if user exists
  *
- * @method
- *
  * @param {Object} req - Request object
- *
  * @param {Object} res - Response object
- *
  * @param {Object} next - callback
  *
  * @returns {object} json - payload
