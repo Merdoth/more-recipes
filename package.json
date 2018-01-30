@@ -59,7 +59,6 @@
     "css-loader": "^0.28.7",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2"
-    
   },
   "devDependencies": {
     "babel-polyfill": "^6.26.0",
@@ -73,15 +72,18 @@
     "mocha": "^3.5.3",
     "nodemon": "^1.12.1",
     "react-hot-loader": "^3.1.1"
-    
   },
   "scripts": {
     "start": "node dist/app.js",
     "build:server": "babel ./server/ -d ./dist && node dist/app.js",
+    "postinstall": "npm run build:server",
     "migrations": "sequelize db:migrate",
-    "server:dev": "NODE_ENV=development nodemon --watch server --exec babel-node  -- server/app.js ",
-    "reset-db": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate",
-    "test": "npm run reset-db && NODE_ENV=test nyc --reporter=html --reporter=text mocha  --compilers js:babel-register ./server/tests/api/*.js -t 20000",
+    "server:dev":
+      "NODE_ENV=development nodemon --watch server --exec babel-node  -- server/app.js ",
+    "reset-db":
+      "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate",
+    "test":
+      "npm run reset-db && NODE_ENV=test nyc --reporter=html --reporter=text mocha  --compilers js:babel-register ./server/tests/api/*.js -t 20000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "start:dev": "npm run server:dev"
