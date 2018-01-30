@@ -1,5 +1,4 @@
 import reviews from '../controller/reviews';
-import { reviewsValidator, validateParams } from '../middleware/validateInput';
 import auth from '../middleware/authorization';
 
 /**
@@ -13,8 +12,6 @@ const reviewRoutes = (router) => {
   router.post(
     '/recipes/:recipeId/reviews',
     auth.authorize,
-    reviewsValidator,
-    validateParams,
     reviews.addReview
   );
 };

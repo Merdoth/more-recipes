@@ -31,7 +31,6 @@ class SignupForm extends Component {
       errors: {},
       isLoading: false
     };
-
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -76,18 +75,18 @@ class SignupForm extends Component {
 
   /**
    *
-   * @returns {void}
+   * @returns {undefined}
    *
-   * @param {any} errors
+   * @param {object} errors
    *
    * @memberof SignupForm
    */
   handleErrors(errors) {
     if (typeof errors !== 'string') {
-      Object.keys(errors).forEach((error) => {
+      Object.values(errors).forEach((error) => {
         swal({
           title: 'Oops!',
-          text: 'sorry one or more fields are empty',
+          text: error,
           icon: 'error'
         });
       });
@@ -101,7 +100,7 @@ class SignupForm extends Component {
   }
   /**
    *
-   * @returns {void}
+   * @returns {undefined}
    *
    * @memberof SignupForm
    */
@@ -172,5 +171,6 @@ class SignupForm extends Component {
 SignupForm.propTypes = {
   userSignupRequest: PropTypes.func.isRequired
 };
+
 const mapDispatchToProps = { userSignupRequest };
 export default connect(null, mapDispatchToProps)(SignupForm);

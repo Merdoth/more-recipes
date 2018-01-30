@@ -13,9 +13,9 @@ import voteRoutes from './votes';
  * @returns {void}
  */
 const routes = (router) => {
-  favoriteRoutes(router);
   usersRoutes(router);
   recipeRoutes(router);
+  favoriteRoutes(router);
   reviewRoutes(router);
   voteRoutes(router);
 };

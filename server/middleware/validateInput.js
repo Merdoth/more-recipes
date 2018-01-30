@@ -16,12 +16,8 @@ const validator = new ValidatePassword(options);
 /**
  * @description validate User Sign In Fields
  *
- * @method
- *
  * @param {Object} req - Request object
- *
  * @param {Object} res - Response object
- *
  * @param {Object} next - callback
  *
  * @returns {object} json - payload
@@ -75,10 +71,6 @@ export const recipeValidator = (req, res, next) => {
       'preparation must at least contain a word without leading space'
     )
     .matches(/^\w[a-zA-Z0-9 !:;.?+=&%@!\-/,()]*\w$/);
-  req.checkBody('imageUrl', 'image url is required').notEmpty();
-  req
-    .checkBody('imageUrl', 'image url is not valid')
-    .matches(/https:\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/);
 
   const errors = req.validationErrors();
   if (errors) {
@@ -107,7 +99,7 @@ export const signUpValidator = (req, res, next) => {
   req
     .checkBody(
       'userName',
-      'username must be at least 3 and not start with an empty space'
+      'username must be at least 3 characters and not start with an empty space'
     )
     .matches(/^[a-zA-Z]{3,}$/);
   req.checkBody('email', 'email is required').notEmpty();
@@ -130,7 +122,7 @@ export const signUpValidator = (req, res, next) => {
   if (!isValid) {
     return res.status(400).send({
       message:
-        'password must contain `uppercase, lowercase, number, and spacial character`'
+        'password must contain `uppercase, lowercase, number, and special character`'
     });
   }
   next();
@@ -150,15 +142,15 @@ export const signUpValidator = (req, res, next) => {
 
 export const validateParams = (req, res, next) => {
   // check if param is of type integer
-  req.sanitizeParams('id', 'Please input a valid id.').toInt();
-  req.checkParams('id', 'Please input a valid id.').isInt();
+  // req.sanitizeParams('id', 'Please input a valid id.').toInt();
+  // req.checkParams('id', 'Please input a valid id.').isInt();
 
-  const errors = req.validationErrors();
-  if (errors) {
-    const errorObject = errors.map(error => error.msg);
-    return res.status(400).send({ message: errorObject[0] });
-  }
-  next();
+  // const errors = req.validationErrors();
+  // if (errors) {
+  //   const errorObject = errors.map(error => error.msg);
+  //   return res.status(400).send({ message: errorObject[0] });
+  // }
+  // next();
 };
 
 /**
@@ -173,13 +165,13 @@ export const validateParams = (req, res, next) => {
  * @returns {object} json - payload
  */
 export const reviewsValidator = (req, res, next) => {
-  req.checkBody('review', 'review is required').notEmpty();
-  req
-    .checkBody(
-      'review',
-      'review should be at least 5 character long without leading space'
-    )
-    .matches(/^\w[a-zA-Z0-9 !:.?+=&%@!]{5,}$/);
+  // req.checkBody('review', 'review is required').notEmpty();
+  // req
+  //   .checkBody(
+  //     'review',
+  //     'review should be at least 5 character long without leading space'
+  //   )
+  //   .matches(/^\w[a-zA-Z0-9 !:.?+=&%@!]{5,}$/);
 
   const errors = req.validationErrors();
   if (errors) {

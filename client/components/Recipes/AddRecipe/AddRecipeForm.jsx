@@ -6,7 +6,7 @@ import InputField from '../../common/InputField.jsx';
 import TextArea from '../../common/TextArea.jsx';
 import InputLine from '../../common/InputLine.jsx';
 import { addRecipes } from '../../../actions/recipeActions/';
-import history from '../../../utils/history';
+// import history from '../../../utils/history';
 
 /**
  * @param { AddRecipeForm } AddRecipeForm
@@ -69,8 +69,9 @@ class AddRecipeForm extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
+    console.log(this.state);
     this.props.addRecipes(this.state);
-    history.push('/recipes');
+    // history.push('/recipes');
   }
   /**
    * @returns { undefined }

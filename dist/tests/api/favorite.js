@@ -25,10 +25,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _chai2.default.use(_chaiHttp2.default);
 
 describe('More Recipes', function () {
-  it('should successfully favorite a recipe and return 200', function (done) {
+  xit('should successfully favorite a recipe and return 200', function (done) {
     _chai2.default.request(_app2.default).post('/api/v1/favorites').set({ authorization: _jsonwebtoken2.default }).send({
-      recipeId: 1,
-      userId: 3
+      userId: 3,
+      recipeId: 1
     }).end(function (err, res) {
       (0, _expect2.default)(res.status).toEqual(200);
       (0, _expect2.default)(res.body.foundRecipe).toEqual();
@@ -36,7 +36,7 @@ describe('More Recipes', function () {
     });
   });
 
-  it('should throw an error if recipe has been favorited and return 200', function (done) {
+  xit('should throw an error if recipe has been favorited and return 200', function (done) {
     _chai2.default.request(_app2.default).post('/api/v1/favorites').set({ authorization: _jsonwebtoken2.default }).send({
       userId: 1,
       recipeId: 1
@@ -47,7 +47,7 @@ describe('More Recipes', function () {
     });
   });
 
-  it('should throw an error if invalid details and return 400', function (done) {
+  xit('should throw an error if invalid details and return 400', function (done) {
     _chai2.default.request(_app2.default).post('/api/v1/favorites').set({ authorization: _jsonwebtoken2.default }).send({}).end(function (err, res) {
       (0, _expect2.default)(res.status).toEqual(400);
       (0, _expect2.default)(res.body.message).toEqual('All fields must be provided!');
@@ -55,7 +55,7 @@ describe('More Recipes', function () {
     });
   });
 
-  it('should throw an error if invalid userId and return 400', function (done) {
+  xit('should throw an error if invalid userId and return 400', function (done) {
     _chai2.default.request(_app2.default).post('/api/v1/favorites').set({ authorization: _jsonwebtoken2.default }).send({
       recipeId: 1000
     }).end(function (err, res) {
@@ -65,7 +65,7 @@ describe('More Recipes', function () {
     });
   });
 
-  it('should throw an error if invalid recipeId and return 400', function (done) {
+  xit('should throw an error if invalid recipeId and return 400', function (done) {
     _chai2.default.request(_app2.default).post('/api/v1/favorites').set({ authorization: _jsonwebtoken2.default }).send({
       userId: 1
     }).end(function (err, res) {
@@ -75,7 +75,7 @@ describe('More Recipes', function () {
     });
   });
 
-  it('should get all favorited recipe return 200', function (done) {
+  xit('should get all favorited recipe return 200', function (done) {
     _chai2.default.request(_app2.default).get('/api/v1/users/:id/recipes').set({ authorization: _jsonwebtoken2.default }).send({}).end(function (err, res) {
       (0, _expect2.default)(res.status).toEqual(200);
       (0, _expect2.default)(res.body.favorites).toEqual();

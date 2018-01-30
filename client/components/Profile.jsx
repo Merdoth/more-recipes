@@ -13,11 +13,11 @@ class Profile extends Component {
   /**
    * Creates an instance of Profile.
    *
-   * @param {any} props
+   * @param {object} props
    *
    * @memberof Profile
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   constructor(props) {
     super(props);
@@ -32,22 +32,22 @@ class Profile extends Component {
   }
 
   /**
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof Profile
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
   /**
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof Profile
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   onSubmit(event) {
     event.preventDefault();
@@ -55,7 +55,7 @@ class Profile extends Component {
   }
 
   /**
-   * @returns {void }
+   * @returns {undefined }
    *
    * @memberof Profile
    */
