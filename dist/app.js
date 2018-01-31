@@ -55,6 +55,7 @@ var _webpackConfig2 = _interopRequireDefault(_webpackConfig);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _dotenv2.default.config();
+var indexPath = process.env.NODE_ENV === 'production' ? 'dist' : 'client';
 
 var app = (0, _express2.default)();
 var router = _express2.default.Router();
@@ -62,7 +63,14 @@ var port = process.env.PORT || 9000;
 var compiler = (0, _webpack2.default)(_webpackConfig2.default);
 
 app.use((0, _morgan2.default)('dev'));
+app.use(_express2.default.static(_path2.default.join(__dirname, './../assets')));
+if (process.env.NODE_ENV !== 'development') {
+  app.use(_express2.default.static(_path2.default.join(__dirname, './../dist')));
+}
 
+if (process.env.NODE_ENV === 'production') {
+  console.log('production');
+}
 if (process.env.NODE_ENV === 'development') {
   app.use((0, _webpackDevMiddleware2.default)(compiler, {
     hot: true,
@@ -82,7 +90,7 @@ app.use((0, _expressValidator2.default)());
 app.use('/api/v1', router);
 
 app.use('*', function (req, res) {
-  res.status(200).sendFile(_path2.default.join(__dirname, '../client/index.html'));
+  res.status(200).sendFile(_path2.default.join(__dirname, '../' + indexPath + '/index.html'));
 });
 
 _models2.default.sequelize.authenticate().then(function () {
