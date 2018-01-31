@@ -69,6 +69,7 @@
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.20.0",
     "webpack-merge": "^4.1.1",
+    "webpack-merge": "^4.1.1",
     "image-webpack-loader": "^3.4.2",
     "node-sass": "^4.5.3",
     "file-loader": "^1.1.5",
@@ -107,11 +108,6 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "start:dev": "npm run server:dev",
-    "prod:server": "babel -d ./dist/server ./server -s",
-    "prod:client": "webpack --config webpack.config.prod.js",
-    "build:prod": "npm run prod:client && npm run prod:server",
-    "heroku-postbuild": "npm run prod:client && npm run prod:server",
-    "heroku-prebuild": "npm i -g babel-cli",
     "build:run": "npm run build:prod && npm start"
   },
   "repository": {
