@@ -61,16 +61,14 @@
     "style-loader": "^0.19.0",
     "sweetalert": "^2.1.0",
     "uglifyjs-webpack-plugin": "^1.1.8",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.0",
     "validate-password": "^1.0.4",
     "validator": "^9.2.0",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.20.0",
+    "dotenv-webpack": "^1.5.4",
     "webpack-merge": "^4.1.1"
   },
- 
   "devDependencies": {
     "eslint": "^4.7.2",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -82,12 +80,10 @@
     "nodemon": "^1.12.1",
     "react-hot-loader": "^3.1.1"
   },
-  
   "scripts": {
-    "build": "NODE_ENV=production webpack --config ./webpack.config.prod.babel.js",
-    "start": "NODE_ENV=production babel-node server/app.js",
-    "start-finish": "node dist/server/app.js",
-    "build:server": "babel ./server/ -d ./dist",
+    "build": "NODE_ENV=production webpack --config ./webpack.config.prod.babel.js && cp -r client/assets dist/client/assets",
+    "start": "NODE_ENV=production node dist/server/app.js",
+    "build:server": "rm -rf dist && babel ./server/ -d ./dist/server",
     "postinstall": "npm run build:server",
     "migrations": "sequelize db:migrate",
     "server:dev": "NODE_ENV=development nodemon --watch server --exec babel-node  -- server/app.js ",
@@ -97,9 +93,9 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "start:dev": "npm run server:dev"
   },
-"bin": {
-"coveralls": "./bin/coveralls.js"
-},
+  "bin": {
+    "coveralls": "./bin/coveralls.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Merdoth/more-recipes.git"

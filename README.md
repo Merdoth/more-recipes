@@ -3,6 +3,7 @@ For the foodies in the house
 
 [![Build Status](https://travis-ci.org/Merdoth/more-recipes.svg?branch=develop)](https://travis-ci.org/Merdoth/more-recipes)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8848c4753fffea6408dc/maintainability)](https://codeclimate.com/github/Merdoth/more-recipes/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/Merdoth/more-recipes/badge.svg?branch=feature%2F154840416%2Fvotes)](https://coveralls.io/github/Merdoth/more-recipes?branch=feature%2F154840416%2Fvotes)
 # Introduction
 
 More recipes is a web appliaction that allows food lovers to exhibit and explore their ideas towards food, and gets the chance to share with others what they've been able to come across in the course of exploring. 

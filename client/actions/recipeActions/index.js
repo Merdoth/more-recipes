@@ -2,7 +2,6 @@ import swal from 'sweetalert';
 import * as types from '../actionTypes';
 import history from '../../utils/history';
 import * as api from './../../utils/moreRecipeAPI';
-import { log } from 'util';
 
 /**
  *
