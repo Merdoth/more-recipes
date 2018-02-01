@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import jwt from 'jsonwebtoken';
 // import { Route } from 'react-router-dom';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
 // import scss stylesheet
 import './scss/main.scss';
@@ -12,38 +12,25 @@ import './scss/main.scss';
 // import component
 import history from './utils/history';
 import store from './utils/store';
-import App from './components/App.jsx';
 import Home from './components/Home.jsx';
-import AuthenticateUser from './utils/AuthenticateUser';
-import CheckLoggedinUser from './utils/CheckLoggedinUser';
+import AuthRoutes from './utils/AuthRoutes';
 import setAuthToken from './utils/setAuthToken';
 import SigninPage from './components/Signin/SigninForm.jsx';
 import SignupPage from './components/Signup/SignupPage.jsx';
+import NavigationBar from './components/NavigationBar.jsx';
 import Footer from './components/Footer.jsx';
-import Profile from './components/Profile.jsx';
-import Recipes from './components/Recipes/Recipes.jsx';
-import AddRecipePage from './components/Recipes/AddRecipe/AddRecipePage.jsx';
-import UpdateRecipePage from
-  './components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
 import { setCurrentUser } from './actions/auth/authActions';
-import RecipeDetails from './components/Recipes/RecipeDetails.jsx';
-import UserRecipes from './components/Recipes/UserRecipes.jsx';
-import NotFound from './components/NotFound.jsx';
 
 const { localStorage } = window;
 const jwtToken = localStorage && localStorage.getItem('jwtToken');
 
 if (jwtToken) {
-  const valid = jwt.verify(
-    jwtToken,
-    'this23423girl223is#$3423crazy',
-    (err, result) => {
-      if (err) {
-        return err;
-      }
-      return result;
+  const valid = jwt.verify(jwtToken, process.env.SECRET_KEY, (err, result) => {
+    if (err) {
+      return err;
     }
-  );
+    return result;
+  });
   if (valid) {
     const decodedToken = jwt.decode(jwtToken);
     setAuthToken(jwtToken);
@@ -55,33 +42,18 @@ if (jwtToken) {
 
 render(
   <Provider store={store}>
-    <Router history={history}>
+    <BrowserRouter>
       <div>
-        <Route path="/" component={App} />
+        <NavigationBar />
         <Switch>
-          <Route exact path="/" component={CheckLoggedinUser(Home)} />
-          <Route path="/Signup" component={CheckLoggedinUser(SignupPage)} />
-          <Route path="/Signin" component={CheckLoggedinUser(SigninPage)} />
-          <Route path="/profile" component={AuthenticateUser(Profile)} />
-          <Route path="/recipes" component={AuthenticateUser(Recipes)} />
-          <Route
-            path="/addrecipe"
-            component={AuthenticateUser(AddRecipePage)}
-          />
-          <Route path="/myrecipes" component={AuthenticateUser(UserRecipes)} />
-          <Route
-            path="/updaterecipe/:recipeId"
-            component={AuthenticateUser(UpdateRecipePage)}
-          />
-          <Route
-            path="/recipe-details/:recipeId"
-            component={AuthenticateUser(RecipeDetails)}
-          />
-          <Route path="*" component={AuthenticateUser(NotFound)} />
+          <Route exact path="/" component={Home} />
+          <Route path="/Signup" component={SignupPage} />
+          <Route path="/Signin" component={SigninPage} />
+          <Route component={AuthRoutes} />
         </Switch>
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('app')
 );

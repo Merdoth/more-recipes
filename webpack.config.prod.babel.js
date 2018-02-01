@@ -3,6 +3,7 @@ import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import HtmlWebpackExcludeAssetsPlugin from 'html-webpack-exclude-assets-plugin';
+import Dotenv from 'dotenv-webpack';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production')
@@ -18,32 +19,29 @@ export default {
 
   target: 'web',
   output: {
-    path: path.join(__dirname, '/dist'), // Note: Physical files are only output by the production build task `npm run build`.
+    path: path.join(__dirname, '/dist/client'), // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: '/',
     filename: 'bundle.js'
   },
   plugins: [
     new webpack.DefinePlugin(GLOBALS),
     new webpack.optimize.UglifyJsPlugin(),
-    // new ExtractTextPlugin('styles.css'),
     extractSass,
     new HtmlWebpackPlugin({
-      filename: path.join(__dirname, 'dist/index.html'),
+      filename: 'index.html',
       template: path.join(__dirname, 'client/index.html'),
       inject: 'body',
       minify: false,
       excludeAssets: [/.js/]
     }),
-    new HtmlWebpackExcludeAssetsPlugin()
+    new HtmlWebpackExcludeAssetsPlugin(),
+    new Dotenv({ path: './.env' })
   ],
   module: {
     loaders: [
       {
         test: /.(js|jsx)$/,
-        include: [
-          path.join(__dirname, 'client'),
-          path.join(__dirname, 'server/shared/')
-        ],
+        include: [path.join(__dirname, 'client')],
         loaders: ['babel-loader']
       },
       {

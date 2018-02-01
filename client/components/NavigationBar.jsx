@@ -67,7 +67,7 @@ class NavigationBar extends React.Component {
               My recipes
             </a>
             <a className="dropdown-item" href="/favourites">
-             Favourites
+              Favourites
             </a>
 
             <a className="dropdown-item" href="/recipes">
@@ -118,8 +118,8 @@ class NavigationBar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark header">
-        <Link className="navbar-brand" to="/recipes">
-          MORE RECIPES
+        <Link className="navbar-brand" to="/">
+          MORECIPES
         </Link>
         <button
           className="navbar-toggler"

@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import Button from '../common/Button.jsx';
 import { getOneRecipe } from '../../actions/recipeActions/';
 import { addReview } from '../../actions/recipeActions/reviews';
+import { upVoteRecipe } from '../../actions/recipeActions/votes';
 import { Icons } from '../common/Icons.jsx';
 import RecipeCardImage from './RecipeCard/RecipeCardImage.jsx';
 import history from '../../utils/history';
@@ -36,6 +37,7 @@ class RecipeDetails extends Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
   /**
    * @param {object} event
@@ -71,9 +73,20 @@ class RecipeDetails extends Component {
   onSubmit(event) {
     const { recipeId } = this.props.match.params;
     event.preventDefault();
-    this.props.addReview(recipeId, this.state.review).then(() => {
-      this.props.getOneRecipe(recipeId);
-    });
+    this.props.addReview(recipeId, this.state.review);
+  }
+
+  /**
+   * @param {Object} event
+   *
+   * @returns { undefined }
+   *
+   * @memberof RecipeDetails
+   */
+  onClick(event) {
+    event.preventDefault();
+    const { id } = this.props;
+    this.props.upVotedRecipe(id, this.state);
   }
   /**
    *
@@ -92,7 +105,8 @@ class RecipeDetails extends Component {
     this.setState(() => ({
       recipe,
       review: currentReview,
-      reviews
+      reviews, 
+      votes
     }));
   }
 
@@ -103,7 +117,7 @@ class RecipeDetails extends Component {
    */
   render() {
     const recipeDetails = this.state.recipe;
-    const fetchedReviews = this.state.reviews.map(review => (
+    const fetchedReviews = this.props.reviews.map(review => (
       <div key={review.id} className="review">
         {review.review}
       </div>
@@ -123,7 +137,12 @@ class RecipeDetails extends Component {
             </div>
           </div>
           <div className="col-md-8 col-sm-8 recipeI">
-            <Icons likes={150} upvotes={150} downvotes={150} views={150} />
+            <Icons
+              likes={150}
+              upvotes={this.onClick}
+              downvotes={150}
+              views={150}
+            />
           </div>
         </div>
         <div className="row main">
@@ -208,6 +227,7 @@ const mapStateToProps = state => ({
   recipe: state.recipeReducer.recipes,
   reviews: state.recipeReducer.recipes.reviews,
   message: state.recipeReducer.message,
+  votes: state.recipeReducer.recipes.votes,
   error: state.recipeReducer.error
 });
 
@@ -215,7 +235,8 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getOneRecipe,
-      addReview
+      addReview,
+      upVoteRecipes
     },
     dispatch
   );

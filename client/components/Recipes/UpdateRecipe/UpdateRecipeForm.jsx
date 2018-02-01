@@ -100,15 +100,19 @@ class UpdateRecipeForm extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    const recipeId = this.props.match.params;
-    this.props.updateRecipe(recipeId, this.state).then(() => {
-      const { error, message } = this.state;
-      if (error.message) {
-        return swal('Too Bad!', error.message, 'error');
-      }
-      swal('Great!!!', message, 'success');
-      history.push(`/recipe-details/${recipeId}`);
-    });
+    const { recipeId } = this.props.match.params;
+    if (this.state.image === '') {
+      swal('Oops!', 'no image found', 'error');
+    } else {
+      this.props.updateRecipe(recipeId, this.state).then(() => {
+        const { error, message } = this.state;
+        if (error.message) {
+          return swal('Too Bad!', error.message, 'error');
+        }
+        swal('Great!!!', message, 'success');
+        history.push(`/recipe-details/${recipeId}`);
+      });
+    }
   }
   /**
    * @returns {undefined }
@@ -184,5 +188,4 @@ const mapStateToProps = state => ({
   error: state.recipeReducer.error
 });
 
-export default
-connect(mapStateToProps, { updateRecipe, getOneRecipe })(UpdateRecipeForm);
+export default connect(mapStateToProps, { updateRecipe, getOneRecipe })(UpdateRecipeForm);

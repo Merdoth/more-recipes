@@ -7,17 +7,25 @@ import { userSignupRequest } from '../../actions/auth/authActions';
  *
  * @extends { Component }
  *
+ * @param {object} props
+ *
  * @returns { undefined }
  */
-const SignupPage = () => (
-  <div>
-    <div className="row">
-      <div className="col-md-6 offset-md-3 cover">
-        <SignupForm userSignupRequest={userSignupRequest} />
+const SignupPage = (props) => {
+  const goToProfile = () => props.history.push('/profile');
+  return (
+    <div>
+      <div className="row">
+        <div className="col-md-6 offset-md-3 cover">
+          <SignupForm
+            userSignupRequest={userSignupRequest}
+            goToProfile={goToProfile}
+          />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default connect(null, {
   userSignupRequest

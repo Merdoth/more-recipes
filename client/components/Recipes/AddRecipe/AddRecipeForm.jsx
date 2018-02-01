@@ -69,7 +69,6 @@ class AddRecipeForm extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     this.props.addRecipes(this.state);
     // history.push('/recipes');
   }

@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import Button from '../common/Button.jsx';
 import InputField from '../common/InputField.jsx';
 import { login } from '../../actions/auth/authActions';
-import history from '../../utils/history';
 import { validateSignIn } from '../../validations';
 
 /**
@@ -56,7 +55,7 @@ class SigninForm extends Component {
             text: this.state.email.split('@')[0],
             icon: 'success'
           });
-          history.push('/profile');
+          this.props.history.push('/profile');
         })
         .catch((err) => {
           const error = err.data.message;
