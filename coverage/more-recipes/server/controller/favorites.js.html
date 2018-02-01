@@ -85,7 +85,22 @@
 40
 41
 42
-43</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -98,21 +113,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,42 +129,73 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import models from '../models';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// import models from models directory
+import models from '../models';
 &nbsp;
+// create reference to database model
 const Favorites = models.favorites;
+&nbsp;
 /**
  * @class
  */
 class Favorite {
   /**
+   * @description add favourite controller
    *
-   * @param {req} req
-   * @param {res} res
-   * @return {favorite} favorite
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
+   *
    */
   static addFavorite(req, res) <span class="cstat-no" title="statement not covered" >{</span>
     const { userId, recipeId } = <span class="cstat-no" title="statement not covered" >req.body;</span>
 <span class="cstat-no" title="statement not covered" >    Favorites.create({</span>
       userId,
-      recipeId,
-    }).then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >foundRecipe =&gt; res.status(200).send(foundRecipe))</span></span>
+      recipeId
+    })
+      .then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >foundRecipe =&gt; res.status(200).send(foundRecipe))</span></span>
       .catch(<span class="fstat-no" title="function not covered" >(</span>err) =&gt; {
 <span class="cstat-no" title="statement not covered" >        res.status(404).send({ err });</span>
       });
   }
 &nbsp;
   /**
- *
- * @param {req} req
- * @param {res} res
- * @return {favorites} favorites
- */
+   *
+   * @description get user favourites controller
+   *
+   * @param {Object} req - Request object
+   *
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
+   *
+   */
   static getFavorites(req, res) {
 <span class="cstat-no" title="statement not covered" >    return Favorites.all()</span>
       .then(<span class="fstat-no" title="function not covered" >(</span>favorites) =&gt; {
@@ -175,7 +214,7 @@ export default Favorite;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jan 24 2018 18:04:29 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jan 29 2018 23:20:49 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

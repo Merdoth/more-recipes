@@ -143,6 +143,19 @@ export const addReview = (recipeId, review) =>
 
 /**
  *
+ * @description upvote user recipe.
+ *
+ * @param {Object} id
+ * @param {Object} callback
+ *
+ * @returns {undefined}
+ *
+ */
+export const upVoteRecipe = (id, callback) =>
+  axios.post(`/api/v1/recipes/${id}/votes`, { callback });
+
+/**
+ *
  * @description allows a user get all top recipes
  *
  * @param {Object} object
@@ -174,4 +187,12 @@ export const getOneRecipe = recipeId =>
  * @returns {undefined}
  *
  */
-export const deleteRecipe = id => axios.delete(`/api/v1/recipes/${id}`);
+export const deleteRecipe = id =>
+  axios({
+    method: 'DELETE',
+    url: `/api/v1/recipes/${id}`,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  });
+// axios.delete(`/api/v1/recipes/${id}`);
