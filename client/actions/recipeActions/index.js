@@ -1,11 +1,10 @@
 import swal from 'sweetalert';
 import * as types from '../actionTypes';
-
+import history from '../../utils/history';
 import * as api from './../../utils/moreRecipeAPI';
+import { log } from 'util';
 
 /**
- *
- * @method
  *
  * @param {object} recipes
  *
@@ -20,8 +19,6 @@ export const getTopRecipesSuccess = recipes => ({
  *
  * @description dispatches action to get top recipes
  *
- * @method
- *
  * @param { object } object
  *
  * @returns { undefined }
@@ -34,8 +31,6 @@ export const getTopRecipes = () => dispatch =>
 
 /**
  *
- * @method
- *
  * @param { object } recipe
  *
  * @returns { undefined }
@@ -45,8 +40,6 @@ export const getOneRecipeSuccess = recipe => ({
   recipe
 });
 /**
- *
- * @method
  *
  * @param { object } error
  *
@@ -61,8 +54,6 @@ export const getOneRecipeFailure = error => ({
  *
  * @description dispatches action to get one recipe
  *
- * @method
- *
  * @param { object } recipeId
  *
  * @returns { undefined }
@@ -70,8 +61,8 @@ export const getOneRecipeFailure = error => ({
 export const getOneRecipe = recipeId => dispatch =>
   api
     .getOneRecipe(recipeId)
-    .then((response) => {
-      const recipe = response.data;
+    .then((res) => {
+      const recipe = res.data;
       dispatch(getOneRecipeSuccess(recipe));
     })
     .catch((error) => {
@@ -79,8 +70,6 @@ export const getOneRecipe = recipeId => dispatch =>
     });
 
 /**
- *
- * @method
  *
  * @param {object} message
  *
@@ -94,8 +83,6 @@ export const deleteRecipeSuccess = message => ({
 
 /**
  *
- * @method
- *
  * @param {object} error
  *
  * @returns {Object} payload
@@ -108,8 +95,6 @@ export const deleteRecipeFailure = error => ({
 
 /**
  * @description this dispatches an action that deletes a recipe
- *
- * @method
  *
  * @param {Integer} id
  *
@@ -126,8 +111,6 @@ export const deleteRecipe = id => dispatch =>
       dispatch(deleteRecipeFailure(error));
     });
 /**
- * @method
- *
  * @param {Object} recipes
  *
  * @returns {Object} payload
@@ -141,8 +124,6 @@ export const getAllRecipesSuccess = recipes => ({
 /**
  * @description this dispatches an action that gets all recipes
  *
- * @method
- *
  * @param {object} object
  *
  * @returns {Object} payload
@@ -155,8 +136,48 @@ export const getAllRecipes = () => dispatch =>
   });
 
 /**
+ * @param {Object} recipes
  *
- * @method
+ * @returns {Object} payload
+ *
+ */
+export const getUserRecipesSuccess = recipes => ({
+  type: types.GET_USER_RECIPES_SUCCESS,
+  recipes
+});
+
+/**
+ * @param {Object} error
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getUserRecipesFailure = error => ({
+  type: types.GET_USER_RECIPES_FAILURE,
+  error
+});
+/**
+ *
+ * @description dispatches action to get one recipe
+ *
+ * @param { object } userId
+ * @param { object } recipes
+ *
+ * @returns { undefined }
+ */
+export const getUserRecipes = (userId, recipes) => dispatch =>
+  api
+    .getUserRecipes(userId, recipes)
+    .then((res) => {
+      if (res) {
+        dispatch(getUserRecipesSuccess({ recipes: res.data }));
+      }
+    })
+
+    .catch((error) => {
+      dispatch(getUserRecipesFailure(error.data));
+    });
+/**
  *
  * @param {object} recipe
  *
@@ -169,7 +190,6 @@ export const updateRecipeSuccess = recipe => ({
 });
 
 /**
- * @method
  *
  * @param {object} error
  *
@@ -184,10 +204,7 @@ export const updateRecipeFailure = error => ({
 /**
  * @description this dispatches an action that updates recipes
  *
- * @method
- *
  * @param {Integer} id
- *
  * @param {Object} recipes
  *
  * @returns {Object} payload
@@ -209,7 +226,6 @@ export const updateRecipe = (id, recipes) => dispatch =>
     });
 
 /**
- * @method
  *
  * @param {object} recipe
  *
@@ -222,7 +238,6 @@ export const addRecipesSuccess = recipe => ({
 });
 
 /**
- * @method
  *
  * @param {object} error
  *
@@ -236,8 +251,6 @@ export const addRecipesFailure = error => ({
 
 /**
  * @description this dispatches an action that adds a recipe
- *
- * @method
  *
  * @param {object} recipes
  *
@@ -255,6 +268,7 @@ export const addRecipes = recipes => dispatch =>
           text: res.data.message,
           icon: 'success'
         });
+        history.push('/recipes');
       }
     })
     .catch((error) => {

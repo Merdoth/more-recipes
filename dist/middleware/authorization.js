@@ -14,6 +14,7 @@ var _dotenv2 = _interopRequireDefault(_dotenv);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import modules from dependecies
 _dotenv2.default.config();
 
 exports.default = {

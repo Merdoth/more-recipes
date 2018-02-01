@@ -7,18 +7,17 @@ import { userSignupRequest } from '../../actions/auth/authActions';
  *
  * @extends { Component }
  *
- * @returns { void }
+ * @returns { undefined }
  */
 const SignupPage = () => (
-      <div>
-        <div className="row">
-          <div className="col-md-6 offset-md-3 cover">
-            <SignupForm />
-          </div>
-        </div>
+  <div>
+    <div className="row">
+      <div className="col-md-6 offset-md-3 cover">
+        <SignupForm userSignupRequest={userSignupRequest} />
       </div>
+    </div>
+  </div>
 );
-
 
 export default connect(null, {
   userSignupRequest

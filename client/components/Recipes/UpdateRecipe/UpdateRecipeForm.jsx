@@ -18,11 +18,11 @@ import { updateRecipe, getOneRecipe } from '../../../actions/recipeActions/';
 class UpdateRecipeForm extends Component {
   /**
    * Creates an instance of UpdateRecipeForm.
-   * @param {any} props
+   * @param {object} props
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   constructor(props) {
     super(props);
@@ -38,22 +38,22 @@ class UpdateRecipeForm extends Component {
     this.onImageChange = this.onImageChange.bind(this);
   }
   /**
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
     this.props.getOneRecipe(recipeId);
   }
   /**
-   * @param {any} nextProps
+   * @param {object} nextProps
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   componentWillReceiveProps(nextProps) {
     const { recipe, error } = nextProps;
@@ -71,36 +71,36 @@ class UpdateRecipeForm extends Component {
     });
   }
   /**
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
   /**
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   onImageChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.files[0] });
   }
   /**
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   onSubmit(event) {
     event.preventDefault();
-    const { recipeId } = this.props.match.params;
+    const recipeId = this.props.match.params;
     this.props.updateRecipe(recipeId, this.state).then(() => {
       const { error, message } = this.state;
       if (error.message) {
@@ -111,7 +111,7 @@ class UpdateRecipeForm extends Component {
     });
   }
   /**
-   * @returns {void }
+   * @returns {undefined }
    *
    * @memberof UpdateRecipeForm
    */
@@ -184,4 +184,5 @@ const mapStateToProps = state => ({
   error: state.recipeReducer.error
 });
 
-export default connect(mapStateToProps, { updateRecipe, getOneRecipe })(UpdateRecipeForm);
+export default
+connect(mapStateToProps, { updateRecipe, getOneRecipe })(UpdateRecipeForm);

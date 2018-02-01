@@ -12,56 +12,22 @@ import { getAllRecipes } from '../../actions/recipeActions/';
  */
 class Recipes extends Component {
   /**
-   * Creates an instance of  Recipes.
-   * @param {any} props
    *
    * @memberof  Recipes
    *
-   * @returns { void }
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      recipes: []
-    };
-  }
-  /**
-   * @param {any} event
-   *
-   * @memberof  Recipes
-   *
-   * @returns { void }
+   * @returns { undefined }
    */
   componentDidMount() {
-    this.props.getAllRecipes().then(() => {
-      this.setState({
-        recipes: this.props.recipes
-      });
-    });
+    this.props.getAllRecipes();
   }
-
   /**
-   * @param {any} nextProps
-   *
-   * @memberof  Recipes
-   *
-   * @returns { void }
-   */
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      recipes: nextProps.recipes
-    });
-  }
-
-  /**
-   * @returns {void }
+   * @returns { undefined }
    *
    * @memberof  Recipes
    */
   render() {
-    const allRecipes = this.state.recipes;
-    const recipes = allRecipes.map(recipe => (
-      <RecipeCard key={recipe.id} recipeList={recipe} />
+    const recipes = this.props.recipes.map(recipe => (
+      <RecipeCard key={`recipes-${recipe.id}`} recipeList={recipe} />
     ));
     return (
       <div>
@@ -70,9 +36,7 @@ class Recipes extends Component {
             <h2>Recipes</h2>
           </div>
           <div className="recipe-header-picture">
-            <p>Feel free to manage your own account</p>
-            <img src="" alt="" />
-            <img src="" alt="" />
+            <p>Try, contribute to others recipe value by adding how your feel about the recipes</p>
           </div>
         </div>
         <hr />
@@ -85,7 +49,7 @@ class Recipes extends Component {
 }
 
 const mapStateToProps = state => ({
-  recipes: state.recipesReducer.rows
+  recipes: state.recipesReducer.rows || []
 });
 
 export default connect(mapStateToProps, { getAllRecipes })(Recipes);

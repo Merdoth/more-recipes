@@ -19,7 +19,17 @@ export default (state = initialState, action = {}) => {
         ...action.recipes
       };
 
+    case types.GET_USER_RECIPES_SUCCESS:
+      return {
+        ...state,
+        ...action.recipes
+      };
 
+    case types.GET_USER_RECIPES_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
     default:
       return state;
   }

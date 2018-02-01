@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Button from '../common/Button.jsx';
 import { getOneRecipe } from '../../actions/recipeActions/';
-import { postReview } from '../../actions/recipeActions/reviews';
+import { addReview } from '../../actions/recipeActions/reviews';
 import { Icons } from '../common/Icons.jsx';
 import RecipeCardImage from './RecipeCard/RecipeCardImage.jsx';
 import history from '../../utils/history';
@@ -21,39 +21,39 @@ import RecipeDetailsFooter from './RecipeCard/RecipeDetailsFooter.jsx';
 class RecipeDetails extends Component {
   /**
    * Creates an instance of RecipeDetails.
-   * @param {any} props
+   * @param {object} props
    *
    * @memberof RecipeDetails
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   constructor(props) {
     super(props);
     this.state = {
       recipe: {},
       review: '',
-      reviews: []
+      reviews: this.props.reviews || []
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
   /**
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof RecipeDetails
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
     this.props.getOneRecipe(recipeId);
   }
   /**
-   * @param {any} event
+   * @param {object} event
    *
    * @memberof RecipeDetails
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   onChange(event) {
     this.setState({
@@ -62,16 +62,16 @@ class RecipeDetails extends Component {
   }
 
   /**
-   * @param {any} event
+   * @param {Object} event
    *
-   * @returns { void }
+   * @returns { undefined }
    *
    * @memberof RecipeDetails
    */
   onSubmit(event) {
     const { recipeId } = this.props.match.params;
     event.preventDefault();
-    this.props.postReview(recipeId, this.state.review).then(() => {
+    this.props.addReview(recipeId, this.state.review).then(() => {
       this.props.getOneRecipe(recipeId);
     });
   }
@@ -79,7 +79,7 @@ class RecipeDetails extends Component {
    *
    * @param {object} nextProps
    *
-   * @returns { void }
+   * @returns { undefined }
    */
   componentWillReceiveProps(nextProps) {
     const {
@@ -97,7 +97,7 @@ class RecipeDetails extends Component {
   }
 
   /**
-   * @returns {void }
+   * @returns {undefined }
    *
    * @memberof RecipeDetails
    */
@@ -105,8 +105,7 @@ class RecipeDetails extends Component {
     const recipeDetails = this.state.recipe;
     const fetchedReviews = this.state.reviews.map(review => (
       <div key={review.id} className="review">
-        {' '}
-        {review.review}{' '}
+        {review.review}
       </div>
     ));
 
@@ -169,18 +168,18 @@ class RecipeDetails extends Component {
           </div>
           <hr />
           <div className="reviewedView">
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-8">
-                  <div class="panel panel-white post panel-shadow">
-                    <div class="post-description">
+            <div className="container">
+              <div className="row">
+                <div className="col-sm-8">
+                  <div className="panel panel-white post panel-shadow">
+                    <div className="post-description">
                       {fetchedReviews}
-                      <div class="stats">
-                        <a href="#" class="btn btn-default stat-item">
-                          <i class="fa fa-thumbs-up icon" />2
+                      <div className="stats">
+                        <a href="#" className="btn btn-default stat-item">
+                          <i className="fa fa-thumbs-up icon" />2
                         </a>
-                        <a href="#" class="btn btn-default stat-item">
-                          <i class="fa fa-thumbs-down icon" />12
+                        <a href="#" className="btn btn-default stat-item">
+                          <i className="fa fa-thumbs-down icon" />12
                         </a>
                       </div>
                     </div>
@@ -194,11 +193,11 @@ class RecipeDetails extends Component {
     );
   }
 }
-RecipeDetails.propTypes = {
-  message: PropTypes.string,
-  recipe: PropTypes.object,
-  error: PropTypes.object
-};
+// RecipeDetails.propTypes = {
+//   message: PropTypes.string,
+//   recipe: PropTypes.object,
+//   error: PropTypes.object
+// };
 
 RecipeDetails.defaultValue = {
   recipe: {},
@@ -216,7 +215,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getOneRecipe,
-      postReview
+      addReview
     },
     dispatch
   );

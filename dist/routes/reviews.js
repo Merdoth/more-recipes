@@ -8,14 +8,23 @@ var _reviews = require('../controller/reviews');
 
 var _reviews2 = _interopRequireDefault(_reviews);
 
-var _reviewsValidator = require('../middleware/reviewsValidator');
+var _validateInput = require('../middleware/validateInput');
 
-var _reviewsValidator2 = _interopRequireDefault(_reviewsValidator);
+var _authorization = require('../middleware/authorization');
+
+var _authorization2 = _interopRequireDefault(_authorization);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * @description reviews routes
+ *
+ * @param {Function} router
+ *
+ * @returns {void}
+ */
 var reviewRoutes = function reviewRoutes(router) {
-  router.post('/recipes/:id/reviews', _reviewsValidator2.default, _reviews2.default.addReview);
+  router.post('/recipes/:recipeId/reviews', _authorization2.default.authorize, _validateInput.reviewsValidator, _validateInput.validateParams, _reviews2.default.addReview);
 };
 
 exports.default = reviewRoutes;

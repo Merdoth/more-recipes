@@ -8,8 +8,6 @@ import {
 import { recipeValidator } from '../../../server/middleware/validateInput';
 
 /**
- * @method
- *
  * @param {object} error
  *
  * @returns {Object} payload
@@ -21,8 +19,6 @@ export const upvoteRecipeFailure = error => ({
 });
 
 /**
- * @method
- *
  * @param {object} recipe
  *
  * @returns {Object} payload
@@ -34,8 +30,6 @@ export const upvoteRecipeSuccess = recipe => ({
 });
 
 /**
- * @method
- *
  * @param {object} error
  *
  * @returns {Object} payload
@@ -62,7 +56,6 @@ export const downvoteRecipeSuccess = recipes => ({
  * @description dispatches an action to upvote a recipe
  *
  * @param {Integer} id
- *
  * @param {object } callback
  *
  * @returns {undefined}
@@ -96,7 +89,6 @@ export const upvoteRecipe = (id, callback) => (dispatch) => {
  * @description dispatches an action to downvote a recipe
  *
  * @param {Integer} id
- *
  * @param {object } callback
  *
  * @returns {undefined}
