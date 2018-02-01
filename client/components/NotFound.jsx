@@ -10,12 +10,9 @@ import React from 'react';
  */
 const NotFound = () => (
   <div>
-    <div className="main">
-      <div className="container">
-        <h1 className="center notFound">Page Not Found</h1>
-      </div>
+    <div className="notFound">
     </div>
-  </div>
+    </div>
 );
 
 export default NotFound;

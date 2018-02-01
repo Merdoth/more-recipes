@@ -27,6 +27,7 @@ import UpdateRecipePage from
   './components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
 import { setCurrentUser } from './actions/auth/authActions';
 import RecipeDetails from './components/Recipes/RecipeDetails.jsx';
+import UserRecipes from './components/Recipes/UserRecipes.jsx';
 import NotFound from './components/NotFound.jsx';
 
 const { localStorage } = window;
@@ -67,6 +68,7 @@ render(
             path="/addrecipe"
             component={AuthenticateUser(AddRecipePage)}
           />
+          <Route path="/myrecipes" component={AuthenticateUser(UserRecipes)} />
           <Route
             path="/updaterecipe/:recipeId"
             component={AuthenticateUser(UpdateRecipePage)}

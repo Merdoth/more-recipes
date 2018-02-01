@@ -85,7 +85,7 @@ export default (state = initialState, action = {}) => {
     case types.POST_REVIEW_SUCCESS:
       return {
         ...state,
-        recipes: [...state.recipes, action.recipe]
+        recipes: [...state.recipes, action.review]
       };
 
     case types.POST_REVIEW_FAILURE:

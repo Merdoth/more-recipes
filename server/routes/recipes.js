@@ -12,10 +12,10 @@ import { recipeValidator, validateParams } from '../middleware/validateInput';
 const recipeRoutes = (router) => {
   router.post('/recipes', auth.authorize, recipeValidator, recipes.addRecipe);
   router.get('/recipes', recipes.getAllRecipes);
-  router.get('/recipes/:userId', recipes.getUserRecipes);
-  router.get('/recipe/:recipeId', recipes.getOneRecipe);
+  router.get('/myrecipes', auth.authorize, recipes.getUserRecipes);
+  router.get('/recipes/:recipeId', recipes.getOneRecipe);
   router.put(
-    '/recipe/:id',
+    '/recipes/:id',
     auth.authorize,
     validateParams,
     recipes.updateUserRecipes

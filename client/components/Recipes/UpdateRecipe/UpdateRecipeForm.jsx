@@ -100,7 +100,7 @@ class UpdateRecipeForm extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    const { recipeId } = this.props.match.params;
+    const recipeId = this.props.match.params;
     this.props.updateRecipe(recipeId, this.state).then(() => {
       const { error, message } = this.state;
       if (error.message) {

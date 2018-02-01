@@ -20,6 +20,17 @@ export const getOneUser = () => axios.get('/api/v1/users/:id');
 
 /**
  *
+ * @description get a specific users recipes
+ *
+ * @param {Object} object
+ *
+ * @returns {undefined}
+ *
+ */
+export const getUserRecipes = () => axios.get('/api/v1/myrecipes');
+
+/**
+ *
  * @description gets all recipes
  *
  * @param {Object} object
@@ -114,7 +125,7 @@ export const updateRecipeRequest = (id, recipes) => {
       preparation,
       image: res.data.url
     };
-    return axios.put(`/api/v1/recipe/${id}`, recipeData, header());
+    return axios.put(`/api/v1/recipes/${id}`, recipeData, header());
   });
 };
 /**
@@ -151,7 +162,8 @@ export const getTopRecipes = () =>
  * @returns {undefined}
  *
  */
-export const getOneRecipe = recipeId => axios.get(`/api/v1/recipe/${recipeId}`);
+export const getOneRecipe = recipeId =>
+  axios.get(`/api/v1/recipes/${recipeId}`);
 
 /**
  *

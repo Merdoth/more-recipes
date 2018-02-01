@@ -145,6 +145,7 @@ class Recipe {
    * @returns {Object} json - payload
    */
   static getUserRecipes(req, res) {
+    const userId = req.decoded.id;
     if (req.query.sort === 'createdAt' && req.query.order === 'des') {
       query = {
         include: [{ model: reviews, votes }],
@@ -155,16 +156,17 @@ class Recipe {
         include: [{ model: reviews, votes }]
       };
     }
-    recipes
-      .findById(query)
+    return recipes
+      .findAll({
+        where: { userId }
+      })
       .then((recipesFound) => {
-        if (recipes.length < 1) {
+        if (recipesFound.length < 1) {
           return res.status(404).send({
             message: 'No recipes found. Please try to create some.'
           });
         }
-
-        if (recipes) {
+        if (recipesFound) {
           return res.status(200).send(recipesFound);
         }
         return res.status(404).send({ message: 'Recipe not found' });
@@ -183,10 +185,7 @@ class Recipe {
   static updateUserRecipes(req, res) {
     const { id } = req.params;
     const {
-      recipeName,
-      preparation,
-      ingredients,
-      image
+      recipeName, preparation, ingredients, image
     } = req.body;
 
     return (
@@ -308,11 +307,7 @@ class Recipe {
          * and return totalCount, currentPage, pageCount, and pageSize
          * to pagenation
          */
-        const paginate = pagination(
-          query.limit,
-          query.offset,
-          recipes.count
-        );
+        const paginate = pagination(query.limit, query.offset, recipes.count);
 
         return res.status(200).send({
           paginate,

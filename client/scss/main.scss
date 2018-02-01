@@ -690,5 +690,8 @@ input {
 }
 
 .notFound {
-  margin-top: 200px;
+  background: url('/assets/image/404-background.jpg');
+  height: 800px;
+  width: 100%;
+  object-fit: cover;
 }

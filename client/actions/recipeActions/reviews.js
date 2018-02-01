@@ -37,6 +37,7 @@ export const addReview = (recipeId, review) => dispatch =>
   api
     .addReview(recipeId, review)
     .then((res) => {
+      console.log(res.data, 'res data');
       const { reviewReturned } = res.data;
       dispatch(addReviewSuccess(reviewReturned));
       swal({

@@ -1,7 +1,8 @@
 import swal from 'sweetalert';
 import * as types from '../actionTypes';
-
+import history from '../../utils/history';
 import * as api from './../../utils/moreRecipeAPI';
+import { log } from 'util';
 
 /**
  *
@@ -60,8 +61,8 @@ export const getOneRecipeFailure = error => ({
 export const getOneRecipe = recipeId => dispatch =>
   api
     .getOneRecipe(recipeId)
-    .then((response) => {
-      const recipe = response.data;
+    .then((res) => {
+      const recipe = res.data;
       dispatch(getOneRecipeSuccess(recipe));
     })
     .catch((error) => {
@@ -134,6 +135,48 @@ export const getAllRecipes = () => dispatch =>
     dispatch(getAllRecipesSuccess(recipes));
   });
 
+/**
+ * @param {Object} recipes
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getUserRecipesSuccess = recipes => ({
+  type: types.GET_USER_RECIPES_SUCCESS,
+  recipes
+});
+
+/**
+ * @param {Object} error
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getUserRecipesFailure = error => ({
+  type: types.GET_USER_RECIPES_FAILURE,
+  error
+});
+/**
+ *
+ * @description dispatches action to get one recipe
+ *
+ * @param { object } userId
+ * @param { object } recipes
+ *
+ * @returns { undefined }
+ */
+export const getUserRecipes = (userId, recipes) => dispatch =>
+  api
+    .getUserRecipes(userId, recipes)
+    .then((res) => {
+      if (res) {
+        dispatch(getUserRecipesSuccess({ recipes: res.data }));
+      }
+    })
+
+    .catch((error) => {
+      dispatch(getUserRecipesFailure(error.data));
+    });
 /**
  *
  * @param {object} recipe
@@ -225,6 +268,7 @@ export const addRecipes = recipes => dispatch =>
           text: res.data.message,
           icon: 'success'
         });
+        history.push('/recipes');
       }
     })
     .catch((error) => {

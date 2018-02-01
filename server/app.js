@@ -22,7 +22,8 @@ const port = process.env.PORT || 9000;
 const compiler = webpack(webpackConfig);
 
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, './../assets')));
+app.use('/assets', express.static(path.join(__dirname, '../assets')));
+
 if (process.env.NODE_ENV !== 'development') {
   app.use(express.static(path.join(__dirname, './../dist')));
 }

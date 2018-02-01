@@ -11,7 +11,6 @@ import NavigationBar from './NavigationBar.jsx';
 const App = () => (
   <div>
     <NavigationBar />
-    {/* {children} */}
   </div>
 );
 

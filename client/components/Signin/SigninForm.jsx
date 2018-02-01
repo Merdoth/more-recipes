@@ -94,8 +94,6 @@ class SigninForm extends Component {
    * @returns {undefined}
    */
   handleErrors(errors) {
-    console.log('=== In handleErrors errors', errors);
-    console.log('=== NONSENSE FUNCTION!!!!!!!!!!');
     Object.keys(errors).forEach((error) => {
       swal({
         title: 'Oops!',
@@ -111,7 +109,6 @@ class SigninForm extends Component {
    * @memberof SignupForm
    */
   render() {
-    const { errors } = this.state;
     return (
       <div className="row">
         <div className="col-md-4 offset-md-4 cover1">
