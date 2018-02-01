@@ -1,12 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
     'babel-polyfill',
     'webpack-hot-middleware/client',
-    path.join(__dirname, '/client/index.js'),
+    path.join(__dirname, '/client/index.js')
   ],
   output: {
     path: '/',
@@ -15,7 +16,8 @@ module.exports = {
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new Dotenv({ path: './.env' })
   ],
   module: {
     loaders: [
@@ -26,11 +28,13 @@ module.exports = {
           path.join(__dirname, 'server')
         ],
         loaders: ['react-hot-loader/webpack', 'babel-loader']
-      }, {
+      },
+      {
         test: /\.scss$/,
         include: path.join(__dirname, 'client'),
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
-      }, {
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
           {
@@ -46,13 +50,13 @@ module.exports = {
             options: {
               query: {
                 mozjpeg: {
-                  progressive: true,
+                  progressive: true
                 },
                 gifsicle: {
-                  interlaced: true,
+                  interlaced: true
                 },
                 optipng: {
-                  optimizationLevel: 7,
+                  optimizationLevel: 7
                 }
               }
             }

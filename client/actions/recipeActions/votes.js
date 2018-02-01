@@ -5,7 +5,7 @@ import {
   DOWNVOTE_RECIPE_FAILURE,
   DOWNVOTE_RECIPE_SUCCESS
 } from '../actionTypes';
-import { recipeValidator } from '../../../server/middleware/validateInput';
+
 
 /**
  * @param {object} error
@@ -15,7 +15,7 @@ import { recipeValidator } from '../../../server/middleware/validateInput';
  */
 export const upvoteRecipeFailure = error => ({
   type: UPVOTE_RECIPE_FAILURE,
-  error: recipeValidator
+  error
 });
 
 /**
@@ -37,7 +37,7 @@ export const upvoteRecipeSuccess = recipe => ({
  */
 export const downvoteRecipeFailure = error => ({
   type: DOWNVOTE_RECIPE_FAILURE,
-  error: recipeValidator
+  error
 });
 
 /**

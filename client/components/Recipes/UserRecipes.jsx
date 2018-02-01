@@ -19,7 +19,7 @@ class UserRecipes extends Component {
    * @returns { undefined }
    */
   componentDidMount() {
-    const { userId } = this.props.match.params;
+    const userId = this.props.match.params;
     this.props.getUserRecipes(userId);
   }
   /**

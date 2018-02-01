@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
-import history from '../../utils/history';
 import { validateSignUp } from '../../validations';
 import { userSignupRequest } from '../../actions/auth/authActions';
 import InputField from '../common/InputField.jsx';
@@ -61,7 +60,7 @@ class SignupForm extends Component {
             text: this.state.email.split('@')[0],
             icon: 'success'
           });
-          history.push('/profile');
+          this.props.goToProfile();
         })
         .catch((err) => {
           const error = err.data.message;
@@ -169,7 +168,8 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired
+  userSignupRequest: PropTypes.func.isRequired,
+  goToProfile: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = { userSignupRequest };
