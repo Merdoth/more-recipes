@@ -20,6 +20,7 @@ const port = process.env.PORT || 9000;
 
 app.use(logger('dev'));
 app.use('/assets', express.static(path.join(__dirname, './../client/assets')));
+app.use('/api-docs', express.static(path.join(__dirname, './../api-docs')));
 
 if (process.env.NODE_ENV !== 'development') {
   app.use(express.static(path.join(__dirname, './../client')));
