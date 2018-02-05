@@ -9,11 +9,8 @@ import auth from '../middleware/authorization';
  * @returns {void}
  */
 const reviewRoutes = (router) => {
-  router.post(
-    '/recipes/:recipeId/reviews',
-    auth.authorize,
-    reviews.addReview
-  );
+  router.post('/recipes/:recipeId/reviews', auth.authorize, reviews.addReview);
+  router.get('/recipes/:recipeId/reviews', auth.authorize, reviews.getReview);
 };
 
 export default reviewRoutes;

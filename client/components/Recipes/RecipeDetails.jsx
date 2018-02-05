@@ -4,9 +4,17 @@ import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Button from '../common/Button.jsx';
-import { getOneRecipe } from '../../actions/recipeActions/';
+import {
+  getOneRecipe,
+  addFavourite,
+  getFavourite,
+  removeFavourite
+} from '../../actions/recipeActions/';
 import { addReview } from '../../actions/recipeActions/reviews';
-import { upVoteRecipe } from '../../actions/recipeActions/votes';
+import {
+  upvoteRecipe,
+  downVoteRecipe
+} from '../../actions/recipeActions/votes';
 import { Icons } from '../common/Icons.jsx';
 import RecipeCardImage from './RecipeCard/RecipeCardImage.jsx';
 import history from '../../utils/history';
@@ -33,11 +41,13 @@ class RecipeDetails extends Component {
     this.state = {
       recipe: {},
       review: '',
-      reviews: this.props.reviews || []
+      favourites: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.handleUpVote = this.handleUpVote.bind(this);
+    this.handleDownVote = this.handleDownVote.bind(this);
+    this.handleFavourite = this.handleFavourite.bind(this);
   }
   /**
    * @param {object} event
@@ -49,6 +59,7 @@ class RecipeDetails extends Component {
   componentDidMount() {
     const { recipeId } = this.props.match.params;
     this.props.getOneRecipe(recipeId);
+    this.props.getFavourite(recipeId);
   }
   /**
    * @param {object} event
@@ -83,10 +94,40 @@ class RecipeDetails extends Component {
    *
    * @memberof RecipeDetails
    */
-  onClick(event) {
+  handleUpVote(event) {
     event.preventDefault();
-    const { id } = this.props;
-    this.props.upVotedRecipe(id, this.state);
+    const { id } = this.props.recipe;
+    this.props.upvoteRecipe(id);
+  }
+  /**
+   * @param {Object} event
+   *
+   * @returns { undefined }
+   *
+   * @memberof RecipeDetails
+   */
+  handleDownVote(event) {
+    event.preventDefault();
+    const { id } = this.props.recipe;
+    this.props.downVoteRecipe(id);
+  }
+
+  /**
+   * @param {Object} event
+   *
+   * @returns { undefined }
+   *
+   * @memberof RecipeDetails
+   */
+  handleFavourite(event) {
+    event.preventDefault();
+    const { id } = this.props.recipe;
+    if (this.state.recipe.favourite) {
+      this.props.removeFavourite(id);
+      this.props.getOneRecipe(id);
+    } else {
+      this.props.addFavourite(id);
+    }
   }
   /**
    *
@@ -95,18 +136,11 @@ class RecipeDetails extends Component {
    * @returns { undefined }
    */
   componentWillReceiveProps(nextProps) {
-    const {
-      recipe, error, currentReview, reviews
-    } = nextProps;
-    if (error.status === 'Not Found') {
-      swal('Too Bad', 'No Such Recipe', 'error');
-      history.push('/recipes');
-    }
+    const { recipe, currentReview, reviews } = nextProps;
     this.setState(() => ({
       recipe,
       review: currentReview,
-      reviews, 
-      votes
+      reviews
     }));
   }
 
@@ -116,6 +150,8 @@ class RecipeDetails extends Component {
    * @memberof RecipeDetails
    */
   render() {
+    const selected = this.state.recipe.favourite ? 'selected' : '';
+    const goToRecipes = route => this.props.history.push(route);
     const recipeDetails = this.state.recipe;
     const fetchedReviews = this.props.reviews.map(review => (
       <div key={review.id} className="review">
@@ -132,30 +168,49 @@ class RecipeDetails extends Component {
                 <RecipeCardImage
                   src={recipeDetails ? recipeDetails.image : ''}
                 />
-                <RecipeDetailsFooter id={recipeDetails.id} />
+                <RecipeDetailsFooter
+                  id={recipeDetails.id}
+                  goToRecipes={goToRecipes}
+                />
               </div>
             </div>
           </div>
           <div className="col-md-8 col-sm-8 recipeI">
-            <Icons
-              likes={150}
-              upvotes={this.onClick}
-              downvotes={150}
-              views={150}
-            />
+            <div className="stats">
+              <span
+                onClick={this.handleUpVote}
+                className="btn btn-default stats-item"
+              >
+                <i className="fa fa-thumbs-up iconStat" />
+                {recipeDetails.upVotes}
+              </span>
+              <span
+                onClick={this.handleDownVote}
+                className="btn btn-default stats-item"
+              >
+                <i className="fa fa-thumbs-down iconStat" />
+                {recipeDetails.downVotes}
+              </span>
+              <span
+                onClick={this.handleFavourite}
+                className={`btn btn-default stats-item ${selected}`}
+              >
+                <i className="fa fa-heart iconStat" />
+              </span>
+            </div>
           </div>
         </div>
         <div className="row main">
           <div className="col-xs-12 col-sm-4 main-aside">
             <h2 id="Popular">Ingredients</h2>
             <hr />
-            <h4>{recipeDetails.ingredients}</h4>
+            <p>{recipeDetails.ingredients}</p>
           </div>
 
           <div className="col-xs-12 col-sm-8 main-section">
             <h2 id="title">Preparation</h2>
             <hr />
-            <h4>{recipeDetails.preparation}</h4>
+            <p>{recipeDetails.preparation}</p>
           </div>
         </div>
         <hr />
@@ -192,15 +247,7 @@ class RecipeDetails extends Component {
                 <div className="col-sm-8">
                   <div className="panel panel-white post panel-shadow">
                     <div className="post-description">
-                      {fetchedReviews}
-                      <div className="stats">
-                        <a href="#" className="btn btn-default stat-item">
-                          <i className="fa fa-thumbs-up icon" />2
-                        </a>
-                        <a href="#" className="btn btn-default stat-item">
-                          <i className="fa fa-thumbs-down icon" />12
-                        </a>
-                      </div>
+                      {this.props.match.params.recipeId ? fetchedReviews : []}
                     </div>
                   </div>
                 </div>
@@ -212,22 +259,16 @@ class RecipeDetails extends Component {
     );
   }
 }
-// RecipeDetails.propTypes = {
-//   message: PropTypes.string,
-//   recipe: PropTypes.object,
-//   error: PropTypes.object
-// };
-
-RecipeDetails.defaultValue = {
-  recipe: {},
-  message: '',
-  error: {}
+RecipeDetails.propTypes = {
+  message: PropTypes.string.isRequired,
+  recipe: PropTypes.object.isRequired
 };
+
 const mapStateToProps = state => ({
   recipe: state.recipeReducer.recipes,
-  reviews: state.recipeReducer.recipes.reviews,
+  reviews: state.recipeReducer.recipes.reviews || [],
   message: state.recipeReducer.message,
-  votes: state.recipeReducer.recipes.votes,
+  favourites: state.recipeReducer.recipes.favourite || {},
   error: state.recipeReducer.error
 });
 
@@ -236,7 +277,11 @@ const mapDispatchToProps = dispatch =>
     {
       getOneRecipe,
       addReview,
-      upVoteRecipes
+      upvoteRecipe,
+      downVoteRecipe,
+      addFavourite,
+      getFavourite,
+      removeFavourite
     },
     dispatch
   );

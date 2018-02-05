@@ -159,14 +159,13 @@ export const getUserRecipesFailure = error => ({
  *
  * @description dispatches action to get one recipe
  *
- * @param { object } userId
  * @param { object } recipes
  *
  * @returns { undefined }
  */
-export const getUserRecipes = (userId, recipes) => dispatch =>
+export const getUserRecipes = () => dispatch =>
   api
-    .getUserRecipes(userId, recipes)
+    .getUserRecipes()
     .then((res) => {
       if (res) {
         dispatch(getUserRecipesSuccess({ recipes: res.data }));
@@ -277,4 +276,135 @@ export const addRecipes = recipes => dispatch =>
         text: 'sorry an error occured',
         icon: 'error'
       });
+    });
+
+/**
+ *
+ * @param {object} favourite
+ *
+ * @returns {Object} payload
+ *
+ */
+export const addFavouriteSuccess = favourite => ({
+  type: types.ADD_FAVOURITE_SUCCESS,
+  favourite
+});
+
+/**
+ *
+ * @param {object} error
+ *
+ * @returns {Object} payload
+ *
+ */
+export const addFavouriteFailure = error => ({
+  type: types.ADD_FAVOURITE_ERROR,
+  error
+});
+
+/**
+ * @description this dispatches an action that adds a recipe
+ *
+ * @param {object} id
+ *
+ * @returns {Object} payload
+ *
+ */
+export const addFavourite = id => dispatch =>
+  api
+    .addFavouriteRequest(id)
+    .then((res) => {
+      if (res) {
+        dispatch(addFavouriteSuccess(res.data.favourite));
+      }
+    })
+    .catch((error) => {
+      dispatch(addFavouriteFailure(error));
+    });
+/**
+ *
+ * @param {object} favourite
+ *
+ * @returns {Object} payload
+ *
+ */
+export const removeFavouriteSuccess = favourite => ({
+  type: types.ADD_FAVOURITE_SUCCESS,
+  favourite
+});
+
+/**
+ *
+ * @param {object} error
+ *
+ * @returns {Object} payload
+ *
+ */
+export const removeFavouriteFailure = error => ({
+  type: types.ADD_FAVOURITE_ERROR,
+  error
+});
+
+/**
+ * @description this dispatches an action that adds a recipe
+ *
+ * @param {object} id
+ *
+ * @returns {Object} payload
+ *
+ */
+export const removeFavourite = id => dispatch =>
+  api
+    .removeFavouriteRequest(id)
+    .then((res) => {
+      if (res) {
+        console.log(res.data, 'hello there we are here')
+        // dispatch(addFavouriteSuccess(res.data.favourite));
+      }
+    })
+    .catch((error) => {
+      dispatch(addFavouriteFailure(error));
+    });
+/**
+ *
+ * @param {object} favourite
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getFavouriteSuccess = favourite => ({
+  type: types.GET_FAVOURITE_SUCCESS,
+  favourite
+});
+
+/**
+ *
+ * @param {object} error
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getFavouriteFailure = error => ({
+  type: types.GET_FAVOURITE_ERROR,
+  error
+});
+
+/**
+ * @description this dispatches an action that adds a recipe
+ *
+ * @param {object} id
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getFavourite = id => dispatch =>
+  api
+    .getFavouriteRequest(id)
+    .then((res) => {
+      if (res) {
+        dispatch(getFavouriteSuccess(res.data.favourites));
+      }
+    })
+    .catch((error) => {
+      dispatch(getFavouriteFailure(error));
     });

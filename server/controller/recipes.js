@@ -53,7 +53,7 @@ class Recipe {
         where: {
           id: req.params.recipeId
         },
-        include: [{ model: reviews, votes }]
+        include: [{ model: reviews }, { model: votes }]
       })
       .then((recipesFound) => {
         if (!recipesFound || recipesFound.length < 1) {

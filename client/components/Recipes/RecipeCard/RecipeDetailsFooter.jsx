@@ -38,7 +38,7 @@ class RecipeDetailsFooter extends Component {
   onSubmit(event) {
     event.preventDefault();
     const { id } = this.props;
-    return history.push(`/updaterecipe/${id}`);
+    return this.props.goToRecipes(`/updaterecipe/${id}`);
   }
   /**
    * @param { object } event
@@ -62,7 +62,7 @@ class RecipeDetailsFooter extends Component {
           swal('Poof! Your recipe has been deleted!', {
             icon: 'success'
           });
-          return history.push('/recipes');
+          return this.props.goToRecipes(`/recipes/${id}`);
         });
       }
       swal('Your recipe is safe!');
@@ -76,24 +76,18 @@ class RecipeDetailsFooter extends Component {
   render() {
     return (
       <div className="itemReview row">
-        <div className="col-md-6 deledit">
           <Button
             type="edit"
             onClick={this.onSubmit}
             name="Edit"
-            iconClass="fa-pencil-square-o icon1"
-            className="btn btn-lg btn-primary btn-block "
+            className="btn btn-lg btn-primary btn-block cta-btn"
           />
-        </div>
-        <div className="col-md-6 deledit">
           <Button
             type="delete"
             onClick={this.handleDelete}
             name="Delete"
-            iconClass="fa-pencil-square-o icon1"
-            className="btn btn-lg btn-primary btn-block "
+            className="btn btn-lg btn-primary btn-block cta-btn"
           />
-        </div>
       </div>
     );
   }

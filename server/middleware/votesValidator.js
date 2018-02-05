@@ -1,7 +1,5 @@
 import models from '../models';
 
-const { votes } = models.votes;
-
 /**
  * @description upVoted recipe Field
  *
@@ -12,10 +10,11 @@ const { votes } = models.votes;
  * @returns {object} json - payload
  */
 const votedRecipes = (req, res, next) => {
-  const { userId, recipeId } = req.body;
+  const userId = Number(req.decoded.id);
+  const recipeId = Number(req.params.recipeId);
 
-  votes
-    .findAll({
+  models.votes
+    .findOne({
       where: {
         recipeId,
         userId
