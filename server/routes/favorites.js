@@ -1,8 +1,5 @@
-// import module, controllers and middlewares
 import favorite from '../controller/favorites';
 import auth from '../middleware/authorization';
-import alreadyFavorited from '../middleware/favoriteValidator';
-import { validateParams } from '../middleware/validateInput';
 
 /**
  * @description favourite routes
@@ -12,14 +9,18 @@ import { validateParams } from '../middleware/validateInput';
  * @returns { undefined }
  */
 const favoriteRoutes = (router) => {
-  router.post(
-    '/favorites',
+  router.post('/favourites', auth.authorize, favorite.addFavourites);
+  router.delete('/favourites/:recipeId', auth.authorize, favorite.removeFavourites);
+  router.get(
+    '/favourites/:recipeId',
     auth.authorize,
-    validateParams,
-    alreadyFavorited,
-    favorite.addFavorite
+    favorite.getSingleFavourite
   );
-  router.get('/users/:id/recipes', auth.authorize, favorite.getFavorites);
+  router.get(
+    '/users/:recipeId/removeFavourites',
+    auth.authorize,
+    favorite.getFavorites
+  );
 };
 
 export default favoriteRoutes;

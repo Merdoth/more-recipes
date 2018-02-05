@@ -48,8 +48,7 @@ class Recipes extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  recipes: state.recipesReducer.rows || []
-});
+const mapStateToProps = state => ({ recipes: state.recipesReducer.rows || [] });
 
 export default connect(mapStateToProps, { getAllRecipes })(Recipes);
+

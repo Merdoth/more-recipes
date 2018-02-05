@@ -1,13 +1,22 @@
-
 module.exports = (sequelize, DataTypes) => {
   const favorites = sequelize.define('favorites', {
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      onDelete: 'CASCADE',
+      references: {
+        model: 'users',
+        key: 'id',
+        as: 'userId'
+      }
     },
     recipeId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      onDelete: 'CASCADE',
+      references: {
+        model: 'recipes',
+        key: 'id',
+        as: 'recipeId'
+      }
     }
   });
 

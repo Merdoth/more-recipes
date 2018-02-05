@@ -110,7 +110,7 @@ class UpdateRecipeForm extends Component {
           return swal('Too Bad!', error.message, 'error');
         }
         swal('Great!!!', message, 'success');
-        history.push(`/recipe-details/${recipeId}`);
+        this.props.goToRecipes(`/recipe-details/${recipeId}`);
       });
     }
   }

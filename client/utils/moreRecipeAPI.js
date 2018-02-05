@@ -195,4 +195,17 @@ export const deleteRecipe = id =>
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   });
-// axios.delete(`/api/v1/recipes/${id}`);
+
+export const removeFavouriteRequest = recipeId =>
+  axios({
+    method: 'DELETE',
+    url: `/api/v1/favourites/${recipeId} `,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  });
+
+export const addFavouriteRequest = recipeId =>
+  axios.post('/api/v1/favourites', { recipeId });
+export const getFavouriteRequest = recipeId =>
+  axios.get(`/api/v1/favourites/${recipeId}`);

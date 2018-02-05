@@ -18,19 +18,13 @@ module.exports = (sequelize, DataTypes) => {
         as: 'recipeId'
       }
     },
-    upVotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+    voted: {
+      type: DataTypes.STRING
     },
-    downVotes: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    }
   });
   votes.associate = (models) => {
     votes.belongsTo(models.recipes, {
       foreignKey: 'recipeId',
-      onDelete: 'CASCADE'
     });
     votes.belongsTo(models.users, {
       foreignKey: 'userId'

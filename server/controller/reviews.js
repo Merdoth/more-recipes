@@ -66,19 +66,19 @@ class Review {
   }
 
   /**
-     * @description get recipe reviews controller
-     *
-     * @param {Object} req - Request object
-     * @param {Object} res - Response object
-     *
-     * @returns {Object} json - payload
-     */
-  getReview(req, res) {
+   * @description get recipe reviews controller
+   *
+   * @param {Object} req - Request object
+   * @param {Object} res - Response object
+   *
+   * @returns {Object} json - payload
+   */
+  static getReview(req, res) {
     reviews
       .findAll({
         include: {
           model: user,
-          attributes: ['userName'],
+          attributes: ['userName']
         },
         where: {
           recipeId: req.params.id
@@ -87,8 +87,7 @@ class Review {
       .then((reviewFound) => {
         if (reviewFound.length === 0) {
           return res.status(404).send({
-            message:
-            'Recipe not found'
+            message: 'Recipe not found'
           });
         }
         return res.status(200).send(reviewFound);

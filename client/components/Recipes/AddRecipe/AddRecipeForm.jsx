@@ -70,7 +70,7 @@ class AddRecipeForm extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.addRecipes(this.state);
-    // history.push('/recipes');
+    this.props.goToRecipes();
   }
   /**
    * @returns { undefined }
