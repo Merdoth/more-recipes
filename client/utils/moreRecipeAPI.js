@@ -163,7 +163,7 @@ export const upVoteRecipe = (id, callback) =>
  * @returns {undefined}
  *
  */
-export const getTopRecipes = () =>
+export const getMostVotedRequest = () =>
   axios.get('/api/v1/recipes?sort=upvotes&order=des');
 
 /**

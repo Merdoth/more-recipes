@@ -11,6 +11,9 @@ import React from 'react';
 const NotFound = () => (
   <div>
     <div className="notFound">
+    <p className="num">404</p>
+    <p className="word">Page Not Found</p>
+    <span>Please try going back to the home page</span>
     </div>
     </div>
 );

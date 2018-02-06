@@ -1,29 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RecipeCard from './RecipeCard/RecipeCard.jsx';
-import { getAllRecipes } from '../../actions/recipeActions/';
+import { getUserRecipes, getAllRecipes } from '../../actions/recipeActions/';
+
+const routeMap = {
+  '/recipes': {
+    reducerKey: 'rows',
+    fn: getAllRecipes,
+    title:
+      'Try, contribute to others recipe value by adding how your feel about the recipes'
+  },
+  '/myrecipes': {
+    reducerKey: 'recipes',
+    fn: getUserRecipes,
+    title: 'Feel free to manage your own account'
+  }
+};
 
 /**
- * @param {  Recipes }  Recipes
+ * @param {  UserRecipes }  UserRecipes
  *
- * @returns {  Recipes }  Recipes
+ * @returns {  Object }  UserRecipes
  *
  * @desc this class returns a  Recipes component
  */
 class Recipes extends Component {
   /**
+   * @param { object } userId
    *
    * @memberof  Recipes
    *
    * @returns { undefined }
    */
   componentDidMount() {
-    this.props.getAllRecipes();
+    this.props.action();
   }
   /**
+   *,k
    * @returns { undefined }
    *
-   * @memberof  Recipes
+   * @memberof  UserRecipes
    */
   render() {
     const recipes = this.props.recipes.map(recipe => (
@@ -36,7 +52,7 @@ class Recipes extends Component {
             <h2>Recipes</h2>
           </div>
           <div className="recipe-header-picture">
-            <p>Try, contribute to others recipe value by adding how your feel about the recipes</p>
+            <p>{this.props.title}</p>
           </div>
         </div>
         <hr />
@@ -48,7 +64,14 @@ class Recipes extends Component {
   }
 }
 
-const mapStateToProps = state => ({ recipes: state.recipesReducer.rows || [] });
+const mapStateToProps = (state, ownProps) => {
+  const { title, reducerKey } = routeMap[ownProps.match.url];
+  return { recipes: state.recipesReducer[reducerKey] || [], title };
+};
 
-export default connect(mapStateToProps, { getAllRecipes })(Recipes);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { fn } = routeMap[ownProps.match.url];
+  return { action: () => dispatch(fn()) };
+};
 
+export default connect(mapStateToProps, mapDispatchToProps)(Recipes);

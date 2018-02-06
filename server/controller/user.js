@@ -28,6 +28,7 @@ class User {
         return res.status(201).send({
           message: 'User successfully created',
           user: {
+            fullName: newUser.fullName,
             userName: newUser.userName,
             email: newUser.email,
             token

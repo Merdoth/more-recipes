@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import Button from '../../common/Button.jsx';
-import history from '../../../utils/history';
 import { deleteRecipe } from '../../../actions/recipeActions';
 
 /**

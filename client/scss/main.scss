@@ -162,8 +162,10 @@ img {
 }
 
 .new_account {
-  text-align: "center";
+  text-align: center;
+  padding-top: 2%;
 }
+
 
 .Enter {
   border: 2px solid white;
@@ -184,35 +186,26 @@ img {
   font-size: 25px;
 }
 
-.hero-bg h1,
-h5 > i {
+.hero-header {
   margin-top: 30px;
-  font-weight: bold;
+  font-weight: 100;
   color: #efefef;
   border-bottom: 0;
-  font-size: 50px;
+  font-size: 64px;
   text-shadow: 3px 3px 8px black;
 }
-.hello {
-  position: relative;
-  bottom: 400px;
-  text-align: center;
-}
-.hero-bg h1 {
-  display: inline-block;
-  font-size: 50px;
-}
 
-.hero-bg h5 {
-  font-size: 15px;
-}
-
-.oats > img {
+.slider-text {
+  position: absolute;
   width: 100%;
-}
-
-.oats1 > img {
-  width: 80%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .profile1 {
@@ -258,10 +251,10 @@ h5 > i {
   width: 100px;
   color: #000;
   border: solid 1px #000;
-    &:hover {
-      background-color: #000;
-      color: #77e2e1;
-    }
+  &:hover {
+    background-color: #000;
+    color: #77e2e1;
+  }
 }
 #note {
   color: #444;
@@ -326,7 +319,7 @@ h5 > i {
   text-align: center;
   border-top: 1px solid #eee;
   padding: 5px;
-  width:100%;
+  width: 100%;
   height: 80px;
   margin-left: 0;
   margin-right: 0;
@@ -345,7 +338,6 @@ h5 > i {
   height: 70px;
 }
 
-
 .icons {
   display: block;
   margin: 10px auto;
@@ -354,11 +346,11 @@ h5 > i {
 }
 
 .iconStat {
-  color:gray;
+  color: gray;
 }
 .stats-item.selected {
   background-color: #000;
-  i{
+  i {
     color: #77e2e1;
   }
 }
@@ -374,19 +366,19 @@ h5 > i {
 }
 
 .btn.stats-item {
-    color: #000;
-    border: solid 2px #000;
-    width: 60px;
-    height: 60px;
-    padding: 15px;
-    font-size: 20px;
-    margin-bottom: 10px;
-    }
+  color: #000;
+  border: solid 2px #000;
+  width: 60px;
+  height: 60px;
+  padding: 15px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
 
 .icons .fa-thumbs-up,
 .icons1 .fa-edit {
- opacity: 0.5; 
- color:blue;
+  opacity: 0.5;
+  color: blue;
 }
 
 .icons .fa-thumbs-down,
@@ -493,7 +485,7 @@ h5 > i {
   padding: 15px 0px;
   background: #000;
   text-align: center;
-  border-top: 1px solid  #77e2e1;
+  border-top: 1px solid #77e2e1;
   color: peachpuff;
   letter-spacing: 0.1em;
   position: fixed;
@@ -522,16 +514,16 @@ p {
 }
 
 .review {
-    padding: 20px;
-    background-color: #eee;
-    border-radius: 5px;
-    height: 150px;
-    width: 100%;
-    max-width: 500px;
-    font-size: 15px;
-    font-family: "Open sans";
-    margin-bottom: 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+  padding: 20px;
+  background-color: #eee;
+  border-radius: 5px;
+  height: 150px;
+  width: 100%;
+  max-width: 500px;
+  font-size: 15px;
+  font-family: "Open sans";
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
 }
 #reviewSubmit {
   margin-left: 20px;
@@ -560,10 +552,6 @@ input {
 .user-details,
 input {
   width: 70%;
-}
-
-.form-signin-heading {
-  margin-top: 5px;
 }
 
 .manage {
@@ -607,18 +595,15 @@ input {
   margin-left: 70px;
 }
 
-.slider-image {
-  width: 100%;
-  height: 600px;
-  object-fit: cover;
-}
-
 .carousel-inner {
-  height: 700px;
+  height: 600px;
 }
 
 .carousel-item {
-  height: 600px;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .form-deco {
@@ -631,7 +616,7 @@ input {
 }
 
 .cover {
-  margin: 5% 0 7% 25%;
+  margin: 4% 0 7% 25%;
   background: none;
 }
 
@@ -647,7 +632,7 @@ input {
 
 .inputstl {
   padding: 15px;
-  border: solid 1px  rgba(0, 0, 0, 0.1);
+  border: solid 1px rgba(0, 0, 0, 0.1);
   outline: 0;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
 }
@@ -717,12 +702,18 @@ input {
 .buttonb {
   margin-top: 5%;
   margin-bottom: 5%;
-  width: 100px;
 }
 
 .notFound {
-  background: url('/assets/image/404pg.jpg');
-  height: 200px;
-  
-  object-fit: cover;
+  text-align: center;
+  padding-top: 200px;
+}
+
+.num {
+ font-size: 70px;
+ font-style: bold;
+}
+.word {
+  font-size: 30px;
+  font-style: bold;
 }

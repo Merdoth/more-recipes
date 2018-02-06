@@ -4,9 +4,9 @@ import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '../common/Button.jsx';
+import { validateSignIn } from '../../validations/index';
 import InputField from '../common/InputField.jsx';
 import { login } from '../../actions/auth/authActions';
-import { validateSignIn } from '../../validations';
 
 /**
  * @description this renders the signin form component

@@ -15,9 +15,7 @@ import {
   upvoteRecipe,
   downVoteRecipe
 } from '../../actions/recipeActions/votes';
-import { Icons } from '../common/Icons.jsx';
 import RecipeCardImage from './RecipeCard/RecipeCardImage.jsx';
-import history from '../../utils/history';
 import RecipeDetailsFooter from './RecipeCard/RecipeDetailsFooter.jsx';
 
 /**

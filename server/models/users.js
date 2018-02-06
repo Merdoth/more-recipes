@@ -2,6 +2,16 @@ import bcrypt from 'bcrypt';
 
 export default (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
+    fullName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: {
+          msg: 'Fullname cannot be Empty!'
+        }
+      }
+    },
     userName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -31,7 +41,7 @@ export default (sequelize, DataTypes) => {
           msg: 'Password cannot be less than 8 characters'
         }
       }
-    },
+    }
   });
 
   users.associate = (models) => {
@@ -50,16 +60,21 @@ export default (sequelize, DataTypes) => {
   };
 
   users.beforeCreate((user) => {
-    user.dataValues.password =
-    bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
+    user.dataValues.password = bcrypt.hashSync(
+      user.dataValues.password,
+      bcrypt.genSaltSync(10)
+    );
     user.dataValues.email = user.dataValues.email;
     user.dataValues.userName = user.dataValues.userName;
+    user.dataValues.fullName = user.dataValues.fullName;
   });
 
   users.beforeUpdate((user) => {
     if (user.changed.password) {
-      user.dataValues.password =
-      bcrypt.hashSync(user.dataValues.password, bcrypt.genSaltSync(10));
+      user.dataValues.password = bcrypt.hashSync(
+        user.dataValues.password,
+        bcrypt.genSaltSync(10)
+      );
     }
   });
 

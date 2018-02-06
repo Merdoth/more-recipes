@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
-import { validateSignUp } from '../../validations';
 import { userSignupRequest } from '../../actions/auth/authActions';
+import { validateSignUp } from '../../validations/index';
 import InputField from '../common/InputField.jsx';
 import Button from '../common/Button.jsx';
 
@@ -23,6 +23,7 @@ class SignupForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      fullName: '',
       userName: '',
       email: '',
       password: '',
@@ -82,7 +83,7 @@ class SignupForm extends Component {
    */
   handleErrors(errors) {
     if (typeof errors !== 'string') {
-      Object.values(errors).forEach((error) => {
+      Object.value(errors).forEach((error) => {
         swal({
           title: 'Oops!',
           text: error,
@@ -110,7 +111,16 @@ class SignupForm extends Component {
           <form className="form-signin">
             <h2 className="form-signin-heading">Sign Up</h2>
             <hr />
-
+            <InputField
+              type="text"
+              className="form-control"
+              name="fullName"
+              placeholder="Enter your fullname"
+              value={this.state.fullName}
+              label="Fullname"
+              onChange={this.onChange}
+              required
+            />
             <InputField
               type="text"
               className="form-control"

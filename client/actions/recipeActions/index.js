@@ -1,32 +1,6 @@
 import swal from 'sweetalert';
 import * as types from '../actionTypes';
-import history from '../../utils/history';
 import * as api from './../../utils/moreRecipeAPI';
-
-/**
- *
- * @param {object} recipes
- *
- * @returns {undefined}
- */
-export const getTopRecipesSuccess = recipes => ({
-  type: types.GET_TOP_RECIPES,
-  recipes
-});
-
-/**
- *
- * @description dispatches action to get top recipes
- *
- * @param { object } object
- *
- * @returns { undefined }
- */
-export const getTopRecipes = () => dispatch =>
-  api.getTopRecipes().then((res) => {
-    const recipes = res.data;
-    dispatch(getTopRecipesSuccess(recipes));
-  });
 
 /**
  *
@@ -341,7 +315,7 @@ export const removeFavouriteSuccess = favourite => ({
  *
  */
 export const removeFavouriteFailure = error => ({
-  type: types.ADD_FAVOURITE_ERROR,
+  type: types.ADD_FAVOURITE_FAILURE,
   error
 });
 
@@ -358,7 +332,7 @@ export const removeFavourite = id => dispatch =>
     .removeFavouriteRequest(id)
     .then((res) => {
       if (res) {
-        console.log(res.data, 'hello there we are here')
+        console.log(res.data, 'hello there we are here');
         // dispatch(addFavouriteSuccess(res.data.favourite));
       }
     })
@@ -385,7 +359,7 @@ export const getFavouriteSuccess = favourite => ({
  *
  */
 export const getFavouriteFailure = error => ({
-  type: types.GET_FAVOURITE_ERROR,
+  type: types.GET_FAVOURITE_FAILURE,
   error
 });
 
@@ -407,4 +381,48 @@ export const getFavourite = id => dispatch =>
     })
     .catch((error) => {
       dispatch(getFavouriteFailure(error));
+    });
+
+/**
+ *
+ * @param {object} recipes
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getMostVotedSuccess = recipes => ({
+  type: types.GET_MOST_VOTED_SUCCESS,
+  recipes
+});
+
+/**
+ *
+ * @param {object} error
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getMostVotedFailure = error => ({
+  type: types.GET_MOST_VOTED_FAILURE,
+  error
+});
+
+/**
+ * @description this dispatches an action that gets most upvoted recipes a recipe
+ *
+ * @param {object} id
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getMostVoted = () => dispatch =>
+  api
+    .getMostVotedRequest()
+    .then((res) => {
+      if (res) {
+        dispatch(getMostVotedSuccess(res.data));
+      }
+    })
+    .catch((error) => {
+      dispatch(getMostVotedFailure(error));
     });
