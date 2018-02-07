@@ -56,7 +56,8 @@ class RecipeDetails extends Component {
    */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
-    this.props.getOneRecipe(recipeId);
+    const { id } = this.props.user;
+    this.props.getOneRecipe(id, recipeId);
     this.props.getFavourite(recipeId);
   }
   /**
@@ -127,6 +128,7 @@ class RecipeDetails extends Component {
       this.props.addFavourite(id);
     }
   }
+
   /**
    *
    * @param {object} nextProps
@@ -148,6 +150,7 @@ class RecipeDetails extends Component {
    * @memberof RecipeDetails
    */
   render() {
+    const loggedInUser = this.props.user.id;
     const selected = this.state.recipe.favourite ? 'selected' : '';
     const goToRecipes = route => this.props.history.push(route);
     const recipeDetails = this.state.recipe;
@@ -168,7 +171,9 @@ class RecipeDetails extends Component {
                 />
                 <RecipeDetailsFooter
                   id={recipeDetails.id}
+                  userId={recipeDetails.userId}
                   goToRecipes={goToRecipes}
+                  loggedInUser = {loggedInUser}
                 />
               </div>
             </div>
@@ -194,6 +199,10 @@ class RecipeDetails extends Component {
                 className={`btn btn-default stats-item ${selected}`}
               >
                 <i className="fa fa-heart iconStat" />
+              </span>
+              <span className="btn btn-default stats-item">
+                <i className="fa fa-eye iconStat align-view-count" />
+                {recipeDetails.views}
               </span>
             </div>
           </div>
@@ -263,6 +272,7 @@ RecipeDetails.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  user: state.setCurrentUser.user,
   recipe: state.recipeReducer.recipes,
   reviews: state.recipeReducer.recipes.reviews || [],
   message: state.recipeReducer.message,

@@ -169,14 +169,14 @@ export const getMostVotedRequest = () =>
 /**
  *
  * @description allows a user get .
- *
+ * @param {Object} userId
  * @param {Object} recipeId
  *
  * @returns {undefined}
  *
  */
-export const getOneRecipe = recipeId =>
-  axios.get(`/api/v1/recipes/${recipeId}`);
+export const getOneRecipe = (userId, recipeId) =>
+  axios.get(`/api/v1/user/${userId}/recipes/${recipeId}`);
 
 /**
  *

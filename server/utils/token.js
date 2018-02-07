@@ -5,6 +5,11 @@ dotenv.config();
 
 export default (payload) => {
   const secret = process.env.SECRET_KEY;
-  const { id, userName, email } = payload;
-  return jwt.sign({ id, userName, email }, secret, { expiresIn: '24h' });
+  const {
+    id, email
+  } = payload;
+
+  return jwt.sign({
+    id, email
+  }, secret, { expiresIn: '24h' });
 };

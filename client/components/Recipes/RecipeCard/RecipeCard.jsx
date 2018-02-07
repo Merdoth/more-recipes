@@ -19,7 +19,7 @@ class RecipeCard extends Component {
    */
   render() {
     return (
-      <div className="col-md-4 col-sm-4">
+      <div className="col-md-4 col-sm-4 main-card">
         <div className="top-items">
           <div className="rated">
             <RecipeCardImage src={this.props.recipeList.image} />
