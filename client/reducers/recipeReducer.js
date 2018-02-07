@@ -13,7 +13,7 @@ export default (state = initialState, action = {}) => {
     case types.GET_ONE_RECIPE:
       return {
         ...state,
-        recipes: action.recipe,
+        recipes: action.payload,
         message: '',
         error: {}
       };

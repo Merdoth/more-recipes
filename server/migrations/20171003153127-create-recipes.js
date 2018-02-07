@@ -32,13 +32,17 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      views: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
       upVotes: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: false
       },
       downVotes: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

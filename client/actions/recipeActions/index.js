@@ -1,5 +1,6 @@
 import swal from 'sweetalert';
 import * as types from '../actionTypes';
+import history from '../../utils/history';
 import * as api from './../../utils/moreRecipeAPI';
 
 /**
@@ -10,7 +11,7 @@ import * as api from './../../utils/moreRecipeAPI';
  */
 export const getOneRecipeSuccess = recipe => ({
   type: types.GET_ONE_RECIPE,
-  recipe
+  payload: recipe
 });
 /**
  *
@@ -26,16 +27,16 @@ export const getOneRecipeFailure = error => ({
 /**
  *
  * @description dispatches action to get one recipe
- *
+ * @param { object } userId
  * @param { object } recipeId
  *
  * @returns { undefined }
  */
-export const getOneRecipe = recipeId => dispatch =>
+export const getOneRecipe = (userId, recipeId) => dispatch =>
   api
-    .getOneRecipe(recipeId)
+    .getOneRecipe(userId, recipeId)
     .then((res) => {
-      const recipe = res.data;
+      const recipe = res.data.recipesFound || res.data.updatedRecipes;
       dispatch(getOneRecipeSuccess(recipe));
     })
     .catch((error) => {
@@ -104,8 +105,7 @@ export const getAllRecipesSuccess = recipes => ({
  */
 export const getAllRecipes = () => dispatch =>
   api.getAllRecipes().then((res) => {
-    const recipes = res.data.recipesFound;
-    dispatch(getAllRecipesSuccess(recipes));
+    dispatch(getAllRecipesSuccess(res.data));
   });
 
 /**
@@ -332,7 +332,7 @@ export const removeFavourite = id => dispatch =>
     .removeFavouriteRequest(id)
     .then((res) => {
       if (res) {
-        console.log(res.data, 'hello there we are here');
+        console.log(res.data, 'hello dear we are here');
         // dispatch(addFavouriteSuccess(res.data.favourite));
       }
     })

@@ -83,7 +83,7 @@ class SignupForm extends Component {
    */
   handleErrors(errors) {
     if (typeof errors !== 'string') {
-      Object.value(errors).forEach((error) => {
+      Object.keys(errors).forEach((error) => {
         swal({
           title: 'Oops!',
           text: error,

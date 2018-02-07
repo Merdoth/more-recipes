@@ -67,27 +67,48 @@ class RecipeDetailsFooter extends Component {
       swal('Your recipe is safe!');
     });
   }
+
+  /**
+   *
+   *
+   * @returns { void }
+   * @memberof RecipeDetailsFooter
+   */
+  authUser() {
+    return (
+      <div className="itemReview row">
+        <Button
+          type="edit"
+          onClick={this.onSubmit}
+          name="Edit"
+          className="btn btn-lg btn-primary btn-block cta-btn"
+        />
+        <Button
+          type="delete"
+          onClick={this.handleDelete}
+          name="Delete"
+          className="btn btn-lg btn-primary btn-block cta-btn"
+        />
+      </div>
+    );
+  }
+  /**
+   *
+   * @returns { void }
+   * @memberof RecipeDetailsFooter
+   */
+  unAuthUser() {
+    return <div className="itemReview row" />;
+  }
   /**
    * @returns { undefined }
    *
    * @memberof RecipeDetailsFooter
    */
   render() {
-    return (
-      <div className="itemReview row">
-          <Button
-            type="edit"
-            onClick={this.onSubmit}
-            name="Edit"
-            className="btn btn-lg btn-primary btn-block cta-btn"
-          />
-          <Button
-            type="delete"
-            onClick={this.handleDelete}
-            name="Delete"
-            className="btn btn-lg btn-primary btn-block cta-btn"
-          />
-      </div>
+    return (this.props.loggedInUser === this.props.userId
+      ? this.authUser()
+      : this.unAuthUser()
     );
   }
 }

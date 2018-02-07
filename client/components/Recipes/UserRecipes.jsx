@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RecipeCard from './RecipeCard/RecipeCard.jsx';
-import { getAllRecipes } from '../../actions/recipeActions/';
+import { getUserRecipes } from '../../actions/recipeActions/';
 
 /**
- * @param {  Recipes }  Recipes
+ * @param {  UserRecipes }  UserRecipes
  *
- * @returns {  Recipes }  Recipes
+ * @returns {  Object }  UserRecipes
  *
  * @desc this class returns a  Recipes component
  */
-class Recipes extends Component {
+class UserRecipes extends Component {
   /**
+   * @param { object } userId
    *
    * @memberof  Recipes
    *
    * @returns { undefined }
    */
   componentDidMount() {
-    this.props.getAllRecipes();
+    const userId = this.props.match.params;
+    this.props.getUserRecipes(userId);
   }
+
   /**
+   *,k
    * @returns { undefined }
    *
-   * @memberof  Recipes
+   * @memberof  UserRecipes
    */
   render() {
     const recipes = this.props.recipes.map(recipe => (
@@ -36,10 +40,7 @@ class Recipes extends Component {
             <h2>Recipes</h2>
           </div>
           <div className="recipe-header-picture">
-            <p>
-              Try, contribute to others recipe value by adding how your feel
-              about the recipes
-            </p>
+            <p>Feel free to manage your own account</p>
           </div>
         </div>
         <hr />
@@ -52,7 +53,7 @@ class Recipes extends Component {
 }
 
 const mapStateToProps = state => ({
-  recipes: (state.recipesReducer.recipesFound || {}).rows || []
+  recipes: state.recipesReducer.recipes || []
 });
 
-export default connect(mapStateToProps, { getAllRecipes })(Recipes);
+export default connect(mapStateToProps, { getUserRecipes })(UserRecipes);
