@@ -239,7 +239,10 @@
                     <a href="#profile" class="toc-h2 toc-link" data-title="profile">PROFILE</a>
                   </li>
                   <li>
-                    <a href="#requires-authentication" class="toc-h2 toc-link" data-title="requires-authentication">Requires Authentication</a>
+                    <a href="#get-all-users" class="toc-h2 toc-link" data-title="get-all-users">GET ALL USERS</a>
+                  </li>
+                  <li>
+                    <a href="#get-one-user" class="toc-h2 toc-link" data-title="get-one-user">GET ONE USER</a>
                   </li>
               </ul>
           </li>
@@ -267,6 +270,9 @@
                   <li>
                     <a href="#users-can-downvote-a-recipe" class="toc-h2 toc-link" data-title="users-can-downvote-a-recipe">USERS CAN DOWNVOTE A RECIPE</a>
                   </li>
+                  <li>
+                    <a href="#users-can-get-most-voted-recipes" class="toc-h2 toc-link" data-title="users-can-get-most-voted-recipes">USERS CAN GET MOST VOTED RECIPES</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -274,9 +280,6 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#add-a-recipe-as-favourite" class="toc-h2 toc-link" data-title="add-a-recipe-as-favourite">ADD A RECIPE AS FAVOURITE</a>
-                  </li>
-                  <li>
-                    <a href="#requires-authentication-7" class="toc-h2 toc-link" data-title="requires-authentication">Requires Authentication</a>
                   </li>
                   <li>
                     <a href="#users-can-view-all-their-favourites" class="toc-h2 toc-link" data-title="users-can-view-all-their-favourites">USERS CAN VIEW ALL THEIR FAVOURITES</a>
@@ -307,8 +310,7 @@
 <aside class="notice">
 All More Recipes API must be prepended with /api/v1 where v1 is the API version number
 </aside>
-<h1 id='authentication'>Authentication</h1><pre class="highlight plaintext"><code>/api/v1/users/signup
-</code></pre>
+<h1 id='authentication'>Authentication</h1>
 <p>To access More Recipes APIs, you&#39;d need to create an account at our <a href="http://example.com/developers">portal</a>.</p>
 
 <p>More Recipes requires authentication with <code>email</code> and <code>password</code> for access to protected api routes. </p>
@@ -318,12 +320,14 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
 <p>The token is expected to be provided in the <code>authorization-header</code> request header.</p>
 <h2 id='signup'>SIGNUP</h2>
 <p>Request </p>
-
+<pre class="highlight plaintext"><code>POST/api/v1/users/signup
+</code></pre>
 <blockquote>
 <p>Request:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w">
   </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Johnny Doe"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"userName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoe@email.com"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
@@ -346,6 +350,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"Token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4367gfgusag7ewgot0g437ytqw073qgwofg830t240tqgwfe803g7"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Johnny Doe"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"userName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JohnDoe"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoe@email.com"</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -376,14 +381,10 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
 <p>Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"Token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4367gfgusag7ewgot0g437ytqw073qgwofg830t240tqgwfe803g7"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"userName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JohnDoe"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoe@email.com"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wecome!"</span><span class="w">
+  </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wecome!"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4367gfgusag7ewgot0g437ytqw073qgwofg830t240tqgwfe803g7"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h1 id='user'>USER</h1><h2 id='profile'>PROFILE</h2><h2 id='requires-authentication'>Requires Authentication</h2><pre class="highlight plaintext"><code>GET /api/v1/users/profile
+</span></code></pre><h1 id='user'>USER</h1><h2 id='profile'>PROFILE</h2><h3 id='requires-authentication'>Requires Authentication</h3><pre class="highlight plaintext"><code>GET /api/v1/users/profile
 </code></pre>
 <p>Request 
 <code>GET /api/v1/users/profile</code> </p>
@@ -405,7 +406,89 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
     </span><span class="s2">"Email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoe@email.com"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h1 id='recipes'>RECIPES</h1><h2 id='get-all-recipes'>GET ALL RECIPES</h2><pre class="highlight plaintext"><code>GET /api/v1/recipes?page=1
+</span></code></pre><h2 id='get-all-users'>GET ALL USERS</h2>
+<p>Request</p>
+
+<p><code>GET /api/v1/users</code></p>
+
+<blockquote>
+<p>Request: GET /api/v1/users</p>
+</blockquote>
+
+<p>Response 
+<code>200</code></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johnny Doe"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"userName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johnDoe"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoe@email.com"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"favorites"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"recipeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-07T09:15:13.612Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-07T09:15:13.612Z"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"meya samuels"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"userName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ucheya"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ucheya97@gmail.com"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"favorites"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>Body (application/json)</code></p>
+<h2 id='get-one-user'>GET ONE USER</h2><h3 id='requires-authentication-2'>Requires Authentication</h3>
+<p>Request</p>
+
+<p><code>GET /api/v1/users/:id</code></p>
+
+<blockquote>
+<p>Request: GET /api/v1/users/:id</p>
+</blockquote>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>none</td>
+<td>id</td>
+</tr>
+</tbody></table>
+
+<p>Response 
+<code>200</code></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johnny Doe"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"userName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johnDoe"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoe@email.com"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"favorites"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"recipeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-07T09:15:13.612Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-07T09:15:13.612Z"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>Body (application/json)</code></p>
+<h1 id='recipes'>RECIPES</h1><h2 id='get-all-recipes'>GET ALL RECIPES</h2><pre class="highlight plaintext"><code>GET /api/v1/recipes?page=1
 </code></pre>
 <p>This endpoint retrieves all recipes.</p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -434,6 +517,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
                 </span><span class="s2">"preparation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cook"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"upVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"downVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"view"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/ucheya/image/upload/v1517622244/3121466_orig_obzslp.jpg"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T01:44:04.799Z"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T08:50:40.560Z"</span><span class="p">,</span><span class="w">
@@ -443,7 +527,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='query-parameters'>Query Parameters</h3>
+</span></code></pre><h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -457,7 +541,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
 <td>page to display</td>
 </tr>
 </tbody></table>
-<h2 id='add-recipe'>ADD RECIPE</h2><h3 id='requires-authentication-2'>Requires Authentication</h3>
+<h2 id='add-recipe'>ADD RECIPE</h2><h3 id='requires-authentication-3'>Requires Authentication</h3>
 <p>Request</p>
 
 <p><code>POST /api/v1/recipes</code></p>
@@ -592,7 +676,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
 <h2 id='view-a-specific-recipe'>VIEW A SPECIFIC RECIPE</h2>
 <blockquote>
 <p>Request: GET /api/v1/recipes/:recipeId</p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+<h3 id='query-parameters-3'>Query Parameters</h3>
 <p>Response</p>
 </blockquote>
 
@@ -618,6 +702,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
     </span><span class="s2">"preparations"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dfgsagdsfas"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"upvote"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"downvote"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"views"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://mbqyszjwy9t4pgkbdw9k.jpg"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-16T18:02:31.657Z"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-17T18:17:16.943Z"</span><span class="p">,</span><span class="w">
@@ -636,7 +721,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
 <p><code>200 OK</code></p>
 
 <p><code>Body (application/json)</code></p>
-<h2 id='user-can-get-all-his-her-recipes'>USER CAN GET ALL HIS/HER RECIPES</h2><h3 id='requires-authentication-3'>Requires Authentication</h3>
+<h2 id='user-can-get-all-his-her-recipes'>USER CAN GET ALL HIS/HER RECIPES</h2><h3 id='requires-authentication-4'>Requires Authentication</h3>
 <p>Request </p>
 
 <p><code>GET /api/v1/myrecipes</code></p>
@@ -664,6 +749,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
                 </span><span class="s2">"preparation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cook"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"upVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"downVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"views"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/ucheya/image/upload/v1517622244/3121466_orig_obzslp.jpg"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T01:44:04.799Z"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T08:50:40.560Z"</span><span class="p">,</span><span class="w">
@@ -677,6 +763,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
                 </span><span class="s2">"preparation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boil"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"upVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"downVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"views"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/ucheya/image/upload/v1517622244/3121466_orig_obzslp.jpg"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T01:44:04.799Z"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T08:50:40.560Z"</span><span class="p">,</span><span class="w">
@@ -692,7 +779,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
 <p><code>200 OK</code></p>
 
 <p><code>Body (application/json)</code></p>
-<h2 id='users-can-add-review-to-recipe'>USERS CAN ADD REVIEW TO RECIPE</h2><h3 id='requires-authentication-4'>Requires Authentication</h3><h3 id='query-parameters-3'>Query Parameters</h3>
+<h2 id='users-can-add-review-to-recipe'>USERS CAN ADD REVIEW TO RECIPE</h2><h3 id='requires-authentication-5'>Requires Authentication</h3><h3 id='query-parameters-4'>Query Parameters</h3>
 <blockquote>
 <p>Request: POST/api/v1/recipes/:recipeId/reviews</p>
 </blockquote>
@@ -739,6 +826,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
                 </span><span class="s2">"preparation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cook"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"upVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"downVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"views"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/ucheya/image/upload/v1517622244/3121466_orig_obzslp.jpg"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T01:44:04.799Z"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T08:50:40.560Z"</span><span class="p">,</span><span class="w">
@@ -768,59 +856,9 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
 <p><code>201 Created</code></p>
 
 <p><code>Body (application/json)</code></p>
-<h2 id='users-can-upvote-a-recipe'>USERS CAN UPVOTE A RECIPE</h2><h3 id='requires-authentication-5'>Requires Authentication</h3>
+<h2 id='users-can-upvote-a-recipe'>USERS CAN UPVOTE A RECIPE</h2><h3 id='requires-authentication-6'>Requires Authentication</h3>
 <blockquote>
 <p>Request: POST /api/v1/votes/:id/upVotes</p>
-</blockquote>
-<h3 id='query-parameters-4'>Query Parameters</h3>
-<blockquote>
-<p>Response</p>
-</blockquote>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>none</td>
-<td>id</td>
-</tr>
-</tbody></table>
-<pre class="highlight json tab-json"><code><span class="w">
-</span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your vote has been recorded"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"recipeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moi moi"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"ingredients"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cook"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"preparation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cook"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"upVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"downVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/ucheya/image/upload/v1517622244/3121466_orig_obzslp.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T01:44:04.799Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-05T09:34:01.242Z"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Request</p>
-
-<p><code>POST /api/v1/votes/:id/upVotes</code></p>
-
-<p><code>Body (application/json)</code></p>
-
-<p>Response </p>
-
-<p><code>201 Created</code></p>
-
-<p><code>Body (application/json)</code></p>
-<h2 id='users-can-downvote-a-recipe'>USERS CAN DOWNVOTE A RECIPE</h2><h3 id='requires-authentication-6'>Requires Authentication</h3>
-<blockquote>
-<p>Request: POST /api/v1/votes/:id/downVotes</p>
 </blockquote>
 <h3 id='query-parameters-5'>Query Parameters</h3>
 <blockquote>
@@ -851,6 +889,58 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
         </span><span class="s2">"preparation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cook"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"upVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"downVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"views"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/ucheya/image/upload/v1517622244/3121466_orig_obzslp.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T01:44:04.799Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-05T09:34:01.242Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Request</p>
+
+<p><code>POST /api/v1/votes/:id/upVotes</code></p>
+
+<p><code>Body (application/json)</code></p>
+
+<p>Response </p>
+
+<p><code>201 Created</code></p>
+
+<p><code>Body (application/json)</code></p>
+<h2 id='users-can-downvote-a-recipe'>USERS CAN DOWNVOTE A RECIPE</h2><h3 id='requires-authentication-7'>Requires Authentication</h3>
+<blockquote>
+<p>Request: POST /api/v1/votes/:id/downVotes</p>
+</blockquote>
+<h3 id='query-parameters-6'>Query Parameters</h3>
+<blockquote>
+<p>Response</p>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>none</td>
+<td>id</td>
+</tr>
+</tbody></table>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your vote has been recorded"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recipeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moi moi"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ingredients"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preparation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"upVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"downVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"views"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/ucheya/image/upload/v1517622244/3121466_orig_obzslp.jpg"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T01:44:04.799Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-05T09:34:01.242Z"</span><span class="w">
@@ -868,7 +958,39 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
 <p><code>201 Created</code></p>
 
 <p><code>Body (application/json)</code></p>
-<h1 id='favourites'>FAVOURITES</h1><h3 id='add-a-recipe-as-favourite'>ADD A RECIPE AS FAVOURITE</h3><h3 id='requires-authentication-7'>Requires Authentication</h3>
+<h2 id='users-can-get-most-voted-recipes'>USERS CAN GET MOST VOTED RECIPES</h2>
+<blockquote>
+<p>Request: GET /api/v1/recipes?sort=upvotes&amp;order=desc</p>
+
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your vote has been recorded"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recipeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moi moi"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ingredients"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preparation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"upVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"downVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"views"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/ucheya/image/upload/v1517622244/3121466_orig_obzslp.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T01:44:04.799Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-05T09:34:01.242Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Request</p>
+
+<p><code>GET /api/v1/recipes?sort=upvotes&amp;order=desc</code></p>
+
+<p><code>Body (application/json)</code></p>
+
+<p>Response 
+<code>200</code></p>
+<h1 id='favourites'>FAVOURITES</h1><h2 id='add-a-recipe-as-favourite'>ADD A RECIPE AS FAVOURITE</h2><h3 id='requires-authentication-8'>Requires Authentication</h3>
 <p>Request </p>
 
 <blockquote>
@@ -898,7 +1020,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
 <p><code>201 Created</code></p>
 
 <p><code>Body (application/json)</code></p>
-<h2 id='users-can-view-all-their-favourites'>USERS CAN VIEW ALL THEIR FAVOURITES</h2><h3 id='requires-authentication-8'>Requires Authentication</h3>
+<h2 id='users-can-view-all-their-favourites'>USERS CAN VIEW ALL THEIR FAVOURITES</h2><h3 id='requires-authentication-9'>Requires Authentication</h3>
 <p>Request </p>
 
 <p><code>GET /api/v1/favourites/:recipeId</code></p>
@@ -936,6 +1058,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
                 </span><span class="s2">"preparation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cook"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"upVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"downVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"views"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/ucheya/image/upload/v1517622244/3121466_orig_obzslp.jpg"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T01:44:04.799Z"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T08:50:40.560Z"</span><span class="p">,</span><span class="w">
@@ -949,6 +1072,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
                 </span><span class="s2">"preparation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boil"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"upVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"downVotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"views"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/ucheya/image/upload/v1517622244/3121466_orig_obzslp.jpg"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T01:44:04.799Z"</span><span class="p">,</span><span class="w">
                 </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-03T08:50:40.560Z"</span><span class="p">,</span><span class="w">
@@ -958,7 +1082,7 @@ All More Recipes API must be prepended with /api/v1 where v1 is the API version 
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h2 id='users-can-remove-recipe-from-favourites'>USERS CAN REMOVE RECIPE FROM FAVOURITES</h2><h3 id='requires-authentication-9'>Requires Authentication</h3>
+</span></code></pre><h2 id='users-can-remove-recipe-from-favourites'>USERS CAN REMOVE RECIPE FROM FAVOURITES</h2><h3 id='requires-authentication-10'>Requires Authentication</h3>
 <p>Request </p>
 
 <p><code>DELETE /api/v1/favourites/:recipeId</code></p>

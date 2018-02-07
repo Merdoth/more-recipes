@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    views: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
     upVotes: {
       type: DataTypes.INTEGER,
       defaultValue: 0,

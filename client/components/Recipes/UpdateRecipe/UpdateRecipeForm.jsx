@@ -6,7 +6,6 @@ import Button from '../../common/Button.jsx';
 import InputField from '../../common/InputField.jsx';
 import TextArea from '../../common/TextArea.jsx';
 import InputLine from '../../common/InputLine.jsx';
-import history from '../../../utils/history';
 import { updateRecipe, getOneRecipe } from '../../../actions/recipeActions/';
 /**
  * @param { UpdateRecipeForm } UpdateRecipeForm

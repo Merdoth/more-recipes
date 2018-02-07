@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import Profile from './../components/Profile.jsx';
 import Recipes from './../components/Recipes/Recipes.jsx';
+import UserRecipes from './../components/Recipes/UserRecipes.jsx';
 import AddRecipePage from './../components/Recipes/AddRecipe/AddRecipePage.jsx';
 import UpdateRecipePage from './../components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
 import RecipeDetails from './../components/Recipes/RecipeDetails.jsx';
@@ -25,7 +26,7 @@ class AuthRoutes extends Component {
             <Route path="/profile" component={Profile} />
             <Route path="/recipes" component={Recipes} />
             <Route path="/addrecipe" component={AddRecipePage} />
-            <Route path="/myrecipes" component={Recipes} />
+            <Route path="/myrecipes" component={UserRecipes} />
             <Route
               path="/updaterecipe/:recipeId"
               component={UpdateRecipePage}
@@ -34,7 +35,7 @@ class AuthRoutes extends Component {
             <Route path="*" component={NotFound} />
           </Switch>
         ) : (
-          <Redirect to="/" />
+          <Redirect to="/Signin" />
         )}
       </div>
     );

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Slider from './Slider.jsx';
 import RecipeCard from '../components/Recipes/RecipeCard/RecipeCard.jsx';
-import { getTopRecipes } from '../actions/recipeActions/';
+import { getMostVoted } from '../actions/recipeActions/';
 
 /**
  * @param { Home } Home
@@ -35,7 +35,7 @@ class Home extends Component {
    * @returns { undefined }
    */
   componentDidMount() {
-    this.props.getTopRecipes();
+    this.props.getMostVoted();
   }
 
   /**
@@ -44,16 +44,14 @@ class Home extends Component {
    * @memberof Home
    */
   render() {
-    const { topRecipes } = this.props;
-
-    const recipes = topRecipes.map(recipe => (
-      <RecipeCard key={recipe.id} recipeList={recipe} />
+    const recipes = this.props.recipes.map(recipe => (
+      <RecipeCard key={`recipes-${recipe.id}`} recipeList={recipe} />
     ));
     return (
       <div>
         <Slider />
-        <h6 id="title4">Top Recipes</h6>
         <div className="container top">
+          <h6 id="title4">Top Recipes</h6>
           <div className="row">{recipes}</div>
         </div>
       </div>
@@ -62,7 +60,8 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  topRecipes: state.recipesReducer.recipes
+  recipes:
+   (state.recipesReducer.recipesFound || {}).rows || []
 });
 
-export default connect(mapStateToProps, { getTopRecipes })(Home);
+export default connect(mapStateToProps, { getMostVoted })(Home);

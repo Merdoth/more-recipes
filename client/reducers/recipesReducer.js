@@ -7,10 +7,16 @@ const initialState = {
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case types.GET_TOP_RECIPES:
+    case types.GET_MOST_VOTED_SUCCESS:
       return {
         ...state,
-        recipes: [...action.recipes]
+        ...action.recipes
+      };
+
+    case types.GET_MOST_VOTED_FAILURE:
+      return {
+        ...state,
+        error: action.error
       };
 
     case types.GET_ALL_RECIPES:

@@ -13,7 +13,6 @@ const voteRoutes = (router) => {
   router.post('/votes/:id/downvotes', auth.authorize, vote.downVotes);
   router.get(
     '/recipes?sort=upvotes&order=desc',
-    auth.authorize,
     vote.getMostVoted
   );
 };

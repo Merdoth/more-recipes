@@ -36,7 +36,10 @@ class Recipes extends Component {
             <h2>Recipes</h2>
           </div>
           <div className="recipe-header-picture">
-            <p>Try, contribute to others recipe value by adding how your feel about the recipes</p>
+            <p>
+              Try, contribute to others recipe value by adding how your feel
+              about the recipes
+            </p>
           </div>
         </div>
         <hr />
@@ -48,7 +51,8 @@ class Recipes extends Component {
   }
 }
 
-const mapStateToProps = state => ({ recipes: state.recipesReducer.rows || [] });
+const mapStateToProps = state => ({
+  recipes: (state.recipesReducer.recipesFound || {}).rows || []
+});
 
 export default connect(mapStateToProps, { getAllRecipes })(Recipes);
-

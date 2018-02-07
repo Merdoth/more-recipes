@@ -48,6 +48,7 @@ class Recipe {
    * @return { message } message
    */
   static getOneRecipe(req, res) {
+    const { userId } = req.params;
     return recipes
       .findOne({
         where: {
@@ -63,10 +64,40 @@ class Recipe {
           });
         }
         if (recipesFound) {
-          return res.status(200).send(recipesFound);
+          if (recipesFound.dataValues.userId !== Number(userId)) {
+            return recipes
+              .update(
+                { views: recipesFound.dataValues.views + 1 },
+                {
+                  where: { id: req.params.recipeId },
+                }
+              )
+              .then(() =>
+                recipes
+                  .findOne({
+                    where: {
+                      id: req.params.recipeId
+                    },
+                    include: [{ model: reviews }, { model: votes }]
+                  })
+                  .then((updatedRecipes) => {
+                    res.status(200).send({
+                      updatedRecipes
+                    });
+                  })
+                  .catch((error) => {
+                    res.status(400).send({ error });
+                  }));
+          } else {
+            return res.status(200).send({
+              recipesFound
+            });
+          }
         }
       })
-      .catch(error => res.status(400).send({ error }));
+      .catch((error) => {
+        res.status(400).send({ error });
+      });
   }
 
   /**

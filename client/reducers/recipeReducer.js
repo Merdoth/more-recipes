@@ -13,7 +13,7 @@ export default (state = initialState, action = {}) => {
     case types.GET_ONE_RECIPE:
       return {
         ...state,
-        recipes: action.recipe,
+        recipes: action.payload,
         message: '',
         error: {}
       };
@@ -49,7 +49,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         recipes: { ...state.recipes, favourite: action.favourite }
       };
-    case types.ADD_FAVOURITE_ERROR:
+    case types.ADD_FAVOURITE_FAILURE:
       return {
         ...state,
         error: action.error
@@ -59,7 +59,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         recipes: { ...state.recipes, favourite: action.favourite }
       };
-    case types.GET_FAVOURITE_ERROR:
+    case types.GET_FAVOURITE_FAILURE:
       return {
         ...state,
         error: action.error
