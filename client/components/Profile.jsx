@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import InputField from './common/InputField.jsx';
+import Button from './common/Button.jsx';
 
 /**
  * @param { Profile } Profile
@@ -22,6 +23,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      fullName: this.props.user.fullName,
       userName: this.props.user.userName,
       email: this.props.user.email,
       errors: {},
@@ -50,6 +52,7 @@ class Profile extends Component {
    * @returns { undefined }
    */
   onSubmit(event) {
+    const { id } = this.props.match.params;
     event.preventDefault();
     this.setState({ errors: {}, isLoading: true });
   }
@@ -62,40 +65,46 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        <h1 id="profile-header">Profile</h1>
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-12 col-md-3">
-              <div className="MyPicture">
-                <img src="./image/moi.jpg" />
-              </div>
-            </div>
-            <div className="col-xs-12 col-md-9 user-details">
-              <form>
-                <InputField
-                  id="userName"
-                  type="text"
-                  name="userName"
-                  value={this.state.userName}
-                  label="Name:&nbsp;&nbsp;&nbsp;"
-                  onChange={this.onChange}
-                  required
-                  placeholder="null"
-                />
-                <InputField
-                  id="email"
-                  type="text"
-                  name="email"
-                  value={this.state.email}
-                  label="Email:&nbsp;&nbsp;&nbsp;&nbsp;"
-                  onChange={this.onChange}
-                  required
-                  placeholder="null"
-                />
-              </form>
-            </div>
-          </div>
-        </div>
+        <form className="profile">
+          <h1 id="profile-header">Profile</h1>
+          <InputField
+            id="fullName"
+            type="text"
+            name="fullName"
+            value={this.state.fullName}
+            label="Fullname:&nbsp;&nbsp;&nbsp;"
+            onChange={this.onChange}
+            required
+            placeholder="null"
+          />
+          <InputField
+            id="userName"
+            type="text"
+            name="userName"
+            value={this.state.userName}
+            label="Username:&nbsp;&nbsp;&nbsp;"
+            onChange={this.onChange}
+            required
+            placeholder="null"
+          />
+          <InputField
+            id="email"
+            type="text"
+            name="email"
+            value={this.state.email}
+            label="Email:&nbsp;&nbsp;&nbsp;&nbsp;"
+            onChange={this.onChange}
+            required
+            placeholder="null"
+          />
+          <Button
+            type="submit"
+            onClick={this.onSubmit}
+            disabled={this.state.isLoading}
+            name="Save Changes"
+            className="btn btn-lg profileButton"
+          />
+        </form>
       </div>
     );
   }

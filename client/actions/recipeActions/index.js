@@ -5,38 +5,13 @@ import * as api from './../../utils/moreRecipeAPI';
 
 /**
  *
- * @param {object} recipes
- *
- * @returns {undefined}
- */
-export const getTopRecipesSuccess = recipes => ({
-  type: types.GET_TOP_RECIPES,
-  recipes
-});
-
-/**
- *
- * @description dispatches action to get top recipes
- *
- * @param { object } object
- *
- * @returns { undefined }
- */
-export const getTopRecipes = () => dispatch =>
-  api.getTopRecipes().then((res) => {
-    const recipes = res.data;
-    dispatch(getTopRecipesSuccess(recipes));
-  });
-
-/**
- *
  * @param { object } recipe
  *
  * @returns { undefined }
  */
 export const getOneRecipeSuccess = recipe => ({
   type: types.GET_ONE_RECIPE,
-  recipe
+  payload: recipe
 });
 /**
  *
@@ -52,16 +27,16 @@ export const getOneRecipeFailure = error => ({
 /**
  *
  * @description dispatches action to get one recipe
- *
+ * @param { object } userId
  * @param { object } recipeId
  *
  * @returns { undefined }
  */
-export const getOneRecipe = recipeId => dispatch =>
+export const getOneRecipe = (userId, recipeId) => dispatch =>
   api
-    .getOneRecipe(recipeId)
+    .getOneRecipe(userId, recipeId)
     .then((res) => {
-      const recipe = res.data;
+      const recipe = res.data.recipesFound || res.data.updatedRecipes;
       dispatch(getOneRecipeSuccess(recipe));
     })
     .catch((error) => {
@@ -130,8 +105,7 @@ export const getAllRecipesSuccess = recipes => ({
  */
 export const getAllRecipes = () => dispatch =>
   api.getAllRecipes().then((res) => {
-    const recipes = res.data.recipesFound;
-    dispatch(getAllRecipesSuccess(recipes));
+    dispatch(getAllRecipesSuccess(res.data));
   });
 
 /**
@@ -341,7 +315,7 @@ export const removeFavouriteSuccess = favourite => ({
  *
  */
 export const removeFavouriteFailure = error => ({
-  type: types.ADD_FAVOURITE_ERROR,
+  type: types.ADD_FAVOURITE_FAILURE,
   error
 });
 
@@ -358,7 +332,7 @@ export const removeFavourite = id => dispatch =>
     .removeFavouriteRequest(id)
     .then((res) => {
       if (res) {
-        console.log(res.data, 'hello there we are here')
+        console.log(res.data, 'hello dear we are here');
         // dispatch(addFavouriteSuccess(res.data.favourite));
       }
     })
@@ -385,7 +359,7 @@ export const getFavouriteSuccess = favourite => ({
  *
  */
 export const getFavouriteFailure = error => ({
-  type: types.GET_FAVOURITE_ERROR,
+  type: types.GET_FAVOURITE_FAILURE,
   error
 });
 
@@ -407,4 +381,48 @@ export const getFavourite = id => dispatch =>
     })
     .catch((error) => {
       dispatch(getFavouriteFailure(error));
+    });
+
+/**
+ *
+ * @param {object} recipes
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getMostVotedSuccess = recipes => ({
+  type: types.GET_MOST_VOTED_SUCCESS,
+  recipes
+});
+
+/**
+ *
+ * @param {object} error
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getMostVotedFailure = error => ({
+  type: types.GET_MOST_VOTED_FAILURE,
+  error
+});
+
+/**
+ * @description this dispatches an action that gets most upvoted recipes a recipe
+ *
+ * @param {object} id
+ *
+ * @returns {Object} payload
+ *
+ */
+export const getMostVoted = () => dispatch =>
+  api
+    .getMostVotedRequest()
+    .then((res) => {
+      if (res) {
+        dispatch(getMostVotedSuccess(res.data));
+      }
+    })
+    .catch((error) => {
+      dispatch(getMostVotedFailure(error));
     });

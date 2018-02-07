@@ -16,43 +16,30 @@ const Slider = () => (
         data-ride="carousel"
       >
         <div className="carousel-inner" role="listbox">
-          <div className="carousel-item active">
-            <img
-              className="d-block img-fluid slider-image"
-              src={'/assets/image/Salad.jpg'}
-              alt="First slide"
-            />
-            <div className="hello">
-              <h1>More Recipes</h1>
-              <h5>
-                <i>Your Favorite Recipe's At Your Pleasure.</i>
+          <div
+            className="carousel-item active"
+            style={{ backgroundImage: "url('/assets/image/Salad.jpg')" }}
+          >
+            <div className="slider-text">
+              <h5 className="hero-header">
+                Your Favorite Recipe's At Your Pleasure.
               </h5>
             </div>
           </div>
-          <div className="carousel-item ">
-            <img
-              className="d-block img-fluid slider-image"
-              src={'/assets/image/Food.jpg'}
-              alt="Second slide"
-            />
-            <div className="hello">
-              <h1>Welcome</h1>
-              <h5>
-                <i>Feel Free To Explore Your Ideas.</i>
-              </h5>
+          <div
+            className="carousel-item"
+            style={{ backgroundImage: "url('/assets/image/Food.jpg')" }}
+          >
+            <div className="slider-text">
+              <h5 className="hero-header">Feel Free To Explore Your Ideas.</h5>
             </div>
           </div>
-          <div className="carousel-item">
-            <img
-              className="d-block img-fluid slider-image"
-              src={'/assets/image/shrimp.jpg'}
-              alt="Third slide"
-            />
-            <div className="hello">
-              <h1>Build Your Recipes</h1>
-              <h5>
-                <i>Love Food, Love Life.</i>
-              </h5>
+          <div
+            className="carousel-item"
+            style={{ backgroundImage: "url('/assets/image/shrimp.jpg')" }}
+          >
+            <div className="slider-text">
+              <h5 className="hero-header">Love Food, Love Life.</h5>
             </div>
           </div>
         </div>

@@ -9,18 +9,18 @@ import React from 'react';
  */
 
 const Footer = () => (
-      <div className="container-fluid">
-        <div className="footer">
-          <div>
-            <p>
-              <i>Designed with</i>
-              <i className="fa fa-heart love" aria-hidden="true" />
-              <i>by </i>
-              <strong>Ucheya</strong>
-            </p>
-          </div>
-        </div>
+  <div className="container-fluid">
+    <div className="footer">
+      <div>
+        <p>
+          Designed with&nbsp;<i
+            className="fa fa-heart love"
+            aria-hidden="true"
+          />&nbsp;by&nbsp;<span>Ucheya</span>
+        </p>
       </div>
+    </div>
+  </div>
 );
 
 export default Footer;

@@ -22,6 +22,7 @@ class UserRecipes extends Component {
     const userId = this.props.match.params;
     this.props.getUserRecipes(userId);
   }
+
   /**
    *,k
    * @returns { undefined }

@@ -1,16 +1,4 @@
-import ValidatePassword from 'validate-password';
 import lodash from 'lodash';
-
-const options = {
-  enforce: {
-    lowercase: true,
-    uppercase: true,
-    specialCharacters: true,
-    numbers: true
-  }
-};
-
-const validator = new ValidatePassword(options);
 
 /**
  * @description validateSignUp function
@@ -21,14 +9,22 @@ const validator = new ValidatePassword(options);
  *
  */
 export const validateSignUp = (value) => {
-  const { userName, email, password } = value;
+  const {
+    fullName, userName, email, password
+  } = value;
   const errors = {};
-  const filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  const filter = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+  if (fullName.trim().length === 0) {
+    errors.fullNameError = 'fullname is required';
+  } else if (fullName.length < 3) {
+    errors.fullNameError = 'fullname must be at least 3 characters long';
+  }
 
   if (userName.trim().length === 0) {
     errors.userNameError = 'username is required';
   } else if (userName.length < 3) {
-    errors.firstNameError = 'username must be at least 3 characters long';
+    errors.userNameError = 'username must be at least 3 characters long';
   }
 
   if (email.trim().length === 0) {
@@ -41,12 +37,6 @@ export const validateSignUp = (value) => {
     errors.passwordError = 'password is required';
   } else if (password.length < 8) {
     errors.passwordError = 'password name must be at least 8 characters long';
-  }
-
-  const { isValid } = validator.checkPassword(password);
-  if (!isValid) {
-    errors.passwordError =
-      'password must contain `uppercase, lowercase, number, spacial character`';
   }
 
   return { isValid: lodash.isEmpty(errors), errors };

@@ -1,18 +1,3 @@
-import ValidatePassword from 'validate-password';
-
-// add rules that will be validated
-const options = {
-  enforce: {
-    lowercase: true,
-    uppercase: true,
-    specialCharacters: true,
-    numbers: true
-  }
-};
-
-// instantiate ValidatePassword
-const validator = new ValidatePassword(options);
-
 /**
  * @description validate User Sign In Fields
  *
@@ -95,6 +80,13 @@ export const recipeValidator = (req, res, next) => {
  */
 
 export const signUpValidator = (req, res, next) => {
+  req.checkBody('fullName', 'fullname is required').notEmpty();
+  req
+    .checkBody(
+      'fullName',
+      'fullname must be at least 3 characters and not start with an empty space'
+    )
+    .matches(/^[a-zA-Z]{3,}$/);
   req.checkBody('userName', 'username is required').notEmpty();
   req
     .checkBody(
@@ -118,13 +110,6 @@ export const signUpValidator = (req, res, next) => {
     return res.status(400).send({ message: errorObject });
   }
 
-  const { isValid } = validator.checkPassword(req.body.password);
-  if (!isValid) {
-    return res.status(400).send({
-      message:
-        'password must contain `uppercase, lowercase, number, and special character`'
-    });
-  }
   next();
 };
 
@@ -144,7 +129,6 @@ export const validateParams = (req, res, next) => {
   // check if param is of type integer
   // req.sanitizeParams('id', 'Please input a valid id.').toInt();
   // req.checkParams('id', 'Please input a valid id.').isInt();
-
   // const errors = req.validationErrors();
   // if (errors) {
   //   const errorObject = errors.map(error => error.msg);

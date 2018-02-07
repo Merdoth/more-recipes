@@ -10,7 +10,6 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './scss/main.scss';
 
 // import component
-import history from './utils/history';
 import store from './utils/store';
 import Home from './components/Home.jsx';
 import AuthRoutes from './utils/AuthRoutes';

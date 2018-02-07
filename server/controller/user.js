@@ -28,6 +28,7 @@ class User {
         return res.status(201).send({
           message: 'User successfully created',
           user: {
+            fullName: newUser.fullName,
             userName: newUser.userName,
             email: newUser.email,
             token
@@ -51,10 +52,15 @@ class User {
       attributes: ['userName', 'email']
     })
       .then((users) => {
-        res.status(200).send({ users });
+        if (!users) {
+          return res.status(404).send({
+            message: 'Users not found',
+          });
+        }
+        return res.status(200).send({ users });
       })
       .catch((err) => {
-        res.status(404).send({ error: err });
+        res.status(500).send({ error: err });
       });
   }
 
@@ -69,7 +75,7 @@ class User {
   static getOneUser(req, res) {
     Users.findById(req.params.id, {
       include: [{ model: Favorites }],
-      attributes: ['userName', 'email']
+      attributes: ['fullName', 'userName', 'email']
     })
       .then((users) => {
         res.status(200).send({ users });
@@ -101,7 +107,10 @@ class User {
         if (user) {
           if (bcrypt.compareSync(password, user.password)) {
             const token = jwt.sign(
-              { id: user.id, userName: user.userName, email: user.email },
+              {
+                id: user.id,
+                email: user.email
+              },
               process.env.SECRET_KEY,
               {
                 expiresIn: 60 * 60 * 24 // Token expires in 24 hours
