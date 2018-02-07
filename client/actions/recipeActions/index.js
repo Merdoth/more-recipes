@@ -332,8 +332,7 @@ export const removeFavourite = id => dispatch =>
     .removeFavouriteRequest(id)
     .then((res) => {
       if (res) {
-        console.log(res.data, 'hello dear we are here');
-        // dispatch(addFavouriteSuccess(res.data.favourite));
+        dispatch(addFavouriteSuccess(res.data.favourite));
       }
     })
     .catch((error) => {
