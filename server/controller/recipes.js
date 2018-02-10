@@ -24,12 +24,13 @@ class Recipe {
    */
   static addRecipe(req, res) {
     const {
-      recipeName, ingredients, preparation, image
+      recipeName, description, ingredients, preparation, image
     } = req.body;
     recipes
       .create({
         userId: req.decoded.id,
         recipeName,
+        description,
         ingredients,
         preparation,
         image
@@ -216,7 +217,7 @@ class Recipe {
   static updateUserRecipes(req, res) {
     const { id } = req.params;
     const {
-      recipeName, preparation, ingredients, image
+      recipeName, description, preparation, ingredients, image
     } = req.body;
 
     return (
@@ -232,6 +233,7 @@ class Recipe {
             return recipe
               .update({
                 recipeName: recipeName || recipe.recipeName,
+                description: description || recipe.description,
                 ingredients: ingredients || recipe.ingredients,
                 preparation: preparation || recipe.preparation,
                 image

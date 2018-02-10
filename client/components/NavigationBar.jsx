@@ -118,8 +118,8 @@ class NavigationBar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark header">
-        <Link className="navbar-brand" to="/">
-          MORECIPES
+        <Link className="navbar-brand logo" to="/">
+          MoRecipes
         </Link>
         <button
           className="navbar-toggler"

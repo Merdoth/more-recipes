@@ -16,6 +16,7 @@ import {
   downVoteRecipe
 } from '../../actions/recipeActions/votes';
 import RecipeCardImage from './RecipeCard/RecipeCardImage.jsx';
+import RecipeCardDes from './RecipeCard/RecipeCardDes.jsx';
 import RecipeDetailsFooter from './RecipeCard/RecipeDetailsFooter.jsx';
 
 /**
@@ -162,21 +163,14 @@ class RecipeDetails extends Component {
 
     return (
       <div className="container wrap">
-        <div className="row Card">
-          <div className="col-md-4 col-sm-4 recipeD">
-            <div className="top-items">
-              <div className="rated">
-                <RecipeCardImage
-                  src={recipeDetails ? recipeDetails.image : ''}
-                />
+        <div className="row DetailsImage" style={{ backgroundImage: `url("${recipeDetails ? recipeDetails.image : ''}")` }}>
+          <div className="recipeD">
                 <RecipeDetailsFooter
                   id={recipeDetails.id}
                   userId={recipeDetails.userId}
                   goToRecipes={goToRecipes}
                   loggedInUser = {loggedInUser}
                 />
-              </div>
-            </div>
           </div>
           <div className="col-md-8 col-sm-8 recipeI">
             <div className="stats">
@@ -206,6 +200,10 @@ class RecipeDetails extends Component {
               </span>
             </div>
           </div>
+          <RecipeCardDes
+            title={recipeDetails.recipeName}
+            text={recipeDetails.description}
+          />
         </div>
         <div className="row main">
           <div className="col-xs-12 col-sm-4 main-aside">

@@ -10,7 +10,12 @@ import auth from '../middleware/authorization';
  */
 const favoriteRoutes = (router) => {
   router.post('/favourites', auth.authorize, favorite.addFavourites);
-  router.delete('/favourites/:recipeId', auth.authorize, favorite.removeFavourites);
+  router.get('/userFavourites', auth.authorize, favorite.getUserFavourites);
+  router.delete(
+    '/favourites/:recipeId',
+    auth.authorize,
+    favorite.removeFavourites
+  );
   router.get(
     '/favourites/:recipeId',
     auth.authorize,

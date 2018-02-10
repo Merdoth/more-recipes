@@ -76,7 +76,7 @@ class RecipeDetailsFooter extends Component {
    */
   authUser() {
     return (
-      <div className="itemReview row">
+      <div className="userButton row">
         <Button
           type="edit"
           onClick={this.onSubmit}

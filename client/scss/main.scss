@@ -57,7 +57,7 @@ div {
 }
 .header {
   display: flex;
-  border-bottom: 8px solid #77e2e1;
+  border-bottom: 2px solid orange;
   background-color: #000;
   padding: 7px 90px;
 }
@@ -239,7 +239,7 @@ img {
 }
 
 .wrap {
-  margin-top: 80px;
+  margin-top: 30px;
 }
 
 .main-aside .main-section {
@@ -271,26 +271,33 @@ img {
 }
 
 .top-items {
-  height: 100%;
+  // height: 100%;
   display: flex;
   flex-direction: row;
-  padding-left: 7px;
-  padding-right: 7px;
-  margin-bottom: 14px;
   width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  transition: .3s;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 }
 .rated {
   width: 380px;
   background: white;
   border-radius: 2px;
+  text-decoration: none;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
-  border-top: solid 1px #000;
-  border-bottom: solid 5px #77e2e1;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .imgholder {
   height: 300px;
-  padding: 5px;
 }
 
 .imgholder > img {
@@ -304,7 +311,7 @@ img {
   padding-top: 60px;
 }
 .top h6 {
-  padding-bottom: 20px;
+  padding-bottom: 70px;
 }
 
 .des {
@@ -313,6 +320,9 @@ img {
 
 .des h2 {
   color: orange;
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  text-decoration: none;
 }
 
 .des > h4 {
@@ -324,15 +334,28 @@ img {
 
 .itemReview {
   text-align: center;
-  border-top: 1px solid #eee;
-  padding: 5px;
   width: 100%;
-  height: 80px;
   margin-left: 0;
   margin-right: 0;
   display: flex;
   justify-content: space-around;
   align-content: center;
+}
+.itemReview > form-group:not(:first-of-type) {
+    margin-left: 10%;
+}
+
+.userButton {
+  text-align: center;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.userButton > form-group:not(:first-of-type) {
+    margin-left: 10%;
 }
 .picicon {
   margin-top: 10px;
@@ -349,7 +372,7 @@ img {
   display: block;
   margin: 10px auto;
 
-  color: black;
+  color: #ddd;
 }
 
 .iconStat {
@@ -382,20 +405,10 @@ img {
   margin-bottom: 10px;
 }
 
-.icons .fa-thumbs-up,
-.icons1 .fa-edit {
+
+.icons1 {
   opacity: 0.5;
-  color: blue;
-}
-
-.icons .fa-thumbs-down,
-.icons1 .fa-trash {
-  color: red;
-}
-
-.icons .fa-eye,
-.icons1 .fa-eye {
-  color: #3535b0;
+  color:gray;
 }
 
 .MyPicture > img {
@@ -478,7 +491,7 @@ img {
 #title4 {
   padding-top: 40px;
   font-size: 35px;
-  line-height: 0.8rem;
+  line-height: 1;
   font-weight: bold;
   text-align: center;
   color: #222;
@@ -492,8 +505,8 @@ img {
   padding: 15px 0px;
   background: #000;
   text-align: center;
-  border-top: 1px solid #77e2e1;
-  color: peachpuff;
+  border-top: 2px solid orange;
+  color: orange;
   letter-spacing: 0.1em;
   position: fixed;
   font-size: 22px;
@@ -503,10 +516,6 @@ img {
   line-height: 60px;
   font-weight: normal;
   margin-top: 50px;
-}
-
-p {
-  margin: 10px 0;
 }
 
 .love {
@@ -688,10 +697,11 @@ input {
   margin-bottom: 20px;
 }
 
-.Card {
+.DetailsImage {
+  background-repeat: no-repeat;
   height: 400px;
   display: flex;
-  background-color: rgb(207, 205, 205);
+  background-size: cover;
 }
 
 .align-view-count {
@@ -749,4 +759,9 @@ input {
 
 .profile {
   margin: 5% 25%;
+}
+
+.logo {
+  font-size: 36px;
+  color: orange !important;
 }

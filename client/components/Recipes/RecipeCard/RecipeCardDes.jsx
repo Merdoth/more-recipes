@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 
 /**
  *
@@ -10,11 +10,9 @@ import { Link } from 'react-router-dom';
  * @returns { undefined }
  * .
  */
-const RecipeCardDes = ({ title, text, id }) => (
+const RecipeCardDes = ({ title, text }) => (
   <div className="des">
-    <Link to={`recipe-details/${id}`}>
       <h2>{title}</h2>
-    </Link>
     <h4>{text}</h4>
   </div>
 );
