@@ -346,12 +346,14 @@ img {
 }
 
 .userButton {
+  height: 70px;
+  padding-top: 10px;
   text-align: center;
   width: 100%;
   margin-left: 0;
   margin-right: 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-content: center;
 }
 .userButton > form-group:not(:first-of-type) {
@@ -569,11 +571,32 @@ input {
 input {
   width: 70%;
 }
+.pagination {
+  cursor: pointer;
+
+   & a {
+      color: black;
+      float: left;
+      padding: 8px 16px;
+      transition: background-color .3s;
+      text-decoration: none;
+      margin: 0 4px;
+  }
+
+   & a.active {
+      background-color: orange;
+      color: white;
+  }
+
+   & a:hover:not(.active) {
+    background-color: #ddd;
+  }
+}
 
 .manage {
   margin-top: 15px;
   margin-bottom: 15px;
-  height: 300px;
+  height: 190px;
 }
 .manage > h2 {
   font-size: 50px;
@@ -723,7 +746,9 @@ input {
 .deco {
   margin-bottom: 100px;
 }
-
+.Card {
+  padding-bottom: 10px;
+}
 .buttonb {
   margin-top: 5%;
   margin-bottom: 5%;

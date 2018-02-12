@@ -9,7 +9,7 @@ import auth from '../middleware/authorization';
  * @returns {void}
  */
 const voteRoutes = (router) => {
-  router.post('/votes/:id/upVotes', auth.authorize, vote.upVotes);
+  router.post('/votes/:id/upvotes', auth.authorize, vote.upVotes);
   router.post('/votes/:id/downvotes', auth.authorize, vote.downVotes);
   router.get(
     '/recipes?sort=upvotes&order=desc',

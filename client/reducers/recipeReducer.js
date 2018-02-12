@@ -44,26 +44,6 @@ export default (state = initialState, action = {}) => {
         ...state,
         recipes: { ...action.payload }
       };
-    case types.ADD_FAVOURITE_SUCCESS:
-      return {
-        ...state,
-        recipes: { ...state.recipes, favourite: action.favourite }
-      };
-    case types.ADD_FAVOURITE_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
-    case types.GET_FAVOURITE_SUCCESS:
-      return {
-        ...state,
-        recipes: { ...state.recipes, favourite: action.favourite }
-      };
-    case types.GET_FAVOURITE_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
     case types.POST_REVIEW_SUCCESS:
       return {
         ...state,

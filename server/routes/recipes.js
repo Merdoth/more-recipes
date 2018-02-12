@@ -1,5 +1,6 @@
 import recipes from '../controller/recipes';
 import auth from '../middleware/authorization';
+
 /**
  * @description recipes routes
  *
@@ -17,7 +18,7 @@ const recipeRoutes = (router) => {
   router.post(
     '/search',
     auth.authorize,
-    recipes.searchByRecipeNameOrIngredient
+    recipes.searchRecipe
   );
 };
 

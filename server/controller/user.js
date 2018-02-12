@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import models from '../models/';
 import generateToken from '../utils/token';
+import validateInput from '../validations/validateInput';
 
 // create reference to db model
 const Users = models.users;
@@ -21,6 +22,12 @@ class User {
    * @returns {Object} json - payload
    */
   static signUpUser(req, res) {
+    const { errors, isValid } = validateInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).send({ error: errors });
+    }
+
     Users.create(req.body)
       .then((userCreated) => {
         const newUser = userCreated.dataValues;
@@ -52,7 +59,7 @@ class User {
       attributes: ['userName', 'email']
     })
       .then((users) => {
-        if (!users) {
+        if (users.length === 0) {
           return res.status(404).send({
             message: 'Users not found',
           });
@@ -73,15 +80,12 @@ class User {
    * @returns {Object} json - payload
    */
   static getOneUser(req, res) {
-    Users.findById(req.params.id, {
+    Users.findById(req.decoded.id, {
       include: [{ model: Favorites }],
       attributes: ['fullName', 'userName', 'email']
     })
-      .then((users) => {
-        res.status(200).send({ users });
-      })
-      .catch((err) => {
-        res.status(404).send({ error: err });
+      .then((user) => {
+        res.status(200).send({ user });
       })
       .catch((err) => {
         res.status(500).send({ error: err });
@@ -116,8 +120,10 @@ class User {
                 expiresIn: 60 * 60 * 24 // Token expires in 24 hours
               }
             );
-
-            return res.status(200).send({ message: 'Welcome', token });
+            return res.status(200).send({
+              message: 'Welcome!',
+              token
+            });
           }
           return res.status(400).send({ message: 'Incorrect login details!' });
         }
@@ -126,6 +132,61 @@ class User {
       .catch((err) => {
         res.status(500).send({ error: err });
       });
+  }
+
+  /** Updates a User's Profile
+   *
+  * @param {Object} req - req object
+  * @param {Object} res - res object
+  *
+  * @returns {Object} res object
+  */
+  static updateUserProfile(req, res) {
+    Users.findById(req.decoded.id)
+      .then((userFound) => {
+        if (userFound) {
+          const {
+            fullName,
+            userName,
+            email
+          } = req.body;
+
+          if (fullName || userName || email) {
+            userFound.update({
+              fullName,
+              userName,
+              email,
+            })
+              .then((updatedUser) => {
+                if (updatedUser) {
+                  const payload = {
+                    id: updatedUser.id,
+                    fullName: updatedUser.dataValues.fullName
+                  };
+                  const token = generateToken(payload);
+                  res.status(200).send({
+                    status: 'Successful',
+                    message: 'Your account has been updated',
+                    token,
+                    user: {
+                      fullName: updatedUser.dataValues.fullName,
+                      userName: updatedUser.dataValues.userName,
+                      email: updatedUser.dataValues.email,
+                    },
+                  });
+                }
+              });
+          } else {
+            res.status(422).send({
+              status: 'Unsuccessful',
+              message: 'No update was made',
+            });
+          }
+        }
+      })
+      .catch(() => res.status(500).send({
+        message: 'Internal Server Error'
+      }));
   }
 }
 

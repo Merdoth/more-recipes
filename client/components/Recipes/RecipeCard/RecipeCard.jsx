@@ -28,7 +28,7 @@ class RecipeCard extends Component {
               title={this.props.recipeList.recipeName}
               text={this.props.recipeList.description}
             />
-            <RecipeCardFooter {...this.props.recipeList.id} />
+            <RecipeCardFooter {...this.props.recipeList.id} upVotes={this.props.recipeList.upVotes} downVotes={this.props.recipeList.downVotes} views={this.props.recipeList.views}/>
           </Link>
         </div>
       </div>

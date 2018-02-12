@@ -99,7 +99,7 @@ class Favorite {
                 });
               });
           } else {
-            res.status(401).send({
+            res.status(404).send({
               message: 'You dont have this recipe as a favourite'
             });
           }
@@ -113,25 +113,6 @@ class Favorite {
     });
   }
 
-  /**
-   *
-   * @description get user favourites controller
-   *
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
-   *
-   * @returns {Object} json - payload
-   *
-   */
-  static getFavorites(req, res) {
-    return Favourites.all()
-      .then((favorites) => {
-        res.status(200).send({ favorites });
-      })
-      .catch((err) => {
-        res.status(404).send({ err });
-      });
-  }
 
   /**
    * @description A method to get a single favourite recipe based on user ID and recipe ID
@@ -153,8 +134,9 @@ class Favorite {
       })
       .then((favourites) => {
         if (favourites.length < 1) {
-          return res.status(404).send({
-            message: 'No Favourites Found please try to create some'
+          return res.status(200).send({
+            message: 'No Favourites Found please try to create some',
+            favourites
           });
         }
         if (favourites) {
@@ -162,44 +144,6 @@ class Favorite {
         }
       })
       .catch(error => res.status(500).send({ error }));
-  }
-
-
-  /**
-   * @description A method to get a single favourite recipe based on user ID and recipe ID
-   *
-   * @param {object} req object
-   *
-   * @param {object} res object
-   *
-   * @returns {object} insertion error messages object or success message object
-   *
-   * @memberof Favourites
-   */
-  static getSingleFavourite(req, res) {
-    const userId = req.decoded.id;
-    const { recipeId } = req.params;
-
-    Favourites.findOne({
-      where: { userId, recipeId }
-    })
-      .then((favourites) => {
-        if (favourites) {
-          res.status(200).send({
-            favourites
-          });
-        } else {
-          res.status(404).send({
-            message: 'No favourite recipe found!!',
-          });
-        }
-      })
-      .catch((error) => {
-        const { message } = error;
-        res.status(500).send({
-          message
-        });
-      });
   }
 }
 

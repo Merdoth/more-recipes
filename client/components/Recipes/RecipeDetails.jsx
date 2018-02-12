@@ -16,7 +16,6 @@ import {
   downVoteRecipe
 } from '../../actions/recipeActions/votes';
 import RecipeCardImage from './RecipeCard/RecipeCardImage.jsx';
-import RecipeCardDes from './RecipeCard/RecipeCardDes.jsx';
 import RecipeDetailsFooter from './RecipeCard/RecipeDetailsFooter.jsx';
 
 /**
@@ -40,7 +39,7 @@ class RecipeDetails extends Component {
     this.state = {
       recipe: {},
       review: '',
-      favourites: {}
+      favourites: []
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -58,9 +57,13 @@ class RecipeDetails extends Component {
   componentDidMount() {
     const { recipeId } = this.props.match.params;
     const { id } = this.props.user;
-    this.props.getOneRecipe(id, recipeId);
-    this.props.getFavourite(recipeId);
+    if (id) {
+      this.props.getOneRecipe(id, recipeId);
+      this.props.getFavourite(recipeId);
+    }
   }
+
+
   /**
    * @param {object} event
    *
@@ -122,11 +125,14 @@ class RecipeDetails extends Component {
   handleFavourite(event) {
     event.preventDefault();
     const { id } = this.props.recipe;
-    if (this.state.recipe.favourite) {
-      this.props.removeFavourite(id);
-      this.props.getOneRecipe(id);
-    } else {
+    const returnedFavorite = this.state.favourites.map(recipe => ({
+      recipeid: recipe.recipeId
+    }));
+    const ids = returnedFavorite.map(favId => favId.recipeid);
+    if (!ids.includes(id) && id) {
       this.props.addFavourite(id);
+    } else {
+      this.props.removeFavourite(id);
     }
   }
 
@@ -137,11 +143,14 @@ class RecipeDetails extends Component {
    * @returns { undefined }
    */
   componentWillReceiveProps(nextProps) {
-    const { recipe, currentReview, reviews } = nextProps;
+    const {
+      recipe, currentReview, reviews, favourites
+    } = nextProps;
     this.setState(() => ({
       recipe,
       review: currentReview,
-      reviews
+      reviews,
+      favourites,
     }));
   }
 
@@ -151,8 +160,13 @@ class RecipeDetails extends Component {
    * @memberof RecipeDetails
    */
   render() {
+    const recipesId = this.state.favourites.map(recipe => ({
+      recipeId: recipe.recipeId
+    }));
+    const recipeIds = recipesId.map(id => id.recipeId);
     const loggedInUser = this.props.user.id;
-    const selected = this.state.recipe.favourite ? 'selected' : '';
+
+    const selected = (recipeIds.includes(this.props.recipe.id)) ? 'selected' : '';
     const goToRecipes = route => this.props.history.push(route);
     const recipeDetails = this.state.recipe;
     const fetchedReviews = this.props.reviews.map(review => (
@@ -163,14 +177,21 @@ class RecipeDetails extends Component {
 
     return (
       <div className="container wrap">
-        <div className="row DetailsImage" style={{ backgroundImage: `url("${recipeDetails ? recipeDetails.image : ''}")` }}>
-          <div className="recipeD">
+        <div className="row Card">
+          <div className="col-md-4 col-sm-4 recipeD">
+            <div className="top-items">
+              <div className="rated">
+                <RecipeCardImage
+                  src={recipeDetails ? recipeDetails.image : ''}
+                />
                 <RecipeDetailsFooter
                   id={recipeDetails.id}
                   userId={recipeDetails.userId}
                   goToRecipes={goToRecipes}
-                  loggedInUser = {loggedInUser}
+                  loggedInUser={loggedInUser}
                 />
+              </div>
+            </div>
           </div>
           <div className="col-md-8 col-sm-8 recipeI">
             <div className="stats">
@@ -198,12 +219,12 @@ class RecipeDetails extends Component {
                 <i className="fa fa-eye iconStat align-view-count" />
                 {recipeDetails.views}
               </span>
+              <div>
+                <h3>{recipeDetails.recipeName}</h3>
+                <p>{recipeDetails.description}</p>
+              </div>
             </div>
           </div>
-          <RecipeCardDes
-            title={recipeDetails.recipeName}
-            text={recipeDetails.description}
-          />
         </div>
         <div className="row main">
           <div className="col-xs-12 col-sm-4 main-aside">
@@ -274,7 +295,7 @@ const mapStateToProps = state => ({
   recipe: state.recipeReducer.recipes,
   reviews: state.recipeReducer.recipes.reviews || [],
   message: state.recipeReducer.message,
-  favourites: state.recipeReducer.recipes.favourite || {},
+  favourites: state.favourite.favourite || [],
   error: state.recipeReducer.error
 });
 

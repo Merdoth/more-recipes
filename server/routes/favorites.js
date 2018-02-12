@@ -19,12 +19,7 @@ const favoriteRoutes = (router) => {
   router.get(
     '/favourites/:recipeId',
     auth.authorize,
-    favorite.getSingleFavourite
-  );
-  router.get(
-    '/users/:recipeId/removeFavourites',
-    auth.authorize,
-    favorite.getFavorites
+    favorite.getUserFavourites
   );
 };
 

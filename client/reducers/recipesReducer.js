@@ -1,7 +1,9 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  recipes: [],
+  recipesFound: {
+    rows: []
+  },
   error: {}
 };
 
@@ -23,6 +25,14 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         ...action.recipes
+      };
+    case types.ADD_RECIPE_SUCCESS:
+      return {
+        ...state,
+        recipesFound: {
+          ...state.recipesFound,
+          rows: [...state.recipesFound.rows, action.recipe]
+        }
       };
 
     case types.GET_USER_RECIPES_SUCCESS:

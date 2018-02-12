@@ -7,7 +7,10 @@ import UserRecipes from './../components/Recipes/UserRecipes.jsx';
 import AddRecipePage from './../components/Recipes/AddRecipe/AddRecipePage.jsx';
 import UpdateRecipePage from './../components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
 import RecipeDetails from './../components/Recipes/RecipeDetails.jsx';
+import SearchResult from './../components/Search/SearchResult.jsx';
 import NotFound from './../components/NotFound.jsx';
+import Authenticate from './AuthenticateUser';
+
 
 /**
  * @class AuthRoutes
@@ -23,15 +26,19 @@ class AuthRoutes extends Component {
       <div>
         {this.props.isAuthenticated ? (
           <Switch>
-            <Route path="/profile" component={Profile} />
-            <Route path="/recipes" component={Recipes} />
-            <Route path="/addrecipe" component={AddRecipePage} />
-            <Route path="/myrecipes" component={UserRecipes} />
+            <Route path="/profile" component={Authenticate(Profile)} />
+            <Route path="/recipes" component={Authenticate(Recipes)} />
+            <Route path="/addrecipe" component={Authenticate(AddRecipePage)} />
+            <Route path="/myrecipes" component={Authenticate(UserRecipes)} />
             <Route
               path="/updaterecipe/:recipeId"
-              component={UpdateRecipePage}
+              component={Authenticate(UpdateRecipePage)}
             />
-            <Route path="/recipe-details/:recipeId" component={RecipeDetails} />
+            <Route
+              path="/searchresults"
+              component={SearchResult}
+            />
+            <Route path="/recipe-details/:recipeId" component={Authenticate(RecipeDetails)} />
             <Route path="*" component={NotFound} />
           </Switch>
         ) : (

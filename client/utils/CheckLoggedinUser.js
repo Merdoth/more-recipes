@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import history from './history';
 
 const CheckLoggedInUser = (ComposedComponent) => {
   /**
@@ -16,7 +17,7 @@ const CheckLoggedInUser = (ComposedComponent) => {
      */
     componentWillMount() {
       if (this.props.isAuthenticated) {
-        history.push('/Profile');
+        history.push('/recipes');
       }
     }
     /**
@@ -27,7 +28,7 @@ const CheckLoggedInUser = (ComposedComponent) => {
      */
     componentWillUpdate(nextProps) {
       if (nextProps.isAuthenticated) {
-        history.push('/Profile');
+        history.push('/recipes');
       }
     }
     /**

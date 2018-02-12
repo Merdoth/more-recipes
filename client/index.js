@@ -3,13 +3,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import jwt from 'jsonwebtoken';
-// import { Route } from 'react-router-dom';
+import { Router } from 'react-router';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
 // import scss stylesheet
 import './scss/main.scss';
 
 // import component
+import history from './utils/history';
 import store from './utils/store';
 import Home from './components/Home.jsx';
 import AuthRoutes from './utils/AuthRoutes';
@@ -19,6 +20,7 @@ import SignupPage from './components/Signup/SignupPage.jsx';
 import NavigationBar from './components/NavigationBar.jsx';
 import Footer from './components/Footer.jsx';
 import { setCurrentUser } from './actions/auth/authActions';
+import CheckLoggedinUser from './utils/CheckLoggedinUser';
 
 const { localStorage } = window;
 const jwtToken = localStorage && localStorage.getItem('jwtToken');
@@ -46,8 +48,8 @@ render(
         <NavigationBar />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/Signup" component={SignupPage} />
-          <Route path="/Signin" component={SigninPage} />
+          <Route path="/Signup" component={CheckLoggedinUser(SignupPage)} />
+          <Route path="/Signin" component={CheckLoggedinUser(SigninPage)} />
           <Route component={AuthRoutes} />
         </Switch>
         <Footer />

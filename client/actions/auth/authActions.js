@@ -9,6 +9,7 @@ import * as types from './../actionTypes';
  * @export
  *
  * @param {Object} user
+ * @param {Object} userData
  *
  * @returns {undefined}
  */

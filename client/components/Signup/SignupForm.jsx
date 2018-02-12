@@ -61,7 +61,7 @@ class SignupForm extends Component {
             text: this.state.email.split('@')[0],
             icon: 'success'
           });
-          this.props.goToProfile();
+          this.props.goToAllRecipes();
         })
         .catch((err) => {
           const error = err.data.message;
@@ -179,7 +179,7 @@ class SignupForm extends Component {
 
 SignupForm.propTypes = {
   userSignupRequest: PropTypes.func.isRequired,
-  goToProfile: PropTypes.func.isRequired
+  goToAllRecipes: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = { userSignupRequest };
