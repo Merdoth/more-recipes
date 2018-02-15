@@ -9,6 +9,7 @@ import UpdateRecipePage from './../components/Recipes/UpdateRecipe/UpdateRecipeP
 import RecipeDetails from './../components/Recipes/RecipeDetails.jsx';
 import SearchResult from './../components/Search/SearchResult.jsx';
 import NotFound from './../components/NotFound.jsx';
+import Favourites from './../components/Favourites.jsx';
 import Authenticate from './AuthenticateUser';
 
 
@@ -30,6 +31,7 @@ class AuthRoutes extends Component {
             <Route path="/recipes" component={Authenticate(Recipes)} />
             <Route path="/addrecipe" component={Authenticate(AddRecipePage)} />
             <Route path="/myrecipes" component={Authenticate(UserRecipes)} />
+            <Route path="/favourites" component={Authenticate(Favourites)} />
             <Route
               path="/updaterecipe/:recipeId"
               component={Authenticate(UpdateRecipePage)}
