@@ -2,8 +2,10 @@
 import sequelize from 'sequelize';
 import models from '../models';
 
-const Votes = models.votes;
-const Recipes = models.recipes;
+
+const {
+  votes, recipes
+} = models;
 
 /**
  * @class
@@ -21,12 +23,12 @@ class Vote {
     const userId = req.decoded.id;
     const { id } = req.params;
     if (!userId && id) {
-      return res.status(400).json({
+      return res.status(400).send({
         succes: false,
-        message: 'user ID or Recipe ID is invalid'
+        message: 'wrong Id is been passed'
       });
     }
-    Votes.findCreateFind({
+    votes.findCreateFind({
       where: {
         userId,
         recipeId: id
@@ -35,9 +37,11 @@ class Vote {
       .spread((vote, created) => {
         if (created) {
           vote.update({ voted: 'upVote' });
-          return Recipes.findOne({ where: { id } }).then((recipe) => {
+          return recipes.findOne({
+            where: { id },
+          }).then((recipe) => {
             recipe.increment('upVotes').then(() => {
-              res.status(201).json({
+              res.status(201).send({
                 message: 'Your vote has been recorded',
                 recipe
               });
@@ -45,24 +49,23 @@ class Vote {
           });
         } else if (!created && vote.voted === 'upVote') {
           vote.destroy();
-          return Recipes.findOne({ where: { id } }).then((recipe) => {
+          return recipes.findOne({
+            where: { id },
+          }).then((recipe) => {
             if (recipe) {
               recipe.decrement('upVotes').then(() => {
                 res.status(200).send({
-                  message: 'Your vote has been removed',
+                  message: 'Your upvote has been removed',
                   recipe
                 });
-              });
-            } else {
-              res.status(404).send({
-                message: 'Recipe not found',
-                recipe
               });
             }
           });
         } else if (!created && vote.voted === 'downVote') {
           vote.update({ voted: 'upVote' });
-          return Recipes.findOne({ where: { id } }).then((recipe) => {
+          return recipes.findOne({
+            where: { id },
+          }).then((recipe) => {
             recipe.increment('upVotes');
             recipe
               .decrement('downVotes')
@@ -78,7 +81,10 @@ class Vote {
         }
       })
       .catch((error) => {
-        res.status(500).json(error.message);
+        res.status(404).send({
+          message: 'Recipe not found',
+          error
+        });
       });
   }
   /**
@@ -94,12 +100,12 @@ class Vote {
     const { id } = req.params;
 
     if (!userId && id) {
-      return res.status(400).json({
+      return res.status(400).send({
         succes: false,
         message: 'user ID or Recipe ID is invalid'
       });
     }
-    Votes.findCreateFind({
+    votes.findCreateFind({
       where: {
         userId,
         recipeId: id
@@ -108,9 +114,11 @@ class Vote {
       .spread((vote, created) => {
         if (created) {
           vote.update({ voted: 'downVote' });
-          return Recipes.findOne({ where: { id } }).then((recipe) => {
+          return recipes.findOne({
+            where: { id },
+          }).then((recipe) => {
             recipe.increment('downVotes').then(() => {
-              res.status(201).json({
+              res.status(201).send({
                 message: 'Your downvote has been recorded',
                 recipe
               });
@@ -118,7 +126,10 @@ class Vote {
           });
         } else if (!created && vote.voted === 'downVote') {
           vote.destroy();
-          return Recipes.findOne({ where: { id } }).then((recipe) => {
+          return recipes.findOne({
+            where:
+            { id },
+          }).then((recipe) => {
             if (recipe) {
               recipe.decrement('downVotes').then(() => {
                 res.status(200).send({
@@ -126,16 +137,13 @@ class Vote {
                   recipe
                 });
               });
-            } else {
-              res.status(404).send({
-                message: 'Recipe not found',
-                recipe
-              });
             }
           });
         } else if (!created && vote.voted === 'upVote') {
           vote.update({ voted: 'downVote' });
-          return Recipes.findOne({ where: { id } }).then((recipe) => {
+          return recipes.findOne({
+            where: { id },
+          }).then((recipe) => {
             recipe.increment('downVotes');
             recipe
               .decrement('upVotes')
@@ -150,7 +158,7 @@ class Vote {
           });
         }
       })
-      .catch(error => res.status(500).json(error.message));
+      .catch(error => res.status(404).send(error.message));
   }
   /**
    * @description get most upvoted controller
@@ -161,9 +169,9 @@ class Vote {
    * @returns {Object} json - payload
    */
   static getMostVoted(req, res) {
-    Votes.findAll({
+    votes.findAll({
       order: sequelize.literal('max(upVoted) DESC'),
-      limit: 6
+      limit: 9
     })
       .then((existingVotes) => {
         res.status(200).send({ existingVotes });

@@ -34,7 +34,7 @@ class Favorite {
           }
         }).then((foundFavourite) => {
           if (foundFavourite) {
-            return res.status(409).json({
+            return res.status(409).send({
               succes: false,
               message: 'You already favourited this recipe'
             });
@@ -42,21 +42,21 @@ class Favorite {
           Favourites.create(recipeData)
             .then((favourite) => {
               if (favourite) {
-                res.status(201).json({
+                res.status(201).send({
                   succes: true,
                   favourite
                 });
               }
             })
             .catch((err) => {
-              res.status(500).json({
+              res.status(500).send({
                 succes: false,
                 message: err.message
               });
             });
         });
       } else {
-        return res.status(400).json({
+        return res.status(400).send({
           succes: false,
           message: `Recipe with ID ${recipeId} does not exist`
         });
@@ -86,26 +86,26 @@ class Favorite {
             })
               .then((responseData) => {
                 if (responseData) {
-                  res.status(200).json({
+                  res.status(200).send({
                     succes: true,
                     message: 'Favourite recipe removed',
                   });
                 }
               })
               .catch((err) => {
-                res.status(500).json({
+                res.status(500).send({
                   succes: false,
                   message: err.message
                 });
               });
           } else {
-            res.status(401).json({
+            res.status(404).send({
               message: 'You dont have this recipe as a favourite'
             });
           }
         });
       } else {
-        return res.status(404).json({
+        return res.status(404).send({
           succes: false,
           message: `Recipe with ID ${recipeId} does not exist`
         });
@@ -113,60 +113,37 @@ class Favorite {
     });
   }
 
-  /**
-   *
-   * @description get user favourites controller
-   *
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
-   *
-   * @returns {Object} json - payload
-   *
-   */
-  static getFavorites(req, res) {
-    return Favourites.all()
-      .then((favorites) => {
-        res.status(200).send({ favorites });
-      })
-      .catch((err) => {
-        res.status(404).send({ err });
-      });
-  }
+
   /**
    * @description A method to get a single favourite recipe based on user ID and recipe ID
    *
    * @param {object} req object
-   *
    * @param {object} res object
    *
-   * @returns {object} insertion error messages object or success message object
+   * @returns {object} json - payload
    *
    * @memberof Favourites
    */
-  static getSingleFavourite(req, res) {
+  static getUserFavourites(req, res) {
     const userId = req.decoded.id;
-    const { recipeId } = req.params;
 
-    Favourites.findOne({
-      where: { userId, recipeId }
-    })
+    return Favourites
+      .findAll({
+        where: { userId },
+        include: [{ model: Recipes }]
+      })
       .then((favourites) => {
-        if (favourites) {
-          res.status(200).json({
+        if (favourites.length < 1) {
+          return res.status(200).send({
+            message: 'No Favourites Found please try to create some',
             favourites
           });
-        } else {
-          res.status(404).json({
-            message: 'No favourite recipe found!!',
-          });
+        }
+        if (favourites) {
+          return res.status(200).send({ favourites });
         }
       })
-      .catch((error) => {
-        const { message } = error;
-        res.status(500).json({
-          message
-        });
-      });
+      .catch(error => res.status(500).send({ error }));
   }
 }
 

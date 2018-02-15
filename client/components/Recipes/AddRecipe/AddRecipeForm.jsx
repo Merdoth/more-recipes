@@ -6,7 +6,6 @@ import InputField from '../../common/InputField.jsx';
 import TextArea from '../../common/TextArea.jsx';
 import InputLine from '../../common/InputLine.jsx';
 import { addRecipes } from '../../../actions/recipeActions/';
-// import history from '../../../utils/history';
 
 /**
  * @param { AddRecipeForm } AddRecipeForm
@@ -28,6 +27,7 @@ class AddRecipeForm extends Component {
     super(props);
     this.state = {
       recipeName: '',
+      description: '',
       ingredients: '',
       preparation: '',
       image: ''
@@ -90,6 +90,14 @@ class AddRecipeForm extends Component {
           label="Name"
           onChange={this.onChange}
           required
+        />
+        <TextArea
+          type="text"
+          name="description"
+          placeholder="Description"
+          value={this.state.description}
+          label="Description"
+          onChange={this.onChange}
         />
         <TextArea
           type="text"

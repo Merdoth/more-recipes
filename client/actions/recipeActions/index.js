@@ -98,13 +98,15 @@ export const getAllRecipesSuccess = recipes => ({
 /**
  * @description this dispatches an action that gets all recipes
  *
- * @param {object} object
+ * @param {object} page
+ * @param {object} offset
+ * @param {object} limit
  *
  * @returns {Object} payload
  *
  */
-export const getAllRecipes = () => dispatch =>
-  api.getAllRecipes().then((res) => {
+export const getAllRecipes = (page, offset, limit) => dispatch =>
+  api.getAllRecipes(page, offset, limit).then((res) => {
     dispatch(getAllRecipesSuccess(res.data));
   });
 
@@ -133,16 +135,18 @@ export const getUserRecipesFailure = error => ({
  *
  * @description dispatches action to get one recipe
  *
- * @param { object } recipes
+ * @param {Number} page
+ * @param {Number} offset
+ * @param {Number} limit
  *
  * @returns { undefined }
  */
-export const getUserRecipes = () => dispatch =>
+export const getUserRecipes = (page, offset, limit) => dispatch =>
   api
-    .getUserRecipes()
+    .getUserRecipes(page, offset, limit)
     .then((res) => {
       if (res) {
-        dispatch(getUserRecipesSuccess({ recipes: res.data }));
+        dispatch(getUserRecipesSuccess(res.data));
       }
     })
 
@@ -303,7 +307,7 @@ export const addFavourite = id => dispatch =>
  *
  */
 export const removeFavouriteSuccess = favourite => ({
-  type: types.ADD_FAVOURITE_SUCCESS,
+  type: types.REMOVE_FAVOURITE_SUCCESS,
   favourite
 });
 
@@ -315,7 +319,7 @@ export const removeFavouriteSuccess = favourite => ({
  *
  */
 export const removeFavouriteFailure = error => ({
-  type: types.ADD_FAVOURITE_FAILURE,
+  type: types.REMOVE_FAVOURITE_FAILURE,
   error
 });
 
@@ -332,11 +336,12 @@ export const removeFavourite = id => dispatch =>
     .removeFavouriteRequest(id)
     .then((res) => {
       if (res) {
-        dispatch(addFavouriteSuccess(res.data.favourite));
+        console.log(res.data, 'actions');
+        dispatch(removeFavouriteSuccess(res.data.favourite));
       }
     })
     .catch((error) => {
-      dispatch(addFavouriteFailure(error));
+      dispatch(removeFavouriteFailure(error));
     });
 /**
  *
@@ -424,4 +429,45 @@ export const getMostVoted = () => dispatch =>
     })
     .catch((error) => {
       dispatch(getMostVotedFailure(error));
+    });
+/**
+ *
+ * @param { object } recipe
+ * @param { object } responsedata
+
+ * @returns { undefined }
+ */
+export const searcRecipeSuccess = recipe => ({
+  type: types.SEARCH_RECIPE_SUCCESS,
+  payload: recipe,
+});
+/**
+ *
+ * @param { object } error
+ *
+ * @returns { undefined }
+ */
+export const searchRecipeFailure = error => ({
+  type: types.SEARCH_RECIPE_FAILURE,
+  error
+});
+
+/**
+ *
+ * @description dispatches action to get one recipe
+ * @param { object } name
+ * @param { object } limit
+ * @param { object } offset
+ *
+ * @returns { undefined }
+ */
+export const searchRecipe = (name, limit, offset) => dispatch =>
+  api
+    .searchRecipeApi(name, limit, offset)
+    .then((res) => {
+      dispatch(searcRecipeSuccess(res.data));
+      // history.push('/searchresults');
+    })
+    .catch((error) => {
+      dispatch(searchRecipeFailure(error.data));
     });

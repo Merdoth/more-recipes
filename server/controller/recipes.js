@@ -1,9 +1,12 @@
 // import module dependencies
 import models from '../models';
-import pagination from '../utils/pagination';
+import pagination, { paginates } from '../utils/pagination';
+import validateRecipe from '../validations/validateRecipe';
 
 // create reference database model
-const { recipes, reviews, votes } = models;
+const {
+  users, recipes, reviews, votes
+} = models;
 
 /**
  * query: hold query limit and offset
@@ -23,13 +26,19 @@ class Recipe {
    * @returns {Object} json - payload
    */
   static addRecipe(req, res) {
+    const { errors, isValid } = validateRecipe(req.body);
+
+    if (!isValid) {
+      return res.status(400).send({ error: errors });
+    }
     const {
-      recipeName, ingredients, preparation, image
+      recipeName, description, ingredients, preparation, image
     } = req.body;
     recipes
       .create({
         userId: req.decoded.id,
         recipeName,
+        description,
         ingredients,
         preparation,
         image
@@ -127,30 +136,16 @@ class Recipe {
         order: [['id', 'DESC']]
       };
     }
-    /**
-     * query the database for all recipes
-     */
     recipes
       .findAndCountAll(query)
       .then((recipesFound) => {
         if (recipesFound.length < 1) {
           return res.status(404).send({
-            message: 'No recipes found. Please try to create some.'
+            message: 'No recipes found. Please try to create one.'
           });
         }
-
-        /**
-         * query limit: get query limit if supplie else use default
-         * query offset: get query offset if supplie else use default
-         */
         query.offset = req.query.offset || 0;
         query.limit = req.query.limit || 6;
-
-        /**
-         * pass query limit, query offset, recipeFound.count to pagenate utilis
-         * and return totalCount, currentPage, pageCount, and pageSize
-         * to pagination
-         */
         const paginate = pagination(
           query.limit,
           query.offset,
@@ -176,29 +171,50 @@ class Recipe {
    * @returns {Object} json - payload
    */
   static getUserRecipes(req, res) {
+    let { limit, offset, page } = req.query;
+    page = page || 1;
+    limit = Number(limit) || 6;
+    offset = limit * (Number(page) - 1) || 0;
     const userId = req.decoded.id;
+
     if (req.query.sort === 'createdAt' && req.query.order === 'des') {
       query = {
         include: [{ model: reviews, votes }],
-        order: [['createdAt', 'DESC']]
+        order: [['createdAt', 'DESC']],
+        limit: 6
       };
     } else {
       query = {
-        include: [{ model: reviews, votes }]
+        include: [{ model: reviews, votes }],
+        limit,
+        offset,
+        order: [['id', 'DESC']]
       };
     }
-    return recipes
-      .findAll({
-        where: { userId }
+    recipes
+      .findAndCountAll({
+        where: { userId },
+        limit,
+        offset,
       })
       .then((recipesFound) => {
-        if (recipesFound.length < 1) {
+        if (recipesFound.count < 1) {
           return res.status(404).send({
-            message: 'No recipes found. Please try to create some.'
+            message: 'No recipes found. Please try to create one.'
           });
         }
+        query.offset = req.query.offset || 0;
+        query.limit = req.query.limit || 6;
+        const paginate = pagination(
+          query.limit,
+          query.offset,
+          recipesFound.count
+        );
         if (recipesFound) {
-          return res.status(200).send(recipesFound);
+          return res.status(200).send({
+            paginate,
+            recipesFound
+          });
         }
         return res.status(404).send({ message: 'Recipe not found' });
       })
@@ -216,7 +232,7 @@ class Recipe {
   static updateUserRecipes(req, res) {
     const { id } = req.params;
     const {
-      recipeName, preparation, ingredients, image
+      recipeName, description, preparation, ingredients, image
     } = req.body;
 
     return (
@@ -232,6 +248,7 @@ class Recipe {
             return recipe
               .update({
                 recipeName: recipeName || recipe.recipeName,
+                description: description || recipe.description,
                 ingredients: ingredients || recipe.ingredients,
                 preparation: preparation || recipe.preparation,
                 image
@@ -281,71 +298,54 @@ class Recipe {
   }
 
   /**
-   * @description search by title or ingredients controller
    *
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
+   * @param {any} req
+   * @param {any} res
    *
-   * @returns {Object} json - payload
+   * @memberof Recipe
+   * @returns { void }
    */
-  static searchByRecipeNameOrIngredient(req, res) {
-    if (req.query.recipeName) {
-      query = {
-        where: {
-          recipeName: {
-            $iLike: `%${req.query.recipeName.trim()}%`
-          }
-        }
-      };
-    } else {
-      query = {
-        where: {
-          ingredients: {
-            $iLike: `%${req.query.ingredients.trim()}%`
-          }
-        }
-      };
+  static searchRecipe(req, res) {
+    let { offset, limit } = req.query;
+    limit = limit || 8;
+    // validate request object
+    if (!req.query.name) {
+      return res.status(404).send({
+        success: false,
+        message: 'no search parameter/limit',
+      });
     }
-
-    /**
-     * query limit: get query limit if supplie else use default
-     * query offset: get query offset if supplie else use default
-     */
-    query.limit = req.query.limit || 8;
-    query.offset = req.query.offset || 0;
-
-    /**
-     * query the db for all recipes
-     * left join Reviews as reviews
-     * left join Favourites as favourites
-     * left join left join Votings as votings
-     * ordered by 'id' descending
-     */
-    Recipe.findAndCountAll(query, {
-      order: [['id', 'DESC']],
-      limit: query.limit,
-      offset: query.offset
-    })
-      .then((recipe) => {
-        if (recipe.rows.length <= 0) {
-          return res
-            .status(404)
-            .send({ message: 'Search term did not match any recipe' });
-        }
-
-        /**
-         * pass query limit, query offset, recipe.count to pagenate helper
-         * and return totalCount, currentPage, pageCount, and pageSize
-         * to pagenation
-         */
-        const paginate = pagination(query.limit, query.offset, recipes.count);
-
-        return res.status(200).send({
-          paginate,
-          recipes: recipe.rows
-        });
+    return recipes
+      .findAndCountAll({
+        offset: offset * limit,
+        limit,
+        where: {
+          $or: [
+            { recipeName: { $ilike: `%${req.query.name}%` } },
+            { ingredients: { $ilike: `%${req.query.name}%` } }
+          ]
+        },
+        include: [
+          { model: users, attributes: ['fullName', 'userName'] },
+        ]
       })
-      .catch(error => res.status(500).send({ error }));
+      .then((recipe) => {
+        if (recipe) {
+          return res.status(200).send({
+            recipe,
+            paginationData: paginates(recipe.count, limit, offset * 5)
+
+          });
+        } else {
+          return res.status(404).send({
+            message: 'No recipe found!!'
+          });
+        }
+      }).catch((err) => {
+        res.status(500).send({
+          message: err.message
+        });
+      });
   }
 }
 export default Recipe;

@@ -16,29 +16,47 @@ const header = () => ({
  * @returns {undefined}
  *
  */
-export const getOneUser = () => axios.get('/api/v1/users/:id');
+export const getOneUser = () => axios.get('/api/v1/user');
+
+/**
+ *
+ * @description get a specific user update
+ *
+ * @param {Object} userData
+ *
+ * @returns {undefined}
+ *
+ */
+export const updateUserProfile = userData =>
+  axios.put('/api/v1/update', userData);
 
 /**
  *
  * @description get a specific users recipes
  *
- * @param {Object} object
+ * @param {Number} page
+ * @param {Number} offset
+ * @param {Number} limit
  *
  * @returns {undefined}
  *
  */
-export const getUserRecipes = () => axios.get('/api/v1/myrecipes');
+export const getUserRecipes = (page, offset, limit) =>
+  axios.get(`/api/v1/myrecipes?page=${page}&offset=${offset}&limit=${limit}`);
 
 /**
  *
  * @description gets all recipes
  *
- * @param {Object} object
+ * @param {Number} page
+ * @param {Number} offset
+ * @param {Number} limit
  *
  * @returns {undefined}
  *
  */
-export const getAllRecipes = () => axios.get('/api/v1/recipes');
+export const getAllRecipes = (page, offset,limit) =>
+  axios.get(`/api/v1/recipes?page=${page}&offset=${offset}&limit=${limit}`);
 
 /**
  *
@@ -84,9 +102,10 @@ export const addRecipeRequest = (recipes) => {
     },
     data: formData
   }).then((res) => {
-    const { recipeName, ingredients, preparation } = recipes;
+    const { recipeName, description, ingredients, preparation } = recipes;
     const recipeData = {
       recipeName,
+      description,
       ingredients,
       preparation,
       image: res.data.url
@@ -118,9 +137,10 @@ export const updateRecipeRequest = (id, recipes) => {
     },
     data: formData
   }).then((res) => {
-    const { recipeName, ingredients, preparation } = recipes;
+    const { recipeName, description, ingredients, preparation } = recipes;
     const recipeData = {
       recipeName,
+      description,
       ingredients,
       preparation,
       image: res.data.url
@@ -204,7 +224,8 @@ export const removeFavouriteRequest = recipeId =>
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   });
-
+export const searchRecipeApi = (name, limit, offset) =>
+  axios.post(`api/v1/search?name=${name}&limit=${limit}&offset=${offset}`);
 export const addFavouriteRequest = recipeId =>
   axios.post('/api/v1/favourites', { recipeId });
 export const getFavouriteRequest = recipeId =>

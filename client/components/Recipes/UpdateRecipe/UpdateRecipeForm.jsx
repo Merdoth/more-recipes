@@ -27,6 +27,7 @@ class UpdateRecipeForm extends Component {
     super(props);
     this.state = {
       recipeName: '',
+      description: '',
       ingredients: '',
       preparation: '',
       image: '',
@@ -62,6 +63,7 @@ class UpdateRecipeForm extends Component {
     }
     this.setState({
       recipeName: recipe.recipeName,
+      description: recipe.description,
       ingredients: recipe.ingredients,
       preparation: recipe.preparation,
       message: nextProps.message,
@@ -134,6 +136,14 @@ class UpdateRecipeForm extends Component {
         />
         <TextArea
           type="text"
+          name="description"
+          placeholder="Description"
+          value={this.state.description}
+          label="Description"
+          onChange={this.onChange}
+        />
+        <TextArea
+          type="text"
           name="ingredients"
           placeholder="Ingredients"
           value={this.state.ingredients}
@@ -187,4 +197,5 @@ const mapStateToProps = state => ({
   error: state.recipeReducer.error
 });
 
-export default connect(mapStateToProps, { updateRecipe, getOneRecipe })(UpdateRecipeForm);
+export default connect(
+  mapStateToProps, { updateRecipe, getOneRecipe })(UpdateRecipeForm);

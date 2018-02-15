@@ -2,8 +2,7 @@ import User from '../controller/user';
 import auth from '../middleware/authorization';
 import {
   signInValidator,
-  signUpValidator
-} from '../middleware/validateInput';
+} from '../validations/validateInput';
 import checkUserExists from '../middleware/checkUserExists';
 
 /**
@@ -15,14 +14,14 @@ import checkUserExists from '../middleware/checkUserExists';
  */
 const userRoutes = (router) => {
   router.get('/users', User.getAllUsers);
-  router.get('/users/:id', signUpValidator, auth.authorize, User.getOneUser);
+  router.get('/user', auth.authorize, User.getOneUser);
+  router.put('/update', auth.authorize, User.updateUserProfile);
   router.post(
     '/users/signup',
-    signInValidator,
     checkUserExists,
     User.signUpUser
   );
-  router.post('/users/signin', User.signInUser);
+  router.post('/users/signin', signInValidator, User.signInUser);
 };
 
 export default userRoutes;

@@ -12,14 +12,14 @@ import { userSignupRequest } from '../../actions/auth/authActions';
  * @returns { undefined }
  */
 const SignupPage = (props) => {
-  const goToProfile = () => props.history.push('/profile');
+  const goToAllRecipes = () => props.history.push('/recipes');
   return (
     <div>
       <div className="row">
         <div className="col-md-6 offset-md-3 cover">
           <SignupForm
             userSignupRequest={userSignupRequest}
-            goToProfile={goToProfile}
+            goToAllRecipes={goToAllRecipes}
           />
         </div>
       </div>

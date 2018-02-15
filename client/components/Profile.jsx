@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import InputField from './common/InputField.jsx';
 import Button from './common/Button.jsx';
+import { getOneUser, updateUserProfile } from '../actions/userActions';
 
 /**
  * @param { Profile } Profile
@@ -23,16 +24,36 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullName: this.props.user.fullName,
-      userName: this.props.user.userName,
-      email: this.props.user.email,
+      fullName: '',
+      userName: '',
+      email: '',
       errors: {},
-      isLoading: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
+  /**
+*
+* @param {*} nextProps updated props
+* @returns {DOM} DOM object
+*/
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      fullName: nextProps.user.fullName,
+      userName: nextProps.user.userName,
+      email: nextProps.user.email,
+    });
+  }
+  /**
+    * @param {object} event
+    *
+    * @memberof Profile
+    *
+    * @returns { undefined }
+    */
+  componentDidMount() {
+    this.props.getOneUser();
+  }
   /**
    * @param {object} event
    *
@@ -52,9 +73,9 @@ class Profile extends Component {
    * @returns { undefined }
    */
   onSubmit(event) {
-    const { id } = this.props.match.params;
     event.preventDefault();
-    this.setState({ errors: {}, isLoading: true });
+    this.props.updateUserProfile(this.state);
+    this.setState({ errors: {} });
   }
 
   /**
@@ -100,8 +121,7 @@ class Profile extends Component {
           <Button
             type="submit"
             onClick={this.onSubmit}
-            disabled={this.state.isLoading}
-            name="Save Changes"
+            name="Update Profile"
             className="btn btn-lg profileButton"
           />
         </form>
@@ -110,6 +130,9 @@ class Profile extends Component {
   }
 }
 const mapStateToProps = state => ({
-  user: state.setCurrentUser.user
+  user: state.getOneUser.users.user
 });
-export default connect(mapStateToProps, null)(Profile);
+export default connect(
+  mapStateToProps,
+  { getOneUser, updateUserProfile }
+)(Profile);

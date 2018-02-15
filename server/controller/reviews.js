@@ -2,7 +2,7 @@
 import models from '../models';
 
 // create reference database model
-const { reviews, recipes, user } = models;
+const { reviews, recipes, users } = models;
 
 /**
  * @class
@@ -54,9 +54,9 @@ class Review {
               }
             });
         } else {
-          res.status(404).json({
+          res.status(404).send({
             succes: false,
-            message: `No recipe with ID '${recipeId}' `
+            message: `No recipe with ID ${recipeId}`
           });
         }
       })
@@ -77,11 +77,11 @@ class Review {
     reviews
       .findAll({
         include: {
-          model: user,
+          model: users,
           attributes: ['userName']
         },
         where: {
-          recipeId: req.params.id
+          recipeId: req.params.recipeId
         }
       })
       .then((reviewFound) => {
@@ -89,10 +89,11 @@ class Review {
           return res.status(404).send({
             message: 'Recipe not found'
           });
+        } else {
+          return res.status(200).send(reviewFound);
         }
-        return res.status(200).send(reviewFound);
       })
-      .catch(error => res.status(400).send({ message: error }));
+      .catch(error => res.status(500).send({ message: error }));
   }
 }
 export default Review;

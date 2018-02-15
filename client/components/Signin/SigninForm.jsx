@@ -55,7 +55,7 @@ class SigninForm extends Component {
             text: this.state.email.split('@')[0],
             icon: 'success'
           });
-          this.props.history.push('/profile');
+          this.props.history.push('/recipes');
         })
         .catch((err) => {
           const error = err.data.message;

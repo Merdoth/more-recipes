@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactPaginate from 'react-paginate';
 import RecipeCard from './RecipeCard/RecipeCard.jsx';
 import { getUserRecipes } from '../../actions/recipeActions/';
 
@@ -12,6 +13,21 @@ import { getUserRecipes } from '../../actions/recipeActions/';
  */
 class UserRecipes extends Component {
   /**
+ * Creates an instance of SearchResult.
+ * @param {any} props
+ * @memberof Recipes
+ */
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 1,
+      limit: 6,
+      offset: 0,
+    };
+    this.pageClick = this.pageClick.bind(this);
+  }
+
+  /**
    * @param { object } userId
    *
    * @memberof  Recipes
@@ -19,8 +35,22 @@ class UserRecipes extends Component {
    * @returns { undefined }
    */
   componentDidMount() {
-    const userId = this.props.match.params;
-    this.props.getUserRecipes(userId);
+    const { page, offset, limit } = this.state;
+    this.props.getUserRecipes(page, offset, limit);
+  }
+
+  /**
+   * @description this method provides data for paginations of the recipe search
+   *
+   * @param {any} searchData
+   *
+   * @return {void}
+   */
+  pageClick(searchData) {
+    const { selected } = searchData;
+    const { limit, offset } = this.state;
+    const page = Number(selected) + 1;
+    this.props.getUserRecipes(page, offset, limit);
   }
 
   /**
@@ -46,6 +76,20 @@ class UserRecipes extends Component {
         <hr />
         <div className="container top">
           <div className="row">{recipes}</div>
+          <div className="row pagination">
+            <ReactPaginate
+              previousLabel="previous"
+              nextLabel="next"
+              breakClassName="break-me"
+              pageCount={this.props.pagination.pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={this.pageClick}
+              containerClassName='pagination'
+              subContainerClassName="pages pagination"
+              activeClassName="active"
+            />
+          </div>
         </div>
       </div>
     );
@@ -53,7 +97,8 @@ class UserRecipes extends Component {
 }
 
 const mapStateToProps = state => ({
-  recipes: state.recipesReducer.recipes || []
+  recipes: (state.recipesReducer.recipesFound || {}).rows || [],
+  pagination: state.recipesReducer.paginate || {}
 });
 
 export default connect(mapStateToProps, { getUserRecipes })(UserRecipes);

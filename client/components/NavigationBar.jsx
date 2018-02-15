@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
+import SearchForm from './Search/SearchForm.jsx';
 import { logout } from '../actions/auth/authActions';
 
 /**
@@ -53,7 +54,7 @@ class NavigationBar extends React.Component {
             aria-haspopup="true"
             aria-expanded="false"
           >
-            Hi, {this.props.user.userName}
+            Hi, {this.props.user.email.replace(/@.*/, '')}
             <i className="fa fa-user-circle-o icon-size" aria-hidden="true" />
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -116,10 +117,11 @@ class NavigationBar extends React.Component {
    * @memberof NavigationBar
    */
   render() {
+    console.log(this.props.user, '=====p===');
     return (
       <nav className="navbar navbar-expand-lg navbar-dark header">
-        <Link className="navbar-brand" to="/">
-          MORECIPES
+        <Link className="navbar-brand logo" to="/">
+          MoRecipes
         </Link>
         <button
           className="navbar-toggler"
@@ -134,14 +136,7 @@ class NavigationBar extends React.Component {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <form className="form-inline my-2 my-lg-0 float-menuitem-right">
-            <input
-              className="form-control mr-sm-2 search"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </form>
+          <SearchForm/>
           {this.props.isAuthenticated
             ? this.loggedInMenu()
             : this.notLoggedInMenu()}

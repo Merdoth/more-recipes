@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     ingredients: {
       type: DataTypes.STRING,
       allowNull: false
@@ -48,6 +52,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'recipeId'
     });
     recipes.hasMany(models.votes, {
+      foreignKey: 'recipeId'
+    });
+    recipes.hasMany(models.favorites, {
       foreignKey: 'recipeId'
     });
   };

@@ -30,13 +30,13 @@ export const validateSignUp = (value) => {
   if (email.trim().length === 0) {
     errors.emailError = 'email is required';
   } else if (!filter.test(email)) {
-    errors.emailError = 'email is not valide';
+    errors.emailError = 'email is not valid';
   }
 
   if (password.trim().length === 0) {
     errors.passwordError = 'password is required';
   } else if (password.length < 8) {
-    errors.passwordError = 'password name must be at least 8 characters long';
+    errors.passwordError = 'password must be at least 8 characters long';
   }
 
   return { isValid: lodash.isEmpty(errors), errors };
@@ -75,7 +75,7 @@ export const validateSignIn = (value) => {
  */
 export const validateAddRecipe = (value) => {
   const {
-    recipeName, ingredients, preparation, image
+    recipeName, description, ingredients, preparation, image
   } = value;
   const errors = {};
 
@@ -83,6 +83,12 @@ export const validateAddRecipe = (value) => {
     errors.recipeNameError = 'recipename is required';
   } else if (recipeName.length < 5) {
     errors.recipeNameError = 'recipename must be at least 5 characters long';
+  }
+
+  if (description.trim().length === 0) {
+    errors.descriptionError = 'description is required';
+  } else if (description.length < 5) {
+    errors.descriptionError = 'description must be at least 5 characters long';
   }
 
   if (ingredients.trim().length === 0) {
