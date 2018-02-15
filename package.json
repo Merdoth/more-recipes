@@ -83,9 +83,12 @@
     "react-hot-loader": "^3.1.1"
   },
   "scripts": {
-    "build": "NODE_ENV=production webpack --config ./webpack.config.prod.babel.js && cp -r client/assets dist/client/assets",
+    "build": "npm run build:server && npm run build:client && npm run copy:docs",
+    "build:client":
+      "NODE_ENV=production webpack --config ./webpack.config.prod.babel.js && cp -r client/assets dist/client/assets",
     "start": "NODE_ENV=production node dist/server/app.js",
     "build:server": "rm -rf dist && babel ./server/ -d ./dist/server",
+    "copy:docs": "cp -r api-docs dist/api-docs",
     "postinstall": "npm run build:server",
     "migrations": "sequelize db:migrate",
     "server:dev": "NODE_ENV=development nodemon --watch server --exec babel-node  -- server/app.js ",
