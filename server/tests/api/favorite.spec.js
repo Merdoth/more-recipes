@@ -104,7 +104,7 @@ describe('More Recipes', () => {
   it('should get all users favourited recipes return 200', (done) => {
     chai
       .request(app)
-      .get('/api/v1/userFavourites')
+      .get('/api/v1/favourites/1')
       .set('authorization', token)
       .end((err, res) => {
         expect(res.status).toEqual(200);
@@ -149,10 +149,11 @@ describe('More Recipes', () => {
   it('should get all users favourited recipes return 200', (done) => {
     chai
       .request(app)
-      .get('/api/v1/userFavourites')
+      .get('/api/v1/favourites/1')
       .set('authorization', token)
       .end((err, res) => {
         expect(res.status).toEqual(200);
+        
         expect(res.body.message).toEqual('No Favourites Found please try to create some');
         done();
       });

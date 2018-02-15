@@ -336,7 +336,6 @@ export const removeFavourite = id => dispatch =>
     .removeFavouriteRequest(id)
     .then((res) => {
       if (res) {
-        console.log(res.data, 'actions');
         dispatch(removeFavouriteSuccess(res.data.favourite));
       }
     })
@@ -466,7 +465,6 @@ export const searchRecipe = (name, limit, offset) => dispatch =>
     .searchRecipeApi(name, limit, offset)
     .then((res) => {
       dispatch(searcRecipeSuccess(res.data));
-      // history.push('/searchresults');
     })
     .catch((error) => {
       dispatch(searchRecipeFailure(error.data));

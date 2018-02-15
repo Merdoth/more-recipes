@@ -224,9 +224,15 @@ export const removeFavouriteRequest = recipeId =>
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   });
+
+
 export const searchRecipeApi = (name, limit, offset) =>
   axios.post(`api/v1/search?name=${name}&limit=${limit}&offset=${offset}`);
+
+
 export const addFavouriteRequest = recipeId =>
   axios.post('/api/v1/favourites', { recipeId });
+
+
 export const getFavouriteRequest = recipeId =>
   axios.get(`/api/v1/favourites/${recipeId}`);
