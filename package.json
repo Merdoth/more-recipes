@@ -101,6 +101,7 @@
     "server:dev": "NODE_ENV=development nodemon --watch server --exec babel-node  -- server/app.js ",
     "reset-db": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate",
     "test": "npm run reset-db && NODE_ENV=test nyc --reporter=lcov --reporter=text  mocha  --compilers js:babel-register ./server/tests/index.spec.js -t 20000",
+    "test:client": "jest --watch",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "start:dev": "npm run server:dev"
