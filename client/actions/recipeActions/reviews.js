@@ -3,9 +3,9 @@ import * as types from '../actionTypes';
 import * as api from './../../utils/moreRecipeAPI';
 
 /**
- * @param {object} review
+ * @param { Object } review
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const addReviewSuccess = review => ({
@@ -14,9 +14,9 @@ export const addReviewSuccess = review => ({
 });
 
 /**
- * @param {object} error
+ * @param { Object } error
  *
- * @returns {undefined}
+ * @returns { undefined }
  *
  */
 export const addReviewFailure = error => ({
@@ -27,10 +27,11 @@ export const addReviewFailure = error => ({
 /**
  * @description this dispatches an action that adds a review to a recipe
  *
- * @param {Integer} recipeId
- * @param {object} review
+ * @param { Number } recipeId
  *
- * @returns {Object} payload
+ * @param { Object } review
+ *
+ * @returns { Object } payload
  *
  */
 export const addReview = (recipeId, review) => dispatch =>
@@ -50,10 +51,10 @@ export const addReview = (recipeId, review) => dispatch =>
     });
 
 /**
- * @param {Object} recipe
- * @param {object} review
+ * @param { Object } recipe
+ * @param { Object } review
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 
@@ -64,9 +65,9 @@ export const getReviewSuccess = (recipe, review) => ({
 });
 
 /**
- * @param {object} error
+ * @param { Object } error
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const getReviewFailure = error => ({
@@ -77,10 +78,11 @@ export const getReviewFailure = error => ({
 /**
  * @description this dispatches an action that gets a review to a recipe
  *
- * @param {Integer} recipeId
- * @param {object} review
+ * @param { Number } recipeId
  *
- * @returns {Object} payload
+ * @param { Object } review
+ *
+ * @returns { Object } payload
  *
  */
 export const getReview = () => dispatch =>

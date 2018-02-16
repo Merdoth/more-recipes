@@ -1,24 +1,24 @@
-import favorite from '../controller/favorites';
+import Favorites from '../controller /Favorites';
 import auth from '../middleware/authorization';
 
 /**
- * @description favourite routes
+ * @description recipe favourites routes
  *
- * @param {Function} router
+ * @param { Function } router
  *
  * @returns { undefined }
  */
 const favoriteRoutes = (router) => {
-  router.post('/favourites', auth.authorize, favorite.addFavourites);
+  router.post('/favourites', auth.authorize, Favorites.addFavourites);
   router.delete(
     '/favourites/:recipeId',
     auth.authorize,
-    favorite.removeFavourites
+    Favorites.removeFavourites
   );
   router.get(
     '/favourites/:recipeId',
     auth.authorize,
-    favorite.getUserFavourites
+    Favorites.getUserFavourites
   );
 };
 

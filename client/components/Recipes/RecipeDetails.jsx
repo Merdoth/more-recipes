@@ -19,16 +19,16 @@ import RecipeCardImage from './RecipeCard/RecipeCardImage.jsx';
 import RecipeDetailsFooter from './RecipeCard/RecipeDetailsFooter.jsx';
 
 /**
- * @desc this class returns a  RecipeDetails component
+ * @description this class returns a  RecipeDetails component
  *
- * @param { RecipeDetails } RecipeDetails
+ * @param { Object } RecipeDetails
  *
- * @returns { RecipeDetails } RecipeDetails
+ * @returns { undefined }
  */
 class RecipeDetails extends Component {
   /**
    * Creates an instance of RecipeDetails.
-   * @param {object} props
+   * @param { Object } props
    *
    * @memberof RecipeDetails
    *
@@ -48,7 +48,7 @@ class RecipeDetails extends Component {
     this.handleFavourite = this.handleFavourite.bind(this);
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof RecipeDetails
    *
@@ -65,7 +65,7 @@ class RecipeDetails extends Component {
 
 
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof RecipeDetails
    *
@@ -78,7 +78,7 @@ class RecipeDetails extends Component {
   }
 
   /**
-   * @param {Object} event
+   * @param { Object } event
    *
    * @returns { undefined }
    *
@@ -91,7 +91,7 @@ class RecipeDetails extends Component {
   }
 
   /**
-   * @param {Object} event
+   * @param { Object } event
    *
    * @returns { undefined }
    *
@@ -103,7 +103,7 @@ class RecipeDetails extends Component {
     this.props.upvoteRecipe(id);
   }
   /**
-   * @param {Object} event
+   * @param { Object } event
    *
    * @returns { undefined }
    *
@@ -116,7 +116,7 @@ class RecipeDetails extends Component {
   }
 
   /**
-   * @param {Object} event
+   * @param { Object } event
    *
    * @returns { undefined }
    *
@@ -138,7 +138,7 @@ class RecipeDetails extends Component {
 
   /**
    *
-   * @param {object} nextProps
+   * @param { Object } nextProps
    *
    * @returns { undefined }
    */
@@ -155,7 +155,7 @@ class RecipeDetails extends Component {
   }
 
   /**
-   * @returns {undefined }
+   * @returns { undefined }
    *
    * @memberof RecipeDetails
    */

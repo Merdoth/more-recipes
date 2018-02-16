@@ -1,4 +1,3 @@
-// import models from models directory
 import models from '../models';
 
 // create reference to database model
@@ -8,9 +7,9 @@ const Recipes = models.recipes;
 /**
  * @class
  */
-class Favorite {
+class Favorites {
   /**
-   * @description add favourite controller
+   * @description  adds a recipe as favourite
    *
    * @param {Object} req - Request object
    * @param {Object} res - Response object
@@ -66,11 +65,12 @@ class Favorite {
 
   /**
    *
-   * @static
-   * @param {any} req
-   * @param {any} res
+   * @param { Object } req - Request object
+   * @param { Object } res - Response object
+   *
    * @memberof Favorite
-   * @returns { void }
+   *
+   * @returns { undefined }
    */
   static removeFavourites(req, res) {
     const userId = req.decoded.id;
@@ -147,4 +147,4 @@ class Favorite {
   }
 }
 
-export default Favorite;
+export default Favorites;

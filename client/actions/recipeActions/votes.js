@@ -8,9 +8,9 @@ import {
 } from '../actionTypes';
 
 /**
- * @param {object} error
+ * @param { Object } error
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const upvoteRecipeFailure = error => ({
@@ -19,9 +19,9 @@ export const upvoteRecipeFailure = error => ({
 });
 
 /**
- * @param {object} recipe
+ * @param { Object } recipe
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const upvoteRecipeSuccess = recipe => ({
@@ -33,10 +33,11 @@ export const upvoteRecipeSuccess = recipe => ({
  *
  * @description dispatches an action to upvote a recipe
  *
- * @param {Integer} id
- * @param {object } callback
+ * @param { Number } id
  *
- * @returns {undefined}
+ * @param { Object } callback
+ *
+ * @returns { Object } payload
  */
 // export const upvote =
 export const upvoteRecipe = id => dispatch =>
@@ -52,9 +53,9 @@ export const upvoteRecipe = id => dispatch =>
     });
 
 /**
- * @param {object} error
+ * @param { Object } error
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const downvoteRecipeFailure = error => ({
@@ -64,9 +65,9 @@ export const downvoteRecipeFailure = error => ({
 
 /**
  *
- * @param {object} recipes
+ * @param { Object } recipes
  *
- * @returns {undefined}
+ * @returns { undefined }
  */
 export const downvoteRecipeSuccess = recipes => ({
   type: DOWNVOTE_RECIPE_SUCCESS,
@@ -77,10 +78,12 @@ export const downvoteRecipeSuccess = recipes => ({
  *
  * @description dispatches an action to downvote a recipe
  *
- * @param {Integer} id
- * @param {object } callback
+ * @param { Number } id
  *
- * @returns {undefined}
+ * @param { Object } callback
+ *
+ * @returns { Object } payload
+ *
  */
 export const downVoteRecipe = id => dispatch =>
   axios

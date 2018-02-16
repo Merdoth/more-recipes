@@ -5,7 +5,8 @@ import Profile from './../components/Profile.jsx';
 import Recipes from './../components/Recipes/Recipes.jsx';
 import UserRecipes from './../components/Recipes/UserRecipes.jsx';
 import AddRecipePage from './../components/Recipes/AddRecipe/AddRecipePage.jsx';
-import UpdateRecipePage from './../components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
+import UpdateRecipePage from
+  './../components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
 import RecipeDetails from './../components/Recipes/RecipeDetails.jsx';
 import SearchResult from './../components/Search/SearchResult.jsx';
 import NotFound from './../components/NotFound.jsx';

@@ -5,14 +5,15 @@ import history from '../../utils/history';
 /**
  *
  * @class Search
- * @extends {Component}
+ *
+ * @extends { Component }
  *
  * @returns {void}
  */
 class SearchForm extends Component {
   /**
    *
-   * @param { props } props
+   * @param { Object } props
    */
   constructor(props) {
     super(props);
@@ -27,18 +28,18 @@ class SearchForm extends Component {
   }
 
   /**
- * @param { event } event
+ * @param { Object } event
  *
- * @returns { state } state
+ * @returns { undefined }
  */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
 
   /**
-   * @param { event } event
+   * @param { Object } event
    *
-   * @returns { state } state
+   * @returns { undefined }
    */
   onSubmit(event) {
     event.preventDefault();
@@ -54,10 +55,11 @@ class SearchForm extends Component {
   }
   /**
   * @description this function handles enter key
-  * @param {any} event
-  * @param {any} callback
-  * @memberof Dashboard
-  * @returns { void }
+  *
+  * @param { Object } event
+  * @param { Object } callback
+  *
+  * @returns { undefined }
   */
   handleEnterKey(event, callback) {
     if (event.key === 'Enter') {

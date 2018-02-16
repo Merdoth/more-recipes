@@ -6,6 +6,7 @@ import history from './history';
 const CheckLoggedInUser = (ComposedComponent) => {
   /**
    * @class Authenticate
+   *
    * @extends {Component}
    */
   class Authenticate extends Component {
@@ -13,7 +14,7 @@ const CheckLoggedInUser = (ComposedComponent) => {
      *
      * @method componentWillMount
      *
-     * @return {*} set user authentication status
+     * @return { undefined } set user authentication status
      */
     componentWillMount() {
       if (this.props.isAuthenticated) {
@@ -22,9 +23,9 @@ const CheckLoggedInUser = (ComposedComponent) => {
     }
     /**
      *
-     * @param {*} nextProps
+     * @param { Object } nextProps
      *
-     * @return {*} props
+     * @return { undefined } props
      */
     componentWillUpdate(nextProps) {
       if (nextProps.isAuthenticated) {

@@ -7,7 +7,7 @@ import UpdateRecipeForm from './UpdateRecipeForm.jsx';
  *
  * @method UpdateRecipePage
  *
- *  @param { props } props
+ *  @param { Object } props
  *
  * @returns { undefined }
  * .

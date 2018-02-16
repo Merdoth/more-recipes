@@ -1,4 +1,3 @@
-// import module dependencies
 import models from '../models';
 import pagination, { paginates } from '../utils/pagination';
 import validateRecipe from '../validations/validateRecipe';
@@ -16,14 +15,14 @@ let query = {};
 /**
  * @class
  */
-class Recipe {
+class Recipes {
   /**
    * @description add recipe controller
    *
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
+   * @param { Object } req - Request object
+   * @param { Object } res - Response object
    *
-   * @returns {Object} json - payload
+   * @returns { Object } json - payload
    */
   static addRecipe(req, res) {
     const { errors, isValid } = validateRecipe(req.body);
@@ -52,9 +51,12 @@ class Recipe {
 
   /**
    *
-   * @param {req} req
-   * @param {res} res
-   * @return { message } message
+   * @description get one recipe controller
+   *
+   * @param { Object } req  - Request object
+   * @param { Object } res - Response object
+   *
+   * @return { Object } json - payload
    */
   static getOneRecipe(req, res) {
     const { userId } = req.params;
@@ -110,12 +112,12 @@ class Recipe {
   }
 
   /**
-   * @description get all recipe controller
+   * @description get all recipes controller
    *
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
+   * @param { Object } req - Request object
+   * @param { Object } res - Response object
    *
-   * @returns {Object} json - payload
+   * @returns { Object } json - payload
    */
   static getAllRecipes(req, res) {
     let { limit, offset, page } = req.query;
@@ -165,10 +167,10 @@ class Recipe {
   /**
    * @description get user recipes controller
    *
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
+   * @param { Object } req - Request object
+   * @param { Object } res - Response object
    *
-   * @returns {Object} json - payload
+   * @returns { Object } json - payload
    */
   static getUserRecipes(req, res) {
     let { limit, offset, page } = req.query;
@@ -224,10 +226,10 @@ class Recipe {
   /**
    * @description update recipe controller
    *
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
+   * @param { Object } req - Request object
+   * @param { Object } res - Response object
    *
-   * @returns {Object} json - payload
+   * @returns { Object } json - payload
    */
   static updateUserRecipes(req, res) {
     const { id } = req.params;
@@ -269,10 +271,10 @@ class Recipe {
   /**
    * @description delete recipe controller
    *
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
+   * @param { Object } req - Request object
+   * @param { Object } res - Response object
    *
-   * @returns {Object} json - payload
+   * @returns { Object } json - payload
    */
   static deleteUserRecipes(req, res) {
     const { id } = req.params;
@@ -298,12 +300,12 @@ class Recipe {
   }
 
   /**
+   * @description search recipe controller
    *
-   * @param {any} req
-   * @param {any} res
+   * @param { Object } req - Request object
+   * @param { Object } res - Response object
    *
-   * @memberof Recipe
-   * @returns { void }
+   * @returns { Object } json - payload
    */
   static searchRecipe(req, res) {
     let { offset, limit } = req.query;
@@ -348,4 +350,4 @@ class Recipe {
       });
   }
 }
-export default Recipe;
+export default Recipes;

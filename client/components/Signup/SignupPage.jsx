@@ -7,7 +7,7 @@ import { userSignupRequest } from '../../actions/auth/authActions';
  *
  * @extends { Component }
  *
- * @param {object} props
+ * @param { Object } props
  *
  * @returns { undefined }
  */

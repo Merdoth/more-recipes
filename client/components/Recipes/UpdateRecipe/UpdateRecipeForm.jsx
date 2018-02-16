@@ -8,16 +8,17 @@ import TextArea from '../../common/TextArea.jsx';
 import InputLine from '../../common/InputLine.jsx';
 import { updateRecipe, getOneRecipe } from '../../../actions/recipeActions/';
 /**
- * @param { UpdateRecipeForm } UpdateRecipeForm
+ * @param { Object } UpdateRecipeForm
  *
- * @returns { UpdateRecipeForm } UpdateRecipeForm
+ * @returns { undefined }
  *
- * @desc this class returns a UpdateRecipeForm component
+ * @description this class returns a UpdateRecipeForm component
  */
 class UpdateRecipeForm extends Component {
   /**
    * Creates an instance of UpdateRecipeForm.
-   * @param {object} props
+   *
+   * @param { Object } props
    *
    * @memberof UpdateRecipeForm
    *
@@ -38,7 +39,7 @@ class UpdateRecipeForm extends Component {
     this.onImageChange = this.onImageChange.bind(this);
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof UpdateRecipeForm
    *
@@ -49,7 +50,7 @@ class UpdateRecipeForm extends Component {
     this.props.getOneRecipe(recipeId);
   }
   /**
-   * @param {object} nextProps
+   * @param { Object } nextProps
    *
    * @memberof UpdateRecipeForm
    *
@@ -72,7 +73,7 @@ class UpdateRecipeForm extends Component {
     });
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof UpdateRecipeForm
    *
@@ -82,7 +83,7 @@ class UpdateRecipeForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof UpdateRecipeForm
    *
@@ -93,7 +94,7 @@ class UpdateRecipeForm extends Component {
     this.setState({ [event.target.name]: event.target.files[0] });
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof UpdateRecipeForm
    *
@@ -116,7 +117,7 @@ class UpdateRecipeForm extends Component {
     }
   }
   /**
-   * @returns {undefined }
+   * @returns { undefined }
    *
    * @memberof UpdateRecipeForm
    */

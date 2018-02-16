@@ -11,14 +11,14 @@ import Button from '../common/Button.jsx';
 /**
  * @description this renders the signup form component
  *
- * @param { SignupFrom } SignupForm
+ * @param { Object } SignupForm
  *
- * @returns { SignupForm } SignupForm
+ * @returns { undefined }
  */
 class SignupForm extends Component {
   /**
    *
-   * @param { props } props
+   * @param { Object } props
    */
   constructor(props) {
     super(props);
@@ -36,17 +36,17 @@ class SignupForm extends Component {
   }
 
   /**
-   * @param { event } event
+   * @param { Object } event
    *
-   * @returns { state } state
+   * @returns { undefined }
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
   /**
-   * @param { event } event
+   * @param { Object } event
    *
-   * @returns { state } state
+   * @returns { Object } state
    */
   onSubmit(event) {
     event.preventDefault();
@@ -75,9 +75,9 @@ class SignupForm extends Component {
 
   /**
    *
-   * @returns {undefined}
+   * @returns { undefined }
    *
-   * @param {object} errors
+   * @param { Object } errors
    *
    * @memberof SignupForm
    */
@@ -100,7 +100,7 @@ class SignupForm extends Component {
   }
   /**
    *
-   * @returns {undefined}
+   * @returns { undefined }
    *
    * @memberof SignupForm
    */

@@ -5,7 +5,7 @@ import * as api from './../../utils/moreRecipeAPI';
 
 /**
  *
- * @param { object } recipe
+ * @param { Object } recipe
  *
  * @returns { undefined }
  */
@@ -15,7 +15,7 @@ export const getOneRecipeSuccess = recipe => ({
 });
 /**
  *
- * @param { object } error
+ * @param { Object } error
  *
  * @returns { undefined }
  */
@@ -27,8 +27,9 @@ export const getOneRecipeFailure = error => ({
 /**
  *
  * @description dispatches action to get one recipe
- * @param { object } userId
- * @param { object } recipeId
+ *
+ * @param { Number } userId
+ * @param { Number } recipeId
  *
  * @returns { undefined }
  */
@@ -45,9 +46,9 @@ export const getOneRecipe = (userId, recipeId) => dispatch =>
 
 /**
  *
- * @param {object} message
+ * @param { Object } message
  *
- * @returns {undefined}
+ * @returns { undefined }
  *
  */
 export const deleteRecipeSuccess = message => ({
@@ -57,9 +58,9 @@ export const deleteRecipeSuccess = message => ({
 
 /**
  *
- * @param {object} error
+ * @param { Object } error
  *
- * @returns {Object} payload
+ * @returns { undefined } payload
  *
  */
 export const deleteRecipeFailure = error => ({
@@ -70,9 +71,9 @@ export const deleteRecipeFailure = error => ({
 /**
  * @description this dispatches an action that deletes a recipe
  *
- * @param {Integer} id
+ * @param { Number } id
  *
- * @returns {Object} payload
+ * @returns { Object } payload
  *
  */
 export const deleteRecipe = id => dispatch =>
@@ -85,9 +86,9 @@ export const deleteRecipe = id => dispatch =>
       dispatch(deleteRecipeFailure(error));
     });
 /**
- * @param {Object} recipes
+ * @param { Object } recipes
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const getAllRecipesSuccess = recipes => ({
@@ -98,11 +99,11 @@ export const getAllRecipesSuccess = recipes => ({
 /**
  * @description this dispatches an action that gets all recipes
  *
- * @param {object} page
- * @param {object} offset
- * @param {object} limit
+ * @param { Number } page
+ * @param { Number } offset
+ * @param { Number } limit
  *
- * @returns {Object} payload
+ * @returns { Object } payload
  *
  */
 export const getAllRecipes = (page, offset, limit) => dispatch =>
@@ -111,9 +112,9 @@ export const getAllRecipes = (page, offset, limit) => dispatch =>
   });
 
 /**
- * @param {Object} recipes
+ * @param { Object } recipes
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const getUserRecipesSuccess = recipes => ({
@@ -122,9 +123,9 @@ export const getUserRecipesSuccess = recipes => ({
 });
 
 /**
- * @param {Object} error
+ * @param { Object } error
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const getUserRecipesFailure = error => ({
@@ -135,11 +136,11 @@ export const getUserRecipesFailure = error => ({
  *
  * @description dispatches action to get one recipe
  *
- * @param {Number} page
- * @param {Number} offset
- * @param {Number} limit
+ * @param { Number } page
+ * @param { Number } offset
+ * @param { Number } limit
  *
- * @returns { undefined }
+ * @returns { Object } payload
  */
 export const getUserRecipes = (page, offset, limit) => dispatch =>
   api
@@ -155,9 +156,9 @@ export const getUserRecipes = (page, offset, limit) => dispatch =>
     });
 /**
  *
- * @param {object} recipe
+ * @param { Object } recipe
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const updateRecipeSuccess = recipe => ({
@@ -167,9 +168,9 @@ export const updateRecipeSuccess = recipe => ({
 
 /**
  *
- * @param {object} error
+ * @param { Object } error
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const updateRecipeFailure = error => ({
@@ -180,10 +181,10 @@ export const updateRecipeFailure = error => ({
 /**
  * @description this dispatches an action that updates recipes
  *
- * @param {Integer} id
- * @param {Object} recipes
+ * @param { Number } id
+ * @param { Object } recipes
  *
- * @returns {Object} payload
+ * @returns { Object } payload
  *
  */
 export const updateRecipe = (id, recipes) => dispatch =>
@@ -203,9 +204,9 @@ export const updateRecipe = (id, recipes) => dispatch =>
 
 /**
  *
- * @param {object} recipe
+ * @param { Object } recipe
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const addRecipesSuccess = recipe => ({
@@ -215,9 +216,9 @@ export const addRecipesSuccess = recipe => ({
 
 /**
  *
- * @param {object} error
+ * @param { Object } error
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const addRecipesFailure = error => ({
@@ -228,9 +229,9 @@ export const addRecipesFailure = error => ({
 /**
  * @description this dispatches an action that adds a recipe
  *
- * @param {object} recipes
+ * @param { Object } recipes
  *
- * @returns {Object} payload
+ * @returns { Object } payload
  *
  */
 export const addRecipes = recipes => dispatch =>
@@ -258,9 +259,9 @@ export const addRecipes = recipes => dispatch =>
 
 /**
  *
- * @param {object} favourite
+ * @param { Object } favourite
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const addFavouriteSuccess = favourite => ({
@@ -270,9 +271,9 @@ export const addFavouriteSuccess = favourite => ({
 
 /**
  *
- * @param {object} error
+ * @param { Object } error
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const addFavouriteFailure = error => ({
@@ -283,9 +284,9 @@ export const addFavouriteFailure = error => ({
 /**
  * @description this dispatches an action that adds a recipe
  *
- * @param {object} id
+ * @param { Number } id
  *
- * @returns {Object} payload
+ * @returns { Object } payload
  *
  */
 export const addFavourite = id => dispatch =>
@@ -301,9 +302,9 @@ export const addFavourite = id => dispatch =>
     });
 /**
  *
- * @param {object} favourite
+ * @param { Object } favourite
  *
- * @returns {Object} payload
+ * @returns { undefined } payload
  *
  */
 export const removeFavouriteSuccess = favourite => ({
@@ -313,9 +314,9 @@ export const removeFavouriteSuccess = favourite => ({
 
 /**
  *
- * @param {object} error
+ * @param { Object } error
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const removeFavouriteFailure = error => ({
@@ -326,9 +327,9 @@ export const removeFavouriteFailure = error => ({
 /**
  * @description this dispatches an action that adds a recipe
  *
- * @param {object} id
+ * @param { Number } id
  *
- * @returns {Object} payload
+ * @returns { Object } payload
  *
  */
 export const removeFavourite = id => dispatch =>
@@ -344,9 +345,9 @@ export const removeFavourite = id => dispatch =>
     });
 /**
  *
- * @param {object} favourite
+ * @param { Object } favourite
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const getFavouriteSuccess = favourite => ({
@@ -356,9 +357,9 @@ export const getFavouriteSuccess = favourite => ({
 
 /**
  *
- * @param {object} error
+ * @param { Object } error
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const getFavouriteFailure = error => ({
@@ -369,9 +370,9 @@ export const getFavouriteFailure = error => ({
 /**
  * @description this dispatches an action that adds a recipe
  *
- * @param {object} id
+ * @param { Number } id
  *
- * @returns {Object} payload
+ * @returns { Object } payload
  *
  */
 export const getFavourite = id => dispatch =>
@@ -388,9 +389,9 @@ export const getFavourite = id => dispatch =>
 
 /**
  *
- * @param {object} recipes
+ * @param { Object } recipes
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const getMostVotedSuccess = recipes => ({
@@ -400,9 +401,9 @@ export const getMostVotedSuccess = recipes => ({
 
 /**
  *
- * @param {object} error
+ * @param { Object } error
  *
- * @returns {Object} payload
+ * @returns { undefined }
  *
  */
 export const getMostVotedFailure = error => ({
@@ -413,7 +414,7 @@ export const getMostVotedFailure = error => ({
 /**
  * @description this dispatches an action that gets most upvoted recipes a recipe
  *
- * @param {object} id
+ * @param { Number } id
  *
  * @returns {Object} payload
  *
@@ -431,9 +432,8 @@ export const getMostVoted = () => dispatch =>
     });
 /**
  *
- * @param { object } recipe
- * @param { object } responsedata
-
+ * @param { Object } recipe
+ *
  * @returns { undefined }
  */
 export const searcRecipeSuccess = recipe => ({
@@ -442,7 +442,7 @@ export const searcRecipeSuccess = recipe => ({
 });
 /**
  *
- * @param { object } error
+ * @param { Object } error
  *
  * @returns { undefined }
  */
@@ -454,11 +454,13 @@ export const searchRecipeFailure = error => ({
 /**
  *
  * @description dispatches action to get one recipe
- * @param { object } name
- * @param { object } limit
- * @param { object } offset
  *
- * @returns { undefined }
+ * @param { String } name
+ *
+ * @param {  Number  } limit
+ * @param {  Number  } offset
+ *
+ * @returns { Object } payload
  */
 export const searchRecipe = (name, limit, offset) => dispatch =>
   api

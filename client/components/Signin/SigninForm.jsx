@@ -11,14 +11,14 @@ import { login } from '../../actions/auth/authActions';
 /**
  * @description this renders the signin form component
  *
- * @param { SigninForm } SigninForm
+ * @param { Object } SigninForm
  *
- * @returns { SigninForm } SignupForm
+ * @returns { undefined } SignupForm
  */
 class SigninForm extends Component {
   /**
    *n
-   * @param { props } props
+   * @param { Object } props
    */
   constructor(props) {
     super(props);
@@ -36,11 +36,11 @@ class SigninForm extends Component {
    * This method validates the input from the state object
    * and chcecks if its valid and makes an api call to the backend
    *
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof SigninForm
    *
-   * @returns {undefined}
+   * @returns { undefined }
    */
   onSubmit(event) {
     event.preventDefault();
@@ -74,11 +74,11 @@ class SigninForm extends Component {
   /**
    *  this method gets the values of the input
    * and passes the values to the global state object
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof SigninForm
    *
-   * @returns {undefined}
+   * @returns { undefined }
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -86,11 +86,11 @@ class SigninForm extends Component {
 
   /**
    * this method handle errors
-   * @param {object} errors
+   * @param { Object } errors
    *
    * @memberof SigninForm
    *
-   * @returns {undefined}
+   * @returns { undefined }
    */
   handleErrors(errors) {
     Object.keys(errors).forEach((error) => {
@@ -103,7 +103,7 @@ class SigninForm extends Component {
   }
   /**
    *
-   * @returns {undefined}
+   * @returns { undefined }
    *
    * @memberof SignupForm
    */
