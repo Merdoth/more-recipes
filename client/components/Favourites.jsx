@@ -4,11 +4,11 @@ import RecipeCard from './Recipes/RecipeCard/RecipeCard.jsx';
 import { getFavourite } from '../actions/recipeActions/';
 
 /**
- * @param {  Favourites }  Favourites
+ * @param { Object }  Favourites
  *
- * @returns {  Object }  Favourites
+ * @returns { undefined }
  *
- * @desc this class returns a  Favourites component
+ * @description this class returns a  Favourites component
  */
 class Favourites extends Component {
   /**

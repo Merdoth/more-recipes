@@ -4,7 +4,7 @@ import React from 'react';
  *
  * @param { Function } Slider
  *
- * @returns { Slider } Slider
+ * @returns { undefined }
  */
 
 const Slider = () => (

@@ -11,20 +11,20 @@ const header = () => ({
  *
  * @description get a specific user
  *
- * @param {Object} object
+ * @param { Object } object
  *
- * @returns {undefined}
+ * @returns { undefined }
  *
  */
 export const getOneUser = () => axios.get('/api/v1/user');
 
 /**
  *
- * @description get a specific user update
+ * @description update a specific user profile
  *
- * @param {Object} userData
+ * @param { Object } userData
  *
- * @returns {undefined}
+ * @returns { undefined }
  *
  */
 export const updateUserProfile = userData =>
@@ -34,11 +34,11 @@ export const updateUserProfile = userData =>
  *
  * @description get a specific users recipes
  *
- * @param {Number} page
- * @param {Number} offset
- * @param {Number} limit
+ * @param { Number } page
+ * @param { Number } offset
+ * @param { Number } limit
  *
- * @returns {undefined}
+ * @returns { undefined }
  *
  */
 export const getUserRecipes = (page, offset, limit) =>
@@ -48,45 +48,45 @@ export const getUserRecipes = (page, offset, limit) =>
  *
  * @description gets all recipes
  *
- * @param {Number} page
- * @param {Number} offset
- * @param {Number} limit
+ * @param { Number } page
+ * @param { Number } offset
+ * @param { Number } limit
  *
- * @returns {undefined}
+ * @returns { undefined }
  *
  */
-export const getAllRecipes = (page, offset,limit) =>
+export const getAllRecipes = (page, offset, limit) =>
   axios.get(`/api/v1/recipes?page=${page}&offset=${offset}&limit=${limit}`);
 
 /**
  *
- * @description user signup request allows a new user signup.
+ * @description signs up a user.
  *
- * @param {Object} object
+ * @param { Object } object
  *
- * @returns {undefined}
+ * @returns { undefined }
  *
  */
 export const userSignupRequest = () => axios.post('/api/v1/users/signup');
 
 /**
  *
- * @description user signin request allows a user signin into his or her account.
+ * @description signs in a user.
  *
- * @param {Object} object
+ * @param { Object } object
  *
- * @returns {undefined}
+ * @returns { undefined }
  *
  */
 export const userSigninRequest = () => axios.post('/api/v1/users/signin');
 
 /**
  *
- * @description allows a user add new recipes to their recipe list.
+ * @description adds a recipe to the recipe list.
  *
- * @param {Object} recipes
+ * @param { Object } recipes
  *
- * @returns {undefined}
+ * @returns { undefined }
  *
  */
 export const addRecipeRequest = (recipes) => {
@@ -102,7 +102,9 @@ export const addRecipeRequest = (recipes) => {
     },
     data: formData
   }).then((res) => {
-    const { recipeName, description, ingredients, preparation } = recipes;
+    const {
+      recipeName, description, ingredients, preparation
+    } = recipes;
     const recipeData = {
       recipeName,
       description,
@@ -116,12 +118,13 @@ export const addRecipeRequest = (recipes) => {
 
 /**
  *
- * @description allows a user update an already existing recipe.
+ * @description updates a recipe.
  *
- * @param {Object} id
- * @param {Object} recipes
+ * @param { Number } id
  *
- * @returns {undefined}
+ * @param { Object } recipes
+ *
+ * @returns { undefined }
  *
  */
 export const updateRecipeRequest = (id, recipes) => {
@@ -137,7 +140,9 @@ export const updateRecipeRequest = (id, recipes) => {
     },
     data: formData
   }).then((res) => {
-    const { recipeName, description, ingredients, preparation } = recipes;
+    const {
+      recipeName, description, ingredients, preparation
+    } = recipes;
     const recipeData = {
       recipeName,
       description,
@@ -150,12 +155,13 @@ export const updateRecipeRequest = (id, recipes) => {
 };
 /**
  *
- * @description post user review.
+ * @description add review to recipe.
  *
- * @param {Object} recipeId
- * @param {Object} review
+ * @param { Number } recipeId
  *
- * @returns {undefined}
+ * @param { Object } review
+ *
+ * @returns { undefined }
  *
  */
 export const addReview = (recipeId, review) =>
@@ -165,10 +171,11 @@ export const addReview = (recipeId, review) =>
  *
  * @description upvote user recipe.
  *
- * @param {Object} id
- * @param {Object} callback
+ * @param { Number } id
  *
- * @returns {undefined}
+ * @param { Object } callback
+ *
+ * @returns { undefined }
  *
  */
 export const upVoteRecipe = (id, callback) =>
@@ -178,9 +185,9 @@ export const upVoteRecipe = (id, callback) =>
  *
  * @description allows a user get all top recipes
  *
- * @param {Object} object
+ * @param { Object } object
  *
- * @returns {undefined}
+ * @returns { undefined }
  *
  */
 export const getMostVotedRequest = () =>
@@ -188,11 +195,12 @@ export const getMostVotedRequest = () =>
 
 /**
  *
- * @description allows a user get .
- * @param {Object} userId
- * @param {Object} recipeId
+ * @description gets a specific recipe .
  *
- * @returns {undefined}
+ * @param { Number } userId
+ * @param { Number } recipeId
+ *
+ * @returns { undefined }
  *
  */
 export const getOneRecipe = (userId, recipeId) =>
@@ -200,11 +208,11 @@ export const getOneRecipe = (userId, recipeId) =>
 
 /**
  *
- * @description allows a user delete his/her recipes
+ * @description deletes a recipe
  *
- * @param {Object} id - action object
+ * @param { Number } id - action object
  *
- * @returns {undefined}
+ * @returns { undefined }
  *
  */
 export const deleteRecipe = id =>
@@ -226,10 +234,31 @@ export const removeFavouriteRequest = recipeId =>
   });
 
 
+/**
+ *
+ * @description search for recipes
+ *
+ * @param { String } name
+ *
+ * @param { Number } limit
+ * @param { Number } offset
+ *
+ * @returns { undefined }
+ *
+ */
 export const searchRecipeApi = (name, limit, offset) =>
   axios.post(`api/v1/search?name=${name}&limit=${limit}&offset=${offset}`);
 
 
+/**
+ *
+ * @description favourite recipes
+ *
+ * @param { Number } recipeId
+ *
+ * @returns { undefined }
+ *
+ */
 export const addFavouriteRequest = recipeId =>
   axios.post('/api/v1/favourites', { recipeId });
 

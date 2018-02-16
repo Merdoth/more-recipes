@@ -1,4 +1,3 @@
-// import models from models directory
 import models from '../models';
 
 // create reference database model
@@ -7,14 +6,14 @@ const { reviews, recipes, users } = models;
 /**
  * @class
  */
-class Review {
+class Reviews {
   /**
    * @description post review controller
    *
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
+   * @param { Object } req - Request object
+   * @param { Object } res - Response object
    *
-   * @returns {Object} json - payload
+   * @returns { Object } json - payload
    */
   static addReview(req, res) {
     const { review } = req.body;
@@ -68,10 +67,10 @@ class Review {
   /**
    * @description get recipe reviews controller
    *
-   * @param {Object} req - Request object
-   * @param {Object} res - Response object
+   * @param { Object } req - Request object
+   * @param { Object } res - Response object
    *
-   * @returns {Object} json - payload
+   * @returns { Object } json - payload
    */
   static getReview(req, res) {
     reviews
@@ -96,4 +95,4 @@ class Review {
       .catch(error => res.status(500).send({ message: error }));
   }
 }
-export default Review;
+export default Reviews;

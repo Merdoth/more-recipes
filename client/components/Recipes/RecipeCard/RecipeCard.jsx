@@ -7,9 +7,9 @@ import RecipeCardFooter from './RecipeCardFooter.jsx';
 /**
  * @description this holders alkl the appreciation buttons and recipe image
  *
- * @param { RecipeCard } RecipeCard
+ * @param { Object } RecipeCard
  *
- * @returns { RecipeCard } RecipeCard
+ * @returns { undefined }
  */
 class RecipeCard extends Component {
   /**

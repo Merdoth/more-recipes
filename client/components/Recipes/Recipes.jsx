@@ -5,16 +5,18 @@ import RecipeCard from './RecipeCard/RecipeCard.jsx';
 import { getAllRecipes } from '../../actions/recipeActions/';
 
 /**
- * @param {  Recipes }  Recipes
+ * @param { Object }  Recipes
  *
- * @returns {  Recipes }  Recipes
+ * @returns { undefined }
  *
- * @desc this class returns a  Recipes component
+ * @description this class returns a  Recipes component
  */
 class Recipes extends Component {
   /**
   * Creates an instance of SearchResult.
-  * @param {any} props
+  *
+  * @param { Object } props
+  *
   * @memberof Recipes
   */
   constructor(props) {
@@ -41,9 +43,9 @@ class Recipes extends Component {
   /**
    * @description this method provides data for paginations of the recipe search
    *
-   * @param {any} searchData
+   * @param { Object } searchData
    *
-   * @return {void}
+   * @return { undefined }
    */
   pageClick(searchData) {
     const { selected } = searchData;

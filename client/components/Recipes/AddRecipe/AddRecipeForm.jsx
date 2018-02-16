@@ -8,16 +8,16 @@ import InputLine from '../../common/InputLine.jsx';
 import { addRecipes } from '../../../actions/recipeActions/';
 
 /**
- * @param { AddRecipeForm } AddRecipeForm
+ * @param { Object } AddRecipeForm
  *
- * @returns { AddRecipeForm } AddRecipeForm
+ * @returns { undefined }
  *
  * @desc this class returns a AddRecipeForm component
  */
 class AddRecipeForm extends Component {
   /**
    * Creates an instance of AddRecipeForm
-   * @param { object } props
+   * @param { Object } props
    *
    * @memberof AddRecipeForm
    *
@@ -38,7 +38,7 @@ class AddRecipeForm extends Component {
   }
 
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof AddRecipeForm
    *
@@ -49,7 +49,7 @@ class AddRecipeForm extends Component {
   }
 
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof AddRecipeForm
    *
@@ -61,7 +61,7 @@ class AddRecipeForm extends Component {
   }
 
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof AddRecipeForm
    *

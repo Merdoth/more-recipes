@@ -1,16 +1,16 @@
 // import controllers
-import usersRoutes from './users';
-import recipeRoutes from './recipes';
-import reviewRoutes from './reviews';
-import favoriteRoutes from './favorites';
-import voteRoutes from './votes';
+import usersRoutes from './usersRoutes';
+import recipeRoutes from './recipeRoutes';
+import reviewRoutes from './reviewRoutes';
+import favoriteRoutes from './favoriteRoutes';
+import voteRoutes from './voteRoutes';
 
 /**
- * @description combine user, recipe, voting reviews and favourite routes
+ * @description combines user, recipe, voting, reviews and favourite routes
  *
- * @param {Function} router
+ * @param { Function } router
  *
- * @returns {void}
+ * @returns { undefined }
  */
 const routes = (router) => {
   usersRoutes(router);

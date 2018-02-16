@@ -5,6 +5,14 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default {
+  /**
+   *
+   * @param { Object } req - Request object
+   * @param { Object } res - Response object
+   * @param { Object } next - callback
+   *
+   * @returns { Object } json - payload
+   */
   authorize(req, res, next) {
     const token = req.headers.authorization || req.body.authorization;
     // req.headers.authorization;

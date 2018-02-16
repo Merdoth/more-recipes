@@ -5,17 +5,17 @@ import Button from './common/Button.jsx';
 import { getOneUser, updateUserProfile } from '../actions/userActions';
 
 /**
- * @param { Profile } Profile
+ * @param { Object } Profile
  *
- * @returns { Profile } Profile
+ * @returns { undefined }
  *
- * @desc this class returns a Profile component
+ * @description this class returns a Profile component
  */
 class Profile extends Component {
   /**
    * Creates an instance of Profile.
    *
-   * @param {object} props
+   * @param { Object } props
    *
    * @memberof Profile
    *
@@ -34,8 +34,9 @@ class Profile extends Component {
   }
   /**
 *
-* @param {*} nextProps updated props
-* @returns {DOM} DOM object
+* @param { Function } nextProps updated props
+*
+* @returns { DOM } DOM object
 */
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -45,7 +46,7 @@ class Profile extends Component {
     });
   }
   /**
-    * @param {object} event
+    * @param { Object } event
     *
     * @memberof Profile
     *
@@ -55,7 +56,7 @@ class Profile extends Component {
     this.props.getOneUser();
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof Profile
    *
@@ -66,7 +67,7 @@ class Profile extends Component {
   }
 
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof Profile
    *
@@ -79,7 +80,7 @@ class Profile extends Component {
   }
 
   /**
-   * @returns {undefined }
+   * @returns { undefined }
    *
    * @memberof Profile
    */

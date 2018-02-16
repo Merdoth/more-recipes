@@ -1,18 +1,13 @@
 /**
- * @description paginate function
+ * @description paginate function allows navigation from one page to another
  *
- * @param {Integer} limit - limit integer
- * @param {Integer} offset - offset integer
- * @param {integer} count - count integer
+ * @param { Number } limit - limit
+ * @param { Number } offset - offset
+ * @param { Number } count - count
  *
- * @returns {object} result - result object
+ * @returns { Object } result - result object
  */
 const pagination = (limit, offset, count) => {
-  /** totalCount : total number of records based on query
-   * pageCount : total number of pages
-   * currentPage : current page of the query result based on limit and offset
-   * pageSize : number of records per page (based on limit)
-   */
   const result = {};
   limit = limit > count ? count : limit;
   offset = offset > count ? count : offset;

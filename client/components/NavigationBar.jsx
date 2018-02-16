@@ -8,14 +8,14 @@ import { logout } from '../actions/auth/authActions';
 /**
  * @description this render the navigation bar which allopws the user move from page to page
  *
- * @param { NavigationBar } NavigationBar
+ * @param { Object } NavigationBar
  *
- * @returns { NavigationBar } NavigationBar
+ * @returns { undefined }
  */
 class NavigationBar extends React.Component {
   /**
    * Creates an instance of NavigationBar.
-   * @param {object} props
+   * @param { Object } props
    *
    * @memberof NavigationBar
    */
@@ -24,7 +24,7 @@ class NavigationBar extends React.Component {
     this.logout = this.logout.bind(this);
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof NavigationBar
    *
@@ -117,7 +117,6 @@ class NavigationBar extends React.Component {
    * @memberof NavigationBar
    */
   render() {
-    console.log(this.props.user, '=====p===');
     return (
       <nav className="navbar navbar-expand-lg navbar-dark header">
         <Link className="navbar-brand logo" to="/">

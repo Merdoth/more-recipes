@@ -6,7 +6,9 @@ import { Icons } from '../../common/Icons.jsx';
  * @description This holds recipe icons
  *
  * @method  RecipeCardFooter
+ *
  * @param { Object } props
+ *
  * @returns { undefined }
  * .
  */
