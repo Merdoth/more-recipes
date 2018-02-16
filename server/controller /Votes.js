@@ -1,4 +1,3 @@
-// import module dependencies
 import sequelize from 'sequelize';
 import models from '../models';
 
@@ -10,7 +9,7 @@ const {
 /**
  * @class
  */
-class Vote {
+class Votes {
   /**
    * @description up vote recipe controller
    *
@@ -87,6 +86,7 @@ class Vote {
         });
       });
   }
+
   /**
    * @description down vote recipe controller
    *
@@ -182,4 +182,4 @@ class Vote {
   }
 }
 
-export default Vote;
+export default Votes;

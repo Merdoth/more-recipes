@@ -117,7 +117,7 @@ export const validateAddRecipe = (value) => {
 };
 
 /**
- * @description validateSignIn function
+ * @description validateReview function
  *
  * @param {Object} value - object
  *

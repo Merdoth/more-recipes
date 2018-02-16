@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import AddRecipeForm from './AddRecipeForm.jsx';
 
 /**
- * @extends {Component}
+ * @extends { Component }
  *
- * @param {object} props
+ * @param { Object } props
  *
  * @return { undefined }
  *

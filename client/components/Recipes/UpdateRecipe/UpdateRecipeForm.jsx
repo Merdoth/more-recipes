@@ -8,16 +8,17 @@ import TextArea from '../../common/TextArea.jsx';
 import InputLine from '../../common/InputLine.jsx';
 import { updateRecipe, getOneRecipe } from '../../../actions/recipeActions/';
 /**
- * @param { UpdateRecipeForm } UpdateRecipeForm
+ * @param { Object } UpdateRecipeForm
  *
- * @returns { UpdateRecipeForm } UpdateRecipeForm
+ * @returns { undefined }
  *
- * @desc this class returns a UpdateRecipeForm component
+ * @description this class returns a UpdateRecipeForm component
  */
 class UpdateRecipeForm extends Component {
   /**
    * Creates an instance of UpdateRecipeForm.
-   * @param {object} props
+   *
+   * @param { Object } props
    *
    * @memberof UpdateRecipeForm
    *
@@ -38,7 +39,7 @@ class UpdateRecipeForm extends Component {
     this.onImageChange = this.onImageChange.bind(this);
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof UpdateRecipeForm
    *
@@ -46,10 +47,11 @@ class UpdateRecipeForm extends Component {
    */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
-    this.props.getOneRecipe(recipeId);
+    const { id } = this.props.user.id;
+    this.props.getOneRecipe(id, recipeId);
   }
   /**
-   * @param {object} nextProps
+   * @param { Object } nextProps
    *
    * @memberof UpdateRecipeForm
    *
@@ -57,22 +59,21 @@ class UpdateRecipeForm extends Component {
    */
   componentWillReceiveProps(nextProps) {
     const { recipe, error } = nextProps;
-    if (error.status === 'Not Found') {
+    if (error === 'Not Found') {
       swal('Too Bad', 'No Such Recipe', 'error');
-      history.push('/recipes');
+      this.props.history.push('/recipes');
     }
     this.setState({
       recipeName: recipe.recipeName,
       description: recipe.description,
       ingredients: recipe.ingredients,
       preparation: recipe.preparation,
-      message: nextProps.message,
       image: recipe.image,
       error: nextProps.error
     });
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof UpdateRecipeForm
    *
@@ -82,7 +83,7 @@ class UpdateRecipeForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof UpdateRecipeForm
    *
@@ -93,7 +94,7 @@ class UpdateRecipeForm extends Component {
     this.setState({ [event.target.name]: event.target.files[0] });
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof UpdateRecipeForm
    *
@@ -106,17 +107,17 @@ class UpdateRecipeForm extends Component {
       swal('Oops!', 'no image found', 'error');
     } else {
       this.props.updateRecipe(recipeId, this.state).then(() => {
-        const { error, message } = this.state;
+        const { error } = this.state;
         if (error.message) {
           return swal('Too Bad!', error.message, 'error');
         }
-        swal('Great!!!', message, 'success');
+        swal('Great!!!', 'your recipe has been updated successfully', 'success');
         this.props.goToRecipes(`/recipe-details/${recipeId}`);
       });
     }
   }
   /**
-   * @returns {undefined }
+   * @returns { undefined }
    *
    * @memberof UpdateRecipeForm
    */
@@ -129,7 +130,7 @@ class UpdateRecipeForm extends Component {
           type="text"
           name="recipeName"
           placeholder="Name"
-          value={this.state.recipeName}
+          value={this.state.recipeName || ''}
           label="Name"
           onChange={this.onChange}
           required
@@ -138,7 +139,7 @@ class UpdateRecipeForm extends Component {
           type="text"
           name="description"
           placeholder="Description"
-          value={this.state.description}
+          value={this.state.description || ''}
           label="Description"
           onChange={this.onChange}
         />
@@ -146,7 +147,7 @@ class UpdateRecipeForm extends Component {
           type="text"
           name="ingredients"
           placeholder="Ingredients"
-          value={this.state.ingredients}
+          value={this.state.ingredients || ''}
           label="Ingredients"
           onChange={this.onChange}
         />
@@ -154,7 +155,7 @@ class UpdateRecipeForm extends Component {
           type="text"
           name="preparation"
           placeholder="Preparation"
-          value={this.state.preparation}
+          value={this.state.preparation || ''}
           label="Preparation"
           onChange={this.onChange}
         />
@@ -165,7 +166,7 @@ class UpdateRecipeForm extends Component {
           placeholder="image"
           value=""
           label="Select Image"
-          onChange={this.onImageChange}
+          onChange={this.onImageChange || ''}
         />
         <Button
           type="submit"
@@ -194,7 +195,8 @@ UpdateRecipeForm.defaultValue = {
 const mapStateToProps = state => ({
   recipe: state.recipeReducer.recipes,
   message: state.recipeReducer.message,
-  error: state.recipeReducer.error
+  error: state.recipeReducer.error,
+  user: state.setCurrentUser.user,
 });
 
 export default connect(

@@ -8,14 +8,14 @@ import { logout } from '../actions/auth/authActions';
 /**
  * @description this render the navigation bar which allopws the user move from page to page
  *
- * @param { NavigationBar } NavigationBar
+ * @param { Object } NavigationBar
  *
- * @returns { NavigationBar } NavigationBar
+ * @returns { undefined }
  */
 class NavigationBar extends React.Component {
   /**
    * Creates an instance of NavigationBar.
-   * @param {object} props
+   * @param { Object } props
    *
    * @memberof NavigationBar
    */
@@ -24,7 +24,7 @@ class NavigationBar extends React.Component {
     this.logout = this.logout.bind(this);
   }
   /**
-   * @param {object} event
+   * @param { Object } event
    *
    * @memberof NavigationBar
    *
@@ -58,22 +58,22 @@ class NavigationBar extends React.Component {
             <i className="fa fa-user-circle-o icon-size" aria-hidden="true" />
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a className="dropdown-item" href="/profile">
+            <Link className="dropdown-item" to="/profile">
               Profile
-            </a>
-            <a className="dropdown-item" href="/addrecipe">
+            </Link>
+            <Link className="dropdown-item" to="/addrecipe">
               Add Recipe
-            </a>
-            <a className="dropdown-item" href="/myrecipes">
+            </Link>
+            <Link className="dropdown-item" to="/myrecipes">
               My recipes
-            </a>
-            <a className="dropdown-item" href="/favourites">
+            </Link>
+            <Link className="dropdown-item" to="/favourites">
               Favourites
-            </a>
+            </Link>
 
-            <a className="dropdown-item" href="/recipes">
+            <Link className="dropdown-item" to="/recipes">
               All Recipes
-            </a>
+            </Link>
             <Link onClick={this.logout} className="dropdown-item" to="/">
               Signout
             </Link>
@@ -117,7 +117,6 @@ class NavigationBar extends React.Component {
    * @memberof NavigationBar
    */
   render() {
-    console.log(this.props.user, '=====p===');
     return (
       <nav className="navbar navbar-expand-lg navbar-dark header">
         <Link className="navbar-brand logo" to="/">

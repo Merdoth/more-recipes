@@ -8,7 +8,7 @@ body {
   padding: 0px;
   max-width: 100%;
   overflow-x: hidden;
-  background: #efefef;
+  background: #fff;
   font-family: "Raleway", sans-serif;
 }
 
@@ -29,26 +29,16 @@ div {
   text-decoration: none;
 }
 .recipe-header {
-  display: block;
-  width: 994px;
-  min-width: 994px;
-  max-width: 994px;
-  padding-left: 14px;
-  padding-right: 14px;
-  margin: auto;
-  overflow: auto;
-}
-@media screen and (min-width: 768px) {
-  .recipe-header {
-    display: block;
-    width: 749px;
-    min-width: 749px;
-    max-width: 749px;
-    padding-left: 14px;
-    padding-right: 14px;
-    margin: auto;
-    overflow: auto;
+  h2 {
+    font-size: 5em;
   }
+
+  p {
+    font-size: 24px;
+  }
+}
+.recipe-wrapper {
+  background-color: #efefef
 }
 .navs > h2 {
   color: #efefef;
@@ -213,33 +203,32 @@ img {
 }
 
 #title {
-  text-align: center;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 0.8rem;
   font-weight: bold;
   color: #222;
   margin-bottom: 5%;
-  margin-top: 15px;
+  margin-top: 9px;
 }
 
 #Popular {
   font-weight: bold;
-  font-size: 36px;
+  font-size: 30px;
   color: #222;
   margin-bottom: 5%;
-  text-align: center;
 }
 
 .main {
   padding-top: 80px;
   padding-left: 5%;
   padding-right: 5%;
-  background-color: #fff;
+  background-color: #efefef;
   height: 500px;
 }
 
 .wrap {
   margin-top: 30px;
+  width: 860px
 }
 
 .main-aside .main-section {
@@ -271,7 +260,6 @@ img {
 }
 
 .top-items {
-  // height: 100%;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -307,30 +295,41 @@ img {
 }
 .top {
   margin-bottom: 90px;
-  padding-bottom: 50px;
-  padding-top: 60px;
+  padding: 60px 20px 50px 20px;
+  background-color: #efefef;
+
 }
 .top h6 {
   padding-bottom: 70px;
 }
 
 .des {
-  padding: 30px;
+  padding: 15px;
+
+  h2 {
+    white-space: nowrap; 
+    width: 12em; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    color: orange;
+    text-transform: capitalize;
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
+  h4 {
+    padding-top: 5px;
+    line-height: 1.4rem;
+    font-size: 16px;
+    font-weight: 600;
+    color: #878787;
+    white-space: nowrap; 
+    width: 12em; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
+
 }
 
-.des h2 {
-  color: orange;
-  text-transform: capitalize;
-  font-size: 1.5rem;
-  text-decoration: none;
-}
-
-.des > h4 {
-  padding-top: 5px;
-  line-height: 1.4rem;
-  font-size: 16px;
-  color: #878787;
-}
 
 .itemReview {
   text-align: center;
@@ -389,14 +388,39 @@ img {
 
 .stats {
   display: flex;
+  flex: 0;
   flex-direction: column;
   margin-top: 2px;
   margin-left: 1px;
-  width: 100%;
   align-items: baseline;
   padding-top: 30px;
+  padding-right: 20px;
+  border-right: solid 1px lightgray;
 }
 
+.recipe-description {
+    flex: 1;
+    margin-top: 2px;
+    padding: 30px;
+
+    h3 {
+      color: #000;
+      font-size: 3em;
+      font-weight: 600;
+      padding-bottom: 10px;
+    }
+
+    p {
+      color: #000;
+      font-size: 18px;
+      line-height: 16px;
+      font-weight: 600;
+    }
+}
+
+.recipe-detail-header-content {
+  display: flex;
+}
 .btn.stats-item {
   color: #000;
   border: solid 2px #000;
@@ -533,15 +557,15 @@ img {
 
 .review {
   padding: 20px;
-  background-color: #eee;
+  background-color: #fff;
   border-radius: 5px;
   height: 150px;
   width: 100%;
-  max-width: 500px;
   font-size: 15px;
   font-family: "Open sans";
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+  border: solid 1px gray;
 }
 #reviewSubmit {
   margin-left: 20px;
@@ -605,7 +629,9 @@ input {
 .manage > p {
   font-size: 30px;
 }
-
+.post-description {
+  overflow: scroll;
+}
 .user-details #status {
   border: 2px solid black;
   border-radius: 5px;
@@ -684,7 +710,7 @@ input {
 }
 
 .textArea {
-  background-color: #efefef;
+  background-color: #fff;
   margin-right: -1.5%;
   margin-left: -1.6%;
   padding-bottom: 5%;
@@ -716,8 +742,10 @@ input {
 }
 
 .reviewedView {
-  margin-top: 60px;
-  margin-bottom: 20px;
+  margin-bottom: 120px;
+  height: auto;
+  background-color: #efefef;
+  padding: 5%;
 }
 
 .DetailsImage {

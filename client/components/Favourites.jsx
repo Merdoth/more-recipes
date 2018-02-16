@@ -4,11 +4,11 @@ import RecipeCard from './Recipes/RecipeCard/RecipeCard.jsx';
 import { getFavourite } from '../actions/recipeActions/';
 
 /**
- * @param {  Favourites }  Favourites
+ * @param { Object }  Favourites
  *
- * @returns {  Object }  Favourites
+ * @returns { undefined }
  *
- * @desc this class returns a  Favourites component
+ * @description this class returns a  Favourites component
  */
 class Favourites extends Component {
   /**
@@ -40,14 +40,13 @@ class Favourites extends Component {
         <div className="container manage">
           <div className="recipe-header">
             <h2>Recipes</h2>
-          </div>
-          <div className="recipe-header-picture">
             <p>Feel free to manage your own account</p>
           </div>
         </div>
-        <hr />
-        <div className="container top">
-          <div className="row">{recipes}</div>
+        <div className="recipe-wrapper">
+          <div className="container top">
+            <div className="row">{recipes}</div>
+          </div>
         </div>
       </div>
     );

@@ -11,7 +11,7 @@ import React from 'react';
  * .
  */
 const RecipeCardDes = ({ title, text }) => (
-  <div className="des">
+  <div className="des text-truncate">
       <h2>{title}</h2>
     <h4>{text}</h4>
   </div>

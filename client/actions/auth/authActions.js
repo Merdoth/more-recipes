@@ -5,13 +5,10 @@ import * as types from './../actionTypes';
 
 /**
  *
+ * @param { Object } user
+ * @param { Object } userData
  *
- * @export
- *
- * @param {Object} user
- * @param {Object} userData
- *
- * @returns {undefined}
+ * @returns { undefined }
  */
 export function setCurrentUser(user) {
   return {
@@ -22,11 +19,11 @@ export function setCurrentUser(user) {
 
 /**
  *
- * @desc this function returns a jwt token
+ * @description this function returns a jwt token
  *
- * @param { string } token
+ * @param { Object } token
  *
- * @returns {undefined}
+ * @returns { undefined }
  */
 function decode(token) {
   return jwtDecode(token);
@@ -34,12 +31,11 @@ function decode(token) {
 
 /**
  *
+ * @description this function signs in a user
  *
- * @desc this function signs in a user
+ * @param { Object } resData
  *
- * @param {object} resData
- *
- * @returns {undefined}
+ * @returns { undefined }
  */
 export function login(resData) {
   return dispatch =>
@@ -53,9 +49,9 @@ export function login(resData) {
 /**
  *
  *
- * @desc this method signs up a user
+ * @description this function signs up a user
  *
- * @param {object} userData
+ * @param { Object } userData
  *
  * @returns { undefined }
  */
@@ -72,7 +68,7 @@ export function userSignupRequest(userData) {
 /**
  *
  *
- * @desc this method logs out a user
+ * @description this function logs out a user
  *
  * @returns { undefined }
  */

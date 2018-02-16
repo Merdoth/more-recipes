@@ -6,11 +6,11 @@ import RecipeCard from '../components/Recipes/RecipeCard/RecipeCard.jsx';
 import { getMostVoted } from '../actions/recipeActions/';
 
 /**
- * @param { Home } Home
+ * @param { Object } Home
  *
  * @returns { undefined }
  *
- * @desc this class returns a Home component
+ * @description this class returns a Home component
  */
 class Home extends Component {
   /**
@@ -28,7 +28,7 @@ class Home extends Component {
     };
   }
   /**
-   * @param {object} props
+   * @param { Function } props
    *
    * @memberof Home
    *
@@ -39,7 +39,7 @@ class Home extends Component {
   }
 
   /**
-   * @returns {undefined }
+   * @returns { undefined }
    *
    * @memberof Home
    */
@@ -50,7 +50,7 @@ class Home extends Component {
     return (
       <div>
         <Slider />
-        <div className="container top">
+        <div className="top">
           <h6 id="title4">Top Recipes</h6>
           <div className="row">{recipes}</div>
         </div>

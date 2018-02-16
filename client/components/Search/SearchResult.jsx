@@ -5,16 +5,18 @@ import { searchRecipe } from '../../actions/recipeActions';
 import RecipeCard from '../Recipes/RecipeCard/RecipeCard.jsx';
 
 /**
- * @param {  Recipes }  Recipes
+ * @param {  Object }  Recipes
  *
- * @returns {  Recipes }  Recipes
+ * @returns {  undefined }
  *
  * @desc this class returns a  Recipes component
  */
 class SearchResult extends Component {
   /**
    * Creates an instance of SearchResult.
-   * @param {any} props
+   *
+   * @param { Object } props
+   *
    * @memberof SearchResult
    */
   constructor(props) {
@@ -35,9 +37,9 @@ class SearchResult extends Component {
   /**
    * @description this method provides data for paginations of the recipe search
    *
-   * @param {any} searchData
+   * @param { Object } searchData
    *
-   * @return {void}
+   * @return { undefined }
    */
   pageClick(searchData) {
     const { selected } = searchData;
@@ -60,33 +62,32 @@ class SearchResult extends Component {
         <div className="container manage">
           <div className="recipe-header">
             <h2>Recipes</h2>
-          </div>
-          <div className="recipe-header-picture">
             <p>
               Below are your search result
             </p>
           </div>
         </div>
-        <hr />
-        <div className="container top">
-          <div className="row">
-          { foundRecipes }
+      <div className="recipe-wrapper">
+          <div className="container top">
+            <div className="row">
+              {foundRecipes}
+            </div>
+            <div className="row pagination">
+              <ReactPaginate
+                previousLabel="previous"
+                nextLabel="next"
+                breakClassName="break-me"
+                pageCount={this.props.pagination.pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.pageClick}
+                containerClassName='pagination'
+                subContainerClassName="pages pagination"
+                activeClassName="active"
+              />
+            </div>
           </div>
-        <div className="row pagination">
-          <ReactPaginate
-            previousLabel="previous"
-            nextLabel="next"
-            breakClassName="break-me"
-            pageCount={ this.props.pagination.pageCount }
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={ this.pageClick }
-            containerClassName='pagination'
-            subContainerClassName="pages pagination"
-            activeClassName="active"
-          />
-        </div>
-        </div>
+      </div>
       </div>
     );
   }

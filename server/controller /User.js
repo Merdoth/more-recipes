@@ -1,4 +1,3 @@
-// import modules
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import models from '../models/';
@@ -124,8 +123,9 @@ class User {
               message: 'Welcome!',
               token
             });
+          } else {
+            return res.status(400).send({ message: 'Incorrect login details!' });
           }
-          return res.status(400).send({ message: 'Incorrect login details!' });
         }
         return res.status(404).send({ message: 'User does not exist!' });
       })
@@ -134,8 +134,9 @@ class User {
       });
   }
 
-  /** Updates a User's Profile
-   *
+  /**
+  *  @description Updates a User's Profile
+  *
   * @param {Object} req - req object
   * @param {Object} res - res object
   *
@@ -177,7 +178,7 @@ class User {
                 }
               });
           } else {
-            res.status(422).send({
+            res.status(404).send({
               status: 'Unsuccessful',
               message: 'No update was made',
             });
