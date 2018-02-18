@@ -25,7 +25,7 @@ import RecipeDetailsFooter from './RecipeCard/RecipeDetailsFooter.jsx';
  *
  * @returns { undefined }
  */
-class RecipeDetails extends Component {
+export class RecipeDetails extends Component {
   /**
    * Creates an instance of RecipeDetails.
    * @param { Object } props
@@ -166,7 +166,8 @@ class RecipeDetails extends Component {
     const recipeIds = recipesId.map(id => id.recipeId);
     const loggedInUser = this.props.user.id;
 
-    const selected = (recipeIds.includes(this.props.recipe.id)) ? 'selected' : '';
+    const selected = (recipeIds.includes(this.props.recipe.id))
+      ? 'selected' : '';
     const goToRecipes = route => this.props.history.push(route);
     const recipeDetails = this.state.recipe;
     const fetchedReviews = this.props.reviews.map(review => (
@@ -278,7 +279,6 @@ class RecipeDetails extends Component {
   }
 }
 RecipeDetails.propTypes = {
-  message: PropTypes.string.isRequired,
   recipe: PropTypes.object.isRequired
 };
 
@@ -286,7 +286,6 @@ const mapStateToProps = state => ({
   user: state.setCurrentUser.user,
   recipe: state.recipeReducer.recipes,
   reviews: state.recipeReducer.recipes.reviews || [],
-  message: state.recipeReducer.message,
   favourites: state.favourite.favourite || [],
   error: state.recipeReducer.error
 });

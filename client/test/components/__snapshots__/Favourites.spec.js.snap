@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Favourites Component snapshot it should render the right amount of elements 1`] = `
+<div>
+  <div
+    className="container manage"
+  >
+    <div
+      className="recipe-header"
+    >
+      <h2>
+        Recipes
+      </h2>
+      <p>
+        Feel free to manage your own account
+      </p>
+    </div>
+  </div>
+  <div
+    className="recipe-wrapper"
+  >
+    <div
+      className="container top"
+    >
+      <div
+        className="row"
+      >
+        <RecipeCard
+          key="recipes-8"
+          recipeList={
+            Object {
+              "createdAt": "2018-02-13T22:12:14.741Z",
+              "description": "peppery",
+              "downVotes": 0,
+              "id": 8,
+              "image": "http://res.cloudinary.com/ucheya/image/upload/v1518559934/slow_rxsoi1.jpg",
+              "ingredients": "yoruba pepper",
+              "preparation": "boil",
+              "recipeName": "pepper soup",
+              "upVotes": 0,
+              "updatedAt": "2018-02-14T19:50:44.721Z",
+              "userId": 3,
+              "views": 1,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

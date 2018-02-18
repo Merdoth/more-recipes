@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignupForm Component snapshot it should render the right amount of elements 1`] = `
+<div>
+  <div
+    className="form-deco"
+  >
+    <form
+      className="form-signin"
+    >
+      <h2
+        className="form-signin-heading"
+      >
+        Sign Up
+      </h2>
+      <hr />
+      <InputField
+        className="form-control"
+        label="Fullname"
+        name="fullName"
+        onChange={[Function]}
+        placeholder="Enter your fullname"
+        required={true}
+        type="text"
+        value=""
+      />
+      <InputField
+        className="form-control"
+        label="Username"
+        name="userName"
+        onChange={[Function]}
+        placeholder="Enter your username"
+        required={true}
+        type="text"
+        value=""
+      />
+      <InputField
+        label="Email address"
+        name="email"
+        onChange={[Function]}
+        placeholder="Enter your email address"
+        required={true}
+        type="email"
+        value=""
+      />
+      <InputField
+        label="Password"
+        name="password"
+        onChange={[Function]}
+        placeholder="Enter your password"
+        required={true}
+        type="password"
+        value=""
+      />
+      <InputField
+        label="Confirm Password"
+        name="confirmPassword"
+        onChange={[Function]}
+        placeholder="Confirm Password"
+        required={true}
+        type="password"
+        value=""
+      />
+      <Button
+        className="btn btn-lg btn-primary btn-block"
+        disabled={false}
+        iconClass="fa-user-plus"
+        name="Sign Up"
+        onClick={[Function]}
+        type="submit"
+      />
+      <p
+        className="new_account"
+      >
+        <strong>
+          Already Have An Account? 
+        </strong>
+        <Link
+          replace={false}
+          to="Signin"
+        >
+          Sign in
+        </Link>
+      </p>
+    </form>
+  </div>
+</div>
+`;

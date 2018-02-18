@@ -5,6 +5,7 @@ import Button from '../../common/Button.jsx';
 import InputField from '../../common/InputField.jsx';
 import TextArea from '../../common/TextArea.jsx';
 import InputLine from '../../common/InputLine.jsx';
+import history from '../../../utils/history';
 import { addRecipes } from '../../../actions/recipeActions/';
 
 /**
@@ -14,7 +15,7 @@ import { addRecipes } from '../../../actions/recipeActions/';
  *
  * @desc this class returns a AddRecipeForm component
  */
-class AddRecipeForm extends Component {
+export class AddRecipeForm extends Component {
   /**
    * Creates an instance of AddRecipeForm
    * @param { Object } props
@@ -70,7 +71,6 @@ class AddRecipeForm extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.addRecipes(this.state);
-    this.props.goToRecipes();
   }
   /**
    * @returns { undefined }
@@ -83,6 +83,7 @@ class AddRecipeForm extends Component {
         <h2 className="form-signin-heading">Add Recipe</h2>
         <hr />
         <InputField
+          id="recipeName"
           type="text"
           name="recipeName"
           placeholder="Name"
@@ -92,6 +93,7 @@ class AddRecipeForm extends Component {
           required
         />
         <TextArea
+          id="description"
           type="text"
           name="description"
           placeholder="Description"
@@ -100,6 +102,7 @@ class AddRecipeForm extends Component {
           onChange={this.onChange}
         />
         <TextArea
+          id="ingredients"
           type="text"
           name="ingredients"
           placeholder="Ingredients"
@@ -108,6 +111,7 @@ class AddRecipeForm extends Component {
           onChange={this.onChange}
         />
         <TextArea
+          id="preparation"
           type="text"
           name="preparation"
           placeholder="Preparation"
@@ -116,10 +120,10 @@ class AddRecipeForm extends Component {
           onChange={this.onChange}
         />
         <InputLine
-          id=""
+          id="image"
           type="file"
           name="image"
-          placeholder="Ingredients"
+          placeholder="Upload Image"
           value=""
           label="Select Image"
           onChange={this.onImageChange}
@@ -131,7 +135,7 @@ class AddRecipeForm extends Component {
           disabled={this.state.isLoading}
           name="Add Recipe"
           iconClass="fa-cutlery"
-          className="btn btn-lg btn-primary btn-block"
+          className="btn btn-lg btn-primary btn-block submitBtn"
         />
       </form>
     );

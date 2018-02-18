@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeDetailsFooter Component snapshot it should render the right amount of elements 1`] = `
+<div
+  className="userButton row"
+>
+  <Button
+    className="btn btn-lg btn-primary btn-block cta-btn"
+    name="Edit"
+    onClick={[Function]}
+    type="edit"
+  />
+  <Button
+    className="btn btn-lg btn-primary btn-block cta-btn"
+    name="Delete"
+    onClick={[Function]}
+    type="delete"
+  />
+</div>
+`;
+
+exports[`RecipeDetailsFooterComponent snapshot it should render the right amount of elements 1`] = `
+<div
+  className="userButton row"
+>
+  <Button
+    className="btn btn-lg btn-primary btn-block cta-btn"
+    name="Edit"
+    onClick={[Function]}
+    type="edit"
+  />
+  <Button
+    className="btn btn-lg btn-primary btn-block cta-btn"
+    name="Delete"
+    onClick={[Function]}
+    type="delete"
+  />
+</div>
+`;

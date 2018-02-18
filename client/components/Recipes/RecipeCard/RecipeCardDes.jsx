@@ -10,7 +10,7 @@ import React from 'react';
  * @returns { undefined }
  * .
  */
-const RecipeCardDes = ({ title, text }) => (
+export const RecipeCardDes = ({ title, text }) => (
   <div className="des text-truncate">
       <h2>{title}</h2>
     <h4>{text}</h4>

@@ -11,7 +11,7 @@ import { getAllRecipes } from '../../actions/recipeActions/';
  *
  * @description this class returns a  Recipes component
  */
-class Recipes extends Component {
+export class Recipes extends Component {
   /**
   * Creates an instance of SearchResult.
   *
@@ -79,6 +79,7 @@ class Recipes extends Component {
             <div className="row">{recipes}</div>
             <div className="row pagination">
               <ReactPaginate
+                id="page"
                 previousLabel="previous"
                 nextLabel="next"
                 breakClassName="break-me"

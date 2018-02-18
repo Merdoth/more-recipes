@@ -12,9 +12,10 @@ import { Icons } from '../../common/Icons.jsx';
  * @returns { undefined }
  * .
  */
-const RecipeCardFooter = props => (
+export const RecipeCardFooter = props => (
   <div className="itemReview row">
-    <Icons upvotes={props.upVotes} downvotes={props.downVotes} views={props.views} />
+    <Icons upvotes={props.upVotes}
+    downvotes={props.downVotes} views={props.views} />
   </div>
 );
 export default RecipeCardFooter;

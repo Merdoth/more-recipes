@@ -7,7 +7,7 @@ import React from 'react';
  * @returns { undefined }
  */
 
-const Slider = () => (
+export const Slider = () => (
   <div className="hero-bg">
     <div className="container-fluid">
       <div

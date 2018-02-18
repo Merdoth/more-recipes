@@ -11,7 +11,7 @@ import { getUserRecipes } from '../../actions/recipeActions/';
  *
  * @description this class returns a  Recipes component
  */
-class UserRecipes extends Component {
+export class UserRecipes extends Component {
   /**
  * Creates an instance of SearchResult.
  *

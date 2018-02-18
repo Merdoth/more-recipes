@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeCard Component snapshot it should render the right amount of elements 1`] = `
+<div
+  className="col-md-4 col-sm-4 main-card"
+>
+  <div
+    className="top-items"
+  >
+    <Link
+      className="rated"
+      replace={false}
+      to="recipe-details/undefined"
+    >
+      <RecipeCardImage />
+      <RecipeCardDes />
+      <RecipeCardFooter />
+    </Link>
+  </div>
+</div>
+`;

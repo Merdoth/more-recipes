@@ -11,7 +11,7 @@ import { deleteRecipe } from '../../../actions/recipeActions';
  *
  * @desc this class returns a RecipeDetailsFooter component
  */
-class RecipeDetailsFooter extends Component {
+export class RecipeDetailsFooter extends Component {
   /**
    * Creates an instance of RecipeDetailsFooter
    *
@@ -23,7 +23,6 @@ class RecipeDetailsFooter extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {};
     this.handleDelete = this.handleDelete.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }

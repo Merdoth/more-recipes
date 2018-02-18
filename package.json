@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.12.0",
+    "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -28,6 +28,7 @@
     "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.5.4",
     "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
     "expect": "^21.2.1",
@@ -43,6 +44,7 @@
     "image-webpack-loader": "^3.6.0",
     "jest": "^22.3.0",
     "jquery": "^3.3.1",
+    "jsdom": "^11.6.2",
     "jsonwebtoken": "^8.1.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
@@ -101,7 +103,7 @@
     "server:dev": "NODE_ENV=development nodemon --watch server --exec babel-node  -- server/app.js ",
     "reset-db": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate",
     "test": "npm run reset-db && NODE_ENV=test nyc --reporter=lcov --reporter=text  mocha  --compilers js:babel-register ./server/tests/index.spec.js -t 20000",
-    "test:client": "jest --watch",
+    "test:client": "jest --config jest.config.js --watch",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "start:dev": "npm run server:dev"

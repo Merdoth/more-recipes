@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import { searchRecipe } from '../../actions/recipeActions';
-import RecipeCard from '../Recipes/RecipeCard/RecipeCard.jsx';
+import { RecipeCard } from '../Recipes/RecipeCard/RecipeCard.jsx';
 
 /**
  * @param {  Object }  Recipes
@@ -11,7 +11,7 @@ import RecipeCard from '../Recipes/RecipeCard/RecipeCard.jsx';
  *
  * @desc this class returns a  Recipes component
  */
-class SearchResult extends Component {
+export class SearchResult extends Component {
   /**
    * Creates an instance of SearchResult.
    *

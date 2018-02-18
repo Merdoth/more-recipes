@@ -26,7 +26,7 @@ export const upvoteRecipeFailure = error => ({
  */
 export const upvoteRecipeSuccess = recipe => ({
   type: UPVOTE_RECIPE_SUCCESS,
-  recipe
+  recipe: recipe.recipe
 });
 
 /**
@@ -39,13 +39,13 @@ export const upvoteRecipeSuccess = recipe => ({
  *
  * @returns { Object } payload
  */
-// export const upvote =
 export const upvoteRecipe = id => dispatch =>
   axios
     .post(`/api/v1/votes/${id}/upvotes`)
     .then((res) => {
       if (res) {
-        dispatch(upvoteRecipeSuccess(res.data.recipe));
+
+        dispatch(upvoteRecipeSuccess(res.data));
       }
     })
     .catch((error) => {

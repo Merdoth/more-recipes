@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import RecipeCardImage from './RecipeCardImage.jsx';
 import RecipeCardDes from './RecipeCardDes.jsx';
@@ -7,33 +7,26 @@ import RecipeCardFooter from './RecipeCardFooter.jsx';
 /**
  * @description this holders alkl the appreciation buttons and recipe image
  *
- * @param { Object } RecipeCard
+ * @param { Object } props
  *
  * @returns { undefined }
  */
-class RecipeCard extends Component {
-  /**
-   *
-   * @returns { undefined }
-   *
-   * @memberof ReciprecipeeCard
-   */
-  render() {
-    return (
-      <div className="col-md-4 col-sm-4 main-card">
-        <div className="top-items">
-          <Link className="rated" to={`recipe-details/${this.props.recipeList.id}`}>
-            <RecipeCardImage src={this.props.recipeList.image} />
-            <RecipeCardDes
-              title={this.props.recipeList.recipeName}
-              text={this.props.recipeList.description}
-            />
-            <RecipeCardFooter {...this.props.recipeList.id} upVotes={this.props.recipeList.upVotes} downVotes={this.props.recipeList.downVotes} views={this.props.recipeList.views}/>
-          </Link>
-        </div>
-      </div>
-    );
-  }
-}
+export const RecipeCard = props => (
+  <div className="col-md-4 col-sm-4 main-card">
+    <div className="top-items">
+      <Link className="rated" to={`recipe-details/${props.recipeList.id}`}>
+        <RecipeCardImage src={props.recipeList.image} />
+        <RecipeCardDes
+          title={props.recipeList.recipeName}
+          text={props.recipeList.description}
+        />
+        <RecipeCardFooter {...props.recipeList.id }
+        upVotes={props.recipeList.upVotes}
+          downVotes={props.recipeList.downVotes }
+          views={props.recipeList.views} />
+      </Link>
+    </div>
+  </div>
+);
 
 export default RecipeCard;
