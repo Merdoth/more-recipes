@@ -123,8 +123,9 @@ class User {
               message: 'Welcome!',
               token
             });
+          } else {
+            return res.status(400).send({ message: 'Incorrect login details!' });
           }
-          return res.status(400).send({ message: 'Incorrect login details!' });
         }
         return res.status(404).send({ message: 'User does not exist!' });
       })

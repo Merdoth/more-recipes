@@ -62,33 +62,32 @@ class SearchResult extends Component {
         <div className="container manage">
           <div className="recipe-header">
             <h2>Recipes</h2>
-          </div>
-          <div className="recipe-header-picture">
             <p>
               Below are your search result
             </p>
           </div>
         </div>
-        <hr />
-        <div className="container top">
-          <div className="row">
-          { foundRecipes }
+      <div className="recipe-wrapper">
+          <div className="container top">
+            <div className="row">
+              {foundRecipes}
+            </div>
+            <div className="row pagination">
+              <ReactPaginate
+                previousLabel="previous"
+                nextLabel="next"
+                breakClassName="break-me"
+                pageCount={this.props.pagination.pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.pageClick}
+                containerClassName='pagination'
+                subContainerClassName="pages pagination"
+                activeClassName="active"
+              />
+            </div>
           </div>
-        <div className="row pagination">
-          <ReactPaginate
-            previousLabel="previous"
-            nextLabel="next"
-            breakClassName="break-me"
-            pageCount={ this.props.pagination.pageCount }
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={ this.pageClick }
-            containerClassName='pagination'
-            subContainerClassName="pages pagination"
-            activeClassName="active"
-          />
-        </div>
-        </div>
+      </div>
       </div>
     );
   }

@@ -50,7 +50,7 @@ class Home extends Component {
     return (
       <div>
         <Slider />
-        <div className="container top">
+        <div className="top">
           <h6 id="title4">Top Recipes</h6>
           <div className="row">{recipes}</div>
         </div>
