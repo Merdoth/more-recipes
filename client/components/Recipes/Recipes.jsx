@@ -68,32 +68,31 @@ class Recipes extends Component {
         <div className="container manage">
           <div className="recipe-header">
             <h2>Recipes</h2>
-          </div>
-          <div className="recipe-header-picture">
             <p>
               Try, contribute to others recipe value by adding how your feel
               about the recipes
             </p>
           </div>
         </div>
-        <hr />
-        <div className="container top">
-          <div className="row">{recipes}</div>
-        <div className="row pagination">
-          <ReactPaginate
-            previousLabel="previous"
-            nextLabel="next"
-            breakClassName="break-me"
-            pageCount={this.props.pagination.pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={this.pageClick}
-            containerClassName='pagination'
-            subContainerClassName="pages pagination"
-            activeClassName="active"
-          />
-        </div>
-        </div>
+       <div className="recipe-wrapper">
+          <div className="container top">
+            <div className="row">{recipes}</div>
+            <div className="row pagination">
+              <ReactPaginate
+                previousLabel="previous"
+                nextLabel="next"
+                breakClassName="break-me"
+                pageCount={this.props.pagination.pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={this.pageClick}
+                containerClassName='pagination'
+                subContainerClassName="pages pagination"
+                activeClassName="active"
+              />
+            </div>
+          </div>
+       </div>
       </div>
     );
   }

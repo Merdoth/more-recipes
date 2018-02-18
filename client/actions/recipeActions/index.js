@@ -199,6 +199,7 @@ export const updateRecipe = (id, recipes) => dispatch =>
       }
     })
     .catch((error) => {
+      console.log(error.response, 'yo!!!')
       dispatch(updateRecipeFailure(error.data));
     });
 
@@ -249,7 +250,8 @@ export const addRecipes = recipes => dispatch =>
       }
     })
     .catch((error) => {
-      dispatch(addRecipesFailure(error.data));
+      console.log(error.response, 'this is an error')
+      dispatch(addRecipesFailure(error.response.data));
       swal({
         title: 'Oops!',
         text: 'sorry an error occured',

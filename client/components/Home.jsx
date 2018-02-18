@@ -48,11 +48,13 @@ class Home extends Component {
       <RecipeCard key={`recipes-${recipe.id}`} recipeList={recipe} />
     ));
     return (
-      <div>
+      <div >
         <Slider />
-        <div className="container top">
-          <h6 id="title4">Top Recipes</h6>
-          <div className="row">{recipes}</div>
+        <div className="recipe-wrapper">
+          <div className="container top">
+            <h6 id="title4">Top Recipes</h6>
+            <div className="row">{recipes}</div>
+          </div>
         </div>
       </div>
     );

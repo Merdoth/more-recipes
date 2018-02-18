@@ -58,7 +58,7 @@ class SigninForm extends Component {
           this.props.history.push('/recipes');
         })
         .catch((err) => {
-          const error = err.data.message;
+          const error = err.response.data.message;
           swal({
             title: 'Oops!',
             text: error,

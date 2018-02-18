@@ -194,52 +194,53 @@ class RecipeDetails extends Component {
             </div>
           </div>
           <div className="col-md-8 col-sm-8 recipeI">
-            <div className="stats">
-              <span
-                onClick={this.handleUpVote}
-                className="btn btn-default stats-item"
-              >
-                <i className="fa fa-thumbs-up iconStat" />
-                {recipeDetails.upVotes}
-              </span>
-              <span
-                onClick={this.handleDownVote}
-                className="btn btn-default stats-item"
-              >
-                <i className="fa fa-thumbs-down iconStat" />
-                {recipeDetails.downVotes}
-              </span>
-              <span
-                onClick={this.handleFavourite}
-                className={`btn btn-default stats-item ${selected}`}
-              >
-                <i className="fa fa-heart iconStat" />
-              </span>
-              <span className="btn btn-default stats-item">
-                <i className="fa fa-eye iconStat align-view-count" />
-                {recipeDetails.views}
-              </span>
-              <div>
-                <h3>{recipeDetails.recipeName}</h3>
-                <p>{recipeDetails.description}</p>
+            <div className="recipe-detail-header-content">
+              <div className="stats">
+                <span
+                  onClick={this.handleUpVote}
+                  className="btn btn-default stats-item"
+                >
+                  <i className="fa fa-thumbs-up iconStat" />
+                  {recipeDetails.upVotes}
+                </span>
+                <span
+                  onClick={this.handleDownVote}
+                  className="btn btn-default stats-item"
+                >
+                  <i className="fa fa-thumbs-down iconStat" />
+                  {recipeDetails.downVotes}
+                </span>
+                <span
+                  onClick={this.handleFavourite}
+                  className={`btn btn-default stats-item ${selected}`}
+                >
+                  <i className="fa fa-heart iconStat" />
+                </span>
+                <span className="btn btn-default stats-item">
+                  <i className="fa fa-eye iconStat align-view-count" />
+                  {recipeDetails.views}
+                </span>
               </div>
-            </div>
+                <div className="recipe-description">
+                  <h3>{recipeDetails.recipeName}</h3>
+                  <p>{recipeDetails.description}</p>
+                </div>
+           </div>
           </div>
         </div>
         <div className="row main">
           <div className="col-xs-12 col-sm-4 main-aside">
-            <h2 id="Popular">Ingredients</h2>
+            <h4 id="Popular">INGREDIENTS</h4>
             <hr />
             <p>{recipeDetails.ingredients}</p>
           </div>
 
           <div className="col-xs-12 col-sm-8 main-section">
-            <h2 id="title">Preparation</h2>
+            <h4 id="title">PREPARATION</h4>
             <hr />
             <p>{recipeDetails.preparation}</p>
           </div>
         </div>
-        <hr />
         <div className="textArea">
           <div className="form-group">
             <h4 id="reView">
@@ -266,21 +267,12 @@ class RecipeDetails extends Component {
               />
             </div>
           </div>
-          <hr />
+        </div>
           <div className="reviewedView">
-            <div className="container">
-              <div className="row">
-                <div className="col-sm-8">
-                  <div className="panel panel-white post panel-shadow">
-                    <div className="post-description">
-                      {this.props.match.params.recipeId ? fetchedReviews : []}
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="post-description">
+                {this.props.match.params.recipeId ? fetchedReviews : []}
             </div>
           </div>
-        </div>
       </div>
     );
   }
