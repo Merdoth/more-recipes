@@ -21,7 +21,7 @@ export const Slider = () => (
             style={{ backgroundImage: "url('/assets/image/Salad.jpg')" }}
           >
             <div className="slider-text">
-              <h5 className="hero-header">
+              <h5 className="hero-header" id="slider-one">
                 Your Favorite Recipe's At Your Pleasure.
               </h5>
             </div>
