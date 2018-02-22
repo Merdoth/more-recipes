@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-// Sets the authorization header
+/**
+ *
+ * @description Sets the authorization header
+ *
+ * @returns { undefined }
+ *
+ */
 const header = () => ({
   headers: {
     authorization: window.localStorage.jwtToken
@@ -10,8 +16,6 @@ const header = () => ({
 /**
  *
  * @description get a specific user
- *
- * @param { Object } object
  *
  * @returns { undefined }
  *
@@ -62,8 +66,6 @@ export const getAllRecipes = (page, offset, limit) =>
  *
  * @description signs up a user.
  *
- * @param { Object } object
- *
  * @returns { undefined }
  *
  */
@@ -72,8 +74,6 @@ export const userSignupRequest = () => axios.post('/api/v1/users/signup');
 /**
  *
  * @description signs in a user.
- *
- * @param { Object } object
  *
  * @returns { undefined }
  *

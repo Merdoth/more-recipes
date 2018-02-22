@@ -3,11 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-
-// import scss stylesheet
 import './scss/main.scss';
-
-// import component
 import store from './utils/store';
 import Home from './components/Home.jsx';
 import AuthRoutes from './utils/AuthRoutes';

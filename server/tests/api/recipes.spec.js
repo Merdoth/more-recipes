@@ -9,6 +9,7 @@ import {
 
 
 import app from '../../app';
+import { define } from 'mime';
 
 
 chai.use(chaiHttp);
@@ -33,9 +34,10 @@ describe('More Recipes', () => {
       .post('/api/v1/users/signin')
       .send(user2)
       .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
         token2 = res.body.token;
-        expect(res.status).toEqual(200);
-        expect(res.body.message).toEqual('Welcome!', token);
         done();
       });
   });
@@ -154,11 +156,13 @@ describe('More Recipes', () => {
         expect(res.status).toEqual(200);
         expect(res.body.message)
           .toEqual('Recipe successfully added', createdRecipe);
+        expect(res.body.createdRecipe.id).toEqual(1);
+        expect(res.body.createdRecipe.recipeName).toBe('Rice Soup');
         done();
       });
   });
 
-  it('should successfully create a recipe and return 200', (done) => {
+  it('should successfully create a second recipe and return 200', (done) => {
     chai.request(app)
       .post('/api/v1/recipes').set({ authorization: token })
       .send(createdRecipe2)
@@ -166,6 +170,7 @@ describe('More Recipes', () => {
         expect(res.status).toEqual(200);
         expect(res.body.message)
           .toEqual('Recipe successfully added', createdRecipe2);
+        expect(res.body.createdRecipe.id).toEqual(2);
         done();
       });
   });
@@ -177,6 +182,7 @@ describe('More Recipes', () => {
         expect(res.status).toEqual(200);
         expect(res.body.message)
           .toEqual();
+        expect(res.body.recipesFound.id).toEqual(1);
         done();
       });
   });
@@ -193,20 +199,24 @@ describe('More Recipes', () => {
         });
     });
 
-  it('should update views for recipe if requesting user is not recipe owner', (done) => {
-    chai.request(app)
-      .get('/api/v1/user/2/recipes/1').set({ authorization: token2 })
-      .end((err, res) => {
-        expect(res.status).toEqual(200);
-        done();
-      });
-  });
+  it(`should increase views count for 
+  recipe if requesting user is not recipe owner`, (done) => {
+      chai.request(app)
+        .get('/api/v1/user/2/recipes/1').set({ authorization: token2 })
+        .end((err, res) => {
+          expect(res.status).toEqual(200);
+          expect(res.body.updatedRecipes.views).toEqual(1);
+          done();
+        });
+    });
 
   it('should successfully get all recipes and return 200', (done) => {
     chai.request(app)
       .get('/api/v1/recipes').set({ authorization: token })
       .end((err, res) => {
         expect(res.status).toEqual(200);
+        expect(res.body.recipesFound.rows).toBeDefined();
+        expect(res.body.recipesFound.count).toEqual(2);
         done();
       });
   });
@@ -219,6 +229,8 @@ describe('More Recipes', () => {
         .query({ sort: 'upVotes', order: 'des' })
         .end((err, res) => {
           expect(res.status).toEqual(200);
+          expect(res.body.recipesFound.rows).toBeDefined();
+          expect(res.body.recipesFound.count).toEqual(2);
           done();
         });
     });
@@ -228,6 +240,8 @@ describe('More Recipes', () => {
       .get('/api/v1/myrecipes').set({ authorization: token })
       .end((err, res) => {
         expect(res.status).toEqual(200);
+        expect(res.body.recipesFound.rows[0]).toBeDefined();
+        expect(res.body.recipesFound.count).toEqual(2);
         done();
       });
   });
@@ -240,6 +254,7 @@ describe('More Recipes', () => {
         .query({ sort: 'createdAt', order: 'des' })
         .end((err, res) => {
           expect(res.status).toEqual(200);
+          expect(res.body.recipesFound.count).toEqual(2);
           done();
         });
     });
@@ -301,6 +316,8 @@ describe('More Recipes', () => {
       .query({ name, offset: 0, limit: 6 })
       .end((err, res) => {
         expect(res.status).toEqual(200);
+        expect(res.body.recipe.rows[0].recipeName).toEqual('Tikwo Shinkapa');
+
         done();
       });
   });

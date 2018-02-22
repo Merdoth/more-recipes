@@ -49,7 +49,8 @@ describe('More Recipes', () => {
         })
         .end((err, res) => {
           expect(res.status).toEqual(409);
-          expect(res.body.message).toEqual('You already favourited this recipe');
+          expect(res.body.message)
+            .toEqual('You already favourited this recipe');
           done();
         });
     }
@@ -90,18 +91,8 @@ describe('More Recipes', () => {
       .set('authorization', token)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.message).toEqual('Recipe with ID undefined does not exist');
-        done();
-      });
-  });
-
-  it('should get all favourited recipe return 200', (done) => {
-    chai
-      .request(app)
-      .get('/api/v1/users/1/recipes')
-      .set('authorization', token)
-      .end((err, res) => {
-        expect(res.status).toEqual(200);
+        expect(res.body.message)
+          .toEqual('Recipe with ID undefined does not exist');
         done();
       });
   });
@@ -113,6 +104,8 @@ describe('More Recipes', () => {
       .set('authorization', token)
       .end((err, res) => {
         expect(res.status).toEqual(200);
+        expect(res.body.favourites[0].id).toBe(1);
+        expect(res.body.favourites).toBeDefined();
         done();
       });
   });

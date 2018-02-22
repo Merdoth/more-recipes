@@ -1,6 +1,12 @@
 import lodash from 'lodash';
-import validator from 'validator';
 
+/**
+ * @description validate User Sign Up Field
+ *
+ * @param {Object} value
+ *
+ * @returns {object} json - payload
+ */
 const validateInput = (value) => {
   const {
     fullName, userName, email, password

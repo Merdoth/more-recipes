@@ -2,14 +2,11 @@ import models from '../models';
 import pagination, { paginates } from '../utils/pagination';
 import validateRecipe from '../validations/validateRecipe';
 
-// create reference database model
+
 const {
   users, recipes, reviews, votes
 } = models;
 
-/**
- * query: hold query limit and offset
- */
 let query = {};
 
 /**
@@ -26,7 +23,6 @@ class Recipes {
    */
   static addRecipe(req, res) {
     const { errors, isValid } = validateRecipe(req.body);
-
     if (!isValid) {
       return res.status(400).send({ error: errors });
     }
@@ -239,7 +235,6 @@ class Recipes {
 
     return (
       recipes
-        // query database to check if recipe exist
         .find({
           where: {
             id
@@ -280,7 +275,6 @@ class Recipes {
     const { id } = req.params;
     return (
       recipes
-        // query db to check if recipe exist
         .find({
           where: {
             id
@@ -310,7 +304,6 @@ class Recipes {
   static searchRecipe(req, res) {
     let { offset, limit } = req.query;
     limit = limit || 8;
-    // validate request object
     if (!req.query.name) {
       return res.status(404).send({
         success: false,

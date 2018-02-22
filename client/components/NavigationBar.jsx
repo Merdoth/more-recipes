@@ -6,15 +6,13 @@ import SearchForm from './Search/SearchForm.jsx';
 import { logout } from '../actions/auth/authActions';
 
 /**
- * @description this render the navigation bar which allopws the user move from page to page
- *
- * @param { Object } NavigationBar
+ * @description Creates an instance of NavigationBar.
  *
  * @returns { undefined }
  */
 class NavigationBar extends React.Component {
   /**
-   * Creates an instance of NavigationBar.
+   *
    * @param { Object } props
    *
    * @memberof NavigationBar

@@ -4,11 +4,11 @@ import history from '../../utils/history';
 
 /**
  *
- * @class Search
+ * @description Search component
  *
  * @extends { Component }
  *
- * @returns {void}
+ * @returns { undefined }
  */
 export class SearchForm extends Component {
   /**
@@ -54,7 +54,7 @@ export class SearchForm extends Component {
     });
   }
   /**
-  * @description this function handles enter key
+  * @description Handle enter event
   *
   * @param { Object } event
   * @param { Object } callback

@@ -5,15 +5,13 @@ import RecipeCard from './RecipeCard/RecipeCard.jsx';
 import { getUserRecipes } from '../../actions/recipeActions/';
 
 /**
- * @param { Object }  UserRecipes
+ * @description this component returns a User Recipes
  *
  * @returns { undefined }  UserRecipes
  *
- * @description this class returns a  Recipes component
  */
 export class UserRecipes extends Component {
   /**
- * Creates an instance of SearchResult.
  *
  * @param { Object } props
  *
@@ -30,7 +28,6 @@ export class UserRecipes extends Component {
   }
 
   /**
-   * @param { Number } userId
    *
    * @memberof  Recipes
    *
@@ -56,10 +53,10 @@ export class UserRecipes extends Component {
   }
 
   /**
-   *,k
+   * @memberof  UserRecipes
+   *
    * @returns { undefined }
    *
-   * @memberof  UserRecipes
    */
   render() {
     const recipes = this.props.recipes.map(recipe => (

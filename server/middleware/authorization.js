@@ -6,6 +6,7 @@ dotenv.config();
 
 export default {
   /**
+   * @description verifies if a users token is valid
    *
    * @param { Object } req - Request object
    * @param { Object } res - Response object

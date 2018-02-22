@@ -7,12 +7,12 @@ import InputField from '../../common/InputField.jsx';
 import TextArea from '../../common/TextArea.jsx';
 import InputLine from '../../common/InputLine.jsx';
 import { updateRecipe, getOneRecipe } from '../../../actions/recipeActions/';
+
 /**
- * @param { Object } UpdateRecipeForm
+ * @description this class returns a UpdateRecipeForm component
  *
  * @returns { undefined }
  *
- * @description this class returns a UpdateRecipeForm component
  */
 export class UpdateRecipeForm extends Component {
   /**
@@ -39,7 +39,6 @@ export class UpdateRecipeForm extends Component {
     this.onImageChange = this.onImageChange.bind(this);
   }
   /**
-   * @param { Object } event
    *
    * @memberof UpdateRecipeForm
    *

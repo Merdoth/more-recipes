@@ -5,19 +5,16 @@ import Button from '../../common/Button.jsx';
 import InputField from '../../common/InputField.jsx';
 import TextArea from '../../common/TextArea.jsx';
 import InputLine from '../../common/InputLine.jsx';
-import history from '../../../utils/history';
 import { addRecipes } from '../../../actions/recipeActions/';
 
 /**
- * @param { Object } AddRecipeForm
+ * @description this class returns a AddRecipeForm component
  *
  * @returns { undefined }
  *
- * @desc this class returns a AddRecipeForm component
  */
 export class AddRecipeForm extends Component {
   /**
-   * Creates an instance of AddRecipeForm
    * @param { Object } props
    *
    * @memberof AddRecipeForm
@@ -73,9 +70,9 @@ export class AddRecipeForm extends Component {
     this.props.addRecipes(this.state);
   }
   /**
+  * @memberof AddRecipeForm
+  *
    * @returns { undefined }
-   *
-   * @memberof AddRecipeForm
    */
   render() {
     return (

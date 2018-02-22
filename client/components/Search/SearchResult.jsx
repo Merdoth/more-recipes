@@ -35,7 +35,7 @@ export class SearchResult extends Component {
   }
 
   /**
-   * @description this method provides data for paginations of the recipe search
+   * @description returns data for paginations of recipe search
    *
    * @param { Object } searchData
    *

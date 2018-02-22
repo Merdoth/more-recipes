@@ -411,9 +411,8 @@ export const getMostVotedFailure = error => ({
 });
 
 /**
- * @description this dispatches an action that gets most upvoted recipes a recipe
- *
- * @param { Number } id
+ * @description this dispatches
+ * an action that gets most upvoted recipes a recipe
  *
  * @returns {Object} payload
  *

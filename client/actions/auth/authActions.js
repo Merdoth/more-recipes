@@ -6,7 +6,6 @@ import * as types from './../actionTypes';
 /**
  *
  * @param { Object } user
- * @param { Object } userData
  *
  * @returns { undefined }
  */
@@ -66,7 +65,6 @@ export function userSignupRequest(userData) {
 }
 
 /**
- *
  *
  * @description this function logs out a user
  *

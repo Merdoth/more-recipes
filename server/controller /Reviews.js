@@ -1,7 +1,7 @@
 import models from '../models';
 
 // create reference database model
-const { reviews, recipes, users } = models;
+const { reviews, recipes } = models;
 
 /**
  * @class

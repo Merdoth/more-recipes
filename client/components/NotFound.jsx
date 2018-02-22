@@ -1,7 +1,8 @@
 import React from 'react';
 /**
  *
- * @description The page the user gets when an invalid route is entered in the address bar.
+ * @description The page the user gets when an
+ * invalid route is entered in the address bar.
  *
  * @method NotFound
  *

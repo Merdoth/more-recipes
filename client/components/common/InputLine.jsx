@@ -1,5 +1,16 @@
 import React from 'react';
 
+/**
+ *
+ * @description Helper component that renders an InputLine
+ *
+ * @method Button
+ *
+ * @param { Object } props
+ *
+ * @returns { undefined }
+ *
+ */
 const InputLine = ({
   type,
   name,

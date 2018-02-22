@@ -1,7 +1,7 @@
 import lodash from 'lodash';
 
 /**
- * @description validateSignUp function
+ * @description helper function to validate user sign up
  *
  * @param {Object} value - object
  *
@@ -43,7 +43,7 @@ export const validateSignUp = (value) => {
 };
 
 /**
- * @description validateSignIn function
+ * @description helper function to validate user sign in
  *
  * @param {Object} value - object
  *
@@ -66,7 +66,7 @@ export const validateSignIn = (value) => {
 };
 
 /**
- * @description validateAddRecipe function
+ * @description helper funcrtion to validate add recipe
  *
  * @param {Object} value - object
  *
@@ -117,7 +117,7 @@ export const validateAddRecipe = (value) => {
 };
 
 /**
- * @description validateReview function
+ * @description helper function to validate user reviews
  *
  * @param {Object} value - object
  *

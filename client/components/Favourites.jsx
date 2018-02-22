@@ -4,15 +4,13 @@ import { RecipeCard } from './Recipes/RecipeCard/RecipeCard.jsx';
 import { getFavourite } from '../actions/recipeActions/';
 
 /**
- * @param { Object }  Favourites
+ * @description this class returns a  Favourites component
  *
  * @returns { undefined }
  *
- * @description this class returns a  Favourites component
  */
 export class Favourites extends Component {
   /**
-   * @param { Number } id
    *
    * @memberof  Favourites
    *
@@ -33,7 +31,9 @@ export class Favourites extends Component {
    */
   render() {
     const recipes = this.props.favourites.map(favourite => (
-      <RecipeCard key={`recipes-${favourite.recipe.id}`} recipeList={favourite.recipe} />
+      <RecipeCard
+      key={`recipes-${favourite.recipe.id}`}
+      recipeList={favourite.recipe} />
     ));
     return (
       <div>

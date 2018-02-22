@@ -2,7 +2,7 @@ import React from 'react';
 
 /**
  *
- * @description This holds recipe images
+ * @description Helper function that renders recipe image
  *
  * @method RecipeCardImage
  *

@@ -64,6 +64,7 @@ class Favorites {
   }
 
   /**
+   * * @description  removes a recipe from favourites
    *
    * @param { Object } req - Request object
    * @param { Object } res - Response object

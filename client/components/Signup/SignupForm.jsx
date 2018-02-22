@@ -11,8 +11,6 @@ import Button from '../common/Button.jsx';
 /**
  * @description this renders the signup form component
  *
- * @param { Object } SignupForm
- *
  * @returns { undefined }
  */
 export class SignupForm extends Component {
@@ -74,12 +72,11 @@ export class SignupForm extends Component {
   }
 
   /**
-   *
-   * @returns { undefined }
-   *
    * @param { Object } errors
    *
    * @memberof SignupForm
+   *
+   * @returns { undefined }
    */
   handleErrors(errors) {
     if (typeof errors !== 'string') {

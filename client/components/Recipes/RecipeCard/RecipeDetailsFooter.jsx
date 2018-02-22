@@ -5,11 +5,11 @@ import Button from '../../common/Button.jsx';
 import { deleteRecipe } from '../../../actions/recipeActions';
 
 /**
- * @param { Object } RecipeDetailsFooter
+ * @description this class returns a RecipeDetailsFooter component
+ *
  *
  * @returns { undefined }
  *
- * @desc this class returns a RecipeDetailsFooter component
  */
 export class RecipeDetailsFooter extends Component {
   /**
@@ -70,10 +70,10 @@ export class RecipeDetailsFooter extends Component {
 
   /**
    *
+   * @memberof RecipeDetailsFooter
    *
    * @returns { undefined }
    *
-   * @memberof RecipeDetailsFooter
    */
   authUser() {
     return (
@@ -96,18 +96,19 @@ export class RecipeDetailsFooter extends Component {
     );
   }
   /**
+   * @memberof RecipeDetailsFooter
    *
    * @returns { undefined }
    *
-   * @memberof RecipeDetailsFooter
    */
   unAuthUser() {
     return <div className="itemReview row" />;
   }
+
   /**
-   * @returns { undefined }
-   *
    * @memberof RecipeDetailsFooter
+   *
+   * @returns { undefined }
    */
   render() {
     return (this.props.loggedInUser === this.props.userId

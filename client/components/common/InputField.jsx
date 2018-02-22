@@ -1,6 +1,17 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+/**
+ *
+ * @description Helper component that renders an InputField
+ *
+ * @method Button
+ *
+ * @param { Object } props
+ *
+ * @returns { undefined }
+ *
+ */
 const InputField = ({
   type,
   name,

@@ -5,11 +5,10 @@ import Button from './common/Button.jsx';
 import { getOneUser, updateUserProfile } from '../actions/userActions';
 
 /**
- * @param { Object } Profile
+ * @description this class returns a Profile component
  *
  * @returns { undefined }
  *
- * @description this class returns a Profile component
  */
 export class Profile extends Component {
   /**
@@ -46,7 +45,6 @@ export class Profile extends Component {
     });
   }
   /**
-    * @param { Object } event
     *
     * @memberof Profile
     *
