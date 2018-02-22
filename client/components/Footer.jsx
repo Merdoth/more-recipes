@@ -10,7 +10,9 @@ import React from 'react';
 
 const Footer = () => (
   <div className="container-fluid">
-    <div className="footer">
+    <div
+    id="footer"
+    className="footer">
       <div>
         <p>
           Designed with&nbsp;<i

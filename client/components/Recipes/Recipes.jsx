@@ -37,7 +37,7 @@ export class Recipes extends Component {
    */
   componentDidMount() {
     const { page, offset, limit } = this.state;
-    this.props.getAllRecipes(page, offset, limit);
+    // this.props.getAllRecipes(page, offset, limit);
   }
 
   /**
@@ -60,40 +60,11 @@ export class Recipes extends Component {
    * @memberof  Recipes
    */
   render() {
-    const recipes = this.props.recipes.map(recipe => (
-      <RecipeCard key={`recipes-${recipe.id}`} recipeList={recipe} />
-    ));
+    // const recipes = this.props.recipes.map(recipe => (
+    //   <RecipeCard key={`recipes-${recipe.id}`} recipeList={recipe} />
+    // ));
     return (
-      <div>
-        <div className="container manage">
-          <div className="recipe-header">
-            <h2>Recipes</h2>
-            <p>
-              Try, contribute to others recipe value by adding how your feel
-              about the recipes
-            </p>
-          </div>
-        </div>
-       <div className="recipe-wrapper">
-          <div className="container top">
-            <div className="row">{recipes}</div>
-            <div className="row pagination">
-              <ReactPaginate
-                id="page"
-                previousLabel="previous"
-                nextLabel="next"
-                breakClassName="break-me"
-                pageCount={this.props.pagination.pageCount}
-                marginPagesDisplayed={2}
-                onPageChange={this.pageClick}
-                containerClassName='pagination'
-                subContainerClassName="pages pagination"
-                activeClassName="active"
-              />
-            </div>
-          </div>
-       </div>
-      </div>
+      <p>Test page</p>
     );
   }
 }

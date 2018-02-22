@@ -108,7 +108,7 @@ export class SignupForm extends Component {
     return (
       <div>
         <div className="form-deco">
-          <form className="form-signin">
+          <form id="TestForm" className="form-signin">
             <h2 className="form-signin-heading">Sign Up</h2>
             <hr />
             <InputField
@@ -159,6 +159,7 @@ export class SignupForm extends Component {
               required
             />
             <Button
+              id="signUpBtn"
               type="submit"
               onClick={this.onSubmit}
               disabled={this.state.isLoading}

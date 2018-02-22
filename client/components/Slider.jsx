@@ -11,7 +11,7 @@ export const Slider = () => (
   <div className="hero-bg">
     <div className="container-fluid">
       <div
-        id="carouselExampleSlidesOnly"
+        id="carouselSlides"
         className="carousel slide"
         data-ride="carousel"
       >
@@ -31,7 +31,8 @@ export const Slider = () => (
             style={{ backgroundImage: "url('/assets/image/Food.jpg')" }}
           >
             <div className="slider-text">
-              <h5 className="hero-header">Feel Free To Explore Your Ideas.</h5>
+              <h5 className="hero-header" id="slider-two">
+              Feel Free To Explore Your Ideas.</h5>
             </div>
           </div>
           <div
@@ -39,7 +40,8 @@ export const Slider = () => (
             style={{ backgroundImage: "url('/assets/image/shrimp.jpg')" }}
           >
             <div className="slider-text">
-              <h5 className="hero-header">Love Food, Love Life.</h5>
+              <h5 className="hero-header" id="slider-three">
+              Love Food, Love Life.</h5>
             </div>
           </div>
         </div>
