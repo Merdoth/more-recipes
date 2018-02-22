@@ -11,7 +11,7 @@ import { userSignupRequest } from '../../actions/auth/authActions';
  *
  * @returns { undefined }
  */
-const SignupPage = (props) => {
+export const SignupPage = (props) => {
   const goToAllRecipes = () => props.history.push('/recipes');
   return (
     <div>

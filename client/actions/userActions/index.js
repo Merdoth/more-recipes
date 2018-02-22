@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 import * as types from '../actionTypes';
 import * as api from './../../utils/moreRecipeAPI';
 
@@ -40,7 +41,7 @@ export const getOneUser = () => (dispatch) => {
     dispatch(getOneUserSuccess(res.data));
   })
     .catch((error) => {
-      dispatch(getOneUserFailure(error));
+      dispatch(getOneUserFailure(error.response.data));
     });
 };
 
@@ -82,6 +83,7 @@ export const updateUserProfileFailure = error => ({
 export const updateUserProfile = userData => (dispatch) => {
   api.updateUserProfile(userData).then((res) => {
     dispatch(updateUserProfileSuccess(res.data));
+    swal('Great!!!', 'Your profile has been updated successfully', 'success');
   })
     .catch((error) => {
       dispatch(updateUserProfileFailure(error));

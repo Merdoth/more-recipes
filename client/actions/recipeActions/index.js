@@ -41,7 +41,7 @@ export const getOneRecipe = (userId, recipeId) => dispatch =>
       dispatch(getOneRecipeSuccess(recipe));
     })
     .catch((error) => {
-      dispatch(getOneRecipeFailure(error.data));
+      dispatch(getOneRecipeFailure(error.response.data));
     });
 
 /**
@@ -80,10 +80,10 @@ export const deleteRecipe = id => dispatch =>
   api
     .deleteRecipe(id)
     .then((res) => {
-      dispatch(deleteRecipeSuccess(res.data.message));
+      dispatch(deleteRecipeSuccess(res.data));
     })
     .catch((error) => {
-      dispatch(deleteRecipeFailure(error));
+      dispatch(deleteRecipeFailure(error.response.data));
     });
 /**
  * @param { Object } recipes
@@ -152,7 +152,7 @@ export const getUserRecipes = (page, offset, limit) => dispatch =>
     })
 
     .catch((error) => {
-      dispatch(getUserRecipesFailure(error.data));
+      dispatch(getUserRecipesFailure(error.response.data));
     });
 /**
  *
@@ -165,6 +165,7 @@ export const updateRecipeSuccess = recipe => ({
   type: types.UPDATE_RECIPE_SUCCESS,
   recipe
 });
+
 
 /**
  *
@@ -192,15 +193,11 @@ export const updateRecipe = (id, recipes) => dispatch =>
     .updateRecipeRequest(id, recipes)
     .then((res) => {
       if (res) {
-        return dispatch(updateRecipeSuccess({
-          message: res.data.message,
-          recipes: res.data.updatedRecipe
-        }));
+        dispatch(updateRecipeSuccess(res.data.updatedRecipe));
       }
     })
     .catch((error) => {
-      console.log(error.response, 'yo!!!')
-      dispatch(updateRecipeFailure(error.data));
+      dispatch(updateRecipeFailure(error.response.data));
     });
 
 /**
@@ -211,6 +208,7 @@ export const updateRecipe = (id, recipes) => dispatch =>
  *
  */
 export const addRecipesSuccess = recipe => ({
+  
   type: types.ADD_RECIPE_SUCCESS,
   recipe
 });
@@ -240,7 +238,7 @@ export const addRecipes = recipes => dispatch =>
     .addRecipeRequest(recipes)
     .then((res) => {
       if (res) {
-        dispatch(addRecipesSuccess(res.data.createdRecipe));
+        dispatch(addRecipesSuccess(res.data));
         swal({
           title: 'Recipe successfully added!',
           text: res.data.message,
@@ -250,8 +248,7 @@ export const addRecipes = recipes => dispatch =>
       }
     })
     .catch((error) => {
-      console.log(error.response, 'this is an error')
-      dispatch(addRecipesFailure(error.response.data));
+      dispatch(addRecipesFailure(error));
       swal({
         title: 'Oops!',
         text: 'sorry an error occured',
@@ -279,7 +276,7 @@ export const addFavouriteSuccess = favourite => ({
  *
  */
 export const addFavouriteFailure = error => ({
-  type: types.ADD_FAVOURITE_ERROR,
+  type: types.ADD_FAVOURITE_FAILURE,
   error
 });
 
@@ -300,7 +297,7 @@ export const addFavourite = id => dispatch =>
       }
     })
     .catch((error) => {
-      dispatch(addFavouriteFailure(error));
+      dispatch(addFavouriteFailure(error.response.data));
     });
 /**
  *
@@ -343,7 +340,7 @@ export const removeFavourite = id => dispatch =>
       }
     })
     .catch((error) => {
-      dispatch(removeFavouriteFailure(error));
+      dispatch(removeFavouriteFailure(error.response.data));
     });
 /**
  *
@@ -430,7 +427,7 @@ export const getMostVoted = () => dispatch =>
       }
     })
     .catch((error) => {
-      dispatch(getMostVotedFailure(error));
+      dispatch(getMostVotedFailure(error.response.data));
     });
 /**
  *
@@ -471,5 +468,5 @@ export const searchRecipe = (name, limit, offset) => dispatch =>
       dispatch(searcRecipeSuccess(res.data));
     })
     .catch((error) => {
-      dispatch(searchRecipeFailure(error.data));
+      dispatch(searchRecipeFailure(error.response.data));
     });

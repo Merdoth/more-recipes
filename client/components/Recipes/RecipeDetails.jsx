@@ -25,7 +25,7 @@ import RecipeDetailsFooter from './RecipeCard/RecipeDetailsFooter.jsx';
  *
  * @returns { undefined }
  */
-class RecipeDetails extends Component {
+export class RecipeDetails extends Component {
   /**
    * Creates an instance of RecipeDetails.
    * @param { Object } props
@@ -166,7 +166,8 @@ class RecipeDetails extends Component {
     const recipeIds = recipesId.map(id => id.recipeId);
     const loggedInUser = this.props.user.id;
 
-    const selected = (recipeIds.includes(this.props.recipe.id)) ? 'selected' : '';
+    const selected = (recipeIds.includes(this.props.recipe.id))
+      ? 'selected' : '';
     const goToRecipes = route => this.props.history.push(route);
     const recipeDetails = this.state.recipe;
     const fetchedReviews = this.props.reviews.map(review => (
@@ -198,21 +199,21 @@ class RecipeDetails extends Component {
               <div className="stats">
                 <span
                   onClick={this.handleUpVote}
-                  className="btn btn-default stats-item"
+                  className="btn btn-default stats-item upvote"
                 >
                   <i className="fa fa-thumbs-up iconStat" />
                   {recipeDetails.upVotes}
                 </span>
                 <span
                   onClick={this.handleDownVote}
-                  className="btn btn-default stats-item"
+                  className="btn btn-default stats-item downvote"
                 >
                   <i className="fa fa-thumbs-down iconStat" />
                   {recipeDetails.downVotes}
                 </span>
                 <span
                   onClick={this.handleFavourite}
-                  className={`btn btn-default stats-item ${selected}`}
+                  className={`btn btn-default stats-item ${selected} favourite`}
                 >
                   <i className="fa fa-heart iconStat" />
                 </span>
@@ -250,7 +251,7 @@ class RecipeDetails extends Component {
             <div className="col-sm-12">
               <textarea
                 name="review"
-                className="form-control inputstl"
+                className="form-control inputstl review"
                 rows="5"
                 type="text"
                 value={this.state.review}
@@ -263,7 +264,7 @@ class RecipeDetails extends Component {
                 onClick={this.onSubmit}
                 name="Post Review"
                 iconClass="fa-pencil-square-o icon1"
-                className="btn btn-lg btn-primary btn-block "
+                className="btn btn-lg btn-primary btn-block reviewBtn"
               />
             </div>
           </div>
@@ -278,7 +279,6 @@ class RecipeDetails extends Component {
   }
 }
 RecipeDetails.propTypes = {
-  message: PropTypes.string.isRequired,
   recipe: PropTypes.object.isRequired
 };
 
@@ -286,7 +286,6 @@ const mapStateToProps = state => ({
   user: state.setCurrentUser.user,
   recipe: state.recipeReducer.recipes,
   reviews: state.recipeReducer.recipes.reviews || [],
-  message: state.recipeReducer.message,
   favourites: state.favourite.favourite || [],
   error: state.recipeReducer.error
 });

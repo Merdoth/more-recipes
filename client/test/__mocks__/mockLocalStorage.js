@@ -1,6 +1,9 @@
 const localStorage = {};
 
-export default {
+global.localStorage = {
+  getItem(key) {
+    return localStorage[key];
+  },
   setItem(key, value) {
     return Object.assign(localStorage, { [key]: value });
   },
@@ -8,3 +11,5 @@ export default {
     return delete localStorage[key]; //eslint-disable-line
   }
 };
+
+export default localStorage;

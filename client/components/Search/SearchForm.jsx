@@ -10,7 +10,7 @@ import history from '../../utils/history';
  *
  * @returns {void}
  */
-class SearchForm extends Component {
+export class SearchForm extends Component {
   /**
    *
    * @param { Object } props
@@ -77,6 +77,7 @@ class SearchForm extends Component {
     return (
       <form className="form-inline my-2 my-lg-0 float-menuitem-right">
         <input
+          id="search"
           className="form-control mr-sm-2 search"
           type="search"
           name="name"

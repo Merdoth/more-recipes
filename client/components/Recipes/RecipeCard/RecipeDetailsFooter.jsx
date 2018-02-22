@@ -11,7 +11,7 @@ import { deleteRecipe } from '../../../actions/recipeActions';
  *
  * @desc this class returns a RecipeDetailsFooter component
  */
-class RecipeDetailsFooter extends Component {
+export class RecipeDetailsFooter extends Component {
   /**
    * Creates an instance of RecipeDetailsFooter
    *
@@ -23,7 +23,6 @@ class RecipeDetailsFooter extends Component {
    */
   constructor(props) {
     super(props);
-    this.state = {};
     this.handleDelete = this.handleDelete.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -80,12 +79,14 @@ class RecipeDetailsFooter extends Component {
     return (
       <div className="userButton row">
         <Button
+          id="edit"
           type="edit"
           onClick={this.onSubmit}
           name="Edit"
           className="btn btn-lg btn-primary btn-block cta-btn"
         />
         <Button
+          id="delete"
           type="delete"
           onClick={this.handleDelete}
           name="Delete"

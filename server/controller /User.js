@@ -84,6 +84,11 @@ class User {
       attributes: ['fullName', 'userName', 'email']
     })
       .then((user) => {
+        if (!user) {
+          return res.status(404).send({
+            message: 'No user was found',
+          });
+        }
         res.status(200).send({ user });
       })
       .catch((err) => {
@@ -124,7 +129,8 @@ class User {
               token
             });
           } else {
-            return res.status(400).send({ message: 'Incorrect login details!' });
+            return res.status(400)
+              .send({ message: 'Incorrect login details!' });
           }
         }
         return res.status(404).send({ message: 'User does not exist!' });

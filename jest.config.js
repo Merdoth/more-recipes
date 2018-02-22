@@ -20,9 +20,11 @@ module.exports = {
     '<rootDir>/coverage',
     '<rootDir>/scss',
     '<rootDir>/utils',
+    '<rootDir>/components/Footer',
     '<rootDir>/validations',
     '<rootDir>/components/NotFound',
     '<rootDir>/components/common',
   ],
-  snapshotSerializers: ['enzyme-to-json/serializer']
+  snapshotSerializers: ['enzyme-to-json/serializer'],
+
 };

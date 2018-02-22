@@ -11,7 +11,7 @@ import { getOneUser, updateUserProfile } from '../actions/userActions';
  *
  * @description this class returns a Profile component
  */
-class Profile extends Component {
+export class Profile extends Component {
   /**
    * Creates an instance of Profile.
    *

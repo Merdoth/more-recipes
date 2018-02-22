@@ -12,7 +12,7 @@ import UpdateRecipeForm from './UpdateRecipeForm.jsx';
  * @returns { undefined }
  * .
  */
-const UpdateRecipePage = (props) => {
+export const UpdateRecipePage = (props) => {
   const goToRecipes = route => props.history.push(route);
   return (
     <div className="row deco">

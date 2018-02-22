@@ -2,6 +2,7 @@ import React from 'react';
 
 
 const Button = ({
+  id,
   type, onClick, disabled, name, iconClass, className,
 }) => (
     <div
@@ -9,6 +10,7 @@ const Button = ({
     >
 
       <button
+        id={ id }
         onClick={ onClick }
         type={ type }
         className={ className}

@@ -14,9 +14,10 @@ describe('More Recipes', () => {
       .post('/api/v1/users/signin')
       .send(user1)
       .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
         token = res.body.token;
-        expect(res.status).toEqual(200);
-        expect(res.body.message).toEqual('Welcome!', token);
         done();
       });
   });

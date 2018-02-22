@@ -3,14 +3,16 @@ import React from 'react';
 /**
  * @description this returns a footer component
  *
- * @extends { Component }
+ * @extends { Component t}
  *
  * @returns { undefined }
  */
 
 const Footer = () => (
   <div className="container-fluid">
-    <div className="footer">
+    <div
+    id="footer"
+    className="footer">
       <div>
         <p>
           Designed with&nbsp;<i

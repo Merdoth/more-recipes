@@ -36,16 +36,18 @@ describe('More Recipes', () => {
   });
 
 
-  it('should throw an error if fullName is less than 3 characters & return 400', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signup')
-      .send(createUser2)
-      .end((err, res) => {
-        expect(res.status).toEqual(400);
-        expect(res.body.error.fullNameError).toEqual('fullname must be at least 3 characters long');
-        done();
-      });
-  });
+  it(`should throw an error if fullName is less 
+  than 3 characters & return 400`, (done) => {
+      chai.request(app)
+        .post('/api/v1/users/signup')
+        .send(createUser2)
+        .end((err, res) => {
+          expect(res.status).toEqual(400);
+          expect(res.body.error.fullNameError)
+            .toEqual('fullname must be at least 3 characters long');
+          done();
+        });
+    });
 
   it('should throw an error if userName is empty & return 400', (done) => {
     chai.request(app)
@@ -58,16 +60,18 @@ describe('More Recipes', () => {
       });
   });
 
-  it('should throw an error if userName is less than 3 characters & return 400', (done) => {
-    chai.request(app)
-      .post('/api/v1/users/signup')
-      .send(createUser4)
-      .end((err, res) => {
-        expect(res.status).toEqual(400);
-        expect(res.body.error.userNameError).toEqual('username must be at least 3 characters long');
-        done();
-      });
-  });
+  it(`should throw an error if userName 
+  is less than 3 characters & return 400`, (done) => {
+      chai.request(app)
+        .post('/api/v1/users/signup')
+        .send(createUser4)
+        .end((err, res) => {
+          expect(res.status).toEqual(400);
+          expect(res.body.error.userNameError)
+            .toEqual('username must be at least 3 characters long');
+          done();
+        });
+    });
 
   it('should throw an error if email is empty & return 400', (done) => {
     chai.request(app)
@@ -225,7 +229,6 @@ describe('More Recipes', () => {
           userName: 'Bisola',
           email: 'ucheya@gmail.com',
         };
-
         expect(res.status).toEqual(200);
         expect(res.body.message).toEqual('Your account has been updated');
         expect(res.body.user).toEqual(expectedUser);

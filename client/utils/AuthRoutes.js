@@ -41,7 +41,8 @@ class AuthRoutes extends Component {
               path="/searchresults"
               component={SearchResult}
             />
-            <Route path="/recipe-details/:recipeId" component={Authenticate(RecipeDetails)} />
+            <Route path="/recipe-details/:recipeId"
+             component={Authenticate(RecipeDetails)} />
             <Route path="*" component={NotFound} />
           </Switch>
         ) : (

@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeDetails Component snapshot it should render the right amount of elements 1`] = `
+<div
+  className="container wrap"
+>
+  <div
+    className="row Card"
+  >
+    <div
+      className="col-md-4 col-sm-4 recipeD"
+    >
+      <div
+        className="top-items"
+      >
+        <div
+          className="rated"
+        >
+          <RecipeCardImage />
+          <Connect(RecipeDetailsFooter)
+            goToRecipes={[Function]}
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="col-md-8 col-sm-8 recipeI"
+    >
+      <div
+        className="recipe-detail-header-content"
+      >
+        <div
+          className="stats"
+        >
+          <span
+            className="btn btn-default stats-item upvote"
+            onClick={[Function]}
+          >
+            <i
+              className="fa fa-thumbs-up iconStat"
+            />
+          </span>
+          <span
+            className="btn btn-default stats-item downvote"
+            onClick={[Function]}
+          >
+            <i
+              className="fa fa-thumbs-down iconStat"
+            />
+          </span>
+          <span
+            className="btn btn-default stats-item  favourite"
+            onClick={[Function]}
+          >
+            <i
+              className="fa fa-heart iconStat"
+            />
+          </span>
+          <span
+            className="btn btn-default stats-item"
+          >
+            <i
+              className="fa fa-eye iconStat align-view-count"
+            />
+          </span>
+        </div>
+        <div
+          className="recipe-description"
+        >
+          <h3 />
+          <p />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row main"
+  >
+    <div
+      className="col-xs-12 col-sm-4 main-aside"
+    >
+      <h4
+        id="Popular"
+      >
+        INGREDIENTS
+      </h4>
+      <hr />
+      <p />
+    </div>
+    <div
+      className="col-xs-12 col-sm-8 main-section"
+    >
+      <h4
+        id="title"
+      >
+        PREPARATION
+      </h4>
+      <hr />
+      <p />
+    </div>
+  </div>
+  <div
+    className="textArea"
+  >
+    <div
+      className="form-group"
+    >
+      <h4
+        id="reView"
+      >
+        Review 
+          
+        <i
+          aria-hidden="true"
+          className="fa fa-pencil-square-o icon1"
+        />
+      </h4>
+      <div
+        className="col-sm-12"
+      >
+        <textarea
+          className="form-control inputstl review"
+          name="review"
+          onChange={[Function]}
+          rows="5"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="textAreaButton"
+      >
+        <Button
+          className="btn btn-lg btn-primary btn-block reviewBtn"
+          iconClass="fa-pencil-square-o icon1"
+          name="Post Review"
+          onClick={[Function]}
+          type="submit"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="reviewedView"
+  >
+    <div
+      className="post-description"
+    />
+  </div>
+</div>
+`;

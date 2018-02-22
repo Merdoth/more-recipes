@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SigninForm Component snapshot it should render the right amount of elements 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col-md-4 offset-md-4 cover1"
+  >
+    <div
+      className="form-deco"
+    >
+      <form
+        className="form-signin"
+      >
+        <h2
+          className="form-signin-heading"
+        >
+          Sign In
+        </h2>
+        <hr />
+        <InputField
+          label="Email Address"
+          name="email"
+          onChange={[Function]}
+          placeholder="Enter your email address"
+          required={true}
+          type="email"
+          value=""
+        />
+        <InputField
+          label="Password"
+          name="password"
+          onChange={[Function]}
+          placeholder="Enter your password"
+          required={true}
+          type="password"
+          value=""
+        />
+        <Button
+          className="btn btn-lg btn-primary btn-block"
+          disabled={false}
+          iconClass="fa-user-plus"
+          name="Sign In"
+          onClick={[Function]}
+          type="submit"
+        />
+        <p
+          className="new_account"
+        >
+          <strong>
+            Create A New Account? 
+          </strong>
+          <Link
+            replace={false}
+            to="Signup"
+          >
+            Sign Up
+          </Link>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+`;
