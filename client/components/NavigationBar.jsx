@@ -91,19 +91,22 @@ class NavigationBar extends React.Component {
   notLoggedInMenu() {
     return (
       <ul className="navbar-nav mr-auto">
-        <li className="nav-item active">
-          <Link className="nav-link" to="/">
+        <li id="Home" className="nav-item active">
+          <Link
+          className="nav-link" to="/">
             Home
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/Signup">
+        <li id="SignUp" className="nav-item">
+          <Link
+          className="nav-link" to="/Signup">
             Sign Up
           </Link>
         </li>
 
-        <li className="nav-item">
-          <Link className="nav-link" to="/Signin">
+        <li id="SignIn" className="nav-item">
+          <Link
+          className="nav-link" to="/Signin">
             Sign In
           </Link>
         </li>
@@ -119,7 +122,10 @@ class NavigationBar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark header">
-        <Link className="navbar-brand logo" to="/">
+        <Link
+        id="brand-name"
+        className="navbar-brand logo"
+        to="/">
           MoRecipes
         </Link>
         <button
