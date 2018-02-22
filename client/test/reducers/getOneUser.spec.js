@@ -1,3 +1,4 @@
+import expect from 'expect';
 import getOneUser, { initialState } from '../../reducers/getOneUser';
 
 

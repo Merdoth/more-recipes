@@ -14,7 +14,7 @@ import { updateRecipe, getOneRecipe } from '../../../actions/recipeActions/';
  *
  * @description this class returns a UpdateRecipeForm component
  */
-class UpdateRecipeForm extends Component {
+export class UpdateRecipeForm extends Component {
   /**
    * Creates an instance of UpdateRecipeForm.
    *
@@ -169,6 +169,7 @@ class UpdateRecipeForm extends Component {
           onChange={this.onImageChange || ''}
         />
         <Button
+          id="update"
           type="submit"
           onClick={this.onSubmit}
           disabled={this.state.isLoading}

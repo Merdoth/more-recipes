@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import expect from 'expect';
 import thunk from 'redux-thunk';
-import ReactPaginate from 'react-paginate';
+import sinon from 'sinon';
 import configureMockStore from 'redux-mock-store';
 import ConnectedRecipes, { Recipes } from
   '../../../components/Recipes/Recipes.jsx';
@@ -13,9 +13,9 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 /* global jest */
-
+let props;
 const setup = () => {
-  const props = {
+  props = {
     recipes: [
       {
         id: 1,
@@ -33,7 +33,7 @@ const setup = () => {
       }
     ],
     pagination: () => { },
-    getAllRecipes: () => { }
+    getAllRecipes: () => { },
   };
   return shallow(<Recipes {...props} />);
 };
@@ -44,12 +44,13 @@ describe('Recipes Component snapshot', () => {
   });
 });
 describe('pageClick()', () => {
-  it('should change the page to the next list of recipes', () => {
-    const pageClick = jest.fn();
-
-    const wrapper = setup();
-    const button = wrapper.find('#page');
-    button.simulate('click', pageClick);
+  const page = {
+    selected: 1
+  };
+  it('should get the next all recipes', () => {
+    const spy = sinon.spy(Recipes.prototype, 'pageClick');
+    shallow(<Recipes {...props} pageClick={spy} />)
+      .instance().pageClick(page);
   });
 });
 describe('Connected Recipes component', () => {

@@ -5,10 +5,12 @@ import { UpdateRecipePage } from
   '../../../../components/Recipes/UpdateRecipe/UpdateRecipePage.jsx';
 
   /* global jest */
-
+let props;
 const setup = () => {
-  const props = {
-    goToRecipes: () => jest.fn(),
+  props = {
+    history: {
+      push: () => jest.fn()
+    }
   };
   return shallow(<UpdateRecipePage {...props} />);
 };

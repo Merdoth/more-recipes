@@ -79,12 +79,14 @@ export class RecipeDetailsFooter extends Component {
     return (
       <div className="userButton row">
         <Button
+          id="edit"
           type="edit"
           onClick={this.onSubmit}
           name="Edit"
           className="btn btn-lg btn-primary btn-block cta-btn"
         />
         <Button
+          id="delete"
           type="delete"
           onClick={this.handleDelete}
           name="Delete"

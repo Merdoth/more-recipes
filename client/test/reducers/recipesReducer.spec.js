@@ -1,3 +1,4 @@
+import expect from 'expect';
 import recipesReducer, { initialState } from '../../reducers/recipesReducer';
 
 describe('Recipes Reducer', () => {

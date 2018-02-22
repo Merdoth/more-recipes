@@ -4,7 +4,6 @@ import expect from 'expect';
 import { SearchForm } from
   '../../../components/Search/SearchForm.jsx';
 
-/* global jest */
 
 const setup = () => shallow(<SearchForm />);
 

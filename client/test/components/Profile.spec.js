@@ -10,6 +10,7 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 /* global jest */
+
 let props;
 const setup = () => {
   props = {

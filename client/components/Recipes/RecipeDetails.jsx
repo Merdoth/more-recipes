@@ -199,21 +199,21 @@ export class RecipeDetails extends Component {
               <div className="stats">
                 <span
                   onClick={this.handleUpVote}
-                  className="btn btn-default stats-item"
+                  className="btn btn-default stats-item upvote"
                 >
                   <i className="fa fa-thumbs-up iconStat" />
                   {recipeDetails.upVotes}
                 </span>
                 <span
                   onClick={this.handleDownVote}
-                  className="btn btn-default stats-item"
+                  className="btn btn-default stats-item downvote"
                 >
                   <i className="fa fa-thumbs-down iconStat" />
                   {recipeDetails.downVotes}
                 </span>
                 <span
                   onClick={this.handleFavourite}
-                  className={`btn btn-default stats-item ${selected}`}
+                  className={`btn btn-default stats-item ${selected} favourite`}
                 >
                   <i className="fa fa-heart iconStat" />
                 </span>
@@ -251,7 +251,7 @@ export class RecipeDetails extends Component {
             <div className="col-sm-12">
               <textarea
                 name="review"
-                className="form-control inputstl"
+                className="form-control inputstl review"
                 rows="5"
                 type="text"
                 value={this.state.review}
@@ -264,7 +264,7 @@ export class RecipeDetails extends Component {
                 onClick={this.onSubmit}
                 name="Post Review"
                 iconClass="fa-pencil-square-o icon1"
-                className="btn btn-lg btn-primary btn-block "
+                className="btn btn-lg btn-primary btn-block reviewBtn"
               />
             </div>
           </div>

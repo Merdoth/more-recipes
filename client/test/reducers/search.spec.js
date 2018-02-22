@@ -1,3 +1,4 @@
+import expect from 'expect';
 import search, { initialState } from '../../reducers/search';
 
 

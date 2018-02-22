@@ -3,9 +3,8 @@ import { shallow } from 'enzyme';
 import expect from 'expect';
 import { SearchResult } from
   '../../../components/Search/SearchResult.jsx';
-/* global jest */
 
-const pageClick = jest.fn();
+/* global jest */
 
 const setup = () => {
   const props = {
@@ -33,7 +32,7 @@ const setup = () => {
       pageCount: 1
     }
   };
- 
+
   return shallow(<SearchResult {...props} />);
 };
 

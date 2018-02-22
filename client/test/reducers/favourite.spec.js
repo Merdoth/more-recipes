@@ -1,3 +1,4 @@
+import expect from 'expect';
 import favourite, { initialState } from '../../reducers/favourite';
 
 

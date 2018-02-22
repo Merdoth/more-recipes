@@ -11,7 +11,7 @@ const mockStore = configureMockStore([thunk]);
 window.localStorage = mockLocalStorage;
 
 
-describe('Authentication action creators', () => {
+describe('Reviews action creators', () => {
   beforeEach(() => moxios.install());
   afterEach(() => moxios.uninstall());
 

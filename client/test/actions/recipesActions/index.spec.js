@@ -11,7 +11,7 @@ const mockStore = configureMockStore([thunk]);
 window.localStorage = mockLocalStorage;
 
 
-describe('Authentication action creators', () => {
+describe('Recipes action creators', () => {
   beforeEach(() => moxios.install());
   afterEach(() => moxios.uninstall());
 
@@ -343,9 +343,9 @@ describe('Authentication action creators', () => {
   });
 
   it('should dispatch ADD_FAVOURITE_FAILURE', (done) => {
-    const error = new Error('Request failed with status code 404');
+    const error = new Error('Request failed with status code 400');
     moxios.stubRequest('/api/v1/favourites', {
-      status: 404,
+      status: 400,
       response: error
     });
 
@@ -380,26 +380,6 @@ describe('Authentication action creators', () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
-
-  // it('should dispatch GET_FAVOURITE_SUCCESS', (done) => {
-  //   const getFavourite = undefined;
-  //   moxios.stubRequest('/api/v1/favourites/1', {
-  //     status: 200,
-  //     response: getFavourite
-  //   });
-
-
-  //   const expectedActions = [{
-  //     type: types.GET_FAVOURITE_SUCCESS,
-  //     favourite: getFavourite
-  //   }];
-  //   const store = mockStore({});
-
-  //   store.dispatch(recipesActions.getFavourite(1)).then(() => {
-  //     expect(store.getActions()).toEqual(expectedActions);
-  //     done();
-  //   });
-  // });
 
   it('should dispatch GET_FAVOURITE_FAILURE', (done) => {
     const error = new Error('Request failed with status code 404');

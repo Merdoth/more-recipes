@@ -1,5 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import expect from 'expect';
 import moxios from 'moxios';
 import * as types from '../../../actions/actionTypes';
 import * as authActions from '../../../actions/auth/authActions';

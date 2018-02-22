@@ -4,7 +4,6 @@ import expect from 'expect';
 import { AddRecipePage } from
   '../../../../components/Recipes/AddRecipe/AddRecipePage.jsx';
 
-/* global jest */
 
 const setup = () => shallow(<AddRecipePage />);
 

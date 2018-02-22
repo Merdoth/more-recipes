@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import thunk from 'redux-thunk';
 import expect from 'expect';
+import sinon from 'sinon';
 import configureMockStore from 'redux-mock-store';
 import ConnectedUserRecipes, { UserRecipes } from
   '../../../components/Recipes/UserRecipes.jsx';
@@ -11,9 +12,9 @@ import mockData from '../../__mocks__/mockData';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 /* global jest */
-
+let props;
 const setup = () => {
-  const props = {
+  props = {
     recipes: [
       {
         id: 1,
@@ -42,7 +43,16 @@ describe('UserRecipes Component snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });
-
+describe('pageClick()', () => {
+  const page = {
+    selected: 1
+  };
+  it('should get the next user recipes', () => {
+    const spy = sinon.spy(UserRecipes.prototype, 'pageClick');
+    shallow(<UserRecipes {...props} pageClick={spy} />)
+      .instance().pageClick(page);
+  });
+});
 describe('Connected UserRecipes component', () => {
   it('tests that the component successfully rendered', () => {
     const { recipes } = mockData;

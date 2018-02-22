@@ -4,7 +4,6 @@ import expect from 'expect';
 import { SigninForm } from
   '../../../components/Signin/SigninForm.jsx';
 
-/* global jest */
 
 const setup = () => shallow(<SigninForm />);
 

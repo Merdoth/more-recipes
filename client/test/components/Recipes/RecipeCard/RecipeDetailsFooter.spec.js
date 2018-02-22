@@ -1,20 +1,28 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import expect from 'expect';
-import sinon from 'sinon';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import ConnectedRecipeDetailsFooter,{ RecipeDetailsFooter } from
+import ConnectedRecipeDetailsFooter, { RecipeDetailsFooter } from
   '../../../../components/Recipes/RecipeCard/RecipeDetailsFooter.jsx';
 import Button from '../../../../components/common/Button.jsx';
 
-/* global jest */
+/* global jest swal */
+
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+let props;
+const swal = jest.fn(() => Promise.resolve());
+const setup = () => {
+  props = {
+    goToRecipes: () => {},
 
-const setup = () => shallow(<RecipeDetailsFooter />);
+    deleteRecipe: () => jest.fn(() => Promise.resolve()),
+  };
+  return shallow(<RecipeDetailsFooter {...props} swal={swal}/>);
+};
 
-describe('RecipeDetailsFooterComponent snapshot', () => {
+describe('RecipeDetailsFooter Component snapshot', () => {
   it('it should render the right amount of elements', () => {
     const wrapper = setup();
     expect(wrapper).toMatchSnapshot();
@@ -31,32 +39,25 @@ describe('RecipeDetailsFooter Component snapshot', () => {
 });
 
 describe('onSubmit()', () => {
-  xit('should add recipes to the state', () => {
+  it('should open the edit page', () => {
     const event = {
       preventDefault: jest.fn()
     };
     const wrapper = setup();
-    const form = wrapper.find('.cta-btn');
-    wrapper.setState({
-      fullName: 'ucheya'
-    });
-
-    form.simulate('submit', event);
+    const button = wrapper.find('#edit');
+    button.simulate('click', event);
   });
 });
 
 describe('handleDelete()', () => {
-  xit('should add recipes to the state', () => {
+  it('should delete a recipe', () => {
     const event = {
-      preventDefault: jest.fn()
+      preventDefault: jest.fn(),
+      goToRecipes: jest.fn()
     };
     const wrapper = setup();
-    const form = wrapper.find('.cta-btn');
-    wrapper.setState({
-      fullName: 'ucheya'
-    });
-
-    form.simulate('submit', event);
+    const button = wrapper.find('#delete');
+    button.simulate('click', event);
   });
 });
 

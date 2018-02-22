@@ -29,6 +29,7 @@ exports[`Slider Component snapshot it should render the right amount of elements
           >
             <h5
               className="hero-header"
+              id="slider-one"
             >
               Your Favorite Recipe's At Your Pleasure.
             </h5>

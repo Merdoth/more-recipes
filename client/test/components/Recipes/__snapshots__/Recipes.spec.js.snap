@@ -61,7 +61,7 @@ exports[`Recipes Component snapshot it should render the right amount of element
           nextLabel="next"
           onPageChange={[Function]}
           pageCount={10}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={2}
           previousClassName="previous"
           previousLabel="previous"
           subContainerClassName="pages pagination"

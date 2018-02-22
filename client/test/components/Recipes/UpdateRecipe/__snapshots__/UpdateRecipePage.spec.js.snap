@@ -12,6 +12,11 @@ exports[`UpdateRecipePage Component snapshot it should render the right amount o
     >
       <Connect(UpdateRecipeForm)
         goToRecipes={[Function]}
+        history={
+          Object {
+            "push": [Function],
+          }
+        }
       />
     </div>
   </div>

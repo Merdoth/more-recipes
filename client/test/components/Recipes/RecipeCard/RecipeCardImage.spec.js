@@ -6,7 +6,7 @@ import { RecipeCardImage } from
 
 const setup = () => shallow(<RecipeCardImage />);
 
-describe('RecipeCardDes Component snapshot', () => {
+describe('RecipeCardImage Component snapshot', () => {
   it('it should render the right amount of elements', () => {
     const wrapper = setup();
     expect(wrapper).toMatchSnapshot();

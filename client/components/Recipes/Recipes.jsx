@@ -85,7 +85,6 @@ export class Recipes extends Component {
                 breakClassName="break-me"
                 pageCount={this.props.pagination.pageCount}
                 marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
                 onPageChange={this.pageClick}
                 containerClassName='pagination'
                 subContainerClassName="pages pagination"

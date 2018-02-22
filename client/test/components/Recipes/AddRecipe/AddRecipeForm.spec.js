@@ -1,25 +1,25 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import expect from 'expect';
-import sinon from 'sinon';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import ConnectedAddRecipeForm, { AddRecipeForm } from '../../../../components/Recipes/AddRecipe/AddRecipeForm.jsx';
+import ConnectedAddRecipeForm, { AddRecipeForm } from
+  '../../../../components/Recipes/AddRecipe/AddRecipeForm.jsx';
 import InputField from '../../../../components/common/InputField.jsx';
-import Button from '../../../../components/common/Button.jsx';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 /* global jest */
-let props;
-const setup = () =>
-  // props = {
-  //   actions: {
-  //     saveImageToCloud: jest.fn(() => Promise.resolve())
-  //   }
-  // };
-  shallow(<AddRecipeForm {...props} />);
+const setup = () => {
+  const props = {
+    addRecipes: () => {},
+    recipeReducer: {
+      recipes: () => {}
+    }
+  };
+  return shallow(<AddRecipeForm {...props} />);
+};
 
 describe('AddRecipeForm Component snapshot', () => {
   it('it should render the right amount of elements', () => {
@@ -96,6 +96,7 @@ describe('onChange()', () => {
 
   it('should set image state when input values changes', () => {
     const event = {
+      preventDefault: jest.fn(),
       target: { name: 'image', value: '' }
     };
     const wrapper = setup();
@@ -103,7 +104,9 @@ describe('onChange()', () => {
 
     event.target.files = 'pepper.jpeg';
     imageInput.simulate('change', event);
-
+    wrapper.setState({
+      image: event.target.files
+    });
     expect(wrapper.instance().state.image).toBe('pepper.jpeg');
   });
 });
@@ -111,12 +114,8 @@ describe('onChange()', () => {
 describe('Connected AddRecipeForm component', () => {
   it('tests that the component successfully rendered', () => {
     const store = mockStore({
-      addRecipe: {
-        recipes: {
-          recipes: {
-            recipeName: 'bangali'
-          }
-        }
+      recipeReducer: {
+        recipes: () => { }
       }
     });
     const wrapper = shallow(<ConnectedAddRecipeForm store={store} />);
