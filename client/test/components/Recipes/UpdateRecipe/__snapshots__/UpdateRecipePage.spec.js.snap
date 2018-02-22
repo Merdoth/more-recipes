@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UpdateRecipePage Component snapshot it should render the right amount of elements 1`] = `
+<div
+  className="row deco"
+>
+  <div
+    className="col-md-4 offset-md-4 cover1"
+  >
+    <div
+      className="form-deco"
+    >
+      <Connect(UpdateRecipeForm)
+        goToRecipes={[Function]}
+        history={
+          Object {
+            "push": [Function],
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;

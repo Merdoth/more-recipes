@@ -63,36 +63,5 @@ class Reviews {
         res.status(500).send({ message: error });
       });
   }
-
-  /**
-   * @description get recipe reviews controller
-   *
-   * @param { Object } req - Request object
-   * @param { Object } res - Response object
-   *
-   * @returns { Object } json - payload
-   */
-  static getReview(req, res) {
-    reviews
-      .findAll({
-        include: {
-          model: users,
-          attributes: ['userName']
-        },
-        where: {
-          recipeId: req.params.recipeId
-        }
-      })
-      .then((reviewFound) => {
-        if (reviewFound.length === 0) {
-          return res.status(404).send({
-            message: 'Recipe not found'
-          });
-        } else {
-          return res.status(200).send(reviewFound);
-        }
-      })
-      .catch(error => res.status(500).send({ message: error }));
-  }
 }
 export default Reviews;

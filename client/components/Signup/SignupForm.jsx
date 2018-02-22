@@ -15,7 +15,7 @@ import Button from '../common/Button.jsx';
  *
  * @returns { undefined }
  */
-class SignupForm extends Component {
+export class SignupForm extends Component {
   /**
    *
    * @param { Object } props

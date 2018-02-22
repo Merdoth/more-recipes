@@ -15,7 +15,7 @@ import { login } from '../../actions/auth/authActions';
  *
  * @returns { undefined } SignupForm
  */
-class SigninForm extends Component {
+export class SigninForm extends Component {
   /**
    *n
    * @param { Object } props

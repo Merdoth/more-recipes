@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import Slider from './Slider.jsx';
-import RecipeCard from '../components/Recipes/RecipeCard/RecipeCard.jsx';
+import { RecipeCard } from '../components/Recipes/RecipeCard/RecipeCard.jsx';
 import { getMostVoted } from '../actions/recipeActions/';
 
 /**
@@ -12,21 +11,7 @@ import { getMostVoted } from '../actions/recipeActions/';
  *
  * @description this class returns a Home component
  */
-class Home extends Component {
-  /**
-   * Creates an instance of Home.
-   * @param {object} props
-   *
-   * @memberof Home
-   *
-   * @returns { undefined }
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      topRecipes: []
-    };
-  }
+export class Home extends Component {
   /**
    * @param { Function } props
    *
@@ -50,10 +35,12 @@ class Home extends Component {
     return (
       <div>
         <Slider />
-        <div className="top">
+        <div className="recipe-wrapper">
+        <div className="container top">
           <h6 id="title4">Top Recipes</h6>
           <div className="row">{recipes}</div>
         </div>
+      </div>
       </div>
     );
   }

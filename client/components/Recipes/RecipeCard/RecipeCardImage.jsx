@@ -9,7 +9,7 @@ import React from 'react';
  * @returns { undefined }
  * .
  */
-const RecipeCardImage = ({ src }) => (
+export const RecipeCardImage = ({ src }) => (
   <div className="imgholder">
     <img src={src} />
   </div>

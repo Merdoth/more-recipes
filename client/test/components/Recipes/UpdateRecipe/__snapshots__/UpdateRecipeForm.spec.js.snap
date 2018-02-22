@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UpdateRecipePage Component snapshot it should render the right amount of elements 1`] = `
+<form
+  className="form-signin"
+  onSubmit={[Function]}
+>
+  <h2
+    className="form-signin-heading"
+  >
+    Edit Recipe
+  </h2>
+  <hr />
+  <InputField
+    label="Name"
+    name="recipeName"
+    onChange={[Function]}
+    placeholder="Name"
+    required={true}
+    type="text"
+    value=""
+  />
+  <TextArea
+    label="Description"
+    name="description"
+    onChange={[Function]}
+    placeholder="Description"
+    type="text"
+    value=""
+  />
+  <TextArea
+    label="Ingredients"
+    name="ingredients"
+    onChange={[Function]}
+    placeholder="Ingredients"
+    type="text"
+    value=""
+  />
+  <TextArea
+    label="Preparation"
+    name="preparation"
+    onChange={[Function]}
+    placeholder="Preparation"
+    type="text"
+    value=""
+  />
+  <InputLine
+    id=""
+    label="Select Image"
+    name="image"
+    onChange={[Function]}
+    placeholder="image"
+    type="file"
+    value=""
+  />
+  <Button
+    className="btn btn-lg btn-primary btn-block"
+    iconClass="fa-cutlery"
+    id="update"
+    name="Update Recipe"
+    onClick={[Function]}
+    type="submit"
+  />
+</form>
+`;

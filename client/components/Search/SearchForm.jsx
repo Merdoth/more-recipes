@@ -10,7 +10,7 @@ import history from '../../utils/history';
  *
  * @returns {void}
  */
-class SearchForm extends Component {
+export class SearchForm extends Component {
   /**
    *
    * @param { Object } props

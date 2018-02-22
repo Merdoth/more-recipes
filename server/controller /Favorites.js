@@ -77,33 +77,34 @@ class Favorites {
     const { recipeId } = req.params;
     Recipes.findById(recipeId).then((foundRecipe) => {
       if (foundRecipe) {
-        Favourites.findOne({ where: { userId, recipeId } }).then((favourite) => {
-          if (favourite) {
-            Favourites.destroy({
-              where: {
-                id: favourite.id
-              }
-            })
-              .then((responseData) => {
-                if (responseData) {
-                  res.status(200).send({
-                    succes: true,
-                    message: 'Favourite recipe removed',
-                  });
+        Favourites.findOne({ where: { userId, recipeId } })
+          .then((favourite) => {
+            if (favourite) {
+              Favourites.destroy({
+                where: {
+                  id: favourite.id
                 }
               })
-              .catch((err) => {
-                res.status(500).send({
-                  succes: false,
-                  message: err.message
+                .then((responseData) => {
+                  if (responseData) {
+                    res.status(200).send({
+                      succes: true,
+                      message: 'Favourite recipe removed',
+                    });
+                  }
+                })
+                .catch((err) => {
+                  res.status(500).send({
+                    succes: false,
+                    message: err.message
+                  });
                 });
+            } else {
+              res.status(404).send({
+                message: 'You dont have this recipe as a favourite'
               });
-          } else {
-            res.status(404).send({
-              message: 'You dont have this recipe as a favourite'
-            });
-          }
-        });
+            }
+          });
       } else {
         return res.status(404).send({
           succes: false,

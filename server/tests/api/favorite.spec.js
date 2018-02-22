@@ -14,9 +14,10 @@ describe('More Recipes', () => {
       .post('/api/v1/users/signin')
       .send(user1)
       .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
         token = res.body.token;
-        expect(res.status).toEqual(200);
-        expect(res.body.message).toEqual('Welcome!', token);
         done();
       });
   });
@@ -36,20 +37,23 @@ describe('More Recipes', () => {
       });
   });
 
-  it('should throw an error if recipe has been favorited and return 409', (done) => {
-    chai
-      .request(app)
-      .post('/api/v1/favourites')
-      .set('authorization', token)
-      .send({
-        recipeId: 1
-      })
-      .end((err, res) => {
-        expect(res.status).toEqual(409);
-        expect(res.body.message).toEqual('You already favourited this recipe');
-        done();
-      });
-  });
+  it(
+    'should throw an error if recipe has been favorited and return 409',
+    (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/favourites')
+        .set('authorization', token)
+        .send({
+          recipeId: 1
+        })
+        .end((err, res) => {
+          expect(res.status).toEqual(409);
+          expect(res.body.message).toEqual('You already favourited this recipe');
+          done();
+        });
+    }
+  );
 
   it('should throw an error if invalid details and return 400', (done) => {
     chai
@@ -58,7 +62,8 @@ describe('More Recipes', () => {
       .set('authorization', token)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.message).toEqual('Recipe with ID undefined does not exist');
+        expect(res.body.message)
+          .toEqual('Recipe with ID undefined does not exist');
         done();
       });
   });
@@ -130,21 +135,24 @@ describe('More Recipes', () => {
         .set({ authorization: token })
         .end((err, res) => {
           expect(res.status).toEqual(404);
-          expect(res.body.message).toEqual('You dont have this recipe as a favourite');
+          expect(res.body.message)
+            .toEqual('You dont have this recipe as a favourite');
           done();
         });
     });
 
-  it('should throw an error if a user trys to delete a recipe that does not exists and return 404', (done) => {
-    chai.request(app)
-      .delete('/api/v1//favourites/3')
-      .set({ authorization: token })
-      .end((err, res) => {
-        expect(res.status).toEqual(404);
-        expect(res.body.message).toEqual('Recipe with ID 3 does not exist');
-        done();
-      });
-  });
+  it(`should throw an error if a user trys to 
+    delete a recipe that does not exists and return 404`, (done) => {
+      chai.request(app)
+        .delete('/api/v1//favourites/3')
+        .set({ authorization: token })
+        .end((err, res) => {
+          expect(res.status).toEqual(404);
+          expect(res.body.message)
+            .toEqual('Recipe with ID 3 does not exist');
+          done();
+        });
+    });
 
   it('should get all users favourited recipes return 200', (done) => {
     chai
@@ -153,8 +161,8 @@ describe('More Recipes', () => {
       .set('authorization', token)
       .end((err, res) => {
         expect(res.status).toEqual(200);
-        
-        expect(res.body.message).toEqual('No Favourites Found please try to create some');
+        expect(res.body.message)
+          .toEqual('No Favourites Found please try to create some');
         done();
       });
   });

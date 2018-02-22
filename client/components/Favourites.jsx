@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import RecipeCard from './Recipes/RecipeCard/RecipeCard.jsx';
+import { RecipeCard } from './Recipes/RecipeCard/RecipeCard.jsx';
 import { getFavourite } from '../actions/recipeActions/';
 
 /**
@@ -10,7 +10,7 @@ import { getFavourite } from '../actions/recipeActions/';
  *
  * @description this class returns a  Favourites component
  */
-class Favourites extends Component {
+export class Favourites extends Component {
   /**
    * @param { Number } id
    *

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeCardDes Component snapshot it should render the right amount of elements 1`] = `
+<div
+  className="des text-truncate"
+>
+  <h2 />
+  <h4 />
+</div>
+`;

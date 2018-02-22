@@ -26,7 +26,7 @@ if (process.env.NODE_ENV !== 'development') {
   app.use(express.static(path.join(__dirname, './../client')));
 }
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   const webpackConfig = require('../webpack.config.dev'); // eslint-disable-line
   const compiler = webpack(webpackConfig);
   app.use(webpackMiddleware(compiler, {
