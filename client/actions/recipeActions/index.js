@@ -208,7 +208,6 @@ export const updateRecipe = (id, recipes) => dispatch =>
  *
  */
 export const addRecipesSuccess = recipe => ({
-  
   type: types.ADD_RECIPE_SUCCESS,
   recipe
 });

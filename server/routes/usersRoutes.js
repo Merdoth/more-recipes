@@ -13,7 +13,7 @@ import checkUserExists from '../middleware/checkUserExists';
  * @returns { undefined }
  */
 const userRoutes = (router) => {
-  router.get('/users', User.getAllUsers);
+  router.get('/users', auth.authorize, User.getAllUsers);
   router.get('/user', auth.authorize, User.getOneUser);
   router.put('/update', auth.authorize, User.updateUserProfile);
   router.post(

@@ -39,13 +39,14 @@ export class RecipeDetailsFooter extends Component {
     const { id } = this.props;
     return this.props.goToRecipes(`/updaterecipe/${id}`);
   }
+
   /**
-   * @param { Object } event
-   *
-   * @memberof RecipeDetailsFooter
-   *
-   * @returns { undefined }
-   */
+    * @param { Object } event
+    *
+    * @memberof RecipeDetailsFooter
+    *
+    * @returns { undefined }
+    */
   handleDelete(event) {
     event.preventDefault();
     const { id } = this.props;
@@ -61,7 +62,7 @@ export class RecipeDetailsFooter extends Component {
           swal('Poof! Your recipe has been deleted!', {
             icon: 'success'
           });
-          return this.props.goToRecipes(`/recipes/${id}`);
+          return this.props.goToRecipes('/recipes');
         });
       }
       swal('Your recipe is safe!');

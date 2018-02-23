@@ -83,7 +83,7 @@ export class SignupForm extends Component {
       Object.keys(errors).forEach((error) => {
         swal({
           title: 'Oops!',
-          text: error,
+          text: errors[error],
           icon: 'error'
         });
       });

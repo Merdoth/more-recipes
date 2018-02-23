@@ -30,20 +30,7 @@ describe('UpdateRecipePage Component snapshot', () => {
     expect(wrapper.length).toBe(1);
   });
 });
-describe('componentWillReceiveProps()', () => {
-  xit('should call componentWillReceiveProps()', () => {
-    const wrapper = setup();
-    wrapper.setProps({
-      recipeName: 'fish pepper soup',
-      description: 'cool fool for cool peeps',
-      ingredients: 'fish and meat',
-      preparation: 'cook for five mins',
-      image: 'fish/jpg',
-      error: ''
-    });
-    expect(wrapper.state('recipeName')).toEqual('fish pepper soup');
-  });
-});
+
 describe('onSubmit()', () => {
   it('should update recipe to the state', () => {
     const event = {

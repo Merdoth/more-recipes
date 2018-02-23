@@ -18,16 +18,28 @@ import CheckLoggedinUser from './utils/CheckLoggedinUser';
 const { localStorage } = window;
 const jwtToken = localStorage && localStorage.getItem('jwtToken');
 if (jwtToken) {
+  const decodedToken = jwt.decode(jwtToken);
+  const hasTokenExpired = decodedToken.exp - (Date.now() / 1000) < 0;
   const valid = jwt.verify(jwtToken, process.env.SECRET_KEY, (err, result) => {
     if (err) {
       return err;
     }
     return result;
   });
-  if (valid) {
-    const decodedToken = jwt.decode(jwtToken);
+  if (valid || hasTokenExpired) {
     setAuthToken(jwtToken);
     store.dispatch(setCurrentUser(decodedToken));
+  } else {
+    localStorage.removeItem('jwtToken');
+  }
+}
+
+if (jwtToken) {
+  const decodedToken = jwt.decode(jwtToken);
+  const hasExpired = decodedToken.exp - (Date.now() / 1000) < 0;
+  if (!hasExpired) {
+    setAuthToken(jwtToken);
+    store.dispatch(setCurrentUser(jwt.decode(jwtToken)));
   } else {
     localStorage.removeItem('jwtToken');
   }

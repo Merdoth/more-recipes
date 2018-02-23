@@ -21,70 +21,62 @@ class Votes {
   static upVotes(req, res) {
     const userId = req.decoded.id;
     const { id } = req.params;
-    if (!userId && id) {
-      return res.status(400).send({
-        succes: false,
-        message: 'wrong Id is been passed'
-      });
-    }
-    votes.findCreateFind({
+    recipes.findOne({
       where: {
-        userId,
-        recipeId: id
+        id
       }
-    })
-      .spread((vote, created) => {
-        if (created) {
-          vote.update({ voted: 'upVote' });
-          return recipes.findOne({
-            where: { id },
-          }).then((recipe) => {
-            recipe.increment('upVotes').then(() => {
-              res.status(201).send({
-                message: 'Your vote has been recorded',
-                recipe
-              });
-            });
-          });
-        } else if (!created && vote.voted === 'upVote') {
-          vote.destroy();
-          return recipes.findOne({
-            where: { id },
-          }).then((recipe) => {
-            if (recipe) {
-              recipe.decrement('upVotes').then(() => {
-                res.status(200).send({
-                  message: 'Your upvote has been removed',
+    }).then((recipeFound) => {
+      if (!recipeFound) {
+        return res.status(404).send({ message: 'recipeId does not exist!' });
+      }
+      votes.findCreateFind({ where: { userId, recipeId: id } })
+        .spread((vote, created) => {
+          if (created) {
+            vote.update({ voted: 'upVote' });
+            return recipes.findOne({
+              where: { id },
+            }).then((recipe) => {
+              recipe.increment('upVotes').then(() => {
+                res.status(201).send({
+                  message: 'Your vote has been recorded',
                   recipe
                 });
               });
-            }
-          });
-        } else if (!created && vote.voted === 'downVote') {
-          vote.update({ voted: 'upVote' });
-          return recipes.findOne({
-            where: { id },
-          }).then((recipe) => {
-            recipe.increment('upVotes');
-            recipe
-              .decrement('downVotes')
-              .then(() => {
-                recipe.reload();
-              })
-              .then(() =>
-                res.status(200).send({
-                  message: 'Your vote has been added',
-                  recipe
-                }));
-          });
-        }
-      })
-      .catch((error) => {
-        res.status(404).send({
-          message: 'Recipe not found',
-          error
+            });
+          } else if (!created && vote.voted === 'upVote') {
+            vote.destroy();
+            return recipes.findOne({ where: { id } }).then((recipe) => {
+              if (recipe) {
+                recipe.decrement('upVotes').then(() => {
+                  res.status(200).send({
+                    message: 'Your upvote has been removed',
+                    recipe
+                  });
+                });
+              }
+            });
+          } else if (!created && vote.voted === 'downVote') {
+            vote.update({ voted: 'upVote' });
+            return recipes.findOne({ where: { id } })
+              .then((recipe) => {
+                recipe.increment('upVotes');
+                recipe
+                  .decrement('downVotes')
+                  .then(() => { recipe.reload(); })
+                  .then(() =>
+                    res.status(200).send({
+                      message: 'Your vote has been added',
+                      recipe
+                    }));
+              });
+          }
         });
+    }).catch((error) => {
+      res.status(500).send({
+        message: 'Recipe not found',
+        error
       });
+    });
   }
 
   /**
@@ -99,65 +91,63 @@ class Votes {
     const userId = req.decoded.id;
     const { id } = req.params;
 
-    if (!userId && id) {
-      return res.status(400).send({
-        succes: false,
-        message: 'user ID or Recipe ID is invalid'
-      });
-    }
-    votes.findCreateFind({
+    recipes.findOne({
       where: {
-        userId,
-        recipeId: id
+        id
       }
-    })
-      .spread((vote, created) => {
-        if (created) {
-          vote.update({ voted: 'downVote' });
-          return recipes.findOne({
-            where: { id },
-          }).then((recipe) => {
-            recipe.increment('downVotes').then(() => {
-              res.status(201).send({
-                message: 'Your downvote has been recorded',
-                recipe
-              });
-            });
-          });
-        } else if (!created && vote.voted === 'downVote') {
-          vote.destroy();
-          return recipes.findOne({
-            where:
-            { id },
-          }).then((recipe) => {
-            if (recipe) {
-              recipe.decrement('downVotes').then(() => {
-                res.status(200).send({
-                  message: 'Your downvote has been removed',
+    }).then((recipeFound) => {
+      if (!recipeFound) {
+        return res.status(404).send({ message: 'recipeId does not exist!' });
+      }
+      votes.findCreateFind({ where: { userId, recipeId: id } })
+        .spread((vote, created) => {
+          if (created) {
+            vote.update({ voted: 'downVote' });
+            return recipes.findOne({
+              where: { id },
+            }).then((recipe) => {
+              recipe.increment('downVotes').then(() => {
+                res.status(201).send({
+                  message: 'Your downvote has been recorded',
                   recipe
                 });
               });
-            }
-          });
-        } else if (!created && vote.voted === 'upVote') {
-          vote.update({ voted: 'downVote' });
-          return recipes.findOne({
-            where: { id },
-          }).then((recipe) => {
-            recipe.increment('downVotes');
-            recipe
-              .decrement('upVotes')
-              .then(() => {
-                recipe.reload();
-              })
-              .then(() =>
-                res.status(200).send({
-                  message: 'Your vote has been added',
-                  recipe
-                }));
-          });
-        }
-      })
+            });
+          } else if (!created && vote.voted === 'downVote') {
+            vote.destroy();
+            return recipes.findOne({
+              where:
+            { id },
+            }).then((recipe) => {
+              if (recipe) {
+                recipe.decrement('downVotes').then(() => {
+                  res.status(200).send({
+                    message: 'Your downvote has been removed',
+                    recipe
+                  });
+                });
+              }
+            });
+          } else if (!created && vote.voted === 'upVote') {
+            vote.update({ voted: 'downVote' });
+            return recipes.findOne({
+              where: { id },
+            }).then((recipe) => {
+              recipe.increment('downVotes');
+              recipe
+                .decrement('upVotes')
+                .then(() => {
+                  recipe.reload();
+                })
+                .then(() =>
+                  res.status(200).send({
+                    message: 'Your vote has been added',
+                    recipe
+                  }));
+            });
+          }
+        });
+    })
       .catch(error => res.status(404).send(error.message));
   }
   /**
