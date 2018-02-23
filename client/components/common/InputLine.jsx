@@ -12,6 +12,7 @@ import React from 'react';
  *
  */
 const InputLine = ({
+  id,
   type,
   name,
   placeholder,
@@ -21,7 +22,7 @@ const InputLine = ({
 }) => (
   <span className='inputLine'>
     <input
-      id=""
+      id={id}
       value={value}
       onChange={onChange}
       type={type}

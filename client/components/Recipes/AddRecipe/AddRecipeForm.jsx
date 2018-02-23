@@ -117,7 +117,7 @@ export class AddRecipeForm extends Component {
           onChange={this.onChange}
         />
         <InputLine
-          id="image"
+          id="foodImage"
           type="file"
           name="image"
           placeholder="Upload Image"
@@ -127,10 +127,11 @@ export class AddRecipeForm extends Component {
         />
 
         <Button
+          id="submitBtn"
           type="submit"
           onClick={this.onSubmit}
           disabled={this.state.isLoading}
-          name="Add Recipe"
+          name="Add"
           iconClass="fa-cutlery"
           className="btn btn-lg btn-primary btn-block submitBtn"
         />

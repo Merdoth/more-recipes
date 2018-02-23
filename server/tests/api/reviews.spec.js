@@ -49,7 +49,7 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.status).toEqual(409);
           expect(res.body.message)
-            .toEqual('Your already have a review with same review');
+            .toEqual('Your already have a review with the same content');
           done();
         });
     });

@@ -83,7 +83,7 @@ export class Recipes extends Component {
                 previousLabel="previous"
                 nextLabel="next"
                 breakClassName="break-me"
-                pageCount={this.props.pagination.pageCount}
+                pageCount={this.props.pagination.pageCount || 0}
                 marginPagesDisplayed={2}
                 onPageChange={this.pageClick}
                 containerClassName='pagination'

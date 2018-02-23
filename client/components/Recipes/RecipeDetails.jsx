@@ -199,6 +199,7 @@ export class RecipeDetails extends Component {
               <div className="stats">
                 <span
                   onClick={this.handleUpVote}
+                  id="upvote"
                   className="btn btn-default stats-item upvote"
                 >
                   <i className="fa fa-thumbs-up iconStat" />
@@ -206,12 +207,14 @@ export class RecipeDetails extends Component {
                 </span>
                 <span
                   onClick={this.handleDownVote}
+                  id="downvote"
                   className="btn btn-default stats-item downvote"
                 >
                   <i className="fa fa-thumbs-down iconStat" />
                   {recipeDetails.downVotes}
                 </span>
                 <span
+                  id="favourite"
                   onClick={this.handleFavourite}
                   className={`btn btn-default stats-item ${selected} favourite`}
                 >

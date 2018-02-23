@@ -16,7 +16,7 @@ const Button = ({
   type, onClick, disabled, name, iconClass, className,
 }) => (
     <div
-      className='form-group '
+      className='form-group'
     >
 
       <button

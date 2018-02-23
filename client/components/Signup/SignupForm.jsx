@@ -62,8 +62,12 @@ export class SignupForm extends Component {
           this.props.goToAllRecipes();
         })
         .catch((err) => {
-          const error = err.data.message;
-          this.handleErrors(error);
+          const error = err.response.data.message;
+          swal({
+            title: 'Oops!',
+            text: error,
+            icon: 'error'
+          });
           this.setState({ isLoading: false });
         });
     } else {
@@ -156,13 +160,13 @@ export class SignupForm extends Component {
               required
             />
             <Button
-              id="signUpBtn"
+              id="signupbtn"
               type="submit"
               onClick={this.onSubmit}
               disabled={this.state.isLoading}
               name="Sign Up"
               iconClass="fa-user-plus"
-              className="btn btn-lg btn-primary btn-block"
+              className="btn btn-lg btn-primary btn-block signup"
             />
             <p className="new_account">
               <strong>Already Have An Account? </strong>

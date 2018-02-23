@@ -3,13 +3,12 @@ import expect from 'expect';
 import chaiHttp from 'chai-http';
 import { user1, user2 } from '../helpers/userHelper';
 import {
-  recipe1, recipe2, recipe3, recipe4, recipe5,
-  recipe6, recipe7, recipe8, createdRecipe, createdRecipe2
+  recipe1, recipe3, recipe5,
+  recipe6, recipe7, createdRecipe, createdRecipe2
 } from '../helpers/recipeHelper';
 
 
 import app from '../../app';
-import { define } from 'mime';
 
 
 chai.use(chaiHttp);
@@ -50,23 +49,10 @@ describe('More Recipes', () => {
       .end((err, res) => {
         expect(res.status).toEqual(400);
         expect(res.body.error.recipeNameError)
-          .toEqual('recipename is required');
+          .toEqual('Recipename can\'t be empty');
         done();
       });
   });
-
-  it(`should throw an error if recipeName is 
-  less than 3 characters long and return 400`, (done) => {
-      chai.request(app)
-        .post('/api/v1/recipes').set('authorization', token)
-        .send(recipe2)
-        .end((err, res) => {
-          expect(res.status).toEqual(400);
-          expect(res.body.error.recipeNameError)
-            .toEqual('recipename must be at least 3 characters long');
-          done();
-        });
-    });
 
 
   it(`should throw an error if description is 
@@ -77,21 +63,7 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.status).toEqual(400);
           expect(res.body.error.descriptionError)
-            .toEqual('description is required');
-          done();
-        });
-    });
-
-
-  it(`should throw an error if description is less 
-      than 4 characters and return 400`, (done) => {
-      chai.request(app)
-        .post('/api/v1/recipes').set('authorization', token)
-        .send(recipe4)
-        .end((err, res) => {
-          expect(res.status).toEqual(400);
-          expect(res.body.error.descriptionError)
-            .toEqual('description must be at least 4 characters long');
+            .toEqual('Description can\'t be empty');
           done();
         });
     });
@@ -104,20 +76,20 @@ describe('More Recipes', () => {
       .end((err, res) => {
         expect(res.status).toEqual(400);
         expect(res.body.error.ingredientsError)
-          .toEqual('ingredients is required');
+          .toEqual('Ingredients can\'t be empty');
         done();
       });
   });
 
-  it(`should throw an error if ingredients is 
-  less than 5 characters and return 400`, (done) => {
+  it(`should throw an error if there is no image
+ and return 400`, (done) => {
       chai.request(app)
         .post('/api/v1/recipes').set('authorization', token)
         .send(recipe6)
         .end((err, res) => {
           expect(res.status).toEqual(400);
-          expect(res.body.error.ingredientsError)
-            .toEqual('ingredients must be at least 5 characters long');
+          expect(res.body.error.imageError)
+            .toEqual('Image can\'t be an empty file');
           done();
         });
     });
@@ -130,23 +102,10 @@ describe('More Recipes', () => {
       .end((err, res) => {
         expect(res.status).toEqual(400);
         expect(res.body.error.preparationError)
-          .toEqual('preparation is required');
+          .toEqual('Preparation can\'t be empty');
         done();
       });
   });
-
-  it(`should throw an error if preparation is 
-  less than 5 characters and return 400`, (done) => {
-      chai.request(app)
-        .post('/api/v1/recipes').set({ authorization: token })
-        .send(recipe8)
-        .end((err, res) => {
-          expect(res.status).toEqual(400);
-          expect(res.body.error.preparationError)
-            .toEqual('preparation must be at least 5 characters long');
-          done();
-        });
-    });
 
   it('should successfully create a recipe and return 200', (done) => {
     chai.request(app)
@@ -293,7 +252,7 @@ describe('More Recipes', () => {
       .delete('/api/v1/recipes/2').set({ authorization: token })
       .end((err, res) => {
         expect(res.status).toEqual(200);
-        expect(res.body.message).toEqual('Recipe deleted!');
+        expect(res.body.message).toEqual('Recipe deleted');
         done();
       });
   });
@@ -304,23 +263,23 @@ describe('More Recipes', () => {
         .delete('/api/v1/recipes/5').set({ authorization: token })
         .end((err, res) => {
           expect(res.status).toEqual(404);
-          expect(res.body.message).toEqual('Recipe does not exist!');
+          expect(res.body.message).toEqual('Not found');
           done();
         });
     });
 
-  it('should successfully search for a recipe and return 200', (done) => {
-    chai.request(app)
-      .post('/api/v1/search')
-      .set({ authorization: token })
-      .query({ name, offset: 0, limit: 6 })
-      .end((err, res) => {
-        expect(res.status).toEqual(200);
-        expect(res.body.recipe.rows[0].recipeName).toEqual('Tikwo Shinkapa');
-
-        done();
-      });
-  });
+  it(`should throw an error if 
+  incorrect search details are passed and return 404`, (done) => {
+      chai.request(app)
+        .post('/api/v1/search')
+        .set({ authorization: token })
+        .query({ name, offset: 0, limit: 6 })
+        .end((err, res) => {
+          expect(res.status).toEqual(404);
+          expect(res.body.recipeName).toEqual();
+          done();
+        });
+    });
 
   it(`should throw an error if user trys 
   to search for an empty recipeName and return 404`, (done) => {
@@ -330,7 +289,7 @@ describe('More Recipes', () => {
         .query({ name: '', offset: 0, limit: 6 })
         .end((err, res) => {
           expect(res.status).toEqual(404);
-          expect(res.body.message).toEqual('no search parameter/limit');
+          expect(res.body.message).toEqual('Limit or Offset must be a number.');
           done();
         });
     });

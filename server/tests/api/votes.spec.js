@@ -62,7 +62,7 @@ describe('More Recipes', () => {
       })
       .end((err, res) => {
         expect(res.status).toEqual(404);
-        expect(res.body.message).toEqual('Recipe not found');
+        expect(res.body.message).toEqual('recipeId does not exist!');
         done();
       });
   });

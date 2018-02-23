@@ -36,8 +36,9 @@ export const recipe5 = {
 export const recipe6 = {
   recipeName: 'Rice',
   description: 'Yummy amala for everyday consumption',
-  ingredients: 'amal',
+  ingredients: 'amalauo',
   preparation: '40 mins',
+  image: ''
 };
 
 export const recipe7 = {
