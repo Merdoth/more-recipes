@@ -57,7 +57,7 @@ export class RecipeDetails extends Component {
   componentDidMount() {
     const { recipeId } = this.props.match.params;
     const { id } = this.props.user;
-    if (id) {
+    if (id && recipeId) {
       this.props.getOneRecipe(id, recipeId);
       this.props.getFavourite(recipeId);
     }

@@ -174,7 +174,11 @@ class Recipes {
     limit = Number(limit) || 6;
     offset = limit * (Number(page) - 1) || 0;
     const userId = req.decoded.id;
-
+    if ((typeof limit !== 'number') || (typeof offset !== 'number')) {
+      return res.status(404).send({
+        message: 'Limit or Offset must be a number.'
+      });
+    }
     if (req.query.sort === 'createdAt' && req.query.order === 'des') {
       query = {
         include: [{ model: reviews, votes }],
@@ -228,18 +232,18 @@ class Recipes {
    * @returns { Object } json - payload
    */
   static updateUserRecipes(req, res) {
+    const userId = req.decoded.id;
+    const { errors, isValid } = validateRecipe(req.body);
+    if (!isValid) {
+      return res.status(400).send({ error: errors });
+    }
     const { id } = req.params;
     const {
       recipeName, description, preparation, ingredients, image
     } = req.body;
-
     return (
       recipes
-        .find({
-          where: {
-            id
-          }
-        })
+        .findOne({ where: { id, userId } })
         .then((recipe) => {
           if (recipe) {
             return recipe
@@ -258,7 +262,7 @@ class Recipes {
               })
               .catch(error => res.status(500).send({ error }));
           }
-          return res.status(404).send({ message: 'Recipe does not exist!' });
+          return res.status(404).send({ message: 'You can not update this recipe!' });
         })
     );
   }
@@ -273,20 +277,26 @@ class Recipes {
    */
   static deleteUserRecipes(req, res) {
     const { id } = req.params;
+    const userId = req.decoded.id;
     return (
       recipes
-        .find({
-          where: {
-            id
-          }
-        })
+        .findOne({ where: { id } })
         .then((recipe) => {
           if (recipe) {
-            recipe
-              .destroy()
-              .then(() => res.status(200).send({ message: 'Recipe deleted!' }));
+            if (recipe.userId === userId) {
+              recipe.destroy()
+                .then(() => res.status(200).json({
+                  message: 'Recipe deleted',
+                }));
+            } else {
+              return res.status(401).json({
+                message: 'You are not authorized to delete this recipe'
+              });
+            }
           } else {
-            res.status(404).send({ message: 'Recipe does not exist!' });
+            return res.status(404).json({
+              message: 'Not found'
+            });
           }
         })
         .catch(error => res.status(500).send({ error }))
@@ -304,6 +314,11 @@ class Recipes {
   static searchRecipe(req, res) {
     let { offset, limit } = req.query;
     limit = limit || 8;
+    if ((typeof limit !== 'number') || (typeof offset !== 'number')) {
+      return res.status(404).send({
+        message: 'Limit or Offset must be a number.'
+      });
+    }
     if (!req.query.name) {
       return res.status(404).send({
         success: false,

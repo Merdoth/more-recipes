@@ -62,14 +62,16 @@ export class UpdateRecipeForm extends Component {
       swal('Too Bad', 'No Such Recipe', 'error');
       this.props.history.push('/recipes');
     }
-    this.setState({
-      recipeName: recipe.recipeName,
-      description: recipe.description,
-      ingredients: recipe.ingredients,
-      preparation: recipe.preparation,
-      image: recipe.image,
-      error: nextProps.error
-    });
+    if (recipe) {
+      this.setState({
+        recipeName: recipe.recipeName,
+        description: recipe.description,
+        ingredients: recipe.ingredients,
+        preparation: recipe.preparation,
+        image: recipe.image,
+        error: nextProps.error
+      });
+    }
   }
   /**
    * @param { Object } event
@@ -199,5 +201,4 @@ const mapStateToProps = state => ({
   user: state.setCurrentUser.user,
 });
 
-export default connect(
-  mapStateToProps, { updateRecipe, getOneRecipe })(UpdateRecipeForm);
+export default connect(mapStateToProps, { updateRecipe, getOneRecipe })(UpdateRecipeForm);

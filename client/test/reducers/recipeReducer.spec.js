@@ -42,16 +42,21 @@ describe('Recipe Reducer', () => {
     };
 
     const message = 'Updated!';
-
+    
     expect(recipeReducer(undefined, {
       type: 'UPDATE_RECIPE_SUCCESS',
+      error: {},
+      message: {},
       recipe: {
         recipes,
         message
       }
     })).toEqual({
       message,
-      recipes,
+      recipes: {
+        message,
+        recipes
+      },
       error: {}
     });
   });

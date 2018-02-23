@@ -10,7 +10,7 @@ exports[`Slider Component snapshot it should render the right amount of elements
     <div
       className="carousel slide"
       data-ride="carousel"
-      id="carouselExampleSlidesOnly"
+      id="carouselSlides"
     >
       <div
         className="carousel-inner"
@@ -48,6 +48,7 @@ exports[`Slider Component snapshot it should render the right amount of elements
           >
             <h5
               className="hero-header"
+              id="slider-two"
             >
               Feel Free To Explore Your Ideas.
             </h5>
@@ -66,6 +67,7 @@ exports[`Slider Component snapshot it should render the right amount of elements
           >
             <h5
               className="hero-header"
+              id="slider-three"
             >
               Love Food, Love Life.
             </h5>

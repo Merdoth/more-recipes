@@ -61,7 +61,7 @@ export class RecipeDetailsFooter extends Component {
           swal('Poof! Your recipe has been deleted!', {
             icon: 'success'
           });
-          return this.props.goToRecipes(`/recipes/${id}`);
+          return this.props.goToRecipes('/recipes');
         });
       }
       swal('Your recipe is safe!');

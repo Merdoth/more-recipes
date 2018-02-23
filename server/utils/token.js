@@ -18,5 +18,5 @@ export default (payload) => {
 
   return jwt.sign({
     id, fullName, userName, email
-  }, secret, { expiresIn: '24h' });
+  }, secret, { expiresIn: 86400 });
 };
