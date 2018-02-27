@@ -5,7 +5,6 @@ import swal from 'sweetalert';
 import Button from '../../common/Button.jsx';
 import InputField from '../../common/InputField.jsx';
 import TextArea from '../../common/TextArea.jsx';
-import InputLine from '../../common/InputLine.jsx';
 import { updateRecipe, getOneRecipe } from '../../../actions/recipeActions/';
 
 /**
@@ -22,7 +21,7 @@ export class UpdateRecipeForm extends Component {
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   constructor(props) {
     super(props);
@@ -42,7 +41,7 @@ export class UpdateRecipeForm extends Component {
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
@@ -54,7 +53,7 @@ export class UpdateRecipeForm extends Component {
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentWillReceiveProps(nextProps) {
     const { recipe, error } = nextProps;
@@ -78,7 +77,7 @@ export class UpdateRecipeForm extends Component {
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -88,10 +87,9 @@ export class UpdateRecipeForm extends Component {
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onImageChange(event) {
-    event.preventDefault();
     this.setState({ [event.target.name]: event.target.files[0] });
   }
   /**
@@ -99,7 +97,7 @@ export class UpdateRecipeForm extends Component {
    *
    * @memberof UpdateRecipeForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onSubmit(event) {
     event.preventDefault();
@@ -160,15 +158,12 @@ export class UpdateRecipeForm extends Component {
           label="Preparation"
           onChange={this.onChange}
         />
-        <InputLine
-          id=""
-          type="file"
-          name="image"
-          placeholder="image"
-          value=""
-          label="Select Image"
-          onChange={this.onImageChange || ''}
-        />
+        <div className="form-group">
+          <label htmlFor="foodImage">Select Image</label>
+          <input type="file" name="image" 
+          className="form-control-file" id="foodImage" 
+          onChange={this.onImageChange} />
+        </div>
         <Button
           id="update"
           type="submit"

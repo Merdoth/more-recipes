@@ -16,6 +16,8 @@ export class UserRecipes extends Component {
  * @param { Object } props
  *
  * @memberof Recipes
+ * 
+ * @returns { Object } json - payload
  */
   constructor(props) {
     super(props);
@@ -31,7 +33,7 @@ export class UserRecipes extends Component {
    *
    * @memberof  Recipes
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentDidMount() {
     const { page, offset, limit } = this.state;
@@ -43,7 +45,7 @@ export class UserRecipes extends Component {
    *
    * @param { Object } searchData
    *
-   * @return { undefined }
+   * @return { Object } json - payload
    */
   pageClick(searchData) {
     const { selected } = searchData;
@@ -62,8 +64,11 @@ export class UserRecipes extends Component {
     const recipes = this.props.recipes.map(recipe => (
       <RecipeCard key={`recipes-${recipe.id}`} recipeList={recipe} />
     ));
+    const recipeResult = recipes.length === 0 ? 'You don\'t have any recipes yet. try creating some' : recipes;
+    const noResultStyle = recipes.length === 0 ? 'no-recipe' : '';
+    const pageCountStyle = recipes.length === 0 ? 'page-count' : '';
     return (
-      <div>
+      <div className="main-wrapper">
         <div className="container manage">
           <div className="recipe-header">
             <h2>Recipes</h2>
@@ -72,8 +77,8 @@ export class UserRecipes extends Component {
         </div>
         <div className="recipe-wrapper">
           <div className="container top">
-            <div className="row">{recipes}</div>
-            <div className="row pagination">
+            <div className={`row ${noResultStyle}`}>{recipeResult}</div>
+            <div className={`row pagination ${pageCountStyle}`}>
               <ReactPaginate
                 previousLabel="previous"
                 nextLabel="next"
@@ -88,14 +93,14 @@ export class UserRecipes extends Component {
               />
             </div>
           </div>
-        </div>       
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  recipes: (state.recipesReducer.recipesFound || {}).rows || [],
+  recipes: (state.recipesReducer.userRecipes || {}).rows || [],
   pagination: state.recipesReducer.paginate || {}
 });
 

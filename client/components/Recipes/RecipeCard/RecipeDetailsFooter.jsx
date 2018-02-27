@@ -19,7 +19,7 @@ export class RecipeDetailsFooter extends Component {
    *
    * @memberof RecipeDetailsFooter
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   constructor(props) {
     super(props);
@@ -32,7 +32,7 @@ export class RecipeDetailsFooter extends Component {
    *
    * @memberof RecipeDetailsFooter
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onSubmit(event) {
     event.preventDefault();
@@ -45,7 +45,7 @@ export class RecipeDetailsFooter extends Component {
     *
     * @memberof RecipeDetailsFooter
     *
-    * @returns { undefined }
+    * @returns { Object } json - payload
     */
   handleDelete(event) {
     event.preventDefault();
@@ -73,7 +73,7 @@ export class RecipeDetailsFooter extends Component {
    *
    * @memberof RecipeDetailsFooter
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    *
    */
   authUser() {
@@ -99,7 +99,7 @@ export class RecipeDetailsFooter extends Component {
   /**
    * @memberof RecipeDetailsFooter
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    *
    */
   unAuthUser() {
@@ -109,7 +109,7 @@ export class RecipeDetailsFooter extends Component {
   /**
    * @memberof RecipeDetailsFooter
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   render() {
     return (this.props.loggedInUser === this.props.userId

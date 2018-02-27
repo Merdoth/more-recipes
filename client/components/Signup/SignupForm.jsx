@@ -36,7 +36,7 @@ export class SignupForm extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -80,16 +80,15 @@ export class SignupForm extends Component {
    *
    * @memberof SignupForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   handleErrors(errors) {
     if (typeof errors !== 'string') {
-      Object.keys(errors).forEach((error) => {
-        swal({
-          title: 'Oops!',
-          text: errors[error],
-          icon: 'error'
-        });
+      const err = errors[Object.keys(errors)[0]];
+      swal({
+        title: 'Oops!',
+        text: err,
+        icon: 'error'
       });
     } else {
       swal({

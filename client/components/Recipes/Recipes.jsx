@@ -18,6 +18,8 @@ export class Recipes extends Component {
   * @param { Object } props
   *
   * @memberof Recipes
+  *
+  * @returns { Object } json - payload
   */
   constructor(props) {
     super(props);
@@ -33,7 +35,7 @@ export class Recipes extends Component {
    *
    * @memberof  Recipes
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentDidMount() {
     const { page, offset, limit } = this.state;
@@ -45,7 +47,7 @@ export class Recipes extends Component {
    *
    * @param { Object } searchData
    *
-   * @return { undefined }
+   * @return { Object } json - payload
    */
   pageClick(searchData) {
     const { selected } = searchData;

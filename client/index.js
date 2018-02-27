@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './scss/main.scss';
+import history from './utils/history';
 import store from './utils/store';
 import Home from './components/Home.jsx';
 import AuthRoutes from './utils/AuthRoutes';
@@ -18,37 +19,26 @@ import CheckLoggedinUser from './utils/CheckLoggedinUser';
 const { localStorage } = window;
 const jwtToken = localStorage && localStorage.getItem('jwtToken');
 if (jwtToken) {
-  const decodedToken = jwt.decode(jwtToken);
-  const hasTokenExpired = decodedToken.exp - (Date.now() / 1000) < 0;
   const valid = jwt.verify(jwtToken, process.env.SECRET_KEY, (err, result) => {
     if (err) {
       return err;
     }
     return result;
   });
-  if (valid || hasTokenExpired) {
+  if (valid) {
+    const decodedToken = jwt.decode(jwtToken);
     setAuthToken(jwtToken);
     store.dispatch(setCurrentUser(decodedToken));
   } else {
     localStorage.removeItem('jwtToken');
-  }
-}
-
-if (jwtToken) {
-  const decodedToken = jwt.decode(jwtToken);
-  const hasExpired = decodedToken.exp - (Date.now() / 1000) < 0;
-  if (!hasExpired) {
-    setAuthToken(jwtToken);
-    store.dispatch(setCurrentUser(jwt.decode(jwtToken)));
-  } else {
-    localStorage.removeItem('jwtToken');
+    history.push('/');
   }
 }
 
 render(
   <Provider store={store}>
     <BrowserRouter>
-      <div>
+      <div className="root">
         <NavigationBar />
         <Switch>
           <Route exact path="/" component={Home} />

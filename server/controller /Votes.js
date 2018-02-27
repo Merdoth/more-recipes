@@ -36,6 +36,7 @@ class Votes {
             return recipes.findOne({
               where: { id },
             }).then((recipe) => {
+              
               recipe.increment('upVotes').then(() => {
                 res.status(201).send({
                   message: 'Your vote has been recorded',

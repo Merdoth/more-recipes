@@ -18,7 +18,7 @@ export class Profile extends Component {
    *
    * @memberof Profile
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   constructor(props) {
     super(props);
@@ -48,7 +48,7 @@ export class Profile extends Component {
     *
     * @memberof Profile
     *
-    * @returns { undefined }
+    * @returns { Object } json - payload
     */
   componentDidMount() {
     this.props.getOneUser();
@@ -58,7 +58,7 @@ export class Profile extends Component {
    *
    * @memberof Profile
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -69,7 +69,7 @@ export class Profile extends Component {
    *
    * @memberof Profile
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onSubmit(event) {
     event.preventDefault();

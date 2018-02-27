@@ -71,7 +71,7 @@ class Favorites {
    *
    * @memberof Favorite
    *
-   * @returns { undefined }
+   * @returns { object } json - payload
    */
   static removeFavourites(req, res) {
     const userId = req.decoded.id;

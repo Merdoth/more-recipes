@@ -14,7 +14,7 @@ export class Home extends Component {
   /**
    * @memberof Home
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentDidMount() {
     this.props.getMostVoted();

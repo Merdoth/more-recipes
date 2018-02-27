@@ -32,10 +32,10 @@ class Recipes {
     recipes
       .create({
         userId: req.decoded.id,
-        recipeName,
-        description,
-        ingredients,
-        preparation,
+        recipeName: recipeName.toLowerCase(),
+        description: description.toLowerCase(),
+        ingredients: ingredients.toLowerCase(),
+        preparation: preparation.toLowerCase(),
         image
       })
       .then(createdRecipe =>
@@ -199,8 +199,8 @@ class Recipes {
         limit,
         offset,
       })
-      .then((recipesFound) => {
-        if (recipesFound.count < 1) {
+      .then((userRecipes) => {
+        if (userRecipes.count < 1) {
           return res.status(404).send({
             message: 'No recipes found. Please try to create one.'
           });
@@ -210,12 +210,12 @@ class Recipes {
         const paginate = pagination(
           query.limit,
           query.offset,
-          recipesFound.count
+          userRecipes.count
         );
-        if (recipesFound) {
+        if (userRecipes) {
           return res.status(200).send({
             paginate,
-            recipesFound
+            userRecipes
           });
         }
         return res.status(404).send({ message: 'Recipe not found' });
@@ -314,7 +314,7 @@ class Recipes {
   static searchRecipe(req, res) {
     let { offset, limit } = req.query;
     limit = limit || 8;
-    if ((typeof limit !== 'number') || (typeof offset !== 'number')) {
+    if ((typeof Number(limit) !== 'number') || (typeof Number(offset) !== 'number')) {
       return res.status(404).send({
         message: 'Limit or Offset must be a number.'
       });
@@ -341,6 +341,11 @@ class Recipes {
       })
       .then((recipe) => {
         if (recipe) {
+          if (recipe.rows.length === 0) {
+            return res.status(404).send({
+              message: 'No recipe found!!'
+            });
+          }
           return res.status(200).send({
             recipe,
             paginationData: paginates(recipe.count, limit, offset * 5)

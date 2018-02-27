@@ -46,14 +46,16 @@ export const getOneRecipe = (userId, recipeId) => dispatch =>
 
 /**
  *
+ * @param { Number } id
  * @param { Object } message
  *
  * @returns { undefined }
  *
  */
-export const deleteRecipeSuccess = message => ({
+export const deleteRecipeSuccess = (id, message) => ({
   type: types.DELETE_RECIPE_SUCCESS,
-  message
+  message,
+  id
 });
 
 /**
@@ -80,7 +82,7 @@ export const deleteRecipe = id => dispatch =>
   api
     .deleteRecipe(id)
     .then((res) => {
-      dispatch(deleteRecipeSuccess(res.data));
+      dispatch(deleteRecipeSuccess(id, res.data));
     })
     .catch((error) => {
       dispatch(deleteRecipeFailure(error.response.data));

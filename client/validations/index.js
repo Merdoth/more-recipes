@@ -66,7 +66,7 @@ export const validateSignIn = (value) => {
 };
 
 /**
- * @description helper funcrtion to validate add recipe
+ * @description helper function to validate add recipe
  *
  * @param {Object} value - object
  *

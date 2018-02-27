@@ -6,7 +6,7 @@ import axios from 'axios';
  *
  * @param { object } token
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 const setAuthToken = (token) => {
   token = token || localStorage.getItem('jwtToken');

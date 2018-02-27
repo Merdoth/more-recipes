@@ -26,7 +26,7 @@ class NavigationBar extends React.Component {
    *
    * @memberof NavigationBar
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   logout(event) {
     event.preventDefault();

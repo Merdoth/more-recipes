@@ -30,7 +30,7 @@ export class SearchForm extends Component {
   /**
  * @param { Object } event
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -39,7 +39,7 @@ export class SearchForm extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onSubmit(event) {
     event.preventDefault();
@@ -59,7 +59,7 @@ export class SearchForm extends Component {
   * @param { Object } event
   * @param { Object } callback
   *
-  * @returns { undefined }
+  * @returns { Object } json - payload
   */
   handleEnterKey(event, callback) {
     if (event.key === 'Enter') {

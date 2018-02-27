@@ -33,12 +33,13 @@ describe('More Recipes', () => {
       .end((err, res) => {
         expect(res.status).toEqual(200);
         expect(res.body.message).toEqual('Review successfully added');
+        expect(res.body.reviewReturned.id).toEqual(1);
         done();
       });
   });
 
-  it(`should throw an error if the review 
-  already exists and return 409`, (done) => {
+  it(`should return 409 status, a message and an object if the review
+  content already exists`, (done) => {
       chai
         .request(app)
         .post('/api/v1/recipes/1/reviews')
