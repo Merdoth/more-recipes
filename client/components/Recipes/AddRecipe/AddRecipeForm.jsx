@@ -1,28 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import swal from 'sweetalert';
 import PropTypes from 'prop-types';
 import Button from '../../common/Button.jsx';
 import InputField from '../../common/InputField.jsx';
 import TextArea from '../../common/TextArea.jsx';
-import InputLine from '../../common/InputLine.jsx';
-import history from '../../../utils/history';
+import { validateAddRecipe } from '../../../validations/index';
 import { addRecipes } from '../../../actions/recipeActions/';
 
 /**
- * @param { Object } AddRecipeForm
+ * @description this class returns a AddRecipeForm component
  *
  * @returns { undefined }
  *
- * @desc this class returns a AddRecipeForm component
  */
 export class AddRecipeForm extends Component {
   /**
-   * Creates an instance of AddRecipeForm
    * @param { Object } props
    *
    * @memberof AddRecipeForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   constructor(props) {
     super(props);
@@ -43,7 +41,7 @@ export class AddRecipeForm extends Component {
    *
    * @memberof AddRecipeForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -54,10 +52,9 @@ export class AddRecipeForm extends Component {
    *
    * @memberof AddRecipeForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onImageChange(event) {
-    event.preventDefault();
     this.setState({ [event.target.name]: event.target.files[0] });
   }
 
@@ -66,16 +63,26 @@ export class AddRecipeForm extends Component {
    *
    * @memberof AddRecipeForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onSubmit(event) {
     event.preventDefault();
-    this.props.addRecipes(this.state);
+    const { errors } = validateAddRecipe(this.state);
+    if (Object.keys(errors).length === 0) {
+      this.props.addRecipes(this.state);
+    } else {
+      const err = errors[Object.keys(errors)[0]];
+      return swal({
+        title: 'Oops!',
+        text: err,
+        icon: 'error'
+      });
+    }
   }
   /**
+  * @memberof AddRecipeForm
+  *
    * @returns { undefined }
-   *
-   * @memberof AddRecipeForm
    */
   render() {
     return (
@@ -119,21 +126,18 @@ export class AddRecipeForm extends Component {
           label="Preparation"
           onChange={this.onChange}
         />
-        <InputLine
-          id="image"
-          type="file"
-          name="image"
-          placeholder="Upload Image"
-          value=""
-          label="Select Image"
-          onChange={this.onImageChange}
-        />
-
+        <div className="form-group">
+          <label htmlFor="foodImage">Select Image</label>
+          <input type="file" name="image"
+          className="form-control-file" id="foodImage"
+          onChange={this.onImageChange}/>
+        </div>
         <Button
+          id="submitBtn"
           type="submit"
           onClick={this.onSubmit}
           disabled={this.state.isLoading}
-          name="Add Recipe"
+          name="Add"
           iconClass="fa-cutlery"
           className="btn btn-lg btn-primary btn-block submitBtn"
         />

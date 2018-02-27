@@ -32,7 +32,7 @@ export class RecipeDetails extends Component {
    *
    * @memberof RecipeDetails
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   constructor(props) {
     super(props);
@@ -52,12 +52,12 @@ export class RecipeDetails extends Component {
    *
    * @memberof RecipeDetails
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
     const { id } = this.props.user;
-    if (id) {
+    if (id && recipeId) {
       this.props.getOneRecipe(id, recipeId);
       this.props.getFavourite(recipeId);
     }
@@ -69,7 +69,7 @@ export class RecipeDetails extends Component {
    *
    * @memberof RecipeDetails
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onChange(event) {
     this.setState({
@@ -80,7 +80,7 @@ export class RecipeDetails extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    *
    * @memberof RecipeDetails
    */
@@ -93,7 +93,7 @@ export class RecipeDetails extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    *
    * @memberof RecipeDetails
    */
@@ -105,7 +105,7 @@ export class RecipeDetails extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    *
    * @memberof RecipeDetails
    */
@@ -118,7 +118,7 @@ export class RecipeDetails extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    *
    * @memberof RecipeDetails
    */
@@ -140,7 +140,7 @@ export class RecipeDetails extends Component {
    *
    * @param { Object } nextProps
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentWillReceiveProps(nextProps) {
     const {
@@ -194,11 +194,12 @@ export class RecipeDetails extends Component {
               </div>
             </div>
           </div>
-          <div className="col-md-8 col-sm-8 recipeI">
+          <div className="col-md-8 col-sm-8">
             <div className="recipe-detail-header-content">
               <div className="stats">
                 <span
                   onClick={this.handleUpVote}
+                  id="upvote"
                   className="btn btn-default stats-item upvote"
                 >
                   <i className="fa fa-thumbs-up iconStat" />
@@ -206,12 +207,14 @@ export class RecipeDetails extends Component {
                 </span>
                 <span
                   onClick={this.handleDownVote}
+                  id="downvote"
                   className="btn btn-default stats-item downvote"
                 >
                   <i className="fa fa-thumbs-down iconStat" />
                   {recipeDetails.downVotes}
                 </span>
                 <span
+                  id="favourite"
                   onClick={this.handleFavourite}
                   className={`btn btn-default stats-item ${selected} favourite`}
                 >
@@ -250,6 +253,7 @@ export class RecipeDetails extends Component {
             </h4>
             <div className="col-sm-12">
               <textarea
+                id="comment"
                 name="review"
                 className="form-control inputstl review"
                 rows="5"

@@ -3,11 +3,8 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-
-// import scss stylesheet
 import './scss/main.scss';
-
-// import component
+import history from './utils/history';
 import store from './utils/store';
 import Home from './components/Home.jsx';
 import AuthRoutes from './utils/AuthRoutes';
@@ -24,6 +21,7 @@ const jwtToken = localStorage && localStorage.getItem('jwtToken');
 if (jwtToken) {
   const valid = jwt.verify(jwtToken, process.env.SECRET_KEY, (err, result) => {
     if (err) {
+      localStorage.removeItem('jwtToken');
       return err;
     }
     return result;
@@ -32,15 +30,16 @@ if (jwtToken) {
     const decodedToken = jwt.decode(jwtToken);
     setAuthToken(jwtToken);
     store.dispatch(setCurrentUser(decodedToken));
-  } else {
+  } else if (!valid) {
     localStorage.removeItem('jwtToken');
+    history.push('/');
   }
 }
 
 render(
   <Provider store={store}>
     <BrowserRouter>
-      <div>
+      <div className="root">
         <NavigationBar />
         <Switch>
           <Route exact path="/" component={Home} />

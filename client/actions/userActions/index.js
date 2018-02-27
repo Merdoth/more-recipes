@@ -30,8 +30,6 @@ export const getOneUserFailure = error => ({
  *
  * @description dispatches an action to get a user
  *
- * @param { Object } callback
- *
  * @returns { Object } payload
  *
  */

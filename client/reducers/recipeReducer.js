@@ -25,7 +25,7 @@ export default (state = initialState, action = {}) => {
     case types.UPDATE_RECIPE_SUCCESS:
       return {
         ...state,
-        recipes: action.recipe.recipes,
+        recipes: action.recipe,
         error: {},
         message: action.recipe.message
       };

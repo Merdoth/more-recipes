@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-// Sets the authorization header
+/**
+ *
+ * @description Sets the authorization header
+ *
+ * @returns { object } json - payload
+ *
+ */
 const header = () => ({
   headers: {
     authorization: window.localStorage.jwtToken
@@ -10,8 +16,6 @@ const header = () => ({
 /**
  *
  * @description get a specific user
- *
- * @param { Object } object
  *
  * @returns { undefined }
  *
@@ -62,8 +66,6 @@ export const getAllRecipes = (page, offset, limit) =>
  *
  * @description signs up a user.
  *
- * @param { Object } object
- *
  * @returns { undefined }
  *
  */
@@ -72,8 +74,6 @@ export const userSignupRequest = () => axios.post('/api/v1/users/signup');
 /**
  *
  * @description signs in a user.
- *
- * @param { Object } object
  *
  * @returns { undefined }
  *
@@ -86,7 +86,7 @@ export const userSigninRequest = () => axios.post('/api/v1/users/signin');
  *
  * @param { Object } recipes
  *
- * @returns { undefined }
+ * @returns {Object} json - payload
  *
  */
 export const addRecipeRequest = (recipes) => {
@@ -112,7 +112,7 @@ export const addRecipeRequest = (recipes) => {
       preparation,
       image: res.data.url
     };
-    return axios.post('/api/v1/recipes', recipeData, header());
+    return axios.post('/api/v1/addrecipes', recipeData, header());
   });
 };
 
@@ -124,7 +124,7 @@ export const addRecipeRequest = (recipes) => {
  *
  * @param { Object } recipes
  *
- * @returns { undefined }
+ * @returns {Object} json - payload
  *
  */
 export const updateRecipeRequest = (id, recipes) => {
@@ -212,7 +212,7 @@ export const getOneRecipe = (userId, recipeId) =>
  *
  * @param { Number } id - action object
  *
- * @returns { undefined }
+ * @returns {Object} json - payload
  *
  */
 export const deleteRecipe = id =>
@@ -223,6 +223,17 @@ export const deleteRecipe = id =>
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   });
+
+
+  /**
+ *
+ * @description remove a favourited recipe
+ *
+ * @param { Number } recipeId - action object
+ *
+ * @returns {Object} json - payload
+ *
+ */
 
 export const removeFavouriteRequest = recipeId =>
   axios({
@@ -263,5 +274,5 @@ export const addFavouriteRequest = recipeId =>
   axios.post('/api/v1/favourites', { recipeId });
 
 
-export const getFavouriteRequest = recipeId =>
-  axios.get(`/api/v1/favourites/${recipeId}`);
+export const getFavouriteRequest = userId =>
+  axios.get(`/api/v1/favourites/${userId}`);

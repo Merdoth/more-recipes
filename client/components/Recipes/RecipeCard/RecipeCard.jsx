@@ -5,7 +5,7 @@ import RecipeCardDes from './RecipeCardDes.jsx';
 import RecipeCardFooter from './RecipeCardFooter.jsx';
 
 /**
- * @description this holders alkl the appreciation buttons and recipe image
+ * @description Helper component for rendering a recipe
  *
  * @param { Object } props
  *

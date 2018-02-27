@@ -3,7 +3,7 @@ import React from 'react';
 
 /**
  *
- * @description This gives the recipe descriptions
+ * @description Helper component for rendering recipe description
  *
  * @method RecipeCardDes
  *

@@ -3,7 +3,7 @@ import { Icons } from '../../common/Icons.jsx';
 
 /**
  *
- * @description This holds recipe icons
+ * @description Helper component for showing informative icons on the app
  *
  * @method  RecipeCardFooter
  *
