@@ -3,17 +3,29 @@ import expect from 'expect';
 import chaiHttp from 'chai-http';
 import {
   createUser1, createUser2, createUser3, createUser4, createUser5,
-  createUser6, createUser7,
-  invalidUser, createdUser, createdUser2, fakeUser, userError, user1
-} from '../helpers/userHelper';
+  createUser6, userWithNoPassword,
+  invalidUser, createdUser, createdUser2, fakeUser, userError, user1,
+  insertUserSeed } from '../helpers/userHelper';
 import app from '../../app';
+import models from '../../models';
 
-
+const { users } = models;
 chai.use(chaiHttp);
 
 let token;
 
 describe('More Recipes', () => {
+  before((done) => {
+    users.destroy({
+      truncate: true,
+      cascade: true,
+      restartIdentity: true
+    })
+      .then(() => {
+        insertUserSeed();
+        done();
+      });
+  });
   it('should throw an error if incorrect token is passed and return 401', (done) => {
     chai.request(app)
       .get('/api/v1/users')
@@ -98,7 +110,7 @@ describe('More Recipes', () => {
   it('should throw an error if password is empty & return 400', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
-      .send(createUser7)
+      .send(userWithNoPassword)
       .end((err, res) => {
         expect(res.status).toEqual(400);
         expect(res.body.error.passwordError).toEqual('Password can\'t be empty');
@@ -128,6 +140,7 @@ describe('More Recipes', () => {
       .end((err, res) => {
         token = res.body.token;
         expect(res.status).toEqual(201);
+        expect(res.body.user.fullName).toEqual('chimereucheya okereke')
         expect(res.body.message)
           .toEqual('User successfully created', token);
         done();
@@ -141,6 +154,7 @@ describe('More Recipes', () => {
       .end((err, res) => {
         token = res.body.token;
         expect(res.status).toEqual(201);
+        expect(res.body.user.email).toEqual('cheya@gmail.com');
         expect(res.body.message)
           .toEqual('User successfully created', token);
         done();
@@ -226,4 +240,3 @@ describe('More Recipes', () => {
       });
   });
 });
-

@@ -175,6 +175,13 @@ module.exports = {
       .click('#downvote')
       .pause(4000)
   },
+  'Should allow a user upvote his/her recipes': (browser) => {
+    browser
+      .waitForElementVisible('body', 3000)
+      .assert.visible('#reView')
+      .assert.visible('#comment')
+      .pause(4000)
+  },
     'Should allow a user delete his/her recipes': (browser) => {
       browser
       .waitForElementVisible('#delete')

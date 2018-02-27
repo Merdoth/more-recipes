@@ -16,7 +16,7 @@ const favoriteRoutes = (router) => {
     Favorites.removeFavourites
   );
   router.get(
-    '/favourites/:recipeId',
+    '/favourites/:userId',
     auth.authorize,
     Favorites.getUserFavourites
   );

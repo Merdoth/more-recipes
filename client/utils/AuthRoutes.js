@@ -24,7 +24,7 @@ class AuthRoutes extends Component {
    */
   render() {
     return (
-      <div>
+      <div id="wrapper">
         {this.props.isAuthenticated ? (
           <Switch>
             <Route path="/profile" component={Profile} />

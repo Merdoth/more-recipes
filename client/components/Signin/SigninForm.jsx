@@ -38,7 +38,7 @@ export class SigninForm extends Component {
    *
    * @memberof SigninForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onSubmit(event) {
     event.preventDefault();
@@ -76,7 +76,7 @@ export class SigninForm extends Component {
    *
    * @memberof SigninForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -88,15 +88,14 @@ export class SigninForm extends Component {
    *
    * @memberof SigninForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   handleErrors(errors) {
-    Object.keys(errors).forEach((error) => {
-      swal({
-        title: 'Oops!',
-        text: errors[error],
-        icon: 'error'
-      });
+    const err = errors[Object.keys(errors)[0]];
+    swal({
+      title: 'Oops!',
+      text: err,
+      icon: 'error'
     });
   }
   /**

@@ -2,7 +2,8 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import models from '../models/';
 import generateToken from '../utils/token';
-import validateInput, { validateUpdateUserInput } from '../validations/validateInput';
+import validateInput,
+{ validateUpdateUserInput } from '../validations/validateInput';
 
 // create reference to db model
 const Users = models.users;
@@ -26,7 +27,12 @@ class User {
       return res.status(400).send({ error: errors });
     }
 
-    Users.create(req.body)
+    Users.create({
+      fullName: req.body.fullName.toLowerCase(),
+      email: req.body.email.toLowerCase(),
+      userName: req.body.userName.toLowerCase(),
+      password: req.body.password
+    })
       .then((userCreated) => {
         const newUser = userCreated.dataValues;
         const token = generateToken(newUser);

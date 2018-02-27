@@ -15,7 +15,6 @@ chai.use(chaiHttp);
 
 let token;
 let token2;
-let name = 'Rice';
 
 describe('More Recipes', () => {
   before((done) => {
@@ -43,7 +42,7 @@ describe('More Recipes', () => {
 
   it('should throw an error if recipeName is empty and return 400', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes')
+      .post('/api/v1/addrecipes')
       .set('authorization', token)
       .send(recipe1)
       .end((err, res) => {
@@ -58,7 +57,7 @@ describe('More Recipes', () => {
   it(`should throw an error if description is 
   empty and return 400 and return 400`, (done) => {
       chai.request(app)
-        .post('/api/v1/recipes').set('authorization', token)
+        .post('/api/v1/addrecipes').set('authorization', token)
         .send(recipe3)
         .end((err, res) => {
           expect(res.status).toEqual(400);
@@ -71,7 +70,7 @@ describe('More Recipes', () => {
 
   it('should throw an error if ingredients is empty and return 400', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes').set('authorization', token)
+      .post('/api/v1/addrecipes').set('authorization', token)
       .send(recipe5)
       .end((err, res) => {
         expect(res.status).toEqual(400);
@@ -84,7 +83,7 @@ describe('More Recipes', () => {
   it(`should throw an error if there is no image
  and return 400`, (done) => {
       chai.request(app)
-        .post('/api/v1/recipes').set('authorization', token)
+        .post('/api/v1/addrecipes').set('authorization', token)
         .send(recipe6)
         .end((err, res) => {
           expect(res.status).toEqual(400);
@@ -97,7 +96,7 @@ describe('More Recipes', () => {
 
   it('should throw an error if preparation is empty and return 400', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes').set({ authorization: token })
+      .post('/api/v1/addrecipes').set({ authorization: token })
       .send(recipe7)
       .end((err, res) => {
         expect(res.status).toEqual(400);
@@ -109,21 +108,21 @@ describe('More Recipes', () => {
 
   it('should successfully create a recipe and return 200', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes').set({ authorization: token })
+      .post('/api/v1/addrecipes').set({ authorization: token })
       .send(createdRecipe)
       .end((err, res) => {
         expect(res.status).toEqual(200);
         expect(res.body.message)
           .toEqual('Recipe successfully added', createdRecipe);
         expect(res.body.createdRecipe.id).toEqual(1);
-        expect(res.body.createdRecipe.recipeName).toBe('Rice Soup');
+        expect(res.body.createdRecipe.recipeName).toBe('rice soup');
         done();
       });
   });
 
   it('should successfully create a second recipe and return 200', (done) => {
     chai.request(app)
-      .post('/api/v1/recipes').set({ authorization: token })
+      .post('/api/v1/addrecipes').set({ authorization: token })
       .send(createdRecipe2)
       .end((err, res) => {
         expect(res.status).toEqual(200);
@@ -136,7 +135,7 @@ describe('More Recipes', () => {
 
   it('should successfully get a recipe and return 200', (done) => {
     chai.request(app)
-      .get('/api/v1/user/1/recipes/1').set({ authorization: token })
+      .get('/api/v1/user/3/recipes/1').set({ authorization: token })
       .end((err, res) => {
         expect(res.status).toEqual(200);
         expect(res.body.message)
@@ -199,8 +198,8 @@ describe('More Recipes', () => {
       .get('/api/v1/myrecipes').set({ authorization: token })
       .end((err, res) => {
         expect(res.status).toEqual(200);
-        expect(res.body.recipesFound.rows[0]).toBeDefined();
-        expect(res.body.recipesFound.count).toEqual(2);
+        expect(res.body.userRecipes.rows[0]).toBeDefined();
+        expect(res.body.userRecipes.count).toEqual(2);
         done();
       });
   });
@@ -213,7 +212,7 @@ describe('More Recipes', () => {
         .query({ sort: 'createdAt', order: 'des' })
         .end((err, res) => {
           expect(res.status).toEqual(200);
-          expect(res.body.recipesFound.count).toEqual(2);
+          expect(res.body.userRecipes.count).toEqual(2);
           done();
         });
     });
@@ -273,10 +272,10 @@ describe('More Recipes', () => {
       chai.request(app)
         .post('/api/v1/search')
         .set({ authorization: token })
-        .query({ name, offset: 0, limit: 6 })
+        .query({ name: 'qeen', offset: 0, limit: 6 })
         .end((err, res) => {
           expect(res.status).toEqual(404);
-          expect(res.body.recipeName).toEqual();
+          expect(res.body.message).toEqual('No recipe found!!');
           done();
         });
     });
@@ -289,7 +288,7 @@ describe('More Recipes', () => {
         .query({ name: '', offset: 0, limit: 6 })
         .end((err, res) => {
           expect(res.status).toEqual(404);
-          expect(res.body.message).toEqual('Limit or Offset must be a number.');
+          expect(res.body.message).toEqual('no search parameter/limit');
           done();
         });
     });

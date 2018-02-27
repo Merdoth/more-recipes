@@ -32,7 +32,7 @@ export class RecipeDetails extends Component {
    *
    * @memberof RecipeDetails
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   constructor(props) {
     super(props);
@@ -52,7 +52,7 @@ export class RecipeDetails extends Component {
    *
    * @memberof RecipeDetails
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentDidMount() {
     const { recipeId } = this.props.match.params;
@@ -69,7 +69,7 @@ export class RecipeDetails extends Component {
    *
    * @memberof RecipeDetails
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onChange(event) {
     this.setState({
@@ -80,7 +80,7 @@ export class RecipeDetails extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    *
    * @memberof RecipeDetails
    */
@@ -93,7 +93,7 @@ export class RecipeDetails extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    *
    * @memberof RecipeDetails
    */
@@ -105,7 +105,7 @@ export class RecipeDetails extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    *
    * @memberof RecipeDetails
    */
@@ -118,7 +118,7 @@ export class RecipeDetails extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    *
    * @memberof RecipeDetails
    */
@@ -140,7 +140,7 @@ export class RecipeDetails extends Component {
    *
    * @param { Object } nextProps
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentWillReceiveProps(nextProps) {
     const {
@@ -194,7 +194,7 @@ export class RecipeDetails extends Component {
               </div>
             </div>
           </div>
-          <div className="col-md-8 col-sm-8 recipeI">
+          <div className="col-md-8 col-sm-8">
             <div className="recipe-detail-header-content">
               <div className="stats">
                 <span
@@ -253,6 +253,7 @@ export class RecipeDetails extends Component {
             </h4>
             <div className="col-sm-12">
               <textarea
+                id="comment"
                 name="review"
                 className="form-control inputstl review"
                 rows="5"

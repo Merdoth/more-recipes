@@ -27,7 +27,7 @@ export class SearchResult extends Component {
    *
    * @memberof  Recipes
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentDidMount() {
     const { name, limit, offset } = this.props.location.state;
@@ -39,7 +39,7 @@ export class SearchResult extends Component {
    *
    * @param { Object } searchData
    *
-   * @return { undefined }
+   * @return { Object } json - payload
    */
   pageClick(searchData) {
     const { selected } = searchData;
@@ -57,8 +57,12 @@ export class SearchResult extends Component {
     const foundRecipes = this.props.recipes.map(recipe => (
       <RecipeCard key={`recipes-${recipe.id}`} recipeList={recipe} />
     ));
+    const recipeResult = foundRecipes.length === 0 ?
+      'No recipes found with that name' : foundRecipes;
+    const noResultStyle = foundRecipes.length === 0 ? 'no-recipe' : '';
+    const pageCountStyle = foundRecipes.length === 0 ? 'page-count' : '';
     return (
-      <div>
+      <div className="main-wrapper">
         <div className="container manage">
           <div className="recipe-header">
             <h2>Recipes</h2>
@@ -69,10 +73,8 @@ export class SearchResult extends Component {
         </div>
       <div className="recipe-wrapper">
           <div className="container top">
-            <div className="row">
-              {foundRecipes}
-            </div>
-            <div className="row pagination">
+            <div className={`row ${noResultStyle}`}>{recipeResult}</div>
+            <div className={`row pagination ${pageCountStyle}`}>
               <ReactPaginate
                 previousLabel="previous"
                 nextLabel="next"
