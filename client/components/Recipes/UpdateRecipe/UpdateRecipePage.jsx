@@ -9,14 +9,14 @@ import UpdateRecipeForm from './UpdateRecipeForm.jsx';
  *
  *  @param { Object } props
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  * .
  */
 export const UpdateRecipePage = (props) => {
   const goToRecipes = route => props.history.push(route);
   return (
     <div className="row deco">
-      <div className="col-md-4 offset-md-4 cover1">
+      <div className="col-md-6 profile">
         <div className="form-deco">
           <UpdateRecipeForm {...props} goToRecipes={goToRecipes} />
         </div>

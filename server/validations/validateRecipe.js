@@ -9,31 +9,36 @@ import lodash from 'lodash';
  */
 const validateRecipe = (value) => {
   const {
-    recipeName, description, ingredients, preparation
+    recipeName, description, ingredients, preparation, image
   } = value;
   const errors = {};
-  if (recipeName.trim().length === 0) {
-    errors.recipeNameError = 'recipename is required';
-  } else if (recipeName.length < 3) {
-    errors.recipeNameError = 'recipename must be at least 3 characters long';
+  if (!recipeName) {
+    errors.recipeNameError = 'Recipename can\'t be empty';
+  } else if (recipeName.trim().length === 0) {
+    errors.recipeNameError = 'Recipename is required';
   }
 
-  if (description.trim().length === 0) {
-    errors.descriptionError = 'description is required';
-  } else if (description.length < 4) {
-    errors.descriptionError = 'description must be at least 4 characters long';
+  if (!description) {
+    errors.descriptionError = 'Description can\'t be empty';
+  } else if (description.trim().length === 0) {
+    errors.descriptionError = 'Description is required';
   }
 
-  if (ingredients.trim().length === 0) {
-    errors.ingredientsError = 'ingredients is required';
-  } else if (ingredients.length < 5) {
-    errors.ingredientsError = 'ingredients must be at least 5 characters long';
+  if (!ingredients) {
+    errors.ingredientsError = 'Ingredients can\'t be empty';
+  } else if (ingredients.trim().length === 0) {
+    errors.ingredientsError = 'Ingredients is required';
   }
 
-  if (preparation.trim().length === 0) {
-    errors.preparationError = 'preparation is required';
-  } else if (preparation.length < 5) {
-    errors.preparationError = 'preparation must be at least 5 characters long';
+  if (!preparation) {
+    errors.preparationError = 'Preparation can\'t be empty';
+  } else if (preparation.trim().length === 0) {
+    errors.preparationError = 'Preparation is required';
+  }
+  if (!image) {
+    errors.imageError = 'Image can\'t be an empty file';
+  } else if (image.trim().length === 0) {
+    errors.imageError = 'image is required';
   }
 
   return { isValid: lodash.isEmpty(errors), errors };

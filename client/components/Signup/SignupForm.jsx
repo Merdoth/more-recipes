@@ -11,8 +11,6 @@ import Button from '../common/Button.jsx';
 /**
  * @description this renders the signup form component
  *
- * @param { Object } SignupForm
- *
  * @returns { undefined }
  */
 export class SignupForm extends Component {
@@ -38,7 +36,7 @@ export class SignupForm extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -64,8 +62,12 @@ export class SignupForm extends Component {
           this.props.goToAllRecipes();
         })
         .catch((err) => {
-          const error = err.data.message;
-          this.handleErrors(error);
+          const error = err.response.data.message;
+          swal({
+            title: 'Oops!',
+            text: error,
+            icon: 'error'
+          });
           this.setState({ isLoading: false });
         });
     } else {
@@ -74,21 +76,19 @@ export class SignupForm extends Component {
   }
 
   /**
-   *
-   * @returns { undefined }
-   *
    * @param { Object } errors
    *
    * @memberof SignupForm
+   *
+   * @returns { Object } json - payload
    */
   handleErrors(errors) {
     if (typeof errors !== 'string') {
-      Object.keys(errors).forEach((error) => {
-        swal({
-          title: 'Oops!',
-          text: error,
-          icon: 'error'
-        });
+      const err = errors[Object.keys(errors)[0]];
+      swal({
+        title: 'Oops!',
+        text: err,
+        icon: 'error'
       });
     } else {
       swal({
@@ -159,13 +159,13 @@ export class SignupForm extends Component {
               required
             />
             <Button
-              id="signUpBtn"
+              id="signupbtn"
               type="submit"
               onClick={this.onSubmit}
               disabled={this.state.isLoading}
               name="Sign Up"
               iconClass="fa-user-plus"
-              className="btn btn-lg btn-primary btn-block"
+              className="btn btn-lg btn-primary btn-block signup"
             />
             <p className="new_account">
               <strong>Already Have An Account? </strong>

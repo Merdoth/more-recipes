@@ -7,6 +7,7 @@ exports[`SearchForm Component snapshot it should render the right amount of elem
   <input
     aria-label="Search"
     className="form-control mr-sm-2 search"
+    id="search"
     name="name"
     onChange={[Function]}
     onKeyPress={[Function]}

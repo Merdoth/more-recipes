@@ -6,7 +6,6 @@ import * as types from './../actionTypes';
 /**
  *
  * @param { Object } user
- * @param { Object } userData
  *
  * @returns { undefined }
  */
@@ -35,12 +34,13 @@ function decode(token) {
  *
  * @param { Object } resData
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export function login(resData) {
   return dispatch =>
     axios.post('/api/v1/users/signin', resData).then((res) => {
       const { token } = res.data;
+      console.log(token, 'this is a bug')
       localStorage.setItem('jwtToken', token);
       setAuthToken(token);
       dispatch(setCurrentUser(decode(token)));
@@ -53,7 +53,7 @@ export function login(resData) {
  *
  * @param { Object } userData
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export function userSignupRequest(userData) {
   return dispatch =>
@@ -67,10 +67,9 @@ export function userSignupRequest(userData) {
 
 /**
  *
- *
  * @description this function logs out a user
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export function logout() {
   return (dispatch) => {

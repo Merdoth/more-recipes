@@ -9,7 +9,7 @@ import auth from '../middleware/authorization';
  * @returns { undefined }
  */
 const recipeRoutes = (router) => {
-  router.post('/recipes', auth.authorize, Recipes.addRecipe);
+  router.post('/addrecipes', auth.authorize, Recipes.addRecipe);
   router.get('/recipes', Recipes.getAllRecipes);
   router.get('/myrecipes', auth.authorize, Recipes.getUserRecipes);
   router.get('/user/:userId/recipes/:recipeId', Recipes.getOneRecipe);

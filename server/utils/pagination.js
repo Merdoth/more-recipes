@@ -1,5 +1,5 @@
 /**
- * @description paginate function allows navigation from one page to another
+ * @description pagination function returns the number of pages
  *
  * @param { Number } limit - limit
  * @param { Number } offset - offset
@@ -19,10 +19,19 @@ const pagination = (limit, offset, count) => {
   return result;
 };
 
+/**
+ * @description paginates function returns the number of pages
+ *
+ * @param { Number } count - count
+ * @param { Number } limit - limit
+ * @param { Number } offset - offset
+ *
+ * @returns { Object } result - result object
+ */
 export const paginates = (count, limit, offset) => {
   const page = Math.floor(offset / limit) + 1;
   const pageCount = Math.ceil(count / limit);
-  const pageSize = (count - offset) > limit ? limit : (count - offset);
+  const pageSize = limit;
   return {
     page,
     pageCount,

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import swal from 'sweetalert';
 import {
   UPVOTE_RECIPE_SUCCESS,
   UPVOTE_RECIPE_FAILURE,
@@ -35,8 +34,6 @@ export const upvoteRecipeSuccess = recipe => ({
  *
  * @param { Number } id
  *
- * @param { Object } callback
- *
  * @returns { Object } payload
  */
 export const upvoteRecipe = id => dispatch =>
@@ -44,7 +41,6 @@ export const upvoteRecipe = id => dispatch =>
     .post(`/api/v1/votes/${id}/upvotes`)
     .then((res) => {
       if (res) {
-
         dispatch(upvoteRecipeSuccess(res.data));
       }
     })
@@ -79,8 +75,6 @@ export const downvoteRecipeSuccess = recipes => ({
  * @description dispatches an action to downvote a recipe
  *
  * @param { Number } id
- *
- * @param { Object } callback
  *
  * @returns { Object } payload
  *

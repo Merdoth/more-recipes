@@ -9,7 +9,7 @@ import { userSignupRequest } from '../../actions/auth/authActions';
  *
  * @param { Object } props
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export const SignupPage = (props) => {
   const goToAllRecipes = () => props.history.push('/recipes');

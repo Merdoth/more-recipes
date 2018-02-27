@@ -5,11 +5,11 @@ import Button from '../../common/Button.jsx';
 import { deleteRecipe } from '../../../actions/recipeActions';
 
 /**
- * @param { Object } RecipeDetailsFooter
+ * @description this class returns a RecipeDetailsFooter component
+ *
  *
  * @returns { undefined }
  *
- * @desc this class returns a RecipeDetailsFooter component
  */
 export class RecipeDetailsFooter extends Component {
   /**
@@ -19,7 +19,7 @@ export class RecipeDetailsFooter extends Component {
    *
    * @memberof RecipeDetailsFooter
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   constructor(props) {
     super(props);
@@ -32,20 +32,21 @@ export class RecipeDetailsFooter extends Component {
    *
    * @memberof RecipeDetailsFooter
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onSubmit(event) {
     event.preventDefault();
     const { id } = this.props;
     return this.props.goToRecipes(`/updaterecipe/${id}`);
   }
+
   /**
-   * @param { Object } event
-   *
-   * @memberof RecipeDetailsFooter
-   *
-   * @returns { undefined }
-   */
+    * @param { Object } event
+    *
+    * @memberof RecipeDetailsFooter
+    *
+    * @returns { Object } json - payload
+    */
   handleDelete(event) {
     event.preventDefault();
     const { id } = this.props;
@@ -61,7 +62,7 @@ export class RecipeDetailsFooter extends Component {
           swal('Poof! Your recipe has been deleted!', {
             icon: 'success'
           });
-          return this.props.goToRecipes(`/recipes/${id}`);
+          return this.props.goToRecipes('/recipes');
         });
       }
       swal('Your recipe is safe!');
@@ -70,10 +71,10 @@ export class RecipeDetailsFooter extends Component {
 
   /**
    *
-   *
-   * @returns { undefined }
-   *
    * @memberof RecipeDetailsFooter
+   *
+   * @returns { Object } json - payload
+   *
    */
   authUser() {
     return (
@@ -96,18 +97,19 @@ export class RecipeDetailsFooter extends Component {
     );
   }
   /**
-   *
-   * @returns { undefined }
-   *
    * @memberof RecipeDetailsFooter
+   *
+   * @returns { Object } json - payload
+   *
    */
   unAuthUser() {
     return <div className="itemReview row" />;
   }
+
   /**
-   * @returns { undefined }
-   *
    * @memberof RecipeDetailsFooter
+   *
+   * @returns { Object } json - payload
    */
   render() {
     return (this.props.loggedInUser === this.props.userId

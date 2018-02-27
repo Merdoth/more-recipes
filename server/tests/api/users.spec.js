@@ -3,23 +3,35 @@ import expect from 'expect';
 import chaiHttp from 'chai-http';
 import {
   createUser1, createUser2, createUser3, createUser4, createUser5,
-  createUser6, createUser7,
-  invalidUser, createdUser, createdUser2, fakeUser, userError, user1
-} from '../helpers/userHelper';
+  createUser6, userWithNoPassword,
+  invalidUser, createdUser, createdUser2, fakeUser, userError, user1,
+  insertUserSeed } from '../helpers/userHelper';
 import app from '../../app';
+import models from '../../models';
 
-
+const { users } = models;
 chai.use(chaiHttp);
 
 let token;
 
 describe('More Recipes', () => {
-  it('should  throw an error if there are no users and return 404', (done) => {
+  before((done) => {
+    users.destroy({
+      truncate: true,
+      cascade: true,
+      restartIdentity: true
+    })
+      .then(() => {
+        insertUserSeed();
+        done();
+      });
+  });
+  it('should throw an error if incorrect token is passed and return 401', (done) => {
     chai.request(app)
       .get('/api/v1/users')
       .end((err, res) => {
-        expect(res.status).toEqual(404);
-        expect(res.body.message).toEqual('Users not found');
+        expect(res.status).toEqual(401);
+        expect(res.body.message).toEqual('You did not provide any access token.');
         done();
       });
   });
@@ -30,7 +42,7 @@ describe('More Recipes', () => {
       .send(createUser1)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.error.fullNameError).toEqual('fullname is required');
+        expect(res.body.error.fullNameError).toEqual('Fullname can\'t be empty');
         done();
       });
   });
@@ -44,7 +56,7 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.status).toEqual(400);
           expect(res.body.error.fullNameError)
-            .toEqual('fullname must be at least 3 characters long');
+            .toEqual('Fullname must be at least 3 characters long');
           done();
         });
     });
@@ -55,7 +67,7 @@ describe('More Recipes', () => {
       .send(createUser3)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.error.userNameError).toEqual('username is required');
+        expect(res.body.error.userNameError).toEqual('Username can\'t be empty');
         done();
       });
   });
@@ -68,7 +80,7 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.status).toEqual(400);
           expect(res.body.error.userNameError)
-            .toEqual('username must be at least 3 characters long');
+            .toEqual('Username must be at least 3 characters long');
           done();
         });
     });
@@ -79,7 +91,7 @@ describe('More Recipes', () => {
       .send(createUser5)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.error.emailError).toEqual('email is required');
+        expect(res.body.error.emailError).toEqual('Email can\'t be empty');
         done();
       });
   });
@@ -90,7 +102,7 @@ describe('More Recipes', () => {
       .send(createUser6)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.error.emailError).toEqual('email is not valid');
+        expect(res.body.error.emailError).toEqual('Email is not valid');
         done();
       });
   });
@@ -98,10 +110,10 @@ describe('More Recipes', () => {
   it('should throw an error if password is empty & return 400', (done) => {
     chai.request(app)
       .post('/api/v1/users/signup')
-      .send(createUser7)
+      .send(userWithNoPassword)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.error.passwordError).toEqual('password is required');
+        expect(res.body.error.passwordError).toEqual('Password can\'t be empty');
         done();
       });
   });
@@ -115,7 +127,7 @@ describe('More Recipes', () => {
         .end((err, res) => {
           expect(res.status).toEqual(400);
           expect(res.body.error.passwordError)
-            .toEqual('password must be at least 8 characters long');
+            .toEqual('Password must be at least 8 characters long');
           done();
         });
     }
@@ -128,6 +140,7 @@ describe('More Recipes', () => {
       .end((err, res) => {
         token = res.body.token;
         expect(res.status).toEqual(201);
+        expect(res.body.user.fullName).toEqual('chimereucheya okereke')
         expect(res.body.message)
           .toEqual('User successfully created', token);
         done();
@@ -141,6 +154,7 @@ describe('More Recipes', () => {
       .end((err, res) => {
         token = res.body.token;
         expect(res.status).toEqual(201);
+        expect(res.body.user.email).toEqual('cheya@gmail.com');
         expect(res.body.message)
           .toEqual('User successfully created', token);
         done();
@@ -189,16 +203,6 @@ describe('More Recipes', () => {
       });
   });
 
-  it('should successfully return all users and return 200', (done) => {
-    chai.request(app)
-      .get('/api/v1/users')
-      .end((err, res) => {
-        expect(res.status).toEqual(200);
-        expect(res.body.users.length).toEqual(2);
-        done();
-      });
-  });
-
   it('should successfully return a user and return 200', (done) => {
     chai.request(app)
       .get('/api/v1/user').set('authorization', token)
@@ -236,4 +240,3 @@ describe('More Recipes', () => {
       });
   });
 });
-

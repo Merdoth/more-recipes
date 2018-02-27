@@ -1,5 +1,17 @@
 import React from 'react';
 
+
+/**
+ *
+ * @description Helper component that renders TextArea
+ *
+ * @method Button
+ *
+ * @param { Object } props
+ *
+ * @returns { undefined }
+ *
+ */
 const TextArea = ({
   name,
   placeholder,

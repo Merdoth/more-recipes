@@ -6,15 +6,13 @@ import SearchForm from './Search/SearchForm.jsx';
 import { logout } from '../actions/auth/authActions';
 
 /**
- * @description this render the navigation bar which allopws the user move from page to page
- *
- * @param { Object } NavigationBar
+ * @description Creates an instance of NavigationBar.
  *
  * @returns { undefined }
  */
 class NavigationBar extends React.Component {
   /**
-   * Creates an instance of NavigationBar.
+   *
    * @param { Object } props
    *
    * @memberof NavigationBar
@@ -28,7 +26,7 @@ class NavigationBar extends React.Component {
    *
    * @memberof NavigationBar
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   logout(event) {
     event.preventDefault();
@@ -58,20 +56,24 @@ class NavigationBar extends React.Component {
             <i className="fa fa-user-circle-o icon-size" aria-hidden="true" />
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <Link className="dropdown-item" to="/profile">
+            <Link id="Profile" className="dropdown-item" to="/profile">
               Profile
             </Link>
-            <Link className="dropdown-item" to="/addrecipe">
+            <Link
+              id="addrecipe"
+             className="dropdown-item" to="/addrecipe">
               Add Recipe
             </Link>
-            <Link className="dropdown-item" to="/myrecipes">
+            <Link
+              id="myrecipes"
+             className="dropdown-item" to="/myrecipes">
               My recipes
             </Link>
             <Link className="dropdown-item" to="/favourites">
               Favourites
             </Link>
 
-            <Link className="dropdown-item" to="/recipes">
+            <Link className="dropdown-item" to="/recipes" id="allrecipes">
               All Recipes
             </Link>
             <Link onClick={this.logout} className="dropdown-item" to="/">
@@ -99,13 +101,14 @@ class NavigationBar extends React.Component {
         </li>
         <li id="SignUp" className="nav-item">
           <Link
-          className="nav-link" to="/Signup">
+            id="signup" className="nav-link" to="/Signup">
             Sign Up
           </Link>
         </li>
 
         <li id="SignIn" className="nav-item">
           <Link
+            id="signin"
           className="nav-link" to="/Signin">
             Sign In
           </Link>

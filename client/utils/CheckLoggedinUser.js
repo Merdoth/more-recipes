@@ -14,7 +14,7 @@ const CheckLoggedInUser = (ComposedComponent) => {
      *
      * @method componentWillMount
      *
-     * @return { undefined } set user authentication status
+     * @return { object } set user authentication status
      */
     componentWillMount() {
       if (this.props.isAuthenticated) {
@@ -25,7 +25,7 @@ const CheckLoggedInUser = (ComposedComponent) => {
      *
      * @param { Object } nextProps
      *
-     * @return { undefined } props
+     * @return { object } props
      */
     componentWillUpdate(nextProps) {
       if (nextProps.isAuthenticated) {

@@ -4,19 +4,31 @@ import { RecipeCard } from './Recipes/RecipeCard/RecipeCard.jsx';
 import { getFavourite } from '../actions/recipeActions/';
 
 /**
- * @param { Object }  Favourites
+ * @description this class returns a  Favourites component
  *
  * @returns { undefined }
  *
- * @description this class returns a  Favourites component
  */
 export class Favourites extends Component {
   /**
-   * @param { Number } id
+  * Creates an instance of RecipeDetails.
+  * @param { Object } props
+  *
+  * @memberof Favourites
+  *
+  * @returns { Object } json - payload
+  */
+  constructor(props) {
+    super(props);
+    this.state = {
+      favourites: [],
+    };
+  }
+  /**
    *
    * @memberof  Favourites
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentDidMount() {
     const { id } = this.props.user;
@@ -24,7 +36,20 @@ export class Favourites extends Component {
       this.props.getFavourite(id);
     }
   }
-
+  /**
+   *
+   * @param { Object } nextProps
+   *
+   * @returns { Object } json - payload
+   */
+  componentWillReceiveProps(nextProps) {
+    if (nextProps) {
+      const { favourites } = nextProps;
+      this.setState(() => ({
+        favourites,
+      }));
+    }
+  }
   /**
    *
    * @returns { undefined }
@@ -32,11 +57,15 @@ export class Favourites extends Component {
    * @memberof  Favourites
    */
   render() {
-    const recipes = this.props.favourites.map(favourite => (
-      <RecipeCard key={`recipes-${favourite.recipe.id}`} recipeList={favourite.recipe} />
-    ));
+    const recipes = this.state.favourites.length !== 0 ? this.state.favourites.map(favourite => (
+      <RecipeCard
+      key={`recipes-${favourite.recipe.id}`}
+      recipeList={favourite.recipe} />
+    )) : [];
+    const userFavourites = recipes.length === 0 ? 'You have no Favorites yet. Try creating one' : recipes;
+    const pageCountStyle = recipes.length === 0 ? 'no-recipe' : '';
     return (
-      <div>
+      <div className="main-wrapper">
         <div className="container manage">
           <div className="recipe-header">
             <h2>Recipes</h2>
@@ -45,7 +74,7 @@ export class Favourites extends Component {
         </div>
         <div className="recipe-wrapper">
           <div className="container top">
-            <div className="row">{recipes}</div>
+            <div className={`row ${pageCountStyle}`}>{userFavourites}</div>
           </div>
         </div>
       </div>
