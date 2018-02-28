@@ -38,7 +38,7 @@ class Reviews {
                 reviews
                   .create({ userId, recipeId, review })
                   .then((reviewReturned) => {
-                    res.status(200).send({
+                    res.status(201).send({
                       message: 'Review successfully added',
                       reviewReturned
                     });

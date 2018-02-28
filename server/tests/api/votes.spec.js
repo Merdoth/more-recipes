@@ -84,7 +84,7 @@ describe('More Recipes', () => {
         done();
       });
   });
-  it('should successfully add an upvote and return 200', (done) => {
+  it('should successfully add an upvote and return 201', (done) => {
     chai
       .request(app)
       .post('/api/v1/votes/1/upvotes')
@@ -93,23 +93,23 @@ describe('More Recipes', () => {
         upVotes: '1'
       })
       .end((err, res) => {
-        expect(res.status).toEqual(200);
+        expect(res.status).toEqual(201);
         expect(res.body.message).toEqual('Your vote has been added');
         expect(res.body.recipe.downVotes).toBe(0);
         expect(res.body.recipe.upVotes).toBe(1);
         done();
       });
   });
-  it('should successfully remove downvote and return 200', (done) => {
+  it('should successfully remove upvote and return 201', (done) => {
     chai
       .request(app)
       .post('/api/v1/votes/1/downvotes')
       .set('authorization', token)
       .send({
-        downVotes: '0'
+        downVotes: '1'
       })
       .end((err, res) => {
-        expect(res.status).toEqual(200);
+        expect(res.status).toEqual(201);
         expect(res.body.message).toEqual('Your vote has been added');
         expect(res.body.recipe.downVotes).toBe(1);
         done();

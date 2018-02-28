@@ -36,7 +36,6 @@ class Votes {
             return recipes.findOne({
               where: { id },
             }).then((recipe) => {
-              
               recipe.increment('upVotes').then(() => {
                 res.status(201).send({
                   message: 'Your vote has been recorded',
@@ -65,7 +64,7 @@ class Votes {
                   .decrement('downVotes')
                   .then(() => { recipe.reload(); })
                   .then(() =>
-                    res.status(200).send({
+                    res.status(201).send({
                       message: 'Your vote has been added',
                       recipe
                     }));
@@ -141,7 +140,7 @@ class Votes {
                   recipe.reload();
                 })
                 .then(() =>
-                  res.status(200).send({
+                  res.status(201).send({
                     message: 'Your vote has been added',
                     recipe
                   }));

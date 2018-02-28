@@ -106,12 +106,12 @@ describe('More Recipes', () => {
       });
   });
 
-  it('should successfully create a recipe and return 200', (done) => {
+  it('should successfully create a recipe and return 201', (done) => {
     chai.request(app)
       .post('/api/v1/addrecipes').set({ authorization: token })
       .send(createdRecipe)
       .end((err, res) => {
-        expect(res.status).toEqual(200);
+        expect(res.status).toEqual(201);
         expect(res.body.message)
           .toEqual('Recipe successfully added', createdRecipe);
         expect(res.body.createdRecipe.id).toEqual(1);
@@ -120,12 +120,12 @@ describe('More Recipes', () => {
       });
   });
 
-  it('should successfully create a second recipe and return 200', (done) => {
+  it('should successfully create a second recipe and return 201', (done) => {
     chai.request(app)
       .post('/api/v1/addrecipes').set({ authorization: token })
       .send(createdRecipe2)
       .end((err, res) => {
-        expect(res.status).toEqual(200);
+        expect(res.status).toEqual(201);
         expect(res.body.message)
           .toEqual('Recipe successfully added', createdRecipe2);
         expect(res.body.createdRecipe.id).toEqual(2);
@@ -162,7 +162,7 @@ describe('More Recipes', () => {
       chai.request(app)
         .get('/api/v1/user/2/recipes/1').set({ authorization: token2 })
         .end((err, res) => {
-          expect(res.status).toEqual(200);
+          expect(res.status).toEqual(201);
           expect(res.body.updatedRecipes.views).toEqual(1);
           done();
         });

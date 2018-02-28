@@ -40,7 +40,7 @@ class Recipes {
       })
       .then(createdRecipe =>
         res
-          .status(200)
+          .status(201)
           .send({ message: 'Recipe successfully added', createdRecipe }))
       .catch(error => res.status(500).send({ error }));
   }
@@ -88,7 +88,7 @@ class Recipes {
                     include: [{ model: reviews }, { model: votes }]
                   })
                   .then((updatedRecipes) => {
-                    res.status(200).send({
+                    res.status(201).send({
                       updatedRecipes
                     });
                   })

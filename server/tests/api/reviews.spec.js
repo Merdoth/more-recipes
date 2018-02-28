@@ -22,7 +22,7 @@ describe('More Recipes', () => {
       });
   });
 
-  it('should successfully add a review and return 200', (done) => {
+  it('should successfully add a review and return 201', (done) => {
     chai
       .request(app)
       .post('/api/v1/recipes/1/reviews')
@@ -31,7 +31,7 @@ describe('More Recipes', () => {
         review: 'This recipe is wack!'
       })
       .end((err, res) => {
-        expect(res.status).toEqual(200);
+        expect(res.status).toEqual(201);
         expect(res.body.message).toEqual('Review successfully added');
         expect(res.body.reviewReturned.id).toEqual(1);
         done();

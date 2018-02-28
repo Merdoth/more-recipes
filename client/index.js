@@ -17,9 +17,9 @@ import CheckLoggedinUser from './utils/CheckLoggedinUser';
 
 const { localStorage } = window;
 const jwtToken = localStorage && localStorage.getItem('jwtToken');
+const decodedToken = jwt.decode(jwtToken);
 
-if (jwtToken) {
-  const decodedToken = jwt.decode(jwtToken);
+if (decodedToken) {
   const hasExpired = decodedToken.exp - (Date.now() / 1000) < 0;
   if (!hasExpired) {
     setAuthToken(jwtToken);

@@ -19,7 +19,7 @@ export default {
     if (token) {
       jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
         if (error) {
-          res.status(400).send({
+          res.status(401).send({
             message: 'The token you provided is incorrect.'
           });
         } else {
