@@ -18,6 +18,8 @@ export class Recipes extends Component {
   * @param { Object } props
   *
   * @memberof Recipes
+  *
+  * @returns { Object } json - payload
   */
   constructor(props) {
     super(props);
@@ -33,11 +35,11 @@ export class Recipes extends Component {
    *
    * @memberof  Recipes
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentDidMount() {
     const { page, offset, limit } = this.state;
-    // this.props.getAllRecipes(page, offset, limit);
+    this.props.getAllRecipes(page, offset, limit);
   }
 
   /**
@@ -45,7 +47,7 @@ export class Recipes extends Component {
    *
    * @param { Object } searchData
    *
-   * @return { undefined }
+   * @return { Object } json - payload
    */
   pageClick(searchData) {
     const { selected } = searchData;
@@ -60,11 +62,40 @@ export class Recipes extends Component {
    * @memberof  Recipes
    */
   render() {
-    // const recipes = this.props.recipes.map(recipe => (
-    //   <RecipeCard key={`recipes-${recipe.id}`} recipeList={recipe} />
-    // ));
+    const recipes = this.props.recipes.map(recipe => (
+      <RecipeCard key={`recipes-${recipe.id}`} recipeList={recipe} />
+    ));
     return (
-      <p>Test page</p>
+      <div>
+        <div className="container manage">
+          <div className="recipe-header">
+            <h2>Recipes</h2>
+            <p>
+              Try, contribute to others recipe value by adding how your feel
+              about the recipes
+            </p>
+          </div>
+        </div>
+        <div className="recipe-wrapper">
+          <div className="container top">
+            <div className="row">{recipes}</div>
+            <div className="row pagination">
+              <ReactPaginate
+                id="page"
+                previousLabel="previous"
+                nextLabel="next"
+                breakClassName="break-me"
+                pageCount={this.props.pagination.pageCount || 0}
+                marginPagesDisplayed={2}
+                onPageChange={this.pageClick}
+                containerClassName='pagination'
+                subContainerClassName="pages pagination"
+                activeClassName="active"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }

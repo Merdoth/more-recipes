@@ -6,6 +6,7 @@ dotenv.config();
 
 export default {
   /**
+   * @description verifies if a users token is valid
    *
    * @param { Object } req - Request object
    * @param { Object } res - Response object
@@ -14,13 +15,11 @@ export default {
    * @returns { Object } json - payload
    */
   authorize(req, res, next) {
-    const token = req.headers.authorization || req.body.authorization;
-    // req.headers.authorization;
+    const token = req.headers.authorization || req.headers['x-access-token'];
     if (token) {
-      // verify token
       jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
         if (error) {
-          res.status(400).send({
+          res.status(401).send({
             message: 'The token you provided is incorrect.'
           });
         } else {
@@ -29,7 +28,6 @@ export default {
         }
       });
     } else {
-      // if no token was provided
       return res.status(401).send({
         status: 401,
         message: 'You did not provide any access token.'

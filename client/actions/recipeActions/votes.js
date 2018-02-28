@@ -1,5 +1,4 @@
 import axios from 'axios';
-import swal from 'sweetalert';
 import {
   UPVOTE_RECIPE_SUCCESS,
   UPVOTE_RECIPE_FAILURE,
@@ -10,7 +9,7 @@ import {
 /**
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const upvoteRecipeFailure = error => ({
@@ -21,7 +20,7 @@ export const upvoteRecipeFailure = error => ({
 /**
  * @param { Object } recipe
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const upvoteRecipeSuccess = recipe => ({
@@ -35,8 +34,6 @@ export const upvoteRecipeSuccess = recipe => ({
  *
  * @param { Number } id
  *
- * @param { Object } callback
- *
  * @returns { Object } payload
  */
 export const upvoteRecipe = id => dispatch =>
@@ -44,7 +41,6 @@ export const upvoteRecipe = id => dispatch =>
     .post(`/api/v1/votes/${id}/upvotes`)
     .then((res) => {
       if (res) {
-
         dispatch(upvoteRecipeSuccess(res.data));
       }
     })
@@ -55,7 +51,7 @@ export const upvoteRecipe = id => dispatch =>
 /**
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const downvoteRecipeFailure = error => ({
@@ -67,7 +63,7 @@ export const downvoteRecipeFailure = error => ({
  *
  * @param { Object } recipes
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export const downvoteRecipeSuccess = recipes => ({
   type: DOWNVOTE_RECIPE_SUCCESS,
@@ -79,8 +75,6 @@ export const downvoteRecipeSuccess = recipes => ({
  * @description dispatches an action to downvote a recipe
  *
  * @param { Number } id
- *
- * @param { Object } callback
  *
  * @returns { Object } payload
  *

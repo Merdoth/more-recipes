@@ -5,19 +5,16 @@ import { RecipeCard } from '../components/Recipes/RecipeCard/RecipeCard.jsx';
 import { getMostVoted } from '../actions/recipeActions/';
 
 /**
- * @param { Object } Home
+ * @description this class returns a Home component
  *
  * @returns { undefined }
  *
- * @description this class returns a Home component
  */
 export class Home extends Component {
   /**
-   * @param { Function } props
-   *
    * @memberof Home
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   componentDidMount() {
     this.props.getMostVoted();

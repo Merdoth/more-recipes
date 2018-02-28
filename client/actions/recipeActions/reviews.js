@@ -5,7 +5,7 @@ import * as api from './../../utils/moreRecipeAPI';
 /**
  * @param { Object } review
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const addReviewSuccess = review => ({
@@ -16,7 +16,7 @@ export const addReviewSuccess = review => ({
 /**
  * @param { Object } error
  *
- * @returns { undefined }
+* @returns { Object } json - payload
  *
  */
 export const addReviewFailure = error => ({

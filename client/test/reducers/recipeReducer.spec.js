@@ -25,11 +25,14 @@ describe('Recipe Reducer', () => {
       recipeName: 'Fish stew'
     };
 
+    const message = '';
+
     expect(recipeReducer(undefined, {
       type: 'ADD_RECIPE_SUCCESS',
-      recipe
+      recipe,
+      message
     })).toEqual({
-      message: '',
+      message,
       recipes: recipe,
       error: {}
     });
@@ -45,30 +48,37 @@ describe('Recipe Reducer', () => {
 
     expect(recipeReducer(undefined, {
       type: 'UPDATE_RECIPE_SUCCESS',
+      error: {},
+      message: {},
       recipe: {
         recipes,
         message
       }
     })).toEqual({
       message,
-      recipes,
+      recipes: {
+        message,
+        recipes
+      },
       error: {}
     });
   });
 
 
   it('should handle DELETE_RECIPE_SUCCESS action', () => {
+    let id;
     const message = 'Deleted!';
-
     expect(recipeReducer(undefined, {
       type: 'DELETE_RECIPE_SUCCESS',
-      message
+      message,
+      id
     })).toEqual({
       message,
       recipes: {
         reviews: []
       },
-      error: {}
+      error: {},
+      id,
     });
   });
 

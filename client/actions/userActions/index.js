@@ -6,7 +6,7 @@ import * as api from './../../utils/moreRecipeAPI';
  *
  * @param { Object } user
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const getOneUserSuccess = user => ({
@@ -18,7 +18,7 @@ export const getOneUserSuccess = user => ({
  *
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const getOneUserFailure = error => ({
@@ -29,8 +29,6 @@ export const getOneUserFailure = error => ({
 /**
  *
  * @description dispatches an action to get a user
- *
- * @param { Object } callback
  *
  * @returns { Object } payload
  *
@@ -49,7 +47,7 @@ export const getOneUser = () => (dispatch) => {
  *
  * @param { Object } user
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const updateUserProfileSuccess = user => ({
@@ -61,7 +59,7 @@ export const updateUserProfileSuccess = user => ({
  *
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const updateUserProfileFailure = error => ({

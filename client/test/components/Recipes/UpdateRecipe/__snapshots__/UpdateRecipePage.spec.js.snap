@@ -5,7 +5,7 @@ exports[`UpdateRecipePage Component snapshot it should render the right amount o
   className="row deco"
 >
   <div
-    className="col-md-4 offset-md-4 cover1"
+    className="col-md-6 profile"
   >
     <div
       className="form-deco"

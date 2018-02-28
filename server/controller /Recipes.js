@@ -2,14 +2,11 @@ import models from '../models';
 import pagination, { paginates } from '../utils/pagination';
 import validateRecipe from '../validations/validateRecipe';
 
-// create reference database model
+
 const {
   users, recipes, reviews, votes
 } = models;
 
-/**
- * query: hold query limit and offset
- */
 let query = {};
 
 /**
@@ -26,7 +23,6 @@ class Recipes {
    */
   static addRecipe(req, res) {
     const { errors, isValid } = validateRecipe(req.body);
-
     if (!isValid) {
       return res.status(400).send({ error: errors });
     }
@@ -36,15 +32,15 @@ class Recipes {
     recipes
       .create({
         userId: req.decoded.id,
-        recipeName,
-        description,
-        ingredients,
-        preparation,
+        recipeName: recipeName.toLowerCase(),
+        description: description.toLowerCase(),
+        ingredients: ingredients.toLowerCase(),
+        preparation: preparation.toLowerCase(),
         image
       })
       .then(createdRecipe =>
         res
-          .status(200)
+          .status(201)
           .send({ message: 'Recipe successfully added', createdRecipe }))
       .catch(error => res.status(500).send({ error }));
   }
@@ -92,7 +88,7 @@ class Recipes {
                     include: [{ model: reviews }, { model: votes }]
                   })
                   .then((updatedRecipes) => {
-                    res.status(200).send({
+                    res.status(201).send({
                       updatedRecipes
                     });
                   })
@@ -178,7 +174,11 @@ class Recipes {
     limit = Number(limit) || 6;
     offset = limit * (Number(page) - 1) || 0;
     const userId = req.decoded.id;
-
+    if ((typeof limit !== 'number') || (typeof offset !== 'number')) {
+      return res.status(404).send({
+        message: 'Limit or Offset must be a number.'
+      });
+    }
     if (req.query.sort === 'createdAt' && req.query.order === 'des') {
       query = {
         include: [{ model: reviews, votes }],
@@ -199,8 +199,8 @@ class Recipes {
         limit,
         offset,
       })
-      .then((recipesFound) => {
-        if (recipesFound.count < 1) {
+      .then((userRecipes) => {
+        if (userRecipes.count < 1) {
           return res.status(404).send({
             message: 'No recipes found. Please try to create one.'
           });
@@ -210,12 +210,12 @@ class Recipes {
         const paginate = pagination(
           query.limit,
           query.offset,
-          recipesFound.count
+          userRecipes.count
         );
-        if (recipesFound) {
+        if (userRecipes) {
           return res.status(200).send({
             paginate,
-            recipesFound
+            userRecipes
           });
         }
         return res.status(404).send({ message: 'Recipe not found' });
@@ -232,19 +232,18 @@ class Recipes {
    * @returns { Object } json - payload
    */
   static updateUserRecipes(req, res) {
+    const userId = req.decoded.id;
+    const { errors, isValid } = validateRecipe(req.body);
+    if (!isValid) {
+      return res.status(400).send({ error: errors });
+    }
     const { id } = req.params;
     const {
       recipeName, description, preparation, ingredients, image
     } = req.body;
-
     return (
       recipes
-        // query database to check if recipe exist
-        .find({
-          where: {
-            id
-          }
-        })
+        .findOne({ where: { id, userId } })
         .then((recipe) => {
           if (recipe) {
             return recipe
@@ -263,7 +262,7 @@ class Recipes {
               })
               .catch(error => res.status(500).send({ error }));
           }
-          return res.status(404).send({ message: 'Recipe does not exist!' });
+          return res.status(404).send({ message: 'You can not update this recipe!' });
         })
     );
   }
@@ -278,21 +277,26 @@ class Recipes {
    */
   static deleteUserRecipes(req, res) {
     const { id } = req.params;
+    const userId = req.decoded.id;
     return (
       recipes
-        // query db to check if recipe exist
-        .find({
-          where: {
-            id
-          }
-        })
+        .findOne({ where: { id } })
         .then((recipe) => {
           if (recipe) {
-            recipe
-              .destroy()
-              .then(() => res.status(200).send({ message: 'Recipe deleted!' }));
+            if (recipe.userId === userId) {
+              recipe.destroy()
+                .then(() => res.status(200).json({
+                  message: 'Recipe deleted',
+                }));
+            } else {
+              return res.status(401).json({
+                message: 'You are not authorized to delete this recipe'
+              });
+            }
           } else {
-            res.status(404).send({ message: 'Recipe does not exist!' });
+            return res.status(404).json({
+              message: 'Not found'
+            });
           }
         })
         .catch(error => res.status(500).send({ error }))
@@ -310,7 +314,11 @@ class Recipes {
   static searchRecipe(req, res) {
     let { offset, limit } = req.query;
     limit = limit || 8;
-    // validate request object
+    if ((typeof Number(limit) !== 'number') || (typeof Number(offset) !== 'number')) {
+      return res.status(404).send({
+        message: 'Limit or Offset must be a number.'
+      });
+    }
     if (!req.query.name) {
       return res.status(404).send({
         success: false,
@@ -333,6 +341,11 @@ class Recipes {
       })
       .then((recipe) => {
         if (recipe) {
+          if (recipe.rows.length === 0) {
+            return res.status(404).send({
+              message: 'No recipe found!!'
+            });
+          }
           return res.status(200).send({
             recipe,
             paginationData: paginates(recipe.count, limit, offset * 5)

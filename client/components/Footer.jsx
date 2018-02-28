@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * @description this returns a footer component
  *
- * @extends { Component t}
+ * @extends { Component }
  *
  * @returns { undefined }
  */
