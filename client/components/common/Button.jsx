@@ -8,7 +8,7 @@ import React from 'react';
  *
  * @param { Object } props
  *
- * @returns { undefined }
+ * @returns { Object } returns button component
  *
  */
 const Button = ({

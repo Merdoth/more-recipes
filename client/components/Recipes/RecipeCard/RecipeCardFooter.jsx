@@ -9,7 +9,7 @@ import { Icons } from '../../common/Icons.jsx';
  *
  * @param { Object } props
  *
- * @returns { undefined }
+ * @returns {object} returns RecipeCardFooter component
  * .
  */
 export const RecipeCardFooter = props => (

@@ -7,7 +7,7 @@ import * as types from './../actionTypes';
  *
  * @param { Object } user
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export function setCurrentUser(user) {
   return {
@@ -22,7 +22,7 @@ export function setCurrentUser(user) {
  *
  * @param { Object } token
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 function decode(token) {
   return jwtDecode(token);
@@ -40,7 +40,6 @@ export function login(resData) {
   return dispatch =>
     axios.post('/api/v1/users/signin', resData).then((res) => {
       const { token } = res.data;
-      console.log(token, 'this is a bug')
       localStorage.setItem('jwtToken', token);
       setAuthToken(token);
       dispatch(setCurrentUser(decode(token)));

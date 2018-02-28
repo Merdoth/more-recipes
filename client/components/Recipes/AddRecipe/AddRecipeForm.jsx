@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 import PropTypes from 'prop-types';
-import Button from '../../common/Button.jsx';
 import InputField from '../../common/InputField.jsx';
 import TextArea from '../../common/TextArea.jsx';
 import { validateAddRecipe } from '../../../validations/index';
@@ -82,7 +81,7 @@ export class AddRecipeForm extends Component {
   /**
   * @memberof AddRecipeForm
   *
-   * @returns { undefined }
+  * @returns {object} returns add recipe form jsx
    */
   render() {
     return (
@@ -132,15 +131,18 @@ export class AddRecipeForm extends Component {
           className="form-control-file" id="foodImage"
           onChange={this.onImageChange}/>
         </div>
-        <Button
+
+        <button
           id="submitBtn"
-          type="submit"
+          type="button"
           onClick={this.onSubmit}
           disabled={this.state.isLoading}
           name="Add"
           iconClass="fa-cutlery"
-          className="btn btn-lg btn-primary btn-block submitBtn"
-        />
+          className="btn btn-lg btn-primary btn-block submitBtn">
+          <i className="fa fa-cutlery"></i>
+           Add
+        </button>
       </form>
     );
   }

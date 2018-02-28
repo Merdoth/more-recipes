@@ -9,7 +9,7 @@ import AddRecipeForm from './AddRecipeForm.jsx';
  *
  * @param { Object } props
  *
- * @return { Object } json - payload
+ * @return { Object } returrns an add recipe page component
  *
  */
 export const AddRecipePage = () =>

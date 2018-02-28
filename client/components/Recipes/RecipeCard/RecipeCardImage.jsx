@@ -6,7 +6,7 @@ import React from 'react';
  *
  * @method RecipeCardImage
  *
- * @returns { undefined }
+ * @returns {object} returns RecipeCardImage component
  * .
  */
 export const RecipeCardImage = ({ src }) => (

@@ -26,15 +26,17 @@ describe('More Recipes', () => {
         done();
       });
   });
-  it('should throw an error if incorrect token is passed and return 401', (done) => {
-    chai.request(app)
-      .get('/api/v1/users')
-      .end((err, res) => {
-        expect(res.status).toEqual(401);
-        expect(res.body.message).toEqual('You did not provide any access token.');
-        done();
-      });
-  });
+  it(`should throw an error if 
+    incorrect token is passed and return 401`, (done) => {
+      chai.request(app)
+        .get('/api/v1/users')
+        .end((err, res) => {
+          expect(res.status).toEqual(401);
+          expect(res.body.message)
+            .toEqual('You did not provide any access token.');
+          done();
+        });
+    });
 
   it('should throw an error if fullName is empty & return 400', (done) => {
     chai.request(app)
@@ -42,7 +44,8 @@ describe('More Recipes', () => {
       .send(createUser1)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.error.fullNameError).toEqual('Fullname can\'t be empty');
+        expect(res.body.error.fullNameError)
+          .toEqual('Fullname can\'t be empty');
         done();
       });
   });
@@ -67,7 +70,8 @@ describe('More Recipes', () => {
       .send(createUser3)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.error.userNameError).toEqual('Username can\'t be empty');
+        expect(res.body.error.userNameError)
+          .toEqual('Username can\'t be empty');
         done();
       });
   });
@@ -102,7 +106,8 @@ describe('More Recipes', () => {
       .send(createUser6)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.error.emailError).toEqual('Email is not valid');
+        expect(res.body.error.emailError)
+          .toEqual('Email is not valid');
         done();
       });
   });
@@ -113,7 +118,8 @@ describe('More Recipes', () => {
       .send(userWithNoPassword)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.error.passwordError).toEqual('Password can\'t be empty');
+        expect(res.body.error.passwordError)
+          .toEqual('Password can\'t be empty');
         done();
       });
   });
@@ -140,7 +146,7 @@ describe('More Recipes', () => {
       .end((err, res) => {
         token = res.body.token;
         expect(res.status).toEqual(201);
-        expect(res.body.user.fullName).toEqual('chimereucheya okereke')
+        expect(res.body.user.fullName).toEqual('chimereucheya okereke');
         expect(res.body.message)
           .toEqual('User successfully created', token);
         done();

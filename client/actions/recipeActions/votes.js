@@ -9,7 +9,7 @@ import {
 /**
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const upvoteRecipeFailure = error => ({
@@ -20,7 +20,7 @@ export const upvoteRecipeFailure = error => ({
 /**
  * @param { Object } recipe
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const upvoteRecipeSuccess = recipe => ({
@@ -51,7 +51,7 @@ export const upvoteRecipe = id => dispatch =>
 /**
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const downvoteRecipeFailure = error => ({
@@ -63,7 +63,7 @@ export const downvoteRecipeFailure = error => ({
  *
  * @param { Object } recipes
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export const downvoteRecipeSuccess = recipes => ({
   type: DOWNVOTE_RECIPE_SUCCESS,

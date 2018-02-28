@@ -7,7 +7,7 @@ import React from 'react';
  *
  * @method RecipeCardDes
  *
- * @returns { undefined }
+ * @returns {object} returns RecipeCardDes component
  * .
  */
 export const RecipeCardDes = ({ title, text }) => (

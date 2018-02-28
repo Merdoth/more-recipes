@@ -44,15 +44,22 @@ exports[`UpdateRecipePage Component snapshot it should render the right amount o
     type="text"
     value=""
   />
-  <InputLine
-    id=""
-    label="Select Image"
-    name="image"
-    onChange={[Function]}
-    placeholder="image"
-    type="file"
-    value=""
-  />
+  <div
+    className="form-group"
+  >
+    <label
+      htmlFor="foodImage"
+    >
+      Select Image
+    </label>
+    <input
+      className="form-control-file"
+      id="foodImage"
+      name="image"
+      onChange={[Function]}
+      type="file"
+    />
+  </div>
   <Button
     className="btn btn-lg btn-primary btn-block"
     iconClass="fa-cutlery"

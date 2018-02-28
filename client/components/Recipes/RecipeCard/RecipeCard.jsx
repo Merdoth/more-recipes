@@ -9,7 +9,7 @@ import RecipeCardFooter from './RecipeCardFooter.jsx';
  *
  * @param { Object } props
  *
- * @returns { undefined }
+ * @returns {object} returns RecipeCard component
  */
 export const RecipeCard = props => (
   <div className="col-md-4 col-sm-4 main-card">

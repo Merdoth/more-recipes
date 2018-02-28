@@ -73,7 +73,7 @@ export class RecipeDetailsFooter extends Component {
    *
    * @memberof RecipeDetailsFooter
    *
-   * @returns { Object } json - payload
+   * @returns {object} returns authUser component
    *
    */
   authUser() {

@@ -7,7 +7,7 @@ import * as api from './../../utils/moreRecipeAPI';
  *
  * @param { Object } recipe
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export const getOneRecipeSuccess = recipe => ({
   type: types.GET_ONE_RECIPE,
@@ -17,7 +17,7 @@ export const getOneRecipeSuccess = recipe => ({
  *
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export const getOneRecipeFailure = error => ({
   type: types.GET_ONE_RECIPE_FAILURE,
@@ -31,7 +31,7 @@ export const getOneRecipeFailure = error => ({
  * @param { Number } userId
  * @param { Number } recipeId
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export const getOneRecipe = (userId, recipeId) => dispatch =>
   api
@@ -49,7 +49,7 @@ export const getOneRecipe = (userId, recipeId) => dispatch =>
  * @param { Number } id
  * @param { Object } message
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const deleteRecipeSuccess = (id, message) => ({
@@ -62,7 +62,7 @@ export const deleteRecipeSuccess = (id, message) => ({
  *
  * @param { Object } error
  *
- * @returns { undefined } payload
+ * @returns { Object } json - payload
  *
  */
 export const deleteRecipeFailure = error => ({
@@ -90,7 +90,7 @@ export const deleteRecipe = id => dispatch =>
 /**
  * @param { Object } recipes
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const getAllRecipesSuccess = recipes => ({
@@ -116,7 +116,7 @@ export const getAllRecipes = (page, offset, limit) => dispatch =>
 /**
  * @param { Object } recipes
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const getUserRecipesSuccess = recipes => ({
@@ -127,7 +127,7 @@ export const getUserRecipesSuccess = recipes => ({
 /**
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const getUserRecipesFailure = error => ({
@@ -160,7 +160,7 @@ export const getUserRecipes = (page, offset, limit) => dispatch =>
  *
  * @param { Object } recipe
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const updateRecipeSuccess = recipe => ({
@@ -173,7 +173,7 @@ export const updateRecipeSuccess = recipe => ({
  *
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const updateRecipeFailure = error => ({
@@ -206,7 +206,7 @@ export const updateRecipe = (id, recipes) => dispatch =>
  *
  * @param { Object } recipe
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const addRecipesSuccess = recipe => ({
@@ -218,7 +218,7 @@ export const addRecipesSuccess = recipe => ({
  *
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const addRecipesFailure = error => ({
@@ -261,7 +261,7 @@ export const addRecipes = recipes => dispatch =>
  *
  * @param { Object } favourite
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const addFavouriteSuccess = favourite => ({
@@ -273,7 +273,7 @@ export const addFavouriteSuccess = favourite => ({
  *
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const addFavouriteFailure = error => ({
@@ -304,7 +304,7 @@ export const addFavourite = id => dispatch =>
  *
  * @param { Object } favourite
  *
- * @returns { undefined } payload
+ * @returns { Object } json - payload
  *
  */
 export const removeFavouriteSuccess = favourite => ({
@@ -316,7 +316,7 @@ export const removeFavouriteSuccess = favourite => ({
  *
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const removeFavouriteFailure = error => ({
@@ -347,7 +347,7 @@ export const removeFavourite = id => dispatch =>
  *
  * @param { Object } favourite
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const getFavouriteSuccess = favourite => ({
@@ -359,7 +359,7 @@ export const getFavouriteSuccess = favourite => ({
  *
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const getFavouriteFailure = error => ({
@@ -391,7 +391,7 @@ export const getFavourite = id => dispatch =>
  *
  * @param { Object } recipes
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const getMostVotedSuccess = recipes => ({
@@ -403,7 +403,7 @@ export const getMostVotedSuccess = recipes => ({
  *
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  *
  */
 export const getMostVotedFailure = error => ({
@@ -433,7 +433,7 @@ export const getMostVoted = () => dispatch =>
  *
  * @param { Object } recipe
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export const searcRecipeSuccess = recipe => ({
   type: types.SEARCH_RECIPE_SUCCESS,
@@ -443,7 +443,7 @@ export const searcRecipeSuccess = recipe => ({
  *
  * @param { Object } error
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
 export const searchRecipeFailure = error => ({
   type: types.SEARCH_RECIPE_FAILURE,

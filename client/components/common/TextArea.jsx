@@ -9,7 +9,7 @@ import React from 'react';
  *
  * @param { Object } props
  *
- * @returns { undefined }
+ * @returns { Object } returns a textarea component
  *
  */
 const TextArea = ({

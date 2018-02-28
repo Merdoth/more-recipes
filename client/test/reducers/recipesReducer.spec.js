@@ -14,14 +14,17 @@ describe('Recipes Reducer', () => {
       count: 0,
       rows: [],
     };
-
     expect(recipesReducer(undefined, {
       type: 'GET_MOST_VOTED_SUCCESS',
       recipes: { paginate, recipesFound },
     })).toEqual({
+      message: '',
       error: {},
       paginate,
-      recipesFound
+      recipesFound,
+      userRecipes: {
+        rows: []
+      }
     });
   });
 
@@ -40,7 +43,11 @@ describe('Recipes Reducer', () => {
         message: 'Failed to fetch'
       }
     })).toEqual({
+      message: '',
       recipesFound: {
+        rows: []
+      },
+      userRecipes: {
         rows: []
       },
       error
@@ -64,9 +71,13 @@ describe('Recipes Reducer', () => {
       type: 'GET_ALL_RECIPES',
       recipes: { paginate, recipesFound },
     })).toEqual({
+      message: '',
       error: {},
       paginate,
-      recipesFound
+      recipesFound,
+      userRecipes: {
+        rows: []
+      }
     });
   });
 
@@ -83,6 +94,9 @@ describe('Recipes Reducer', () => {
         rows: [
           recipe
         ]
+      },
+      userRecipes: {
+        rows: []
       },
       error: {}
     });
@@ -106,9 +120,13 @@ describe('Recipes Reducer', () => {
       type: 'GET_USER_RECIPES_SUCCESS',
       recipes: { paginate, recipesFound },
     })).toEqual({
+      message: '',
       error: {},
       paginate,
-      recipesFound
+      recipesFound,
+      userRecipes: {
+        rows: []
+      }
     });
   });
 
@@ -123,7 +141,11 @@ describe('Recipes Reducer', () => {
         message: 'Failed to fetch'
       }
     })).toEqual({
+      message: '',
       recipesFound: {
+        rows: []
+      },
+      userRecipes: {
         rows: []
       },
       error

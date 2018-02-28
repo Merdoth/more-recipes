@@ -40,17 +40,23 @@ module.exports = {
       .setValue('input[name=password]', '123456789')
       .setValue('input[name=confirmPassword]', '123456789')
       .waitForElementVisible('.btn.btn-lg.btn-primary.btn-block.signup', 3000)
-      .click('.btn.btn-lg.btn-primary.btn-block.signup')
-      .pause(5000);
-      
+      .assert.visible('.btn.btn-lg.btn-primary.btn-block.signup')
+      .click('#signupbtn')
+      .pause(5000)
+     
   },
   'Should display sign in page and check for available elements': (browser) => {
     browser
+      .waitForElementVisible('body', 1000)
+      .assert.urlEquals('http://localhost:9000/recipes')
+      .click('#navbarDropdown')
+      .waitForElementVisible('.dropdown-menu', 5000)
+      .assert.visible('.dropdown-menu')
+      .click('#logout')
       .url('http://localhost:9000/')
       .waitForElementVisible('body', 10000)
       .click('#signin')
       .assert.urlEquals('http://localhost:9000/Signin')
-      .waitForElementVisible('body')
       .assert.visible('form')
       .assert.visible('h2')
       .assert.visible('input[name=email]')
@@ -58,6 +64,8 @@ module.exports = {
       .setValue('input[name=email]', 'sarah.gigs@gmail.com')
       .setValue('input[name=password]', '123456789')
       .click('.btn')
+      .pause(2000)
+      .assert.urlEquals('http://localhost:9000/recipes')
       .pause(5000);
   },
   'Should display profile page and check for available elements': (browser) => {
@@ -78,6 +86,7 @@ module.exports = {
       .setValue('input[name=fullName]', ' Bighead')
       .clearValue('input[name=userName]')
       .setValue('input[name=userName]', ' Smile')
+      .assert.visible('.btn')
       .click('.btn')
       .pause(5000);
   },
@@ -109,8 +118,7 @@ module.exports = {
       .waitForElementVisible('.btn.btn-lg.btn-primary.btn-block.submitBtn', 10000)
       .pause(2000)
       .assert.visible('.btn.btn-lg.btn-primary.btn-block.submitBtn')
-
-      .click('.btn.btn-lg.btn-primary.btn-block.submitBtn')
+      .click('#submitBtn')
       .pause(5000);
   },
   'Should allow a user view all his/her recipes': (browser) => {
@@ -142,6 +150,7 @@ module.exports = {
       .assert.visible('#update')
       .click('#update')
       .pause(5000)
+      .assert.visible('.swal-button.swal-button--confirm')
       .click('.swal-button.swal-button--confirm')
       .pause(5000)
     },
@@ -185,7 +194,9 @@ module.exports = {
     'Should allow a user delete his/her recipes': (browser) => {
       browser
       .waitForElementVisible('#delete')
+      .assert.visible('#delete')
       .click('#delete')
+      .assert.visible('.swal-button.swal-button--confirm.swal-button--danger')
       .click('.swal-button.swal-button--confirm.swal-button--danger')
       .pause(5000)
   }

@@ -8,7 +8,7 @@ import React from 'react';
  *
  * @param { Object } props
  *
- * @returns { undefined }
+ * @returns { Object } returns icons
  *
  */
 export const Icons = ({ upvotes, downvotes, views }) => (
@@ -27,7 +27,7 @@ export const Icons = ({ upvotes, downvotes, views }) => (
  *
  * @param { Object } props
  *
- * @returns { undefined }
+ * @returns { Object } retruns an icon component
  *
  */
 export const Icon = ({ className, score }) => (

@@ -74,7 +74,7 @@ class User {
               },
               process.env.SECRET_KEY,
               {
-                expiresIn: 60 * 60 * 24
+                expiresIn: 86400
               }
             );
             return res.status(200).send({

@@ -61,12 +61,12 @@ class NavigationBar extends React.Component {
             </Link>
             <Link
               id="addrecipe"
-             className="dropdown-item" to="/addrecipe">
+              className="dropdown-item" to="/addrecipe">
               Add Recipe
             </Link>
             <Link
               id="myrecipes"
-             className="dropdown-item" to="/myrecipes">
+              className="dropdown-item" to="/myrecipes">
               My recipes
             </Link>
             <Link className="dropdown-item" to="/favourites">
@@ -76,7 +76,7 @@ class NavigationBar extends React.Component {
             <Link className="dropdown-item" to="/recipes" id="allrecipes">
               All Recipes
             </Link>
-            <Link onClick={this.logout} className="dropdown-item" to="/">
+            <Link onClick={this.logout} className="dropdown-item" to="/" id="logout">
               Signout
             </Link>
           </div>
@@ -92,10 +92,10 @@ class NavigationBar extends React.Component {
    */
   notLoggedInMenu() {
     return (
-      <ul className="navbar-nav mr-auto">
+      <ul className="navbar-nav">
         <li id="Home" className="nav-item active">
           <Link
-          className="nav-link" to="/">
+            className="nav-link" to="/">
             Home
           </Link>
         </li>
@@ -109,7 +109,7 @@ class NavigationBar extends React.Component {
         <li id="SignIn" className="nav-item">
           <Link
             id="signin"
-          className="nav-link" to="/Signin">
+            className="nav-link" to="/Signin">
             Sign In
           </Link>
         </li>
@@ -126,9 +126,9 @@ class NavigationBar extends React.Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark header">
         <Link
-        id="brand-name"
-        className="navbar-brand logo"
-        to="/">
+          id="brand-name"
+          className="navbar-brand logo"
+          to="/">
           MoRecipes
         </Link>
         <button
@@ -144,7 +144,7 @@ class NavigationBar extends React.Component {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <SearchForm/>
+          <SearchForm />
           {this.props.isAuthenticated
             ? this.loggedInMenu()
             : this.notLoggedInMenu()}

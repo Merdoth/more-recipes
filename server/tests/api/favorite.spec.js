@@ -22,7 +22,7 @@ describe('More Recipes', () => {
       });
   });
 
-  it('should successfully favorite a recipe and return 200', (done) => {
+  it('should successfully favorite a recipe and return 201', (done) => {
     chai
       .request(app)
       .post('/api/v1/favourites')
@@ -32,7 +32,8 @@ describe('More Recipes', () => {
       })
       .end((err, res) => {
         expect(res.status).toEqual(201);
-        expect(res.body.foundRecipe).toEqual();
+        expect(res.body.favourite.id).toBe(1);
+        expect(res.body.favourite).toBeDefined();
         done();
       });
   });
@@ -156,6 +157,7 @@ describe('More Recipes', () => {
         expect(res.status).toEqual(200);
         expect(res.body.message)
           .toEqual('No Favourites Found please try to create some');
+        expect(res.body.favourites).toBeDefined();
         done();
       });
   });

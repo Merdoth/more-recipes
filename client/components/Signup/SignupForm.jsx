@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { userSignupRequest } from '../../actions/auth/authActions';
 import { validateSignUp } from '../../validations/index';
 import InputField from '../common/InputField.jsx';
-import Button from '../common/Button.jsx';
 
 /**
  * @description this renders the signup form component
@@ -27,7 +26,6 @@ export class SignupForm extends Component {
       password: '',
       confirmPassword: '',
       errors: {},
-      isLoading: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -50,7 +48,6 @@ export class SignupForm extends Component {
     event.preventDefault();
     const { errors, isValid } = validateSignUp(this.state);
     if (isValid) {
-      this.setState({ isLoading: true });
       this.props
         .userSignupRequest(this.state)
         .then(() => {
@@ -68,7 +65,6 @@ export class SignupForm extends Component {
             text: error,
             icon: 'error'
           });
-          this.setState({ isLoading: false });
         });
     } else {
       this.handleErrors(errors);
@@ -158,15 +154,16 @@ export class SignupForm extends Component {
               onChange={this.onChange}
               required
             />
-            <Button
+            <button
               id="signupbtn"
-              type="submit"
+              type="button"
               onClick={this.onSubmit}
-              disabled={this.state.isLoading}
               name="Sign Up"
               iconClass="fa-user-plus"
-              className="btn btn-lg btn-primary btn-block signup"
-            />
+              className="btn btn-lg btn-primary btn-block signup">
+              <i className="fa fa-user-plus"></i>
+              Sign up
+        </button>
             <p className="new_account">
               <strong>Already Have An Account? </strong>
               <Link to="Signin">Sign in</Link>

@@ -48,21 +48,34 @@ exports[`AddRecipeForm Component snapshot it should render the right amount of e
     type="text"
     value=""
   />
-  <InputLine
-    id="image"
-    label="Select Image"
-    name="image"
-    onChange={[Function]}
-    placeholder="Upload Image"
-    type="file"
-    value=""
-  />
-  <Button
+  <div
+    className="form-group"
+  >
+    <label
+      htmlFor="foodImage"
+    >
+      Select Image
+    </label>
+    <input
+      className="form-control-file"
+      id="foodImage"
+      name="image"
+      onChange={[Function]}
+      type="file"
+    />
+  </div>
+  <button
     className="btn btn-lg btn-primary btn-block submitBtn"
     iconClass="fa-cutlery"
-    name="Add Recipe"
+    id="submitBtn"
+    name="Add"
     onClick={[Function]}
-    type="submit"
-  />
+    type="button"
+  >
+    <i
+      className="fa fa-cutlery"
+    />
+    Add
+  </button>
 </form>
 `;

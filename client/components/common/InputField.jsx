@@ -9,7 +9,7 @@ import { PropTypes } from 'prop-types';
  *
  * @param { Object } props
  *
- * @returns { undefined }
+ * @returns { Object } returns an input field component
  *
  */
 const InputField = ({

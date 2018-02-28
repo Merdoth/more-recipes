@@ -218,7 +218,7 @@ describe('More Recipes', () => {
     });
 
   it(`should throw an error when a user without a 
-  recipe trys to get his or her own recipes and return 200`, (done) => {
+  recipe trys to get his or her own recipes and return 404`, (done) => {
       chai.request(app)
         .get('/api/v1/myrecipes').set({ authorization: token2 })
         .end((err, res) => {
@@ -242,6 +242,7 @@ describe('More Recipes', () => {
       .end((err, res) => {
         expect(res.status).toEqual(200);
         expect(res.body.message).toEqual('Recipe successfully updated');
+        expect(res.body.updatedRecipe.recipeName).toEqual('Tikwo Shinkapa');
         done();
       });
   });
