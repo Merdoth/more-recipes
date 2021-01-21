@@ -3,11 +3,11 @@ import React from 'react';
 
 /**
  *
- * @description This gives the recipe descriptions
+ * @description Helper component for rendering recipe description
  *
  * @method RecipeCardDes
  *
- * @returns { undefined }
+ * @returns {object} returns RecipeCardDes component
  * .
  */
 export const RecipeCardDes = ({ title, text }) => (

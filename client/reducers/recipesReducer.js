@@ -4,6 +4,10 @@ export const initialState = {
   recipesFound: {
     rows: []
   },
+  userRecipes: {
+    rows: []
+  },
+  message: '',
   error: {}
 };
 
@@ -26,6 +30,17 @@ export default (state = initialState, action = {}) => {
         ...state,
         ...action.recipes
       };
+    case types.DELETE_RECIPE_SUCCESS: {
+      const oldRecipes = state.userRecipes.rows;
+      const newRecipes = oldRecipes.filter(num => num.id !== action.id);
+      return {
+        ...state,
+        message: action.message,
+        userRecipes: {
+          rows: newRecipes
+        }
+      };
+    }
     case types.ADD_RECIPE_SUCCESS:
       return {
         ...state,
@@ -40,7 +55,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         ...action.recipes
       };
-
+    case types.DELETE_RECIPE_FAILURE:
     case types.GET_USER_RECIPES_FAILURE:
       return {
         ...state,

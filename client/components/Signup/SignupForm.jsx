@@ -6,12 +6,9 @@ import PropTypes from 'prop-types';
 import { userSignupRequest } from '../../actions/auth/authActions';
 import { validateSignUp } from '../../validations/index';
 import InputField from '../common/InputField.jsx';
-import Button from '../common/Button.jsx';
 
 /**
  * @description this renders the signup form component
- *
- * @param { Object } SignupForm
  *
  * @returns { undefined }
  */
@@ -29,7 +26,6 @@ export class SignupForm extends Component {
       password: '',
       confirmPassword: '',
       errors: {},
-      isLoading: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -38,7 +34,7 @@ export class SignupForm extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -52,7 +48,6 @@ export class SignupForm extends Component {
     event.preventDefault();
     const { errors, isValid } = validateSignUp(this.state);
     if (isValid) {
-      this.setState({ isLoading: true });
       this.props
         .userSignupRequest(this.state)
         .then(() => {
@@ -64,9 +59,12 @@ export class SignupForm extends Component {
           this.props.goToAllRecipes();
         })
         .catch((err) => {
-          const error = err.data.message;
-          this.handleErrors(error);
-          this.setState({ isLoading: false });
+          const error = err.response.data.message;
+          swal({
+            title: 'Oops!',
+            text: error,
+            icon: 'error'
+          });
         });
     } else {
       this.handleErrors(errors);
@@ -74,21 +72,19 @@ export class SignupForm extends Component {
   }
 
   /**
-   *
-   * @returns { undefined }
-   *
    * @param { Object } errors
    *
    * @memberof SignupForm
+   *
+   * @returns { Object } json - payload
    */
   handleErrors(errors) {
     if (typeof errors !== 'string') {
-      Object.keys(errors).forEach((error) => {
-        swal({
-          title: 'Oops!',
-          text: error,
-          icon: 'error'
-        });
+      const err = errors[Object.keys(errors)[0]];
+      swal({
+        title: 'Oops!',
+        text: err,
+        icon: 'error'
       });
     } else {
       swal({
@@ -158,15 +154,16 @@ export class SignupForm extends Component {
               onChange={this.onChange}
               required
             />
-            <Button
-              id="signUpBtn"
-              type="submit"
+            <button
+              id="signupbtn"
+              type="button"
               onClick={this.onSubmit}
-              disabled={this.state.isLoading}
               name="Sign Up"
               iconClass="fa-user-plus"
-              className="btn btn-lg btn-primary btn-block"
-            />
+              className="btn btn-lg btn-primary btn-block signup">
+              <i className="fa fa-user-plus"></i>
+              Sign up
+        </button>
             <p className="new_account">
               <strong>Already Have An Account? </strong>
               <Link to="Signin">Sign in</Link>

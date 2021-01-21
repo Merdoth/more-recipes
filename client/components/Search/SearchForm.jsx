@@ -4,11 +4,11 @@ import history from '../../utils/history';
 
 /**
  *
- * @class Search
+ * @description Search component
  *
  * @extends { Component }
  *
- * @returns {void}
+ * @returns { undefined }
  */
 export class SearchForm extends Component {
   /**
@@ -30,7 +30,7 @@ export class SearchForm extends Component {
   /**
  * @param { Object } event
  *
- * @returns { undefined }
+ * @returns { Object } json - payload
  */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -39,7 +39,7 @@ export class SearchForm extends Component {
   /**
    * @param { Object } event
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onSubmit(event) {
     event.preventDefault();
@@ -54,12 +54,12 @@ export class SearchForm extends Component {
     });
   }
   /**
-  * @description this function handles enter key
+  * @description Handle enter event
   *
   * @param { Object } event
   * @param { Object } callback
   *
-  * @returns { undefined }
+  * @returns { Object } json - payload
   */
   handleEnterKey(event, callback) {
     if (event.key === 'Enter') {

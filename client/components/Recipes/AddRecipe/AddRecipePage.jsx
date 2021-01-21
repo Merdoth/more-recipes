@@ -3,18 +3,19 @@ import { connect } from 'react-redux';
 import AddRecipeForm from './AddRecipeForm.jsx';
 
 /**
+ * @description this returns an AddRecipeForm component
+ *
  * @extends { Component }
  *
  * @param { Object } props
  *
- * @return { undefined }
+ * @return { Object } returrns an add recipe page component
  *
- * @desc this returns an AddRecipeForm component
  */
 export const AddRecipePage = () =>
   (
   <div className="row deco">
-    <div className="col-md-4 offset-md-4 cover1">
+      <div className="col-md-6 profile">
       <div className="form-deco">
         <AddRecipeForm />
       </div>

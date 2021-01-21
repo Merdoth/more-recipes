@@ -100,10 +100,7 @@ describe('onChange()', () => {
       target: { name: 'image', value: '' }
     };
     const wrapper = setup();
-    const imageInput = wrapper.find('#image');
-
     event.target.files = 'pepper.jpeg';
-    imageInput.simulate('change', event);
     wrapper.setState({
       image: event.target.files
     });

@@ -7,6 +7,7 @@ exports[`SignupForm Component snapshot it should render the right amount of elem
   >
     <form
       className="form-signin"
+      id="TestForm"
     >
       <h2
         className="form-signin-heading"
@@ -61,14 +62,19 @@ exports[`SignupForm Component snapshot it should render the right amount of elem
         type="password"
         value=""
       />
-      <Button
-        className="btn btn-lg btn-primary btn-block"
-        disabled={false}
+      <button
+        className="btn btn-lg btn-primary btn-block signup"
         iconClass="fa-user-plus"
+        id="signupbtn"
         name="Sign Up"
         onClick={[Function]}
-        type="submit"
-      />
+        type="button"
+      >
+        <i
+          className="fa fa-user-plus"
+        />
+        Sign up
+      </button>
       <p
         className="new_account"
       >

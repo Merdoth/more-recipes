@@ -3,13 +3,13 @@ import { Icons } from '../../common/Icons.jsx';
 
 /**
  *
- * @description This holds recipe icons
+ * @description Helper component for showing informative icons on the app
  *
  * @method  RecipeCardFooter
  *
  * @param { Object } props
  *
- * @returns { undefined }
+ * @returns {object} returns RecipeCardFooter component
  * .
  */
 export const RecipeCardFooter = props => (

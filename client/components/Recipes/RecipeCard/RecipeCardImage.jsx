@@ -2,11 +2,11 @@ import React from 'react';
 
 /**
  *
- * @description This holds recipe images
+ * @description Helper function that renders recipe image
  *
  * @method RecipeCardImage
  *
- * @returns { undefined }
+ * @returns {object} returns RecipeCardImage component
  * .
  */
 export const RecipeCardImage = ({ src }) => (

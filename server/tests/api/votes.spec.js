@@ -34,6 +34,7 @@ describe('More Recipes', () => {
       .end((err, res) => {
         expect(res.status).toEqual(201);
         expect(res.body.message).toEqual('Your vote has been recorded');
+        expect(res.body.recipe.upVotes).toBe(1);
         done();
       });
   });
@@ -49,6 +50,7 @@ describe('More Recipes', () => {
       .end((err, res) => {
         expect(res.status).toEqual(200);
         expect(res.body.message).toEqual('Your upvote has been removed');
+        expect(res.body.recipe.upVotes).toBe(0);
         done();
       });
   });
@@ -62,7 +64,7 @@ describe('More Recipes', () => {
       })
       .end((err, res) => {
         expect(res.status).toEqual(404);
-        expect(res.body.message).toEqual('Recipe not found');
+        expect(res.body.message).toEqual('recipeId does not exist!');
         done();
       });
   });
@@ -78,6 +80,7 @@ describe('More Recipes', () => {
       .end((err, res) => {
         expect(res.status).toEqual(201);
         expect(res.body.message).toEqual('Your downvote has been recorded');
+        expect(res.body.recipe.downVotes).toBe(1);
         done();
       });
   });
@@ -92,20 +95,8 @@ describe('More Recipes', () => {
       .end((err, res) => {
         expect(res.status).toEqual(200);
         expect(res.body.message).toEqual('Your vote has been added');
-        done();
-      });
-  });
-  it('should create a downvote if there was an upvote and return 200', (done) => {
-    chai
-      .request(app)
-      .post('/api/v1/votes/1/downvotes')
-      .set('authorization', token)
-      .send({
-        downVotes: '1'
-      })
-      .end((err, res) => {
-        expect(res.status).toEqual(200);
-        expect(res.body.message).toEqual('Your vote has been added');
+        expect(res.body.recipe.downVotes).toBe(0);
+        expect(res.body.recipe.upVotes).toBe(1);
         done();
       });
   });
@@ -119,7 +110,8 @@ describe('More Recipes', () => {
       })
       .end((err, res) => {
         expect(res.status).toEqual(200);
-        expect(res.body.message).toEqual('Your downvote has been removed');
+        expect(res.body.message).toEqual('Your vote has been added');
+        expect(res.body.recipe.downVotes).toBe(1);
         done();
       });
   });

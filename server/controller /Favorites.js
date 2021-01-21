@@ -64,13 +64,14 @@ class Favorites {
   }
 
   /**
+   * * @description  removes a recipe from favourites
    *
    * @param { Object } req - Request object
    * @param { Object } res - Response object
    *
    * @memberof Favorite
    *
-   * @returns { undefined }
+   * @returns { object } json - payload
    */
   static removeFavourites(req, res) {
     const userId = req.decoded.id;

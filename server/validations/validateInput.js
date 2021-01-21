@@ -1,6 +1,12 @@
 import lodash from 'lodash';
-import validator from 'validator';
 
+/**
+ * @description validate User Sign Up Field
+ *
+ * @param {Object} value
+ *
+ * @returns {object} json - payload
+ */
 const validateInput = (value) => {
   const {
     fullName, userName, email, password
@@ -8,33 +14,77 @@ const validateInput = (value) => {
   const errors = {};
   const filter = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-  if (fullName.trim().length === 0) {
-    errors.fullNameError = 'fullname is required';
+  if (!fullName) {
+    errors.fullNameError = 'Fullname can\'t be empty';
+  } else if (fullName.trim().length === 0) {
+    errors.fullNameError = 'Fullname is required';
   } else if (fullName.length < 3) {
-    errors.fullNameError = 'fullname must be at least 3 characters long';
+    errors.fullNameError = 'Fullname must be at least 3 characters long';
   }
-
-  if (userName.trim().length === 0) {
-    errors.userNameError = 'username is required';
+  if (!userName) {
+    errors.userNameError = 'Username can\'t be empty';
+  } else if (userName.trim().length === 0) {
+    errors.userNameError = 'Username is required';
   } else if (userName.length < 3) {
-    errors.userNameError = 'username must be at least 3 characters long';
+    errors.userNameError = 'Username must be at least 3 characters long';
   }
-
-  if (email.trim().length === 0) {
-    errors.emailError = 'email is required';
+  if (!email) {
+    errors.emailError = 'Email can\'t be empty';
+  } else if (email.trim().length === 0) {
+    errors.emailError = 'Email is required';
   } else if (!filter.test(email)) {
-    errors.emailError = 'email is not valid';
+    errors.emailError = 'Email is not valid';
   }
-
-  if (password.trim().length === 0) {
-    errors.passwordError = 'password is required';
+  if (!password) {
+    errors.passwordError = 'Password can\'t be empty';
+  } else if (password.trim().length === 0) {
+    errors.passwordError = 'Password is required';
   } else if (password.length < 8) {
-    errors.passwordError = 'password must be at least 8 characters long';
+    errors.passwordError = 'Password must be at least 8 characters long';
   }
 
   return { isValid: lodash.isEmpty(errors), errors };
 };
 
+
+/**
+ * @description validate User Sign Up Field
+ *
+ * @param {Object} value
+ *
+ * @returns {object} json - payload
+ */
+export const validateUpdateUserInput = (value) => {
+  const {
+    fullName, userName, email
+  } = value;
+  const errors = {};
+  const filter = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+  if (!fullName) {
+    errors.fullNameError = 'Fullname can\'t be empty';
+  } else if (fullName.trim().length === 0) {
+    errors.fullNameError = 'Fullname is required';
+  } else if (fullName.length < 3) {
+    errors.fullNameError = 'Fullname must be at least 3 characters long';
+  }
+  if (!userName) {
+    errors.userNameError = 'Username can\'t be empty';
+  } else if (userName.trim().length === 0) {
+    errors.userNameError = 'Username is required';
+  } else if (userName.length < 3) {
+    errors.userNameError = 'Username must be at least 3 characters long';
+  }
+  if (!email) {
+    errors.emailError = 'Email can\'t be empty';
+  } else if (email.trim().length === 0) {
+    errors.emailError = 'Email is required';
+  } else if (!filter.test(email)) {
+    errors.emailError = 'Email is not valid';
+  }
+
+  return { isValid: lodash.isEmpty(errors), errors };
+};
 
 /**
  * @description validate User Sign In Fields

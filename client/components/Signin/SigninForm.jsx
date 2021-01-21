@@ -11,8 +11,6 @@ import { login } from '../../actions/auth/authActions';
 /**
  * @description this renders the signin form component
  *
- * @param { Object } SigninForm
- *
  * @returns { undefined } SignupForm
  */
 export class SigninForm extends Component {
@@ -33,14 +31,14 @@ export class SigninForm extends Component {
   }
 
   /**
-   * This method validates the input from the state object
+   * @description This method validates the input from the state object
    * and chcecks if its valid and makes an api call to the backend
    *
    * @param { Object } event
    *
    * @memberof SigninForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onSubmit(event) {
     event.preventDefault();
@@ -72,13 +70,13 @@ export class SigninForm extends Component {
   }
 
   /**
-   *  this method gets the values of the input
+   * @description this method gets the values of the input
    * and passes the values to the global state object
    * @param { Object } event
    *
    * @memberof SigninForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -90,15 +88,14 @@ export class SigninForm extends Component {
    *
    * @memberof SigninForm
    *
-   * @returns { undefined }
+   * @returns { Object } json - payload
    */
   handleErrors(errors) {
-    Object.keys(errors).forEach((error) => {
-      swal({
-        title: 'Oops!',
-        text: errors[error],
-        icon: 'error'
-      });
+    const err = errors[Object.keys(errors)[0]];
+    swal({
+      title: 'Oops!',
+      text: err,
+      icon: 'error'
     });
   }
   /**

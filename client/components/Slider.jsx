@@ -2,8 +2,6 @@ import React from 'react';
 /**
  * @description this returns a slider component
  *
- * @param { Function } Slider
- *
  * @returns { undefined }
  */
 

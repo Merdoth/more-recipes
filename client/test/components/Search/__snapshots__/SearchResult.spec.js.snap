@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SearchResult Component snapshot it should render the right amount of elements 1`] = `
-<div>
+<div
+  className="main-wrapper"
+>
   <div
     className="container manage"
   >
@@ -23,7 +25,7 @@ exports[`SearchResult Component snapshot it should render the right amount of el
       className="container top"
     >
       <div
-        className="row"
+        className="row "
       >
         <RecipeCard
           key="recipes-1"
@@ -46,7 +48,7 @@ exports[`SearchResult Component snapshot it should render the right amount of el
         />
       </div>
       <div
-        className="row pagination"
+        className="row pagination "
       >
         <PaginationBoxView
           activeClassName="active"
