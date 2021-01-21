@@ -1,0 +1,25 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - node
+
+services:
+  - postgresql
+
+postgres:
+  adapter: postgresql
+  database: morerecipes
+  username: postgres
+  
+before_script:
+  - createdb morerecipes -U postgres
+  - npm install sequelize-cli -g
+
+script:
+  - npm run test
+
+after_success:
+  - npm run coveralls
+
+group: deprecated-2017Q4

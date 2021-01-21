@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slider Component snapshot it should render the right amount of elements 1`] = `
+<div
+  className="hero-bg"
+>
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="carousel slide"
+      data-ride="carousel"
+      id="carouselSlides"
+    >
+      <div
+        className="carousel-inner"
+        role="listbox"
+      >
+        <div
+          className="carousel-item active"
+          style={
+            Object {
+              "backgroundImage": "url('/assets/image/Salad.jpg')",
+            }
+          }
+        >
+          <div
+            className="slider-text"
+          >
+            <h5
+              className="hero-header"
+              id="slider-one"
+            >
+              Your Favorite Recipe's At Your Pleasure.
+            </h5>
+          </div>
+        </div>
+        <div
+          className="carousel-item"
+          style={
+            Object {
+              "backgroundImage": "url('/assets/image/Food.jpg')",
+            }
+          }
+        >
+          <div
+            className="slider-text"
+          >
+            <h5
+              className="hero-header"
+              id="slider-two"
+            >
+              Feel Free To Explore Your Ideas.
+            </h5>
+          </div>
+        </div>
+        <div
+          className="carousel-item"
+          style={
+            Object {
+              "backgroundImage": "url('/assets/image/shrimp.jpg')",
+            }
+          }
+        >
+          <div
+            className="slider-text"
+          >
+            <h5
+              className="hero-header"
+              id="slider-three"
+            >
+              Love Food, Love Life.
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

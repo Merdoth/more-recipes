@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile Component snapshot it should render the right amount of elements 1`] = `
+<div>
+  <form
+    className="profile"
+  >
+    <h1
+      id="profile-header"
+    >
+      Profile
+    </h1>
+    <InputField
+      id="fullName"
+      label="Fullname:   "
+      name="fullName"
+      onChange={[Function]}
+      placeholder="null"
+      required={true}
+      type="text"
+      value=""
+    />
+    <InputField
+      id="userName"
+      label="Username:   "
+      name="userName"
+      onChange={[Function]}
+      placeholder="null"
+      required={true}
+      type="text"
+      value=""
+    />
+    <InputField
+      id="email"
+      label="Email:    "
+      name="email"
+      onChange={[Function]}
+      placeholder="null"
+      required={true}
+      type="text"
+      value=""
+    />
+    <Button
+      className="btn btn-lg profileButton"
+      name="Update Profile"
+      onClick={[Function]}
+      type="submit"
+    />
+  </form>
+</div>
+`;
+
+exports[`Profile Component snapshot should return profile 1`] = `
+<div>
+  <form
+    className="profile"
+  >
+    <h1
+      id="profile-header"
+    >
+      Profile
+    </h1>
+    <InputField
+      id="fullName"
+      label="Fullname:   "
+      name="fullName"
+      onChange={[Function]}
+      placeholder="null"
+      required={true}
+      type="text"
+      value="Samuel Uyali"
+    />
+    <InputField
+      id="userName"
+      label="Username:   "
+      name="userName"
+      onChange={[Function]}
+      placeholder="null"
+      required={true}
+      type="text"
+      value="Samuel"
+    />
+    <InputField
+      id="email"
+      label="Email:    "
+      name="email"
+      onChange={[Function]}
+      placeholder="null"
+      required={true}
+      type="text"
+      value="samuel.uyali@gmail.com"
+    />
+    <Button
+      className="btn btn-lg profileButton"
+      name="Update Profile"
+      onClick={[Function]}
+      type="submit"
+    />
+  </form>
+</div>
+`;

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Favourites Component snapshot it should render the right amount of elements 1`] = `
+<div
+  className="main-wrapper"
+>
+  <div
+    className="container manage"
+  >
+    <div
+      className="recipe-header"
+    >
+      <h2>
+        Recipes
+      </h2>
+      <p>
+        Feel free to manage your own account
+      </p>
+    </div>
+  </div>
+  <div
+    className="recipe-wrapper"
+  >
+    <div
+      className="container top"
+    >
+      <div
+        className="row no-recipe"
+      >
+        You have no Favorites yet. Try creating one
+      </div>
+    </div>
+  </div>
+</div>
+`;

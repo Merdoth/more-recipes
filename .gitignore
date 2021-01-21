@@ -1,3 +1,12 @@
 node_modules/*
 .DS_Store
 .editorconfig
+.env
+.coveralls.yml
+.package-lock.json
+.nyc_output
+coverage
+dist
+selenium-debug.log
+e2ereports/*
+*.log

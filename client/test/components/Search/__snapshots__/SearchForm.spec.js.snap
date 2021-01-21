@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchForm Component snapshot it should render the right amount of elements 1`] = `
+<form
+  className="form-inline my-2 my-lg-0 float-menuitem-right"
+>
+  <input
+    aria-label="Search"
+    className="form-control mr-sm-2 search"
+    id="search"
+    name="name"
+    onChange={[Function]}
+    onKeyPress={[Function]}
+    placeholder="Search"
+    type="search"
+    value=""
+  />
+</form>
+`;

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignupPage Component snapshot it should render the right amount of elements 1`] = `
+<div>
+  <div
+    className="row"
+  >
+    <div
+      className="col-md-6 offset-md-3 cover"
+    >
+      <Connect(SignupForm)
+        goToAllRecipes={[Function]}
+        userSignupRequest={[Function]}
+      />
+    </div>
+  </div>
+</div>
+`;

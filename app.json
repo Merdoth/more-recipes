@@ -1,0 +1,18 @@
+{
+  "name": "more-recipes",
+  "scripts": {
+  },
+  "env": {
+    "SECRET_KEY": {
+      "generator": "secret"
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+
+  ]
+}

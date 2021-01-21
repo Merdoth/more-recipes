@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserRecipes Component snapshot it should render the right amount of elements 1`] = `
+<div
+  className="main-wrapper"
+>
+  <div
+    className="container manage"
+  >
+    <div
+      className="recipe-header"
+    >
+      <h2>
+        Recipes
+      </h2>
+      <p>
+        Feel free to manage your own account
+      </p>
+    </div>
+  </div>
+  <div
+    className="recipe-wrapper"
+  >
+    <div
+      className="container top"
+    >
+      <div
+        className="row "
+      >
+        <RecipeCard
+          key="recipes-1"
+          recipeList={
+            Object {
+              "createdAt": "2018-02-13T22:14:54.283Z",
+              "description": "sweet",
+              "downVotes": 0,
+              "id": 1,
+              "image": "/img/toast_qaxxcy.jpg",
+              "ingredients": "floor, sugar, butter, salt",
+              "preparation": "Mix and bake",
+              "recipeName": "Sweet cake",
+              "upVotes": 0,
+              "updatedAt": "2018-02-18T15:23:59.106Z",
+              "userId": 1,
+              "views": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="row pagination "
+      >
+        <PaginationBoxView
+          activeClassName="active"
+          breakClassName="break-me"
+          breakLabel="..."
+          containerClassName="pagination"
+          disableInitialCallback={false}
+          disabledClassName="disabled"
+          marginPagesDisplayed={2}
+          nextClassName="next"
+          nextLabel="next"
+          onPageChange={[Function]}
+          pageCount={10}
+          pageRangeDisplayed={5}
+          previousClassName="previous"
+          previousLabel="previous"
+          subContainerClassName="pages pagination"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
